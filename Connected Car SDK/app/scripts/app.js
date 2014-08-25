@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/toogleSwitch', {
+          templateUrl: 'views/toogleSwitch.html',
+          controller: 'ToogleSwitchCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
