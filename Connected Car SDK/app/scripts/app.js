@@ -27,8 +27,8 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/toggle-switch', {
-          templateUrl: 'views/toggleSwitch.html',
+      .when('/toogle-switch', {
+          templateUrl: 'views/toogleSwitch.html',
           controller: 'ToogleSwitchCtrl'
       })
       .otherwise({
