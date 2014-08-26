@@ -12,7 +12,7 @@ angular.module('connectedCarSdk')
       templateUrl: '/templates/toggleSwitch.html',
       restrict: 'A',
         scope: {
-            attCustomModel: '='
+            CustomModel: 'ON'
         }
     };
   });

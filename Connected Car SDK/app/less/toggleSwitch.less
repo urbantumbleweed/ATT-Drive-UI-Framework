@@ -3,10 +3,21 @@
     border-radius: 0;
   }
 
-  .btn-group > .btn:first-child:not(:last-child){
-    background-color: @danger;
+  .on{
+    .btn-group > .btn:first-child:not(:last-child){
+      background-color: @gray;
+    }
+    .btn-group > .btn:last-child:not(:first-child){
+      background-color: @brand-primary;
+    }
   }
-  .btn-group > .btn:last-child:not(:first-child){
-    background-color: @primary;
+
+  .off{
+    .btn-group > .btn:first-child:not(:last-child){
+      background-color: @brand-danger;
+    }
+    .btn-group > .btn:last-child:not(:first-child){
+      background-color: @gray;
+    }
   }
 }
