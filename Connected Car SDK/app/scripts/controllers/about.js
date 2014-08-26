@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name connectedCarSdkApp.controller:AboutCtrl
+ * @name connectedCarSdk.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the connectedCarSdkApp
+ * Controller of the connectedCarSdk
  */
-angular.module('connectedCarSdkApp')
+angular.module('connectedCarSdk')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

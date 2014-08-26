@@ -3,7 +3,7 @@
 describe('Directive: attToggleSwitch', function () {
 
   // load the directive's module
-  beforeEach(module('connectedCarSdkApp'));
+  beforeEach(module('connectedCarSdk'));
 
   var element,
     scope;

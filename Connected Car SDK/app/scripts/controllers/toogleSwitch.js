@@ -2,15 +2,19 @@
 
 /**
  * @ngdoc function
- * @name connectedCarSdkApp.controller:ToogleSwitchCtrl
+ * @name connectedCarSdk.controller:ToogleSwitchCtrl
  * @description
  * # ToogleSwitchCtrl
- * Controller of the connectedCarSdkApp
+ * Controller of the connectedCarSdk
  */
 
-angular.module('connectedCarSdkApp')
+angular.module('connectedCarSdk')
   .controller('ToogleSwitchCtrl', function ($scope) {
       $scope.customModel = true;
+
+      $scope.test = function () {
+          alert($scope.customModel);
+      };
   });
 
 

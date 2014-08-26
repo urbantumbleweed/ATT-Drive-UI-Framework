@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name connectedCarSdkApp.directive:toggleSwitch
+ * @name connectedCarSdk.directive:toggleSwitch
  * @description
  * # toggleSwitch
  */
-angular.module('connectedCarSdkApp')
+angular.module('connectedCarSdk')
   .directive('attToggleSwitch', function () {
     return {
       templateUrl: '/templates/toggleSwitch.html',

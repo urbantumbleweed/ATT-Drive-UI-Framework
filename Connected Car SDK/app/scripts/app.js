@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name connectedCarSdkApp
+ * @name connectedCarSdk
  * @description
- * # connectedCarSdkApp
+ * # connectedCarSdk
  *
  * Main module of the application.
  */
 angular
-  .module('connectedCarSdkApp', [
+  .module('connectedCarSdk', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
