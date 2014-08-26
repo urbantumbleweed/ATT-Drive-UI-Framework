@@ -2390,8 +2390,8 @@ input[type="button"].btn-block {
   border-radius: 0;
   width: 50%;
   height: 100%;
-  line-height: 2.07857143;
-  font-size: 20px;
+  line-height: 1.97857143;
+  font-size: 22px;
 }
 .att-toggle-switch .on,
 .att-toggle-switch .off {
