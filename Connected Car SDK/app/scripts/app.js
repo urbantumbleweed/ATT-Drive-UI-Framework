@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.connected-car'
   ])
   .config(function ($routeProvider) {
     $routeProvider
