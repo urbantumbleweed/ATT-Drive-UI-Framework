@@ -15,8 +15,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
-    'ui.connected-car'
+    'ngTouch'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -29,7 +28,7 @@ angular
         controller: 'AboutCtrl'
       })
       .when('/toogleSwitch', {
-          templateUrl: 'views/toogleSwitch.html',
+          templateUrl: 'views/toggleSwitch.html',
           controller: 'ToogleSwitchCtrl'
       })
       .otherwise({

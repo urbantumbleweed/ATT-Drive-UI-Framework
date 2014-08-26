@@ -21,23 +21,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-        <div class="header">
-            <ul class="nav nav-pills pull-right">
-                <li class="active"><a ng-href="#">Home</a></li>
-                <li><a ng-href="#/about">About</a></li>
-                <li><a ng-href="#">Contact</a></li>
-                <li><a ng-href="#/toogleSwitch">Toogle switch</a></li>
-            </ul>
-            <h3 class="text-muted">connectedCarSdk</h3>
-        </div>
+        <div att-toggle-switch></div>
 
-        <div ng-view=""></div>
-
-        <div class="footer">
-            <p><span class="glyphicon glyphicon-heart"></span>from the Yeoman team</p>
-        </div>
-    </div>
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
@@ -65,6 +50,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/toogleSwitch.js"></script>
+    <script src="scripts/directives/attToggleswitch.js"></script>
     <!-- endbuild -->
 </body>
 </html>
