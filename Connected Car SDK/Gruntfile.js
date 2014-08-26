@@ -70,10 +70,6 @@ module.exports = function (grunt) {
                 files: ['test/spec/{,*/}*.js'],
                 tasks: ['newer:jshint:test', 'karma']
             },
-            less: {
-                files: ['./app/less/att-sdk.less'],
-                tasks: ['less']
-            },
             styles: {
                 files: ['<%= sdk.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']

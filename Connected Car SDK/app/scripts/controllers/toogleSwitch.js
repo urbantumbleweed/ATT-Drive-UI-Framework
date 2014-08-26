@@ -10,7 +10,7 @@
 
 angular.module('connectedCarSdkApp')
   .controller('ToogleSwitchCtrl', function ($scope) {
-      $scope.customModel = true;
+      $scope.customModel = 'ON';
   });
 
 
