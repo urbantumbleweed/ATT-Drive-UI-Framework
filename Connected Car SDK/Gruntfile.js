@@ -32,14 +32,25 @@ module.exports = function (grunt) {
                 options: {
                     paths: ['./app/less'],
                     compress: true,
-                    yuicompress: true,
                     optimization: 2
                 },
                 files: {
                     // target.css file: source.less file
-                    './dist/styles/main.css': './app/less/sdk.less'
+                    './app/styles/att-sdk.css': './app/less/att-sdk.less'
+                }
+            },
+            dist: {
+                options: {
+                    paths: ['./app/less'],
+                    compress: true,
+                    optimization: 2
+                },
+                files: {
+                    // target.css file: source.less file
+                    './dist/styles/att-sdk.css': './app/less/att-sdk.less'
                 }
             }
+
         },
 
         // Watches files for changes and runs tasks based on the changed files
@@ -58,6 +69,10 @@ module.exports = function (grunt) {
             jsTest: {
                 files: ['test/spec/{,*/}*.js'],
                 tasks: ['newer:jshint:test', 'karma']
+            },
+            less: {
+                files: ['./app/less/att-sdk.less'],
+                tasks: ['less']
             },
             styles: {
                 files: ['<%= sdk.app %>/styles/{,*/}*.css'],
