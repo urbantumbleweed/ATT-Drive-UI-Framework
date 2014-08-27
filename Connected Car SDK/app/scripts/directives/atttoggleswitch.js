@@ -15,11 +15,11 @@ angular.module('connectedCarSdk')
               ngModel: '='
           },
           require: '^ngModel',
-          link: function ($scope, $element, attrs) {
+          link: function (scope, element, attrs) {
 
-              $scope.change = function (enabled)
+              scope.change = function (enabled)
               {
-                  $scope.ngModel = enabled;
+                  scope.ngModel = enabled;
               }
 
           }
