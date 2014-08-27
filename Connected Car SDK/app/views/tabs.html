@@ -1,12 +1,5 @@
-<tabset>
-    <tab heading="Static title">Static tab content</tab>
-    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+<att-tabset>
+    <att-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
         {{tab.content}}
-    </tab>
-    <tab select="alertMe()">
-        <tab-heading>
-            <i class="glyphicon glyphicon-bell"></i> Selected tab heading
-        </tab-heading>
-        Selected tab content
-    </tab>
-</tabset>
+    </att-tab>
+</att-tabset>

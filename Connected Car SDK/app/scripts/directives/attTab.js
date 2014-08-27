@@ -83,10 +83,10 @@
 angular.module('connectedCarSdk')
   .directive('attTab', ['$parse', function ($parse) {
       return {
-          require: '^tabset',
+          require: '^attTabset',
           restrict: 'EA',
           replace: true,
-          templateUrl: 'template/tabs/tab.html',
+          templateUrl: '/templates/tabs/tab.html',
           transclude: true,
           scope: {
               active: '=?',
@@ -135,7 +135,7 @@ angular.module('connectedCarSdk')
 .directive('tabHeadingTransclude', [function () {
     return {
         restrict: 'A',
-        require: '^tab',
+        require: '^attTab',
         link: function (scope, elm, attrs, tabCtrl) {
             scope.$watch('headingElement', function updateHeadingElement(heading) {
                 if (heading) {
@@ -150,7 +150,7 @@ angular.module('connectedCarSdk')
 .directive('tabContentTransclude', function () {
     return {
         restrict: 'A',
-        require: '^tabset',
+        require: '^attTabset',
         link: function (scope, elm, attrs) {
             var tab = scope.$eval(attrs.tabContentTransclude);
 

@@ -23,15 +23,11 @@ angular
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
         })
-        .when('/tabs', {
-            templateUrl: 'views/tabs.html'
-
-        })
         .when('/toogle-switch', {
             templateUrl: 'views/toogleSwitch.html',
             controller: 'ToogleSwitchCtrl'
         })
-        .when('/toogle-switch', {
+        .when('/tabs', {
             templateUrl: 'views/tabs.html',
             controller: 'TabsCtrl'
         })
