@@ -12,16 +12,16 @@ angular.module('connectedCarSdk')
           templateUrl: '/templates/toogleSwitch.html',
           restrict: 'A',
           scope: {
-              attCustomModel: '='
+              ngModel: '='
           },
+          require: '^ngModel',
           link: function ($scope, $element, attrs) {
-              $scope.checked = $scope.attCustomModel ? "on" : "off";
 
               $scope.change = function (enabled)
               {
-                  $scope.attCustomModel = enabled;
-                  $scope.checked = enabled ? "on" : "off";
+                  $scope.ngModel = enabled;
               }
+
           }
       };
   });
