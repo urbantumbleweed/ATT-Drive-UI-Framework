@@ -2372,6 +2372,7 @@ input[type="button"].btn-block {
 }
 .att-toggle-switch {
   display: inline-block;
+  margin: 0;
   width: 200px;
   height: 60px;
 }
@@ -2390,7 +2391,7 @@ input[type="button"].btn-block {
   border-radius: 0;
   width: 50%;
   height: 100%;
-  line-height: 1.97857143;
+  line-height: 1.92857143;
   font-size: 22px;
 }
 .att-toggle-switch .on,
