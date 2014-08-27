@@ -18,20 +18,24 @@ angular
     'ngTouch'
   ])
   .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/tabs', {
-        templateUrl: 'views/tabs.html'
+      $routeProvider
+        .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+        })
+        .when('/tabs', {
+            templateUrl: 'views/tabs.html'
 
-      })
-      .when('/toogle-switch', {
-          templateUrl: 'views/toogleSwitch.html',
-          controller: 'ToogleSwitchCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+        })
+        .when('/toogle-switch', {
+            templateUrl: 'views/toogleSwitch.html',
+            controller: 'ToogleSwitchCtrl'
+        })
+        .when('/toogle-switch', {
+            templateUrl: 'views/tabs.html',
+            controller: 'TabsCtrl'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
   });

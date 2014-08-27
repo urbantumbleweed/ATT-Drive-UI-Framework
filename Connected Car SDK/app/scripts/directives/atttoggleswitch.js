@@ -7,7 +7,7 @@
  * # toggleSwitch
  */
 angular.module('connectedCarSdk')
-  .directive('toogleSwitch', function () {
+  .directive('attToogleSwitch', function () {
       return {
           templateUrl: '/templates/toogleSwitch.html',
           restrict: 'E',
