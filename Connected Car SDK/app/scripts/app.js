@@ -31,6 +31,10 @@ angular
             templateUrl: 'views/tabs.html',
             controller: 'TabsCtrl'
         })
+        .when('/progress-bar', {
+            templateUrl: 'views/progressBar.html',
+            controller: 'ProgressBarCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
