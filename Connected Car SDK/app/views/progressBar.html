@@ -1,0 +1,22 @@
+﻿<h3>Static</h3>
+<div class="row">
+    <div class="col-sm-4">
+        <att-progressbar value="55"></att-progressbar>
+    </div>
+    <div class="col-sm-4">
+        <att-progressbar class="progress-striped" value="22" type="warning">22%</att-progressbar>
+    </div>
+    <div class="col-sm-4">
+        <att-progressbar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></att-progressbar>
+    </div>
+</div>
+
+<h3>Dynamic
+    <button class="btn btn-sm btn-primary" type="button" ng-click="random()">Randomize</button></h3>
+<att-progressbar max="max" value="dynamic"><span style="color:black; white-space:nowrap;">{{dynamic}} / {{max}}</span></att-progressbar>
+
+<small><em>No animation</em></small>
+<att-progressbar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></att-progressbar>
+
+<small><em>Object (changes type based on value)</em></small>
+<att-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></att-progressbar>
