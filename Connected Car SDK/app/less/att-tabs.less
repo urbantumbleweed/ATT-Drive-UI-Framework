@@ -1,0 +1,84 @@
+.att-tabs{
+  background-color: transparent;
+  max-height: 470px;
+  height: 100%;
+  display: block;
+
+  // Hide content, show it when `.active`
+  .tab-content {
+    > .tab-pane {
+      display: none;
+    }
+    > .active {
+      display: block;
+
+    }
+    max-height: 410px;
+    color: #ffffff;
+    padding: 10px;
+    overflow: auto;
+  }
+
+
+  //
+  // Navs
+  // --------------------------------------------------
+
+  .nav {
+    margin-bottom: 0;
+    padding-left: 0; // Override default ul/ol
+    list-style: none;
+    &:extend(.clearfix all);
+    width: 100%;
+
+
+
+
+    > li {
+      position: relative;
+      float: none;
+      cursor: pointer;
+      display: table-cell;
+      width: 1%;
+
+
+      > a {
+        height: 60px;
+        line-height: @line-height-base + .8;
+        font-size: 18px;
+        color: #ffffff;
+        background-color:  fade(@brand-primary, 50%);
+        position: relative;
+        display: block;
+        padding: @nav-link-padding;
+
+        text-align: center;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          background-color: @brand-primary;
+        }
+      }
+
+      &.active > a{
+        background-color: @brand-primary;
+        color: #fff;
+      }
+
+      // Disabled state sets text to gray and nukes hover/tab effects
+      &.disabled > a {
+        color: lighten(@nav-disabled-link-color, 20%);
+
+        &:hover,
+        &:focus {
+          color: lighten(@nav-disabled-link-color, 20%);
+          text-decoration: none;
+          background-color: fade(@brand-primary, 50%);
+          cursor: default;
+        }
+      }
+    }
+
+
+  }
+}
