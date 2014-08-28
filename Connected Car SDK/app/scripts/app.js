@@ -2,20 +2,24 @@
 
 /**
  * @ngdoc overview
- * @name connectedCarSdk
+ * @name connectedCarSDK
  * @description
- * # connectedCarSdk
+ * # connectedCarSDK
  *
  * Main module of the application.
  */
 angular
-  .module('connectedCarSdk', [
+  .module('connectedCarSDK', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'connectedCarSDK.toggleSwitch',
+    'connectedCarSDK.tab',
+    'connectedCarSDK.progressbar',
+    'connectedCarSDK.carousel'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -34,6 +38,10 @@ angular
         .when('/progress-bar', {
             templateUrl: 'views/progressBar.html',
             controller: 'ProgressBarCtrl'
+        })
+        .when('/carousel', {
+            templateUrl: 'views/carousel.html',
+            controller: 'CarouselCtrl'
         })
         .otherwise({
             redirectTo: '/'

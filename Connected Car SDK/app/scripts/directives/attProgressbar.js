@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name connectedCarSdk.directive:attProgressbar
+ * @name connectedCarSDK.progressbar.directive:attProgressbar
  * @description
  * # attprogressbar
  */
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK.progressbar', [])
  .constant('progressConfig', {
      animate: true,
      max: 100

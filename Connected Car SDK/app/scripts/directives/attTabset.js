@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name connectedCarSdkApp.directive:attTabset
+ * @name connectedCarSDK.tabset.directive:attTabset
  * @description
  * # attTabset
  */
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK.tabset', [])
   .controller('TabsetController', ['$scope', function TabsetCtrl($scope) {
       var ctrl = this,
           tabs = ctrl.tabs = $scope.tabs = [];
@@ -47,7 +47,7 @@ angular.module('connectedCarSdk')
 
 /**
  * @ngdoc directive
- * @name ui.bootstrap.tabs.directive:tabset
+ * @name connectedCarSDK.tabs.directive:tabset
  * @restrict EA
  *
  * @description

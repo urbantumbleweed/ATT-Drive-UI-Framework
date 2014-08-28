@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: attToggleSwitch', function () {
+describe('Directive: attcarousel', function () {
 
   // load the directive's module
     beforeEach(module('connectedCarSDK'));
@@ -13,8 +13,8 @@ describe('Directive: attToggleSwitch', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<div att-toggle-switch></div>');
+    element = angular.element('<attcarousel></attcarousel>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the toggleSwitch directive');
+    expect(element.text()).toBe('this is the attcarousel directive');
   }));
 });

@@ -3,7 +3,7 @@
 describe('Directive: attTabset', function () {
 
   // load the directive's module
-  beforeEach(module('connectedCarSdkApp'));
+    beforeEach(module('connectedCarSDK'));
 
   var element,
     scope;

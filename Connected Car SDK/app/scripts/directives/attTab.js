@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name connectedCarSdkApp.directive:attTab
+ * @name connectedCarSDK.tab.directive:attTab
  * @restrict EA
  *
  * @param {string=} heading The visible heading, or title, of the tab. Set HTML headings with {@link ui.bootstrap.tabs.directive:tabHeading tabHeading}.
@@ -58,11 +58,11 @@
 
 /**
  * @ngdoc directive
- * @name ui.bootstrap.tabs.directive:tabHeading
+ * @name connectedCarSDK.tab.directive:tabHeading
  * @restrict EA
  *
  * @description
- * Creates an HTML heading for a {@link ui.bootstrap.tabs.directive:tab tab}. Must be placed as a child of a tab element.
+ * Creates an HTML heading for a {@link connectedCarSDK.tab.directive:tab tab}. Must be placed as a child of a tab element.
  *
  * @example
 <example module="ui.bootstrap">
@@ -80,7 +80,7 @@
   </file>
 </example>
  */
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK.tab', ['connectedCarSDK.tabset'])
   .directive('attTab', ['$parse', function ($parse) {
       return {
           require: '^attTabset',

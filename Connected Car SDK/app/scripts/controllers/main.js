@@ -5,9 +5,9 @@
  * @name connectedCarSdk.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the connectedCarSdk
+ * Controller of the connectedCarSDK
  */
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

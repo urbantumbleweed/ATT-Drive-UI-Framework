@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name connectedCarSdk.controller:TabsCtrl
+ * @name connectedCarSDK.controller:TabsCtrl
  * @description
  * # ToogleSwitchCtrl
- * Controller of the connectedCarSdk
+ * Controller of the connectedCarSDK
  */
 
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK')
   .controller('TabsCtrl', function ($scope) {
       $scope.tabs = [
         { title: 'Dynamic Title 1', content: 'Dynamic content 1 abc' },

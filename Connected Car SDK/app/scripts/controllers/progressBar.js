@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name connectedCarSdk.controller:ProgressBarCtrl
+ * @name connectedCarSDK.controller:ProgressBarCtrl
  * @description
  * # ToogleSwitchCtrl
- * Controller of the connectedCarSdk
+ * Controller of the connectedCarSDK
  */
 
-angular.module('connectedCarSdk')
+angular.module('connectedCarSDK')
   .controller('ProgressBarCtrl', function ($scope) {
       $scope.max = 200;
 
