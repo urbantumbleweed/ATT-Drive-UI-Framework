@@ -13,7 +13,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/att-sdk.css"/>
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+    <!--//<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
     <!-- endbuild -->
 </head>
 <body ng-app="connectedCarSdk">
@@ -22,9 +22,16 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-        <div ng-view>
 
+        <ul>
+            <li><a href="#/toogle-switch">Toggle Switch</a></li>
+            <li><a href="#/tabs">Tabs</a></li>
+        </ul>
+        <div class="container" id="main-container">
+            <div ng-view></div>
         </div>
+
+
 
 
     <!-- build:js(.) scripts/oldieshim.js -->

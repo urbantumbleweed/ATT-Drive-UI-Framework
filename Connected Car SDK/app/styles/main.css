@@ -60,6 +60,15 @@ body {
   margin-top: 28px;
 }
 
+#main-container{
+    background-color: #333333;
+    padding: 0;
+    height: 470px;
+    width: 768px;
+}
+
+
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
