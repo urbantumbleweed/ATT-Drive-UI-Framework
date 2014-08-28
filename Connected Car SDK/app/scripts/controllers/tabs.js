@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name connectedCarSDK.controller:TabsCtrl
  * @description
- * # ToogleSwitchCtrl
+ * # ToggleSwitchCtrl
  * Controller of the connectedCarSDK
  */
 

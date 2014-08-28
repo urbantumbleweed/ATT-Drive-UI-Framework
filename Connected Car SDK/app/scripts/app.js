@@ -27,9 +27,9 @@ angular
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
         })
-        .when('/toogle-switch', {
-            templateUrl: 'views/toogleSwitch.html',
-            controller: 'ToogleSwitchCtrl'
+        .when('/toggle-switch', {
+            templateUrl: 'views/toggleSwitch.html',
+            controller: 'ToggleSwitchCtrl'
         })
         .when('/tabs', {
             templateUrl: 'views/tabs.html',

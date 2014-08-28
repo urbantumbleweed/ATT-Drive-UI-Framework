@@ -25,10 +25,9 @@
 
         <div class="sidebar">
             <ul>
-                <li><a href="#/toggle-switch">Toggle Switch</a></li>
+                <li><a href="#/toogle-switch">Toggle Switch</a></li>
                 <li><a href="#/tabs">Tabs</a></li>
                 <li><a href="#/progress-bar">Progress bars</a></li>
-                <li><a href="#/carousel">Carousel</a></li>
             </ul>
         </div>
         <div class="container" id="main-container">
@@ -63,7 +62,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/toggleSwitch.js"></script>
+    <script src="scripts/controllers/toogleSwitch.js"></script>
     <script src="scripts/controllers/tabs.js"></script>
     <script src="scripts/controllers/progressBar.js"></script>
     <script src="scripts/controllers/carousel.js"></script>
@@ -72,10 +71,13 @@
     <script src="scripts/directives/attTab.js"></script>
     <script src="scripts/directives/attTabset.js"></script>
     <script src="scripts/directives/attProgressbar.js"></script>
+<<<<<<< HEAD
     <script src="scripts/directives/attCarousel.js"></script>
-    <script src="scripts/directives/attalert.js"></script>
 
     <script src="scripts/services/transition.js"></script>
+=======
+    <script src="scripts/directives/attalert.js"></script>
+>>>>>>> 9c0b0b812c064540b681a958ba84ea488e7604db
     <!-- endbuild -->
 </body>
 </html>
