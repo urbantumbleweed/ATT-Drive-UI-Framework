@@ -67,6 +67,10 @@ body {
     width: 768px;
 }
 
+#main-container > .ng-scope{
+    height: 470px;
+}
+
 
 .sidebar{
     position: absolute;
@@ -74,8 +78,14 @@ body {
     top: 0;
     width: 300px;
     height: 100%;
-    background-color: #efefef;
+    background-color: #333;
+    color: #ffffff;
     padding-top: 2em;
+}
+
+.sidebar a:hover{
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .sidebar ul li{

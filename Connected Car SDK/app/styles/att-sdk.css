@@ -2420,11 +2420,12 @@ input[type="button"].btn-block {
 }
 .att-tabs {
   background-color: transparent;
-  max-height: 470px;
+  height: 470px;
   height: 100%;
   display: block;
 }
 .att-tabs .tab-content {
+  height: 100%;
   max-height: 410px;
   color: #ffffff;
   padding: 10px;
