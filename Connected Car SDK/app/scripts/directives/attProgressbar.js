@@ -39,7 +39,7 @@ angular.module('connectedCarSDK.progressbar', [])
     this.removeBar = function (bar) {
         this.bars.splice(this.bars.indexOf(bar), 1);
     };
-}]).directive('attProgressbar', function () {
+}]).directive('attProgressBar', function () {
     return {
         restrict: 'EA',
         replace: true,
