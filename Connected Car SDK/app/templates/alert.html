@@ -1,6 +1,8 @@
-<div class="att-alert {{type}}" ng-hide="closeAlert">
-    <span class="close-icon" ng-class="{visible: showCloseBtn == 'true'}" ng-click="onClose()">X</span>
-    <h1 class="alert-heading" ng-bind="title"></h1>
-    <p class="alert-text" ng-transclude></p>
-    <span class="alert-icon {{type}}" ng-show="showIcon"><i></i></span>
+<div class="att-alert"  ng-hide="closeAlert">
+    <div ng-class="type && 'alert-' + type">
+        <span class="close-icon" ng-class="{visible: showCloseBtn == 'true'}" ng-click="onClose()">X</span>
+        <h1 class="alert-heading" ng-bind="title"></h1>
+        <p class="alert-text" ng-transclude></p>
+        <span class="alert-icon {{type}}" ng-show="showIcon"><i></i></span>
+    </div>
 </div>
