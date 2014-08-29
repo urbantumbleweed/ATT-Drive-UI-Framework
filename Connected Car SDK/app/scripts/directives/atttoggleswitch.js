@@ -4,7 +4,7 @@
  * @ngdoc directive
  * @name connectedCarSDK.toggleSwitch.directive:attToggleSwitch
  * @description
- * # toggleSwitch
+ * # attToggleSwitch
  */
 angular.module('connectedCarSDK.toggleSwitch', [])
   .directive('attToggleSwitch', function () {
@@ -16,6 +16,11 @@ angular.module('connectedCarSDK.toggleSwitch', [])
           },
           require: '^ngModel',
           link: function (scope, element, attrs) {
+
+              if (angular.isDefined(attrs.disabled))
+              {
+                  element.find("label").attr("disabled", "disabled");
+              }
 
               scope.change = function (enabled)
               {

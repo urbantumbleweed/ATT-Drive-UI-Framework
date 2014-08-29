@@ -11,6 +11,7 @@
 angular.module('connectedCarSDK')
   .controller('ToggleSwitchCtrl', function ($scope) {
       $scope.customModel = true;
+      $scope.customModel2 = true;
   });
 
 

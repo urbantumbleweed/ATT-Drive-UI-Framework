@@ -19,7 +19,8 @@ angular
     'connectedCarSDK.toggleSwitch',
     'connectedCarSDK.tab',
     'connectedCarSDK.progressbar',
-    'connectedCarSDK.carousel'
+    'connectedCarSDK.carousel',
+    'connectedCarSDK.buttons'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -42,6 +43,10 @@ angular
         .when('/carousel', {
             templateUrl: 'views/carousel.html',
             controller: 'CarouselCtrl'
+        })
+        .when('/buttons', {
+            templateUrl: 'views/buttons.html',
+            controller: 'ButtonsCtrl'
         })
         .otherwise({
             redirectTo: '/'

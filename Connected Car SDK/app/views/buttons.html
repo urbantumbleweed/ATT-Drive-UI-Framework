@@ -1,0 +1,21 @@
+﻿<div ng-controller="ButtonsCtrl">
+    <h4>Single toggle</h4>
+    <pre>{{singleModel}}</pre>
+    <button type="button" class="btn btn-primary" ng-model="singleModel" att-btn-checkbox att-btn-checkbox-true="1" att-btn-checkbox-false="0">
+        Single Toggle
+    </button>
+    <h4>Checkbox</h4>
+    <pre>{{checkModel}}</pre>
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="checkModel.left" att-btn-checkbox>Left</label>
+        <label class="btn btn-primary" ng-model="checkModel.middle" att-btn-checkbox>Middle</label>
+        <label class="btn btn-primary" ng-model="checkModel.right" att-btn-checkbox>Right</label>
+    </div>
+    <h4>Radio &amp; Uncheckable Radio</h4>
+    <pre>{{radioModel || 'null'}}</pre>
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Left'">Left</label>
+        <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Middle'">Middle</label>
+        <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Right'">Right</label>
+    </div>
+</div>
