@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name connectedCarSdk.directive:attAlert
+ * @name connectedCarSdk.alert.directive:attAlert
  * @description
  * # attAlert
  */
-angular.module('connectedCarSDK.attAlert', [])
+angular.module('connectedCarSDK.alert', [])
     .directive('attAlert', [
         '$timeout', function($timeout) {
 

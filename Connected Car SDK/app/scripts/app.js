@@ -20,7 +20,7 @@ angular
     'connectedCarSDK.tab',
     'connectedCarSDK.progressbar',
     'connectedCarSDK.carousel',
-    'connectedCarSDK.attAlert'
+    'connectedCarSDK.alert',
     'connectedCarSDK.buttons'
   ])
   .config(function ($routeProvider) {
