@@ -1,22 +1,26 @@
-﻿<h3>Static</h3>
-<div class="row">
-    <div class="col-sm-4">
-        <att-progress-bar value="55"></att-progress-bar>
-    </div>
-    <div class="col-sm-4">
-        <att-progress-bar class="progress-striped" value="22" type="warning">22%</att-progress-bar>
-    </div>
-    <div class="col-sm-4">
-        <att-progress-bar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></att-progress-bar>
-    </div>
-</div>
+﻿<br/>
+<br/>
+<br/>
 
-<h3>Dynamic
-    <button class="btn btn-sm btn-primary" type="button" ng-click="random()">Randomize</button></h3>
-<att-progress-bar max="max" value="dynamic"><span style="color:black; white-space:nowrap;">{{dynamic}} / {{max}}</span></att-progress-bar>
+<att-progressbar max="max" value="dynamic">Default</att-progressbar>
 
-<small><em>No animation</em></small>
-<att-progress-bar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></att-progress-bar>
+<br/>
+<br/>
+<br/>
+<att-progressbar animate="false" value="dynamic" type="success">Success</att-progressbar>
 
-<small><em>Object (changes type based on value)</em></small>
-<att-progress-bar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></att-progress-bar>
+<br/>
+<br/>
+<br/>
+<att-progressbar value="dynamic" type="warning">Warning</att-progressbar>
+
+<br/>
+<br/>
+<br/>
+<att-progressbar value="dynamic" type="danger">danger</att-progressbar>
+
+
+<br/>
+<br/>
+<br/>
+<button class="btn btn-sm btn-primary" type="button" ng-click="random()">Randomize</button>
