@@ -1971,8 +1971,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #4ca90c;
+  border-color: #41910a;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -1980,8 +1980,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #ffffff;
-  background-color: #449d44;
-  border-color: #398439;
+  background-color: #377909;
+  border-color: #285806;
 }
 .btn-success:active,
 .btn-success.active,
@@ -2003,11 +2003,11 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #4ca90c;
+  border-color: #41910a;
 }
 .btn-success .badge {
-  color: #5cb85c;
+  color: #4ca90c;
   background-color: #ffffff;
 }
 .btn-info {
@@ -2053,8 +2053,8 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
   color: #ffffff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #ef6f00;
+  border-color: #d66300;
 }
 .btn-warning:hover,
 .btn-warning:focus,
@@ -2062,8 +2062,8 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #ffffff;
-  background-color: #ec971f;
-  border-color: #d58512;
+  background-color: #bc5700;
+  border-color: #984700;
 }
 .btn-warning:active,
 .btn-warning.active,
@@ -2085,11 +2085,11 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active,
 .btn-warning[disabled].active,
 fieldset[disabled] .btn-warning.active {
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #ef6f00;
+  border-color: #d66300;
 }
 .btn-warning .badge {
-  color: #f0ad4e;
+  color: #ef6f00;
   background-color: #ffffff;
 }
 .btn-danger {
@@ -2479,4 +2479,33 @@ input[type="button"].btn-block {
   text-decoration: none;
   background-color: rgba(6, 122, 180, 0.5);
   cursor: default;
+}
+.att-progress-bar {
+  background-color: #ffffff;
+  /* Contextual variants
+  ------------------------------------------*/
+}
+.att-progress-bar .progress-bar {
+  background-color: #067ab4;
+  height: 5px;
+}
+.att-progress-bar .label {
+  font: 18px;
+  position: relative;
+  top: -1.5em;
+  text-transform: uppercase;
+}
+.att-progress-bar .value {
+  position: relative;
+  float: right;
+  top: -1.5em;
+}
+.att-progress-bar .progress-bar-success {
+  background-color: #4ca90c;
+}
+.att-progress-bar .progress-bar-warning {
+  background-color: #ef6f00;
+}
+.att-progress-bar .progress-bar-danger {
+  background-color: #e23232;
 }
