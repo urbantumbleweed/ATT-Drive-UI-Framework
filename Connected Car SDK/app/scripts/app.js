@@ -21,7 +21,8 @@ angular
     'connectedCarSDK.progressbar',
     'connectedCarSDK.carousel',
     'connectedCarSDK.alert',
-    'connectedCarSDK.buttons'
+    'connectedCarSDK.buttons',
+    'connectedCarSDK.dropdown'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -49,9 +50,13 @@ angular
             templateUrl: 'views/buttons.html',
             controller: 'ButtonsCtrl'
         })
-	.when('/alert', {
+	    .when('/alert', {
             templateUrl: 'views/alert.html',
             controller: 'AlertCtrl'
+	    })
+        .when('/dropdown', {
+            templateUrl: 'views/dropdown.html',
+            controller: 'DropdownCtrl'
         })
         .otherwise({
             redirectTo: '/'
