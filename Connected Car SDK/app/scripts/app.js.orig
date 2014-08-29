@@ -20,8 +20,11 @@ angular
     'connectedCarSDK.tab',
     'connectedCarSDK.progressbar',
     'connectedCarSDK.carousel',
-    'connectedCarSDK.attAlert'
+<<<<<<< HEAD
     'connectedCarSDK.buttons'
+=======
+    'connectedCarSDK.attAlert'
+>>>>>>> 08dadf8b0de751f0caaad733c9529cc2f633d1e3
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -45,13 +48,15 @@ angular
             templateUrl: 'views/carousel.html',
             controller: 'CarouselCtrl'
         })
+<<<<<<< HEAD
         .when('/buttons', {
             templateUrl: 'views/buttons.html',
             controller: 'ButtonsCtrl'
-        })
-	.when('/alert', {
+=======
+        .when('/alert', {
             templateUrl: 'views/alert.html',
             controller: 'AlertCtrl'
+>>>>>>> 08dadf8b0de751f0caaad733c9529cc2f633d1e3
         })
         .otherwise({
             redirectTo: '/'

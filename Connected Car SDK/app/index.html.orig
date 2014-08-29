@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/att-sdk.css"/>
-    <!--//<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
     <!-- endbuild -->
 </head>
 <body ng-app="connectedCarSDK">
@@ -25,9 +25,15 @@
 
         <div class="sidebar">
             <ul>
-                <li><a href="#/toogle-switch">Toggle Switch</a></li>
+                <li><a href="#/toggle-switch">Toggle Switch</a></li>
                 <li><a href="#/tabs">Tabs</a></li>
                 <li><a href="#/progress-bar">Progress bars</a></li>
+                <li><a href="#/carousel">Carousel</a></li>
+<<<<<<< HEAD
+                <li><a href="#/buttons">Buttons</a></li>
+=======
+                <li><a href="#/alert">Alert</a></li>
+>>>>>>> 08dadf8b0de751f0caaad733c9529cc2f633d1e3
             </ul>
         </div>
         <div class="container" id="main-container">
@@ -62,22 +68,26 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/toogleSwitch.js"></script>
+    <script src="scripts/controllers/toggleSwitch.js"></script>
     <script src="scripts/controllers/tabs.js"></script>
     <script src="scripts/controllers/progressBar.js"></script>
     <script src="scripts/controllers/carousel.js"></script>
+<<<<<<< HEAD
+    <script src="scripts/controllers/buttons.js"></script>
+=======
+    <script src="scripts/controllers/alert.js"></script>
+>>>>>>> 08dadf8b0de751f0caaad733c9529cc2f633d1e3
 
     <script src="scripts/directives/attToggleSwitch.js"></script>
     <script src="scripts/directives/attTab.js"></script>
     <script src="scripts/directives/attTabset.js"></script>
     <script src="scripts/directives/attProgressbar.js"></script>
-<<<<<<< HEAD
     <script src="scripts/directives/attCarousel.js"></script>
+    <script src="scripts/directives/attalert.js"></script>
+    <script src="scripts/directives/attButtons.js"></script>
 
     <script src="scripts/services/transition.js"></script>
-=======
-    <script src="scripts/directives/attalert.js"></script>
->>>>>>> 9c0b0b812c064540b681a958ba84ea488e7604db
+    <script src="scripts/directives/attbuttons.js"></script>
     <!-- endbuild -->
 </body>
 </html>
