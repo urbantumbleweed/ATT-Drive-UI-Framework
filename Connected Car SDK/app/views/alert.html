@@ -6,10 +6,11 @@
 </select><br/>
 
 <label for="titleText">Title:</label><input type="text" name="titleText" ng-model="title" /><br />
-<label for="alertText">Content:</label><input type="text" name="alertText" ng-model="content" /><br />
+<label for="alertText">Content:</label><input type="text" name="alertText" ng-model="text" /><br />
 
 <label for="showIcon">Show Icon:</label><input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
-<label for="showClose">Show Close Button:</label><input type="checkbox" name="showClose" ng-model="showClose" /><br />
+<label for="showConfirmationBtn">Show Confirmation Button:</label><input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
+<label for="buttonText">Confirmation Button Text:</label><input type="text" name="buttonText" ng-model="buttonText" /><br />
 
 <label for="autoClose">Auto Close interval:</label><input type="number" name="autoClose" ng-model="autoClose" /><br />
 
@@ -18,9 +19,11 @@
 <att-alert ng-repeat="alert in alerts"
            type="alert.type"
            show-icon="alert.showIcon"
-           show-close-btn="alert.showClose"
-           close="removeAlert($index)"
-           auto-close-interval="alert.autoClose"
-           title="alert.title">
-    {{alert.content}}
+           show-confirmation-btn="alert.showConfirmationBtn"
+           button-text="alert.buttonText"
+           on-click="alert.onClick()"
+           on-close="alert.onClose()"
+           auto-close-interval="alert.autoCloseInterval"
+           title="alert.title"
+           text="alert.text">
 </att-alert>
