@@ -68,11 +68,11 @@
 
       // Disabled state sets text to gray and nukes hover/tab effects
       &.disabled > a {
-        color: lighten(@nav-disabled-link-color, 20%);
+        color: @gray;
 
         &:hover,
         &:focus {
-          color: lighten(@nav-disabled-link-color, 20%);
+          color: @gray;
           text-decoration: none;
           background-color: fade(@brand-primary, 50%);
           cursor: default;

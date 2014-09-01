@@ -21,7 +21,9 @@ angular
     'connectedCarSDK.progressbar',
     'connectedCarSDK.carousel',
     'connectedCarSDK.alert',
-    'connectedCarSDK.buttons'
+    'connectedCarSDK.buttons',
+    'connectedCarSDK.dropdown',
+    'connectedCarSDK.loader'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -32,7 +34,7 @@ angular
         .when('/toggle-switch', {
             templateUrl: 'views/toggleSwitch.html',
             controller: 'ToggleSwitchCtrl'
-        })
+        }) 
         .when('/tabs', {
             templateUrl: 'views/tabs.html',
             controller: 'TabsCtrl'
@@ -49,9 +51,17 @@ angular
             templateUrl: 'views/buttons.html',
             controller: 'ButtonsCtrl'
         })
-	.when('/alert', {
+	    .when('/alert', {
             templateUrl: 'views/alert.html',
             controller: 'AlertCtrl'
+	    })
+        .when('/dropdown', {
+            templateUrl: 'views/dropdown.html',
+            controller: 'DropdownCtrl'
+        })
+        .when('/loader', {
+            templateUrl: 'views/loader.html',
+            controller: 'LoaderCtrl'
         })
         .otherwise({
             redirectTo: '/'

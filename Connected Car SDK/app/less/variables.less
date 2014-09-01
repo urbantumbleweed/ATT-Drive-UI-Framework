@@ -7,11 +7,11 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-@gray-darker:            lighten(#000, 13.5%); // #222
-@gray-dark:              lighten(#000, 20%);   // #333
-@gray:                   lighten(#000, 33.5%); // #555
-@gray-light:             lighten(#000, 46.7%); // #777
-@gray-lighter:           lighten(#000, 93.5%); // #eee
+@gray-darker:            #333333;
+@gray-dark:              #666666;
+@gray:                   #999999;
+@gray-light:             #cccccc;
+@gray-lighter:           #eeeeee;
 
 @brand-primary:         #067ab4;
 @brand-secondary:       #ef6f00;
@@ -19,6 +19,8 @@
 @brand-info:            #5bc0de;
 @brand-warning:         #ef6f00;
 @brand-danger:          #e23232;
+
+@components-partial-opacity: .2;
 
 
 //== Scaffolding
@@ -28,7 +30,7 @@
 //** Background color for `<body>`.
 @body-bg:               #fff;
 //** Global text color on `<body>`.
-@text-color:            @gray-dark;
+@text-color:            @gray-darker;
 
 //** Global textual link color.
 @link-color:            @brand-primary;
