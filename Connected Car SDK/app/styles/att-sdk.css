@@ -2527,12 +2527,18 @@ input[type="button"].btn-block {
   min-height: 140px;
   height: 100%;
   font-size: 24px;
+}
+.att-alert .close-icon {
   min-width: 200px;
 }
-.att-alert .alert-info,
-.att-alert .alert-warning .alert-danger {
-  height: 100%;
-  min-height: 140px;
+.att-alert.alert-info {
+  background-color: rgba(6, 122, 180, 0.9);
+}
+.att-alert.alert-success {
+  background-color: rgba(76, 169, 12, 0.9);
+}
+.att-alert.alert-danger {
+  background-color: rgba(226, 50, 50, 0.9);
 }
 .att-alert .content {
   display: table-cell;
