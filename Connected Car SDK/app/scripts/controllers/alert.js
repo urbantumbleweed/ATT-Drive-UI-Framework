@@ -6,16 +6,16 @@ sdk.controller('AlertCtrl', function($scope) {
 
     $scope.runCustomCode = function() {
 
-        alert('On Close event called');
+        //alert('On Close event called');
 
     };
 
     $scope.onClose = function () {
-        alert('on Close');
+        //alert('on Close');
     };
 
     $scope.onClick = function () {
-        alert('on Click');
+        //alert('on Click');
     };
 
     $scope.alerts = [];
