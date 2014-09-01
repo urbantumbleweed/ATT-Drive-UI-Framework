@@ -1,19 +1,60 @@
-﻿<label for="alertType">Alert Type:</label>
-<select name="alertType" ng-model="type">
-    <option value="info" selected="">Info</option>
-    <option value="success">Success</option>
-    <option value="danger">Danger</option>
-</select><br/>
+﻿<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="alertType" class="col-sm-2 control-label">Alert Type:</label>
 
-<label for="titleText">Title:</label><input type="text" name="titleText" ng-model="title" /><br />
-<label for="alertText">Content:</label><input type="text" name="alertText" ng-model="content" /><br />
+        <div class="col-sm-10">
+            <select class="form-control"  name="alertType" ng-model="type">
+                <option value="info" selected="">Info</option>
+                <option value="success">Success</option>
+                <option value="danger">Danger</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
 
-<label for="showIcon">Show Icon:</label><input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
-<label for="showClose">Show Close Button:</label><input type="checkbox" name="showClose" ng-model="showClose" /><br />
+        <label for="titleText" class="col-sm-2 control-label">Title:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="titleText" ng-model="title" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="alertText" class="col-sm-2 control-label">Content:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="alertText" ng-model="content" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="autoClose" class="col-sm-2 control-label">Auto Close interval:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" name="autoClose" ng-model="autoClose" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label for="showIcon">
+                    <input type="checkbox" name="showIcon" ng-model="showIcon" />Show Icon
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label for="showClose">
+                    <input type="checkbox" name="showClose" ng-model="showClose" />Show Close Button
+                </label>
+            </div>
+        </div>
+    </div>
 
-<label for="autoClose">Auto Close interval:</label><input type="number" name="autoClose" ng-model="autoClose" /><br />
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" ng-click="showAlert()">Show Alert</button>
+        </div>
+    </div>
+</form>
 
-<button type="button" ng-click="showAlert()">Show Alert</button><br />
 
 <att-alert ng-repeat="alert in alerts"
            type="alert.type"
@@ -24,3 +65,6 @@
            title="alert.title">
     {{alert.content}}
 </att-alert>
+
+
+
