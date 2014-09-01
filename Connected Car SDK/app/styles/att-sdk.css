@@ -54,7 +54,9 @@ figure {
 img {
   vertical-align: middle;
 }
-.img-responsive {
+.img-responsive,
+.att-carousel .carousel-inner > .item > img,
+.att-carousel .carousel-inner > .item > a > img {
   display: block;
   width: 100% \9;
   max-width: 100%;
@@ -2512,7 +2514,7 @@ input[type="button"].btn-block {
 }
 .att-alert {
   position: absolute;
-  top: 20%;
+  top: 18%;
   background-color: #067ab4;
   min-height: 140px;
   width: 100%;
@@ -2520,19 +2522,31 @@ input[type="button"].btn-block {
   display: table;
 }
 .att-alert .alert-icon,
-.att-alert .close-icon {
+.att-alert .close-icon,
+.att-alert .alert-button {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
   min-height: 140px;
   height: 100%;
   font-size: 24px;
+  min-width: 50px;
+}
+.att-alert .alert-button {
   min-width: 200px;
 }
-.att-alert .alert-info,
-.att-alert .alert-warning .alert-danger {
-  height: 100%;
-  min-height: 140px;
+.att-alert .alert-button .btn {
+  min-width: 200px;
+  min-height: 60px;
+}
+.att-alert.alert-info {
+  background-color: rgba(6, 122, 180, 0.9);
+}
+.att-alert.alert-success {
+  background-color: rgba(76, 169, 12, 0.9);
+}
+.att-alert.alert-danger {
+  background-color: rgba(226, 50, 50, 0.9);
 }
 .att-alert .content {
   display: table-cell;
@@ -2546,4 +2560,196 @@ input[type="button"].btn-block {
 .att-alert .alert-heading {
   text-transform: uppercase;
   font-size: 24px;
+}
+.att-carousel {
+  background-color: red;
+}
+.att-carousel .carousel {
+  position: relative;
+}
+.att-carousel .carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.att-carousel .carousel-inner > .item {
+  display: none;
+  position: relative;
+  -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.att-carousel .carousel-inner > .item > img,
+.att-carousel .carousel-inner > .item > a > img {
+  line-height: 1;
+}
+.att-carousel .carousel-inner > .active,
+.att-carousel .carousel-inner > .next,
+.att-carousel .carousel-inner > .prev {
+  display: block;
+}
+.att-carousel .carousel-inner > .active {
+  left: 0;
+}
+.att-carousel .carousel-inner > .next,
+.att-carousel .carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.att-carousel .carousel-inner > .next {
+  left: 100%;
+}
+.att-carousel .carousel-inner > .prev {
+  left: -100%;
+}
+.att-carousel .carousel-inner > .next.left,
+.att-carousel .carousel-inner > .prev.right {
+  left: 0;
+}
+.att-carousel .carousel-inner > .active.left {
+  left: -100%;
+}
+.att-carousel .carousel-inner > .active.right {
+  left: 100%;
+}
+.att-carousel .carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.att-carousel .carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+.att-carousel .carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+.att-carousel .carousel-control:hover,
+.att-carousel .carousel-control:focus {
+  outline: 0;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.att-carousel .carousel-control .icon-prev,
+.att-carousel .carousel-control .icon-next,
+.att-carousel .carousel-control .glyphicon-chevron-left,
+.att-carousel .carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+.att-carousel .carousel-control .icon-prev,
+.att-carousel .carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.att-carousel .carousel-control .icon-next,
+.att-carousel .carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.att-carousel .carousel-control .icon-prev,
+.att-carousel .carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  font-family: serif;
+}
+.att-carousel .carousel-control .icon-prev:before {
+  content: '\2039';
+}
+.att-carousel .carousel-control .icon-next:before {
+  content: '\203a';
+}
+.att-carousel .carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+.att-carousel .carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+}
+.att-carousel .carousel-indicators .active {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+}
+.att-carousel .carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.att-carousel .carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .att-carousel .carousel-control .glyphicon-chevron-left,
+  .att-carousel .carousel-control .glyphicon-chevron-right,
+  .att-carousel .carousel-control .icon-prev,
+  .att-carousel .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    font-size: 30px;
+  }
+  .att-carousel .carousel-control .glyphicon-chevron-left,
+  .att-carousel .carousel-control .icon-prev {
+    margin-left: -15px;
+  }
+  .att-carousel .carousel-control .glyphicon-chevron-right,
+  .att-carousel .carousel-control .icon-next {
+    margin-right: -15px;
+  }
+  .att-carousel .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+  .att-carousel .carousel-indicators {
+    bottom: 20px;
+  }
 }

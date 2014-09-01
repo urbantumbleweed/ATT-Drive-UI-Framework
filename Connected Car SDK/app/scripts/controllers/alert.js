@@ -6,37 +6,52 @@ sdk.controller('AlertCtrl', function($scope) {
 
     $scope.runCustomCode = function() {
 
-        alert('On Close event called');
+        //alert('On Close event called');
 
     };
 
+    $scope.onClose = function () {
+        //alert('on Close');
+    };
+
+    $scope.onClick = function () {
+        //alert('on Click');
+    };
+
     $scope.alerts = [];
-    $scope.alerts.push({
-        type: 'info',
-        showIcon: 'true',
-        showClose: 'true',
-        autoClose: undefined,
-        title: 'Alert title',
-        content: 'Sample alert content'
-    });
+    //$scope.alerts.push({
+    //    type: 'info',
+    //    showIcon: false,
+    //    showConfirmationBtn: true,
+    //    buttonText: 'OK',
+    //    onClose: $scope.onClose,
+    //    onClick: $scope.onClick,
+    //    autoCloseInterval: undefined,
+    //    title: 'Sample alert title',
+    //    text: 'Sample alert text'
+    //});
 
     $scope.showAlert = function() {
 
         $scope.alerts.push({
             type: $scope.type,
             showIcon: $scope.showIcon,
-            showClose: $scope.showClose,
-            autoClose: $scope.autoClose,
+            showConfirmationBtn: $scope.showConfirmationBtn,
+            buttonText: $scope.buttonText,
+            onClose: $scope.onClose,
+            onClick: $scope.onClick,
+            autoCloseInterval: $scope.autoClose,
             title: $scope.title,
-            content: $scope.content
+            text: $scope.text
         });
-
+        
     };
-
-
+    
     $scope.removeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
+
+    
 
 });
 

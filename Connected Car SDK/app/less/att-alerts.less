@@ -1,6 +1,6 @@
 .att-alert{
   position: absolute;
-  top: 20%;
+  top: 18%;
 
   background-color: @brand-primary;
   min-height: 140px;
@@ -9,22 +9,42 @@
   display: table;
 
   .alert-icon,
-  .close-icon{
+  .close-icon,
+  .alert-button{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
     min-height: 140px;
     height: 100%;
     font-size: 24px;
-
-    min-width: 200px;
+    min-width: 50px;
   }
 
-  .alert-info,
-  .alert-warning
-  .alert-danger{
-    height: 100%;
-    min-height: 140px;
+
+
+  .alert-button{
+    min-width: 200px;
+    .btn{
+      min-width: 200px;
+      min-height: 60px;
+    }
+  }
+
+
+
+
+  &.alert-info
+  {
+    background-color: fade(@brand-primary, 90%);
+  }
+  &.alert-success
+  {
+    background-color: fade(@brand-success, 90%);
+  }
+
+  &.alert-danger
+  {
+    background-color: fade(@brand-danger, 90%);
   }
 
 

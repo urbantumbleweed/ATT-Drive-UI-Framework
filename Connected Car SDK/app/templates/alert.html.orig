@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+<div class="att-alert" ng-class="type && 'alert-' + type"  ng-hide="closeAlert">
+=======
+<div class="att-alert" ng-hide="closeAlert" ng-click="close()">
+    <div ng-class="type && 'alert-' + type">
+        
+        <div class="btn btn-default" ng-show="showConfirmationBtn" ng-click="onClick()">{{buttonText}}</div>
+        <span class="alert-icon {{type}}" ng-show="showIcon && !showConfirmationBtn"><i></i></span>
+>>>>>>> 1531f27c221e2676592fc373d57c13214736cdac
+
+        <h1 class="alert-heading" ng-bind="title"></h1>
+        <p class="alert-text" ng-bind="text"></p>
+        
+    </div>
+</div>
