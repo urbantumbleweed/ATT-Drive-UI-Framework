@@ -73,6 +73,10 @@ body {
     height: 470px;
 }
 
+#details-container{
+    margin-top: 2em;
+}
+
 
 .sidebar{
     position: absolute;
