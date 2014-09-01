@@ -21,8 +21,8 @@
            show-icon="alert.showIcon"
            show-confirmation-btn="alert.showConfirmationBtn"
            button-text="alert.buttonText"
-           on-click="alert.onClick()"
-           on-close="alert.onClose()"
+           on-click="alert.onClick(); removeAlert($index)"
+           on-close="alert.onClose(); removeAlert($index)"
            auto-close-interval="alert.autoCloseInterval"
            title="alert.title"
            text="alert.text">

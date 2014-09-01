@@ -19,17 +19,17 @@ sdk.controller('AlertCtrl', function($scope) {
     };
 
     $scope.alerts = [];
-    $scope.alerts.push({
-        type: 'info',
-        showIcon: false,
-        showConfirmationBtn: true,
-        buttonText: 'OK',
-        onClose: $scope.onClose,
-        onClick: $scope.onClick,
-        autoCloseInterval: undefined,
-        title: 'Sample alert title',
-        text: 'Sample alert text'
-    });
+    //$scope.alerts.push({
+    //    type: 'info',
+    //    showIcon: false,
+    //    showConfirmationBtn: true,
+    //    buttonText: 'OK',
+    //    onClose: $scope.onClose,
+    //    onClick: $scope.onClick,
+    //    autoCloseInterval: undefined,
+    //    title: 'Sample alert title',
+    //    text: 'Sample alert text'
+    //});
 
     $scope.showAlert = function() {
 
