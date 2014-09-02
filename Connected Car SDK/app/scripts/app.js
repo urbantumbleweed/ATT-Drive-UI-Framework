@@ -73,6 +73,10 @@ angular
             templateUrl: 'views/modal.html',
             controller: 'ModalCtrl'
         })
+        .when('/radio', {
+            templateUrl: 'views/radio.html',
+            controller: 'RadioBtnCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

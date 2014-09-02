@@ -1,0 +1,114 @@
+.btn {
+  font-family: 'omnes_attlight', sans-serif;
+  width: 200px;
+  height: 60px;
+  padding: 0 20px;
+  border: 2px solid white;
+  display: inline-block;
+  background: transparent;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Default button */
+.btn.btn-default {
+  border-color: white;
+}
+
+.btn.btn-default:focus,
+.btn.btn-default.focus {
+  border: 7px solid white;
+}
+
+.btn.btn-default:active,
+.btn.btn-default.active {
+  background: white;
+  color: #333;
+}
+
+/* Primary button */
+.btn.btn-primary {
+  border-color: #067ab4;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary.focus {
+  border: 7px solid #44c8f5;
+}
+
+.btn.btn-primary:active,
+.btn.btn-primary.active {
+  background: #067ab4;
+  border-color: #067ab4;
+}
+
+/* Danger button */
+.btn.btn-danger {
+  border-color: #e23232;
+}
+
+.btn.btn-danger:focus,
+.btn.btn-danger.focus {
+  border: 7px solid #fe8f8f;
+}
+
+.btn.btn-danger:active,
+.btn.btn-danger.active {
+  background: #e23232;
+  border-color: #e23232;
+}
+
+/* Success button */
+.btn.btn-success {
+  border-color: #4ca90c;
+}
+
+.btn.btn-success:focus,
+.btn.btn-success.focus {
+  border: 7px solid #c4d82d;
+}
+
+.btn.btn-success:active,
+.btn.btn-success.active {
+  background: #4ca90c;
+  border-color: #4ca90c;
+}
+
+/* Circular buttons */
+.btn-circ {
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circ:focus,
+.btn-circ.focus {
+  border: 7px solid white;
+}
+
+.btn-circ:active,
+.btn-circ.active {
+  background: white;
+  color: #333;
+}
+
+.btn-circ.medium {
+  width: 64px;
+  height: 64px;
+}
+
+/* Disabled button */
+.btn:disabled,
+.btn.disabled {
+  pointer-events: none;
+  color: #666;
+  border-color: #666;
+}
+
+
+.btn-close-list {
+  position: absolute; /* Should switch to fixed in actual project as it's fixed relative to viewport */
+  top: 25px;
+  right: 24px;
+}
+

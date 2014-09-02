@@ -1,13 +1,17 @@
 .att-carousel{
-  background-color: red;
+
   .carousel {
     position: relative;
+    height: 100%;
   }
 
   .carousel-inner {
     position: relative;
     overflow: hidden;
     width: 100%;
+    max-height: 470px !important;
+    height: 100%;
+    min-height: 100%;
 
     > .item {
       display: none;
@@ -63,27 +67,34 @@
   // ---------------------------
 
   .carousel-control {
+    background-color: @gray-darker;
     position: absolute;
-    top: 0;
+    top: 25%;
     left: 0;
     bottom: 0;
-    width: @carousel-control-width;
+
     .opacity(@carousel-control-opacity);
     font-size: @carousel-control-font-size;
     color: @carousel-control-color;
     text-align: center;
     text-shadow: @carousel-text-shadow;
+
+    height: 50%;
+
+    width: 30px;
     // We can't have this transition here because WebKit cancels the carousel
     // animation if you trip this while in the middle of another animation.
 
     // Set gradients for backgrounds
     &.left {
-      #gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));
+      border-top-right-radius: 100%;
+      border-bottom-right-radius: 100%;
     }
     &.right {
       left: auto;
       right: 0;
-      #gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));
+      border-top-left-radius: 100%;
+      border-bottom-left-radius: 100%;
     }
 
     // Hover/focus state
@@ -95,23 +106,28 @@
       .opacity(.9);
     }
 
+    &:focus,
+    &:active{
+      border: 3px solid #ffffff;
+    }
+
     // Toggles
     .icon-prev,
     .icon-next,
-    .glyphicon-chevron-left,
-    .glyphicon-chevron-right {
+    .fa-chevron-left,
+    .fa-chevron-right {
       position: absolute;
-      top: 50%;
+      top: 47%;
       z-index: 5;
       display: inline-block;
     }
     .icon-prev,
-    .glyphicon-chevron-left {
+    .fa-chevron-left {
       left: 50%;
       margin-left: -10px;
     }
     .icon-next,
-    .glyphicon-chevron-right {
+    .fa-chevron-right {
       right: 50%;
       margin-right: -10px;
     }
@@ -162,16 +178,7 @@
       border-radius: 10px;
       cursor: pointer;
 
-      // IE8-9 hack for event handling
-      //
-      // Internet Explorer 8-9 does not support clicks on elements without a set
-      // `background-color`. We cannot use `filter` since that's not viewed as a
-      // background color by the browser. Thus, a hack is needed.
-      //
-      // For IE8, we set solid black as it doesn't support `rgba()`. For IE9, we
-      // set alpha transparency for the best results possible.
-      background-color: #000 \9; // IE8
-      background-color: rgba(0,0,0,0); // IE9
+
     }
     .active {
       margin: 0;
