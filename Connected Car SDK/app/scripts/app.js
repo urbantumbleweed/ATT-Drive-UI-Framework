@@ -68,6 +68,10 @@ angular
             templateUrl: 'views/badge.html',
             controller: 'BadgeCtrl'
         })
+        .when('/radio', {
+            templateUrl: 'views/radio.html',
+            controller: 'RadioBtnCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
