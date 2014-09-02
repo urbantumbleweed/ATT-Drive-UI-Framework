@@ -1,0 +1,17 @@
+﻿<div class="container" id="main-container">
+    
+    <att-list-view title="title" items="genres" multi-select="true"></att-list-view>
+    
+</div>
+
+<div class="container" id="details-container">
+    
+    <span>Selected genres:</span>
+    <ul>
+        <li ng-repeat="genre in genres">
+            <span ng-bind="genre.text"></span>: 
+            <span ng-bind="genre.selected"></span>
+        </li>
+    </ul>
+
+</div>
