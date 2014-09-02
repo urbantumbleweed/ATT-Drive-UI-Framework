@@ -9,7 +9,7 @@
  */
 
 angular.module('connectedCarSDK')
-  .controller('ModalCtrl', function ($scope) {
+  .controller('ModalCtrl', function ($scope, $modal, $log) {
       $scope.items = ['item1', 'item2', 'item3'];
 
       $scope.open = function (size) {
@@ -50,7 +50,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-});
+};
 
 
 
