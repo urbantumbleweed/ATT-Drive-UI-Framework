@@ -310,7 +310,7 @@ angular.module('connectedCarSDK.modal', ['connectedCarSdk.transition'])
 
       var $modalProvider = {
           options: {
-              backdrop: true, //can be also false or 'static'
+              backdrop: false, //can be also false or 'static'
               keyboard: true
           },
           $get: ['$injector', '$rootScope', '$q', '$http', '$templateCache', '$controller', '$modalStack',
