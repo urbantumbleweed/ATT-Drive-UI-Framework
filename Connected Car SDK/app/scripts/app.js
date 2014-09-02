@@ -24,7 +24,8 @@ angular
     'connectedCarSDK.buttons',
     'connectedCarSDK.dropdown',
     'connectedCarSDK.loader',
-    'connectedCarSDK.badge'
+    'connectedCarSDK.badge',
+    'connectedCarSDK.modal'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -67,6 +68,10 @@ angular
         .when('/badge', {
             templateUrl: 'views/badge.html',
             controller: 'BadgeCtrl'
+        })
+        .when('/modal', {
+            templateUrl: 'views/modal.html',
+            controller: 'ModalCtrl'
         })
         .otherwise({
             redirectTo: '/'
