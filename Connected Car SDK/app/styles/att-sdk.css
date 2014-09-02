@@ -2224,9 +2224,6 @@ select[multiple].input-lg {
   text-transform: uppercase;
   font-size: 24px;
 }
-.att-carousel {
-  background-color: red;
-}
 .att-carousel .carousel {
   position: relative;
 }
@@ -2528,11 +2525,11 @@ input[type="radio"] + label span {
   height: 60px;
   margin-right: 20px;
   vertical-align: middle;
-  background: url(../img/radio.png) no-repeat;
+  background: url(../images/radio.png) no-repeat;
   cursor: pointer;
 }
 input[type="radio"]:checked + label span {
-  background: url(../img/radio-checked.png) no-repeat;
+  background: url(../images/radio-checked.png) no-repeat;
 }
 /* DROPDOWNS
 ---------------------------------------------------------------- */
