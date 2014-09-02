@@ -25,7 +25,8 @@ angular
     'connectedCarSDK.dropdown',
     'connectedCarSDK.loader',
     'connectedCarSDK.badge',
-    'connectedCarSDK.listView'
+    'connectedCarSDK.listView',
+    'connectedCarSDK.modal'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -69,14 +70,18 @@ angular
             templateUrl: 'views/badge.html',
             controller: 'BadgeCtrl'
         })
+        .when('/modal', {
+            templateUrl: 'views/modal.html',
+            controller: 'ModalCtrl'
+        })
         .when('/radio', {
             templateUrl: 'views/radio.html',
             controller: 'RadioBtnCtrl'
         })
-          .when('/listview', {
-              templateUrl: 'views/listView.html',
-              controller: 'ListViewCtrl'
-          })
+        .when('/listview', {
+            templateUrl: 'views/listView.html',
+            controller: 'ListViewCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
