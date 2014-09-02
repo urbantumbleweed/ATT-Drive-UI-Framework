@@ -24,7 +24,8 @@ angular
     'connectedCarSDK.buttons',
     'connectedCarSDK.dropdown',
     'connectedCarSDK.loader',
-    'connectedCarSDK.badge'
+    'connectedCarSDK.badge',
+    'connectedCarSDK.listView'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -72,6 +73,10 @@ angular
             templateUrl: 'views/radio.html',
             controller: 'RadioBtnCtrl'
         })
+          .when('/listview', {
+              templateUrl: 'views/listView.html',
+              controller: 'ListViewCtrl'
+          })
         .otherwise({
             redirectTo: '/'
         });
