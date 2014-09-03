@@ -1,6 +1,6 @@
 .att-tabs{
   background-color: transparent;
-  height: 470px;
+  max-height: 470px;
   height: 100%;
   display: block;
 
@@ -25,14 +25,20 @@
   // Navs
   // --------------------------------------------------
 
+
+
   .nav {
     margin-bottom: 0;
     padding-left: 0; // Override default ul/ol
     list-style: none;
     &:extend(.clearfix all);
     width: 100%;
+    max-width: 768px;
 
-
+   &.top{
+     position: absolute;
+     top: 60px;
+   }
 
 
     > li {
