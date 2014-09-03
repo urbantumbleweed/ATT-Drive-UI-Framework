@@ -1,9 +1,36 @@
 ﻿
 
-<div class="container" id="main-container">
-    <att-toggle-switch ng-model="customModel"></att-toggle-switch> <br /> <br />
-    <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="main-container">
+            <att-toggle-switch ng-model="customModel"></att-toggle-switch> <br /> <br />
+            <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div id="options-panel">
+            This component has no additional options.
+        </div>
+    </div>
 </div>
-<div class="container" id="details-container">
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="details-container">
 
+            <att-tabset style="height: 340px">
+                <att-tab heading="Description">
+
+                </att-tab>
+
+                <att-tab heading="Markup">
+
+                </att-tab>
+                <att-tab heading="Js">
+
+                </att-tab>
+            </att-tabset>
+
+        </div>
+    </div>
 </div>
+

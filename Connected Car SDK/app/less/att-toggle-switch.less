@@ -22,7 +22,6 @@
     border-radius: 0;
     width: 50%;
     height: 100%;
-    line-height: 1.8;
     font-size: 24px;
   }
 
@@ -35,9 +34,9 @@
     border: 2px solid @brand-primary;
 
     .btn-group > .btn:first-child:not(:last-child){
-      background-color: @gray;
-      color: #fff;
-      opacity: @components-partial-opacity;
+      background-color: @semi-transparent-backdrop;
+      color: @gray;
+
     }
     .btn-group > .btn:last-child:not(:first-child){
       background-color: @brand-primary;
@@ -51,9 +50,9 @@
       background-color: @brand-danger;
     }
     .btn-group > .btn:last-child:not(:first-child){
-      background-color: @gray;
-      color: #fff;
-      opacity: @components-partial-opacity;
+      background-color: @semi-transparent-backdrop;
+      color: @gray;
+
     }
   }
 }

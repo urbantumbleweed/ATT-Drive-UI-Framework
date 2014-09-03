@@ -12,9 +12,10 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/att-sdk.css" />
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+
     <!-- endbuild -->
 </head>
 <body ng-app="connectedCarSDK">
@@ -24,26 +25,37 @@
 
     <!-- Add your site or application content here -->
 
-    <div class="sidebar">
-        <h3>&nbsp;Components</h3>
 
-        <ul>
-            <li><a href="#/toggle-switch">Toggle Switch</a></li>
-            <li><a href="#/tabs">Tabs</a></li>
-            <li><a href="#/progress-bar">Progress bars</a></li>
-            <li><a href="#/carousel">Carousel</a></li>
-            <li><a href="#/buttons">Buttons</a></li>
-            <li><a href="#/radio">Radio Buttons</a></li>
-            <li><a href="#/alert">Alert</a></li>
-            <li><a href="#/dropdown">Dropdown</a></li>
-            <li><a href="#/loader">Loader</a></li>
-            <li><a href="#/badge">Badge</a></li>
-            <li><a href="#/listview">List View</a></li>
-            <li><a href="#/modal">Modal</a></li>
-        </ul>
+
+    <div class="container-fluid">
+        <div class="col-md-2" id="sidebar">
+            <div>
+                <img src="images/ATT-logo.jpg" alt="AT&T Drive SDK" width="80%"/>
+                <p class="small">&nbsp;&nbsp;Automotive UX Guidelines</p>
+            </div>
+            <hr/>
+            <h4>&nbsp;Components</h4>
+
+            <ul>
+                <li><a href="#/toggle-switch">Toggle Switch</a></li>
+                <li><a href="#/tabs">Tabs</a></li>
+                <li><a href="#/progress-bar">Progress bars</a></li>
+                <li><a href="#/carousel">Carousel</a></li>
+                <li><a href="#/buttons">Buttons</a></li>
+                <li><a href="#/radio">Radio Buttons</a></li>
+                <li><a href="#/alert">Alert</a></li>
+                <li><a href="#/dropdown">Dropdown</a></li>
+                
+                <li><a href="#/badge">Badge</a></li>
+                <li><a href="#/listview">List View</a></li>
+                <li><a href="#/modal">Modal</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div ng-view></div>
+        </div>
+
     </div>
-
-    <div ng-view></div>
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>

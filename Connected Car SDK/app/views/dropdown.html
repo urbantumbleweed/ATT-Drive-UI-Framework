@@ -1,6 +1,38 @@
-﻿<div class="container" id="main-container">
-    <att-dropdown default-option="Please select an option:" items="items" close-button="true" ng-model="selectedItem">
-    </att-dropdown>
+﻿
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="main-container">
+            <att-dropdown default-option="Please select an option:" items="items" close-button="true" ng-model="selectedItem">
+            </att-dropdown>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div id="options-panel">
+            This component has no additional options.
+        </div>
+    </div>
 </div>
-<div class="container" id="details-container">
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="details-container">
+
+            <att-tabset style="height: 340px">
+                <att-tab heading="Description">
+
+                </att-tab>
+
+                <att-tab heading="Markup">
+
+                </att-tab>
+                <att-tab heading="Js">
+
+                </att-tab>
+            </att-tabset>
+
+        </div>
+    </div>
 </div>
+
+
+
+
