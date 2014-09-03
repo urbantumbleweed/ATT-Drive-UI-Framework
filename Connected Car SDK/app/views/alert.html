@@ -1,36 +1,60 @@
-﻿<div class="container" id="main-container">
+﻿
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="main-container">
+            <att-alert ng-repeat="alert in alerts"
+                       type="alert.type"
+                       show-icon="alert.showIcon"
+                       show-confirmation-btn="alert.showConfirmationBtn"
+                       button-text="alert.buttonText"
+                       on-click="alert.onClick(); removeAlert($index)"
+                       on-close="alert.onClose(); removeAlert($index)"
+                       auto-close-interval="alert.autoCloseInterval"
+                       title="alert.title"
+                       text="alert.text">
+            </att-alert>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div id="options-panel">
+            <label for="alertType">Alert Type:</label>
+            <select name="alertType" ng-model="type">
+                <option value="info" selected="">Info</option>
+                <option value="success">Success</option>
+                <option value="danger">Danger</option>
+            </select><br/>
 
+            <label for="titleText">Title:</label><input type="text" name="titleText" ng-model="title" /><br />
+            <label for="alertText">Content:</label><input type="text" name="alertText" ng-model="text" /><br />
 
-    <att-alert ng-repeat="alert in alerts"
-               type="alert.type"
-               show-icon="alert.showIcon"
-               show-confirmation-btn="alert.showConfirmationBtn"
-               button-text="alert.buttonText"
-               on-click="alert.onClick(); removeAlert($index)"
-               on-close="alert.onClose(); removeAlert($index)"
-               auto-close-interval="alert.autoCloseInterval"
-               title="alert.title"
-               text="alert.text">
-    </att-alert>
+            <label for="showIcon">Show Icon:</label><input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
+            <label for="showConfirmationBtn">Show Confirmation Button:</label><input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
+            <label for="buttonText">Confirmation Button Text:</label><input type="text" name="buttonText" ng-model="buttonText" /><br />
 
+            <label for="autoClose">Auto Close interval:</label><input type="number" name="autoClose" ng-model="autoClose" /><br />
+
+            <button type="button" ng-click="showAlert()">Show Alert</button><br />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="details-container">
+
+            <att-tabset style="height: 340px">
+                <att-tab heading="Description">
+
+                </att-tab>
+
+                <att-tab heading="Markup">
+
+                </att-tab>
+                <att-tab heading="Js">
+
+                </att-tab>
+            </att-tabset>
+
+        </div>
+    </div>
 </div>
 
-<div class="container" id="details-container">
-    <label for="alertType">Alert Type:</label>
-    <select name="alertType" ng-model="type">
-        <option value="info" selected="">Info</option>
-        <option value="success">Success</option>
-        <option value="danger">Danger</option>
-    </select><br/>
-
-    <label for="titleText">Title:</label><input type="text" name="titleText" ng-model="title" /><br />
-    <label for="alertText">Content:</label><input type="text" name="alertText" ng-model="text" /><br />
-
-    <label for="showIcon">Show Icon:</label><input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
-    <label for="showConfirmationBtn">Show Confirmation Button:</label><input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
-    <label for="buttonText">Confirmation Button Text:</label><input type="text" name="buttonText" ng-model="buttonText" /><br />
-
-    <label for="autoClose">Auto Close interval:</label><input type="number" name="autoClose" ng-model="autoClose" /><br />
-
-    <button type="button" ng-click="showAlert()">Show Alert</button><br />
-</div>

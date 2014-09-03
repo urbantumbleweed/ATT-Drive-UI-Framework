@@ -1,50 +1,57 @@
-/* LISTS/MENUS
+.att-list-view{
+  /* LISTS/MENUS
 ---------------------------------------------------------------- */
-.screen {
-  width: 768px;
-  height: 470px;
-  background: rgba(15, 15, 15, 0.9);
-  display: block;
-  padding: 25px 24px 35px 24px;
-  overflow-y: scroll;
-  position: relative;
-}
 
-h3.active-screen {
-  margin: 0;
-  margin-bottom: 25px;
-  font-size: 24px;
-  font-family: 'omnes_attmedium', sans-serif;
-  text-transform: uppercase;
-}
+    width: 768px;
+    height: 470px;
+    background: rgba(15, 15, 15, 0.9);
+    display: block;
+    padding: 25px 24px 35px 24px;
+    overflow-y: scroll;
+    position: relative;
 
-ul.list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  font-size: 36px;
-}
 
-ul.list li {
-  margin-bottom: 40px;
-  padding: 0;
-  line-height: 1;
-}
+  h3.active-screen {
+    margin: 0;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-family: 'omnes_attmedium', sans-serif;
+    text-transform: uppercase;
+  }
 
-ul.list li span {
-  display: block;
-  color: #666;
-  font-size: 18px;
-}
+  ul.list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 36px;
+    li {
+      margin-bottom: 40px;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      span {
+        display: block;
+        color: #666;
+        font-size: 18px;
+      }
 
-ul.list li.active:before {
-  background: #067ab4;
-  height: 46px;
-  width: 8px;
-  content: "";
-  float: left;
-  position: relative;
-  left: -16px;
-  top: 5px;
-  margin-left: -8px;
+      &.active:before {
+        background: #067ab4;
+        height: 50px;
+        width: 8px;
+        content: "";
+        float: left;
+        position: relative;
+        left: -16px;
+        top: 5px;
+        margin-left: -8px;
+      }
+    }
+  }
+
+
+
+
+
+
 }
