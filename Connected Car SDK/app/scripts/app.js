@@ -40,7 +40,7 @@ angular
         .when('/toggle-switch', {
             templateUrl: 'views/toggleSwitch.html',
             controller: 'ToggleSwitchCtrl'
-        }) 
+        })
         .when('/tabs', {
             templateUrl: 'views/tabs.html',
             controller: 'TabsCtrl'

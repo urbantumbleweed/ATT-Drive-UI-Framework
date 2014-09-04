@@ -1,6 +1,7 @@
 ﻿
 
 <div class="container" id="main-container">
+  <div class="padding">
     <input type="radio" id="radio1" name="radio" ng-model="color" value="red" />
     <label for="radio1"><span></span>Red</label>
     <br><br>
@@ -12,7 +13,7 @@
     <input type="radio" id="radio3" name="radio" ng-model="color" value="blue" />
     <label for="radio3"><span></span>Blue</label>
 </div>
-
+</div>
 
 <div id="options-panel">
     <span>Selected color: </span>{{color}}
@@ -30,37 +31,23 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                        &lt;input type=&quot;radio&quot; id=&quot;radio1&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;red&quot; /&gt;
-                &lt;label for=&quot;radio1&quot;&gt;&lt;span&gt;&lt;/span&gt;Red&lt;/label&gt;
-                &lt;br&gt;&lt;br&gt;
+            <pre ng-non-bindable=""><code data-language="html">&lt;input type=&quot;radio&quot; id=&quot;radio1&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;red&quot; /&gt;
+&lt;label for=&quot;radio1&quot;&gt;&lt;span&gt;&lt;/span&gt;Red&lt;/label&gt;
 
-                &lt;input type=&quot;radio&quot; id=&quot;radio2&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;green&quot; /&gt;
-                &lt;label for=&quot;radio2&quot;&gt;&lt;span&gt;&lt;/span&gt;Green&lt;/label&gt;
-                &lt;br&gt;&lt;br&gt;
+&lt;input type=&quot;radio&quot; id=&quot;radio2&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;green&quot; /&gt;
+&lt;label for=&quot;radio2&quot;&gt;&lt;span&gt;&lt;/span&gt;Green&lt;/label&gt;
 
-                &lt;input type=&quot;radio&quot; id=&quot;radio3&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;blue&quot; /&gt;
-                &lt;label for=&quot;radio3&quot;&gt;&lt;span&gt;&lt;/span&gt;Blue&lt;/label&gt;
-              </code>
-         </pre>
+&lt;input type=&quot;radio&quot; id=&quot;radio3&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;blue&quot; /&gt;
+&lt;label for=&quot;radio3&quot;&gt;&lt;span&gt;&lt;/span&gt;Blue&lt;/label&gt;</code></pre>
         </att-tab>
 
-        <att-tab heading="Js">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    angular.module('connectedCarSDK')
-                      .controller('RadioBtnCtrl', function ($scope) {
+        <att-tab heading="JavaScript">
+            <pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+  .controller('RadioBtnCtrl', function ($scope) {
 
-                        $scope.color = 'green';
-
-                    });
-              </code>
-         </pre>
+  $scope.color = 'green';
+});</code></pre>
         </att-tab>
     </att-tabset>
 
 </div>
-
-
-

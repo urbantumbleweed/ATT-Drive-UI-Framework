@@ -1,15 +1,16 @@
 ﻿<div class="container" id="main-container">
-    <att-toggle-switch ng-model="customModel"></att-toggle-switch>
-    <br />
-    <br />
-    <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
+  <div class="padding">
+  Active: <br>
+  <att-toggle-switch ng-model="customModel"></att-toggle-switch><br>
+  Dissabled: <br>
+  <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
 </div>
-
+</div>
 <div id="options-panel">
     This component has no additional options.
 </div>
 
-<div class="container" id="details-container">
+<div class="container " id="details-container">
 
     <att-tabset top-position="true">
         <att-tab heading="Description">
@@ -29,28 +30,16 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    &lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
-                </code>
-            </pre>
+            <pre ng-non-bindable=""><code data-language="html">&lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
+&lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;</code></pre>
         </att-tab>
-        <att-tab heading="Js">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    angular.module('connectedCarSDK')
-                      .controller('ToggleSwitchCtrl', function ($scope) {
-                          $scope.customModel = true;
-                          $scope.customModel2 = true;
-                      });
-                </code>
-            </pre>
+        <att-tab heading="JavaScript">
+            <pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+  .controller('ToggleSwitchCtrl', function ($scope) {
+    $scope.customModel = true;
+    $scope.customModel2 = true;
+});</code></pre>
         </att-tab>
     </att-tabset>
 
 </div>
-
-

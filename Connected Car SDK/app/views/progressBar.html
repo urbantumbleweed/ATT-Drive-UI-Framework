@@ -1,7 +1,7 @@
 ﻿
 
 <div class="container" id="main-container">
-    <br />
+  <div class="padding">
     <br />
     <br />
 
@@ -9,23 +9,16 @@
 
     <br />
     <br />
-    <br />
     <att-progress-bar animate="false" value="dynamic" type="success">Success</att-progress-bar>
 
-    <br />
     <br />
     <br />
     <att-progress-bar value="dynamic" type="warning">Warning</att-progress-bar>
 
     <br />
     <br />
-    <br />
     <att-progress-bar value="dynamic" type="danger">danger</att-progress-bar>
-
-
-    <br />
-    <br />
-    <br />
+</div>
 </div>
 
 
@@ -58,70 +51,36 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-
-                    &lt;att-progress-bar max=&quot;max&quot; value=&quot;dynamic&quot;&gt;Default&lt;/att-progress-bar&gt;
-
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;att-progress-bar animate=&quot;false&quot; value=&quot;dynamic&quot; type=&quot;success&quot;&gt;Success&lt;/att-progress-bar&gt;
-
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;warning&quot;&gt;Warning&lt;/att-progress-bar&gt;
-
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;danger&quot;&gt;danger&lt;/att-progress-bar&gt;
-
-
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                </code>
-            </pre>
+            <pre ng-non-bindable=""><code data-language="html">&lt;att-progress-bar max=&quot;max&quot; value=&quot;dynamic&quot;&gt;Default&lt;/att-progress-bar&gt;
+&lt;att-progress-bar animate=&quot;false&quot; value=&quot;dynamic&quot; type=&quot;success&quot;&gt;Success&lt;/att-progress-bar&gt;
+&lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;warning&quot;&gt;Warning&lt;/att-progress-bar&gt;
+&lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;danger&quot;&gt;danger&lt;/att-progress-bar&gt;</code></pre>
         </att-tab>
-        <att-tab heading="Js">
-             <pre ng-non-bindable="">
-                <code data-language="html">
-            angular.module('connectedCarSDK')
-              .controller('ProgressBarCtrl', function ($scope) {
-                  $scope.max = 200;
+        <att-tab heading="JavaScript">
+             <pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+.controller('ProgressBarCtrl', function ($scope) {
+  $scope.max = 200;
+  $scope.random = function () {
+    var value = Math.floor((Math.random() * 100) + 1);
+    var type;
 
-                  $scope.random = function () {
-                      var value = Math.floor((Math.random() * 100) + 1);
-                      var type;
+      if (value < 25) {
+        type = 'success';
+      } else if (value < 50) {
+        type = 'info';
+      } else if (value < 75) {
+        type = 'warning';
+      } else {
+        type = 'danger';
+      }
 
-                      if (value < 25) {
-                          type = 'success';
-                      } else if (value < 50) {
-                          type = 'info';
-                      } else if (value < 75) {
-                          type = 'warning';
-                      } else {
-                          type = 'danger';
-                      }
-
-                      $scope.showWarning = (type === 'danger' || type === 'warning');
-
-                      $scope.dynamic = value;
-                      $scope.type = type;
-                  };
-                  $scope.random();
-              });
-               </code>
-            </pre>
+  $scope.showWarning = (type === 'danger' || type === 'warning');
+  $scope.dynamic = value;
+  $scope.type = type;
+};
+$scope.random();
+});</code></pre>
         </att-tab>
     </att-tabset>
 
 </div>
-
-
-
