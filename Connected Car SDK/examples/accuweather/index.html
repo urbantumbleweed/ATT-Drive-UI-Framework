@@ -15,9 +15,9 @@
     <body ng-app="app">
     
         <div class="screen bg" style="overflow: hidden">
-            <div class="content">
-                
-                <att-header></att-header>
+            <div class="content" style="background-color:gray">
+
+                <att-header app-name="ACCUWEATHER" app-image="images/accuweather.png" ng-click="showDrawer = !showDrawer"></att-header>
 
                 <div ng-view=""></div>
 
