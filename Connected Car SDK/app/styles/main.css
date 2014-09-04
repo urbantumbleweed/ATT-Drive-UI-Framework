@@ -61,7 +61,8 @@ body {
 }
 
 #main-container{
-    background-color: #333333;
+  background-image: url(/images/Drive-Demo-App-Background.jpg);
+    background-repeat: repeat;
     padding: 0;
     height: 470px;
     width: 768px;
@@ -132,3 +133,5 @@ body {
 #options-panel{
 
 }
+
+/* TABS */
