@@ -11,7 +11,9 @@
 angular.module('connectedCarSDK')
   .controller('CarouselCtrl', function ($scope) {
       $scope.myInterval = 5000;
+
       var slides = $scope.slides = [];
+
       $scope.addSlide = function () {
           var newWidth = 600 + slides.length + 2;
           slides.push({
@@ -20,6 +22,7 @@ angular.module('connectedCarSDK')
                 ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
           });
       };
+
       for (var i = 0; i < 4; i++) {
           $scope.addSlide();
       }

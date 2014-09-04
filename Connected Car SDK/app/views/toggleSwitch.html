@@ -1,9 +1,9 @@
-﻿
-
-<div class="row">
+﻿<div class="row">
     <div class="col-md-9">
         <div class="container" id="main-container">
-            <att-toggle-switch ng-model="customModel"></att-toggle-switch> <br /> <br />
+            <att-toggle-switch ng-model="customModel"></att-toggle-switch>
+            <br />
+            <br />
             <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
         </div>
     </div>
@@ -17,16 +17,43 @@
     <div class="col-md-9">
         <div class="container" id="details-container">
 
-            <att-tabset style="height: 340px">
-                <att-tab heading="Description">
-
+            <att-tabset >
+                <att-tab heading="Description">                    
+                    <h2 id="overview">Overview</h2>
+                    <p>The Toggle control allows the user to turn a setting on or off. (If you need a control that supports more than two options, consider a button group or radio buttons).</p>
+                    <h2 id="appropriate-use">Appropriate Use</h2>
+                    <p>Use a toggle for selections that become effective immediately when the user changes it. For example, a toggle may be used to turn On/Off Paperless Billing.</p>
+                    <h1 id="design-breakdown">Design Breakdown</h1>
+                    <h2 id="placement">Placement</h2>
+                    <p>Toggles should typically be presented in list format with the control right-justified with a left-justified label on the same horizontal plane. They may or may not be bordered with a separator above or below depending upon the layout requirements.</p>
+                    <h2 id="size">Size</h2>
+                    <p>Fixed</p>
+                    <h2 id="content">Content</h2>
+                    <p>The toggle is limited to Yes/No (si/no) or On/Off. Spanish uses the I/O symbolic representation of On/Off with disabled states of activo/inactivo. No other labels should be used other than those shown above.</p>
+                    <h2 id="interactions">Interactions</h2>
+                    <p>Interaction of a toggle should respond immediately to tapping or sliding.</p>
                 </att-tab>
 
                 <att-tab heading="Markup">
-
+                    <pre ng-non-bindable="">
+                        <code data-language="html">
+                            &lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
+                            &lt;br /&gt;
+                            &lt;br /&gt;
+                            &lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
+                        </code>
+                    </pre>
                 </att-tab>
                 <att-tab heading="Js">
-
+                    <pre ng-non-bindable="">
+                        <code data-language="html">
+                            angular.module('connectedCarSDK')
+                              .controller('ToggleSwitchCtrl', function ($scope) {
+                                  $scope.customModel = true;
+                                  $scope.customModel2 = true;
+                              });
+                        </code>
+                    </pre>
                 </att-tab>
             </att-tabset>
 

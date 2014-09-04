@@ -1,5 +1,4 @@
-﻿
-<div class="row">
+﻿<div class="row">
     <div class="col-md-9">
         <div class="container" id="main-container">
             <att-dropdown default-option="Please select an option:" items="items" close-button="true" ng-model="selectedItem">
@@ -16,16 +15,41 @@
     <div class="col-md-9">
         <div class="container" id="details-container">
 
-            <att-tabset style="height: 340px">
+            <att-tabset>
                 <att-tab heading="Description">
-
+                    <h2 id="overview">Overview</h2>
+                    <p>A dropdown, or select, is not a standard type of form element that is used to allow a customer to choose one item from a list of options. For automotive use, the traditional flyout-styled design is replaced with an full screen overlay variant.</p>
+                    <h2 id="appropriate-use">Appropriate Use</h2>
+                    <p>An appropriate use of a dropdown, or select, would be to enable a customer to select their state as a part of entering their address.</p>
+                    <h2 id="design-breakdown">Design Breakdown</h2>
+                    <p>A dropdown would be stacked within a series of other form elements, or as a standalone element.
+                    Initial content should add value and not simply reiterate the label. Text length of the initial content and of the options within the dropdown should be limited so that they fit within the viewport.</p>
                 </att-tab>
 
                 <att-tab heading="Markup">
-
+                     <pre ng-non-bindable="">
+                        <code data-language="html"> 
+                            &lt;att-dropdown default-option=&quot;Please select an option:&quot; items=&quot;items&quot; close-button=&quot;true&quot; ng-model=&quot;selectedItem&quot;&gt;
+                            &lt;/att-dropdown&gt;
+                        </code>
+                    </pre>
                 </att-tab>
-                <att-tab heading="Js">
 
+                <att-tab heading="Js">
+                    <pre ng-non-bindable="">
+                        <code data-language="html">
+                            angular.module('connectedCarSDK')
+                              .controller('DropdownCtrl', function ($scope) {
+                                  $scope.items = [
+                                    { text: 'Item1', value: 1 },
+                                    { text: 'Item2', value: 2 },
+                                    { text: 'Item3', value: 3 },
+                                    { text: 'Item4', value: 4 }];
+
+                                  $scope.selectedItem = null;//$scope.items[0];
+                              });
+                        </code>
+                    </pre>
                 </att-tab>
             </att-tabset>
 

@@ -12,7 +12,7 @@ angular.module('connectedCarSDK.attDropdown', [])
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: '/templates/dropdown.html',
+        templateUrl: '/templates/attDropdown.html',
         require: '^ngModel',
         scope: {
             ngModel: '=',
