@@ -1,93 +1,93 @@
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <att-tabset>
-                <att-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
-                    {{tab.content}}
-                </att-tab>
-                <att-tab disabled="true" heading="Disabled tab">Disabled tab content</att-tab>
-                <att-tab heading="Active tab">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorem eos, eum ex impedit maxime mollitia officiis quos sint! Corporis doloremque eum ipsa iure maiores molestias quis totam, veniam veritatis.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis doloribus, unde. Aperiam cupiditate deleniti dicta inventore ipsa laboriosam, laudantium maxime nisi quibusdam, ratione tenetur, voluptas voluptatibus. Obcaecati optio quo recusandae.
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magni neque nisi odit perferendis,
-                            quas quasi quo repudiandae ut voluptatibus. A accusantium adipisci animi deserunt error, molestias natus
-                            praesentium unde!
-                        </li>
-                        <li>Dolorem et labore qui! Ab, adipisci aperiam assumenda blanditiis cum cupiditate distinctio earum
-                            eligendi illo ipsa libero maxime modi neque nesciunt nisi obcaecati, possimus praesentium quidem ratione
-                            sit temporibus vero?
-                        </li>
-                        <li>Aspernatur tenetur, voluptates! Accusamus aliquam animi debitis earum eligendi est eum eveniet fuga
-                            ipsum minus nemo non numquam, pariatur quae quas quia suscipit tempore. Alias deleniti dolorem eum ipsum
-                            quaerat!
-                        </li>
-                    </ul>
-                </att-tab>
-            </att-tabset>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            This component has no additional options.
-        </div>
-    </div>
+
+
+<div class="container" id="main-container">
+    <att-tabset>
+        <att-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+            {{tab.content}}
+        </att-tab>
+        <att-tab disabled="true" heading="Disabled tab">Disabled tab content</att-tab>
+        <att-tab heading="Active tab">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorem eos, eum ex impedit maxime mollitia officiis quos sint! Corporis doloremque eum ipsa iure maiores molestias quis totam, veniam veritatis.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis doloribus, unde. Aperiam cupiditate deleniti dicta inventore ipsa laboriosam, laudantium maxime nisi quibusdam, ratione tenetur, voluptas voluptatibus. Obcaecati optio quo recusandae.
+            <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magni neque nisi odit perferendis,
+                    quas quasi quo repudiandae ut voluptatibus. A accusantium adipisci animi deserunt error, molestias natus
+                    praesentium unde!
+                </li>
+                <li>Dolorem et labore qui! Ab, adipisci aperiam assumenda blanditiis cum cupiditate distinctio earum
+                    eligendi illo ipsa libero maxime modi neque nesciunt nisi obcaecati, possimus praesentium quidem ratione
+                    sit temporibus vero?
+                </li>
+                <li>Aspernatur tenetur, voluptates! Accusamus aliquam animi debitis earum eligendi est eum eveniet fuga
+                    ipsum minus nemo non numquam, pariatur quae quas quia suscipit tempore. Alias deleniti dolorem eum ipsum
+                    quaerat!
+                </li>
+            </ul>
+        </att-tab>
+    </att-tabset>
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" style="color: #333333;" id="details-container">
 
-            <att-tabset >
-                <att-tab heading="Description">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet blanditiis corporis cum doloremque eligendi, esse ex harum iste libero nam nisi non odio quaerat sint ut voluptates? Praesentium, voluptates!</p>
-                </att-tab>
 
-                <att-tab heading="Markup">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                                                        &lt;att-tabset&gt;
-                                &lt;att-tab ng-repeat=&quot;tab in tabs&quot; heading=&quot;{{tab.title}}&quot; active=&quot;tab.active&quot;&gt;
-                                    {{tab.content}}
-                                &lt;/att-tab&gt;
-                                &lt;att-tab disabled=&quot;true&quot; heading=&quot;Disabled tab&quot;&gt;Disabled tab content&lt;/att-tab&gt;
-                                &lt;att-tab heading=&quot;Active tab&quot;&gt;
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorem eos, eum ex impedit maxime mollitia officiis quos sint! Corporis doloremque eum ipsa iure maiores molestias quis totam, veniam veritatis.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis doloribus, unde. Aperiam cupiditate deleniti dicta inventore ipsa laboriosam, laudantium maxime nisi quibusdam, ratione tenetur, voluptas voluptatibus. Obcaecati optio quo recusandae.
-                                    &lt;ul&gt;
-                                        &lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magni neque nisi odit perferendis,
-                                            quas quasi quo repudiandae ut voluptatibus. A accusantium adipisci animi deserunt error, molestias natus
-                                            praesentium unde!
-                                        &lt;/li&gt;
-                                        &lt;li&gt;Dolorem et labore qui! Ab, adipisci aperiam assumenda blanditiis cum cupiditate distinctio earum
-                                            eligendi illo ipsa libero maxime modi neque nesciunt nisi obcaecati, possimus praesentium quidem ratione
-                                            sit temporibus vero?
-                                        &lt;/li&gt;
-                                        &lt;li&gt;Aspernatur tenetur, voluptates! Accusamus aliquam animi debitis earum eligendi est eum eveniet fuga
-                                            ipsum minus nemo non numquam, pariatur quae quas quia suscipit tempore. Alias deleniti dolorem eum ipsum
-                                            quaerat!
-                                        &lt;/li&gt;
-                                    &lt;/ul&gt;
-                                &lt;/att-tab&gt;
-                            &lt;/att-tabset&gt;
-                    </code>
-                 </pre>
-                </att-tab>
-
-                <att-tab heading="Js">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            angular.module('connectedCarSDK')
-                              .controller('TabsCtrl', function ($scope) {
-                                  $scope.tabs = [
-                                    { title: 'Dynamic Title 1', content: 'Dynamic content 1 abc' },
-                                    { title: 'Dynamic Title 2', content: 'Dynamic content 2 abc' }];
-                              });
-                        </code>
-                    </pre>
-                </att-tab>
-            </att-tabset>
-
-        </div>
-    </div>
+<div id="options-panel">
+    This component has no additional options.
 </div>
+
+
+
+
+<div class="container" style="color: #333333;" id="details-container">
+
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet blanditiis corporis cum doloremque eligendi, esse ex harum iste libero nam nisi non odio quaerat sint ut voluptates? Praesentium, voluptates!</p>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                                                &lt;att-tabset&gt;
+                        &lt;att-tab ng-repeat=&quot;tab in tabs&quot; heading=&quot;{{tab.title}}&quot; active=&quot;tab.active&quot;&gt;
+                            {{tab.content}}
+                        &lt;/att-tab&gt;
+                        &lt;att-tab disabled=&quot;true&quot; heading=&quot;Disabled tab&quot;&gt;Disabled tab content&lt;/att-tab&gt;
+                        &lt;att-tab heading=&quot;Active tab&quot;&gt;
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorem eos, eum ex impedit maxime mollitia officiis quos sint! Corporis doloremque eum ipsa iure maiores molestias quis totam, veniam veritatis.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis doloribus, unde. Aperiam cupiditate deleniti dicta inventore ipsa laboriosam, laudantium maxime nisi quibusdam, ratione tenetur, voluptas voluptatibus. Obcaecati optio quo recusandae.
+                            &lt;ul&gt;
+                                &lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magni neque nisi odit perferendis,
+                                    quas quasi quo repudiandae ut voluptatibus. A accusantium adipisci animi deserunt error, molestias natus
+                                    praesentium unde!
+                                &lt;/li&gt;
+                                &lt;li&gt;Dolorem et labore qui! Ab, adipisci aperiam assumenda blanditiis cum cupiditate distinctio earum
+                                    eligendi illo ipsa libero maxime modi neque nesciunt nisi obcaecati, possimus praesentium quidem ratione
+                                    sit temporibus vero?
+                                &lt;/li&gt;
+                                &lt;li&gt;Aspernatur tenetur, voluptates! Accusamus aliquam animi debitis earum eligendi est eum eveniet fuga
+                                    ipsum minus nemo non numquam, pariatur quae quas quia suscipit tempore. Alias deleniti dolorem eum ipsum
+                                    quaerat!
+                                &lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/att-tab&gt;
+                    &lt;/att-tabset&gt;
+            </code>
+         </pre>
+        </att-tab>
+
+        <att-tab heading="Js">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    angular.module('connectedCarSDK')
+                      .controller('TabsCtrl', function ($scope) {
+                          $scope.tabs = [
+                            { title: 'Dynamic Title 1', content: 'Dynamic content 1 abc' },
+                            { title: 'Dynamic Title 2', content: 'Dynamic content 2 abc' }];
+                      });
+                </code>
+            </pre>
+        </att-tab>
+    </att-tabset>
+
+</div>
+
+
 

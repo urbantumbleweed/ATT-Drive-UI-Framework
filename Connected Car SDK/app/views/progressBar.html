@@ -1,127 +1,127 @@
-﻿<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <br />
-            <br />
-            <br />
+﻿
 
-            <att-progress-bar max="max" value="dynamic">Default</att-progress-bar>
+<div class="container" id="main-container">
+    <br />
+    <br />
+    <br />
 
-            <br />
-            <br />
-            <br />
-            <att-progress-bar animate="false" value="dynamic" type="success">Success</att-progress-bar>
+    <att-progress-bar max="max" value="dynamic">Default</att-progress-bar>
 
-            <br />
-            <br />
-            <br />
-            <att-progress-bar value="dynamic" type="warning">Warning</att-progress-bar>
+    <br />
+    <br />
+    <br />
+    <att-progress-bar animate="false" value="dynamic" type="success">Success</att-progress-bar>
 
-            <br />
-            <br />
-            <br />
-            <att-progress-bar value="dynamic" type="danger">danger</att-progress-bar>
+    <br />
+    <br />
+    <br />
+    <att-progress-bar value="dynamic" type="warning">Warning</att-progress-bar>
+
+    <br />
+    <br />
+    <br />
+    <att-progress-bar value="dynamic" type="danger">danger</att-progress-bar>
 
 
-            <br />
-            <br />
-            <br />
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            <button type="button" ng-click="random()">Randomize</button>
-        </div>
-    </div>
+    <br />
+    <br />
+    <br />
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="details-container">
-
-            <att-tabset style="height: 340px">
-                <att-tab heading="Description">
-                    <h2 id="overview">Overview</h2>
-                    <p>Progress bars are used for graphical representation of elapsed data (time, usage, progress, etc).</p>
-                    <h2 id="appropriate-use">Appropriate Use</h2>
-                    <p>Use gray bar to display elapsed time and green bar for healthy status of progression (i.e.: data usage). Bar can show breaks inside a progress element (increments) if needed.</p>
-                    <h2 id="design-breakdown">Design Breakdown</h2>
-                    <h2 id="placement">Placement</h2>
-                    <p>Block element with appropriate labels</p>
-                    <h2 id="variations">Variations</h2>
-                    <p>Progress bar color should change to indicate the importance of progress</p>
-                    <ul>
-                    <li>Progress <code>.bar</code> color is blue (default progress bar)</li>
-                    <li>Progress <code>.bar .success</code> color is green (healthy status)</li>
-                    <li>Progress <code>.bar .progress-warning</code> color changes to yellow and indicates a warning</li>
-                    <li>Progress <code>.bar .progress-danger</code> color changes to red and indicates danger or urgency</li>
-                    </ul>
-                </att-tab>
-
-                <att-tab heading="Markup">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-
-                            &lt;att-progress-bar max=&quot;max&quot; value=&quot;dynamic&quot;&gt;Default&lt;/att-progress-bar&gt;
-
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;att-progress-bar animate=&quot;false&quot; value=&quot;dynamic&quot; type=&quot;success&quot;&gt;Success&lt;/att-progress-bar&gt;
-
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;warning&quot;&gt;Warning&lt;/att-progress-bar&gt;
-
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;danger&quot;&gt;danger&lt;/att-progress-bar&gt;
 
 
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                        </code>
-                    </pre>
-                </att-tab>
-                <att-tab heading="Js">
-                     <pre ng-non-bindable="">
-                        <code data-language="html">
-                    angular.module('connectedCarSDK')
-                      .controller('ProgressBarCtrl', function ($scope) {
-                          $scope.max = 200;
-
-                          $scope.random = function () {
-                              var value = Math.floor((Math.random() * 100) + 1);
-                              var type;
-
-                              if (value < 25) {
-                                  type = 'success';
-                              } else if (value < 50) {
-                                  type = 'info';
-                              } else if (value < 75) {
-                                  type = 'warning';
-                              } else {
-                                  type = 'danger';
-                              }
-
-                              $scope.showWarning = (type === 'danger' || type === 'warning');
-
-                              $scope.dynamic = value;
-                              $scope.type = type;
-                          };
-                          $scope.random();
-                      });
-                       </code>
-                    </pre>
-                </att-tab>
-            </att-tabset>
-
-        </div>
-    </div>
+<div id="options-panel">
+    <button type="button" ng-click="random()">Randomize</button>
 </div>
+
+
+
+
+<div class="container" id="details-container">
+
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <h2 id="overview">Overview</h2>
+            <p>Progress bars are used for graphical representation of elapsed data (time, usage, progress, etc).</p>
+            <h2 id="appropriate-use">Appropriate Use</h2>
+            <p>Use gray bar to display elapsed time and green bar for healthy status of progression (i.e.: data usage). Bar can show breaks inside a progress element (increments) if needed.</p>
+            <h2 id="design-breakdown">Design Breakdown</h2>
+            <h2 id="placement">Placement</h2>
+            <p>Block element with appropriate labels</p>
+            <h2 id="variations">Variations</h2>
+            <p>Progress bar color should change to indicate the importance of progress</p>
+            <ul>
+            <li>Progress <code>.bar</code> color is blue (default progress bar)</li>
+            <li>Progress <code>.bar .success</code> color is green (healthy status)</li>
+            <li>Progress <code>.bar .progress-warning</code> color changes to yellow and indicates a warning</li>
+            <li>Progress <code>.bar .progress-danger</code> color changes to red and indicates danger or urgency</li>
+            </ul>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+
+                    &lt;att-progress-bar max=&quot;max&quot; value=&quot;dynamic&quot;&gt;Default&lt;/att-progress-bar&gt;
+
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;att-progress-bar animate=&quot;false&quot; value=&quot;dynamic&quot; type=&quot;success&quot;&gt;Success&lt;/att-progress-bar&gt;
+
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;warning&quot;&gt;Warning&lt;/att-progress-bar&gt;
+
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;att-progress-bar value=&quot;dynamic&quot; type=&quot;danger&quot;&gt;danger&lt;/att-progress-bar&gt;
+
+
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                </code>
+            </pre>
+        </att-tab>
+        <att-tab heading="Js">
+             <pre ng-non-bindable="">
+                <code data-language="html">
+            angular.module('connectedCarSDK')
+              .controller('ProgressBarCtrl', function ($scope) {
+                  $scope.max = 200;
+
+                  $scope.random = function () {
+                      var value = Math.floor((Math.random() * 100) + 1);
+                      var type;
+
+                      if (value < 25) {
+                          type = 'success';
+                      } else if (value < 50) {
+                          type = 'info';
+                      } else if (value < 75) {
+                          type = 'warning';
+                      } else {
+                          type = 'danger';
+                      }
+
+                      $scope.showWarning = (type === 'danger' || type === 'warning');
+
+                      $scope.dynamic = value;
+                      $scope.type = type;
+                  };
+                  $scope.random();
+              });
+               </code>
+            </pre>
+        </att-tab>
+    </att-tabset>
+
+</div>
+
+
 

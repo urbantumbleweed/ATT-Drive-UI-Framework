@@ -1,138 +1,139 @@
-﻿<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <h4>(click "Show Alert")</h4>
-            <att-alert ng-repeat="alert in alerts"
-                       type="alert.type"
-                       show-icon="alert.showIcon"
-                       show-confirmation-btn="alert.showConfirmationBtn"
-                       button-text="alert.buttonText"
-                       on-click="alert.onClick(); removeAlert($index)"
-                       on-close="alert.onClose(); removeAlert($index)"
-                       auto-close-interval="alert.autoCloseInterval"
-                       title="alert.title"
-                       text="alert.text">
-            </att-alert>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            <label for="alertType">Alert Type:</label><br/>
-            <select name="alertType" ng-model="type">
-                <option value="info" selected="">Info</option>
-                <option value="success">Success</option>
-                <option value="danger">Danger</option>
-            </select><br/>
+﻿
 
-            <label for="titleText">Title:</label><br/>
-            <input type="text" name="titleText" ng-model="title" /><br />
-            <label for="alertText">Content:</label><br/>
-            <input type="text" name="alertText" ng-model="text" /><br />
-
-            <label for="showIcon">Show Icon:</label><br/>
-            <input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
-            <label for="showConfirmationBtn">Show Confirmation Button:</label><br/>
-            <input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
-            <label for="buttonText">Confirmation Button Text:</label><br/>
-            <input type="text" name="buttonText" ng-model="buttonText" /><br />
-
-            <label for="autoClose">Auto Close interval:</label><br/>
-            <input type="number" name="autoClose" ng-model="autoClose" /><br />
-            <br/>
-
-            <button type="button" ng-click="showAlert()">Show Alert</button><br />
-        </div>
-    </div>
+<div class="container" id="main-container">
+    <h4>(click "Show Alert")</h4>
+    <att-alert ng-repeat="alert in alerts"
+               type="alert.type"
+               show-icon="alert.showIcon"
+               show-confirmation-btn="alert.showConfirmationBtn"
+               button-text="alert.buttonText"
+               on-click="alert.onClick(); removeAlert($index)"
+               on-close="alert.onClose(); removeAlert($index)"
+               auto-close-interval="alert.autoCloseInterval"
+               title="alert.title"
+               text="alert.text">
+    </att-alert>
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="details-container">
 
-            <att-tabset style="height: 340px">
-                <att-tab heading="Description">
-                    <h2 id="overview">Overview</h2>
-                    <p>Notification dialogs function the same way as modals and overlay the entire screen, with action buttons fixed at the center of the screen. Dialog animations are predefined.</p>
-                    <p>Tap launch dialog to see the animation. Dialogs may have a close button in the header and may rely on the challenge button requiring user action to dismiss them, or may contain timeout.</p>
-                </att-tab>
 
-                <att-tab heading="Markup">
-                    <pre ng-non-bindable="" class="prettyprint linenums">
-                        <code data-language="html">
-                            &lt;att-alert ng-repeat=&quot;alert in alerts&quot;
-                                       type=&quot;alert.type&quot;
-                                       show-icon=&quot;alert.showIcon&quot;
-                                       show-confirmation-btn=&quot;alert.showConfirmationBtn&quot;
-                                       button-text=&quot;alert.buttonText&quot;
-                                       on-click=&quot;alert.onClick(); removeAlert($index)&quot;
-                                       on-close=&quot;alert.onClose(); removeAlert($index)&quot;
-                                       auto-close-interval=&quot;alert.autoCloseInterval&quot;
-                                       title=&quot;alert.title&quot;
-                                       text=&quot;alert.text&quot;&gt;
-                            &lt;/att-alert&gt;
-                        </code>
-                 </pre>
-                </att-tab>
+<div id="options-panel">
+    <label for="alertType">Alert Type:</label><br/>
+    <select name="alertType" ng-model="type">
+        <option value="info" selected="">Info</option>
+        <option value="success">Success</option>
+        <option value="danger">Danger</option>
+    </select><br/>
 
-                <att-tab heading="Js">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            angular.module('connectedCarSDK')
-                              .controller('AlertCtrl', function ($scope) {
-                                  $scope.customModel = true;
+    <label for="titleText">Title:</label><br/>
+    <input type="text" name="titleText" ng-model="title" /><br />
+    <label for="alertText">Content:</label><br/>
+    <input type="text" name="alertText" ng-model="text" /><br />
 
-                                  $scope.runCustomCode = function () {
+    <label for="showIcon">Show Icon:</label><br/>
+    <input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
+    <label for="showConfirmationBtn">Show Confirmation Button:</label><br/>
+    <input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
+    <label for="buttonText">Confirmation Button Text:</label><br/>
+    <input type="text" name="buttonText" ng-model="buttonText" /><br />
 
-                                      //alert('On Close event called');
+    <label for="autoClose">Auto Close interval:</label><br/>
+    <input type="number" name="autoClose" ng-model="autoClose" /><br />
+    <br/>
 
-                                  };
+    <button type="button" ng-click="showAlert()">Show Alert</button><br />
+</div>
 
-                                  $scope.onClose = function () {
-                                      //alert('on Close');
-                                  };
 
-                                  $scope.onClick = function () {
-                                      //alert('on Click');
-                                  };
 
-                                  $scope.alerts = [];
-                                  //$scope.alerts.push({
-                                  //    type: 'info',
-                                  //    showIcon: false,
-                                  //    showConfirmationBtn: true,
-                                  //    buttonText: 'OK',
-                                  //    onClose: $scope.onClose,
-                                  //    onClick: $scope.onClick,
-                                  //    autoCloseInterval: undefined,
-                                  //    title: 'Sample alert title',
-                                  //    text: 'Sample alert text'
-                                  //});
 
-                                  $scope.showAlert = function () {
+<div class="container" id="details-container">
 
-                                      $scope.alerts.push({
-                                          type: $scope.type,
-                                          showIcon: $scope.showIcon,
-                                          showConfirmationBtn: $scope.showConfirmationBtn,
-                                          buttonText: $scope.buttonText,
-                                          onClose: $scope.onClose,
-                                          onClick: $scope.onClick,
-                                          autoCloseInterval: $scope.autoClose,
-                                          title: $scope.title,
-                                          text: $scope.text
-                                      });
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <h2 id="overview">Overview</h2>
+            <p>Notification dialogs function the same way as modals and overlay the entire screen, with action buttons fixed at the center of the screen. Dialog animations are predefined.</p>
+            <p>Tap launch dialog to see the animation. Dialogs may have a close button in the header and may rely on the challenge button requiring user action to dismiss them, or may contain timeout.</p>
+        </att-tab>
 
-                                  };
+        <att-tab heading="Markup">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    &lt;att-alert ng-repeat=&quot;alert in alerts&quot;
+                               type=&quot;alert.type&quot;
+                               show-icon=&quot;alert.showIcon&quot;
+                               show-confirmation-btn=&quot;alert.showConfirmationBtn&quot;
+                               button-text=&quot;alert.buttonText&quot;
+                               on-click=&quot;alert.onClick(); removeAlert($index)&quot;
+                               on-close=&quot;alert.onClose(); removeAlert($index)&quot;
+                               auto-close-interval=&quot;alert.autoCloseInterval&quot;
+                               title=&quot;alert.title&quot;
+                               text=&quot;alert.text&quot;&gt;
+                    &lt;/att-alert&gt;
+                </code>
+         </pre>
+        </att-tab>
 
-                                  $scope.removeAlert = function (index) {
-                                      $scope.alerts.splice(index, 1);
-                                  };
+        <att-tab heading="Js">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    angular.module('connectedCarSDK')
+                      .controller('AlertCtrl', function ($scope) {
+                          $scope.customModel = true;
+
+                          $scope.runCustomCode = function () {
+
+                              //alert('On Close event called');
+
+                          };
+
+                          $scope.onClose = function () {
+                              //alert('on Close');
+                          };
+
+                          $scope.onClick = function () {
+                              //alert('on Click');
+                          };
+
+                          $scope.alerts = [];
+                          //$scope.alerts.push({
+                          //    type: 'info',
+                          //    showIcon: false,
+                          //    showConfirmationBtn: true,
+                          //    buttonText: 'OK',
+                          //    onClose: $scope.onClose,
+                          //    onClick: $scope.onClick,
+                          //    autoCloseInterval: undefined,
+                          //    title: 'Sample alert title',
+                          //    text: 'Sample alert text'
+                          //});
+
+                          $scope.showAlert = function () {
+
+                              $scope.alerts.push({
+                                  type: $scope.type,
+                                  showIcon: $scope.showIcon,
+                                  showConfirmationBtn: $scope.showConfirmationBtn,
+                                  buttonText: $scope.buttonText,
+                                  onClose: $scope.onClose,
+                                  onClick: $scope.onClick,
+                                  autoCloseInterval: $scope.autoClose,
+                                  title: $scope.title,
+                                  text: $scope.text
                               });
 
-                        </code>
-                 </pre>
-                </att-tab>
-            </att-tabset>
+                          };
 
-        </div>
-    </div>
+                          $scope.removeAlert = function (index) {
+                              $scope.alerts.splice(index, 1);
+                          };
+                      });
+
+                </code>
+         </pre>
+        </att-tab>
+    </att-tabset>
+
 </div>
+
+
+

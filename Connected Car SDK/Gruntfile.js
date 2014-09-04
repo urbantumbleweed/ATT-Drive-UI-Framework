@@ -34,6 +34,7 @@ module.exports = function (grunt) {
         html2js: {
             options: {
                 // custom options, see below
+                base: 'app'
             },
             main: {
                 src: ['app/templates/**/*.html'],

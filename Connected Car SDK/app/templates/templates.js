@@ -1,7 +1,7 @@
-angular.module('templates-main', ['../app/templates/attAlert.html', '../app/templates/attBadge.html', '../app/templates/attListView.html', '../app/templates/attLoader.html', '../app/templates/attProgressBar.html', '../app/templates/attToggleSwitch.html', '../app/templates/carousel/carousel.html', '../app/templates/carousel/slide.html', '../app/templates/modal/backdrop.html', '../app/templates/modal/window.html', '../app/templates/tabs/attTab.html', '../app/templates/tabs/attTabset.html']);
+angular.module('templates-main', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
-angular.module("/templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attAlert.html",
+angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attAlert.html",
     "<div class=\"att-alert\" ng-class=\"type && 'alert-' + type\" ng-hide=\"closeAlert\" ng-click=\"close()\">\n" +
     "    <div class=\"content\">\n" +
     "        <h1 class=\"alert-heading\" ng-bind=\"title\"></h1>\n" +
@@ -16,14 +16,52 @@ angular.module("/templates/attAlert.html", []).run(["$templateCache", function($
     "</div>");
 }]);
 
-angular.module("/templates/attBadge.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attBadge.html",
-    "<span></span>");
+angular.module("templates/attBadge.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attBadge.html",
+    "<span class=\"att-badge\" ng-class=\"type && 'badge-' + type\">\n" +
+    "    1\n" +
+    "</span>");
 }]);
 
-angular.module("/templates/attListView.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attListView.html",
-    "<div class=\"screen\">\n" +
+angular.module("templates/attDrawer.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attDrawer.html",
+    "<div ng-show=\"showDrawer\">\n" +
+    "    <div ng-transclude></div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/attDropdown.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attDropdown.html",
+    "<div class=\"att-dropdown\">\n" +
+    "    <a class=\"selected\" ng-bind=\"defaultOption\" ng-click=\"show=!show\"></a>\n" +
+    "    <span class=\"icon\"><i class=\"fa fa-bars\"></i></span>\n" +
+    "    <div class=\"screen\" ng-show=\"show\">\n" +
+    "        <button ng-show=\"closeButton\" type=\"button\" class=\"btn btn-circ medium btn-close-list\" ng-click=\"show=false\">X</button>\n" +
+    "        <ul class=\"list\">\n" +
+    "            <li ng-repeat=\"item in items\" ng-click=\"selectItem(item)\">{{item.text}}</li>\n" +
+    "\n" +
+    "        </ul>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/attHeader.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attHeader.html",
+    "<div class=\"header\">\n" +
+    "    <h3 class=\"active-screen\"><i class=\"fa fa-bars separate-right-10\"></i>{{currentItem}}</h3>\n" +
+    "    <div class=\"app-branding\">\n" +
+    "        <img ng-src=\"{{appImage}}\">\n" +
+    "        <span ng-bind=\"appName\"></span>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/attListView.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attListView.html",
+    "<div class=\"att-list-view\">\n" +
     "    <h3 class=\"active-screen\" ng-bind=\"title\"></h3>\n" +
     "    <ul class=\"list\">\n" +
     "        <li ng-repeat=\"item in items\"\n" +
@@ -36,14 +74,31 @@ angular.module("/templates/attListView.html", []).run(["$templateCache", functio
     "</div>");
 }]);
 
-angular.module("/templates/attLoader.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attLoader.html",
+angular.module("templates/attLoader.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attLoader.html",
     "<div style=\"display:none;\">Loader goes here...</div>\n" +
     "");
 }]);
 
-angular.module("/templates/attProgressBar.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attProgressBar.html",
+angular.module("templates/attMenu.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attMenu.html",
+    "<div class=\"att-list-view\">\n" +
+    "    <h3 class=\"active-screen\" ng-bind=\"title\"></h3>\n" +
+    "    <ul class=\"list\">\n" +
+    "        <li ng-repeat=\"item in items\"\n" +
+    "            ng-class=\"{active: item.selected}\"\n" +
+    "            ng-click=\"item.selected = true\">\n" +
+    "            <a ng-href=\"{{item.href}}\">{{item.text}}\n" +
+    "            <span ng-bind=\"item.desc\"></span>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/attProgressBar.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attProgressBar.html",
     "<div class=\"att-progress-bar\">\n" +
     "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\">\n" +
     "      <span class=\"label\" ng-transclude></span>\n" +
@@ -52,8 +107,8 @@ angular.module("/templates/attProgressBar.html", []).run(["$templateCache", func
     "</div>");
 }]);
 
-angular.module("/templates/attToggleSwitch.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attToggleSwitch.html",
+angular.module("templates/attToggleSwitch.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attToggleSwitch.html",
     "<div class=\"att-toggle-switch\">\n" +
     "    <div ng-class=\"{on: ngModel == true , off: ngModel == false}\">\n" +
     "        <div class=\"btn-group\">\n" +
@@ -64,8 +119,8 @@ angular.module("/templates/attToggleSwitch.html", []).run(["$templateCache", fun
     "</div>");
 }]);
 
-angular.module("/templates/carousel/carousel.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/carousel/carousel.html",
+angular.module("templates/carousel/carousel.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/carousel/carousel.html",
     "<div class=\"att-carousel\">\n" +
     "    <div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\" ng-swipe-right=\"prev()\" ng-swipe-left=\"next()\">\n" +
     "        <ol class=\"carousel-indicators\" ng-show=\"slides.length > 1\">\n" +
@@ -78,8 +133,8 @@ angular.module("/templates/carousel/carousel.html", []).run(["$templateCache", f
     "</div>");
 }]);
 
-angular.module("/templates/carousel/slide.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/carousel/slide.html",
+angular.module("templates/carousel/slide.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/carousel/slide.html",
     "<div ng-class=\"{\n" +
     "    'active': leaving || (active && !entering),\n" +
     "    'prev': (next || active) && direction=='prev',\n" +
@@ -89,8 +144,8 @@ angular.module("/templates/carousel/slide.html", []).run(["$templateCache", func
     "  }\" class=\"item text-center\" ng-transclude></div>");
 }]);
 
-angular.module("../app/templates/modal/backdrop.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../app/templates/modal/backdrop.html",
+angular.module("templates/modal/backdrop.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/modal/backdrop.html",
     "<div class=\"modal-backdrop fade {{ backdropClass }}\"\n" +
     "    ng-class=\"{in: animate}\"\n" +
     "    ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\">\n" +
@@ -98,8 +153,8 @@ angular.module("../app/templates/modal/backdrop.html", []).run(["$templateCache"
     "");
 }]);
 
-angular.module("../app/templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../app/templates/modal/window.html",
+angular.module("templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/modal/window.html",
     "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
     "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
     "        <div class=\"modal-content\" modal-transclude></div>\n" +
@@ -108,16 +163,16 @@ angular.module("../app/templates/modal/window.html", []).run(["$templateCache", 
     "");
 }]);
 
-angular.module("../app/templates/tabs/attTab.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../app/templates/tabs/attTab.html",
+angular.module("templates/tabs/attTab.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/tabs/attTab.html",
     "<li ng-class=\"{active: active, disabled: disabled}\">\n" +
     "    <a ng-click=\"select()\" tab-heading-transclude>{{heading}}</a>\n" +
     "</li>\n" +
     "");
 }]);
 
-angular.module("../app/templates/tabs/attTabset.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../app/templates/tabs/attTabset.html",
+angular.module("templates/tabs/attTabset.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/tabs/attTabset.html",
     "<div class=\"att-tabs\">\n" +
     "    <div class=\"tab-content\">\n" +
     "        <div class=\"tab-pane\"\n" +
@@ -126,7 +181,9 @@ angular.module("../app/templates/tabs/attTabset.html", []).run(["$templateCache"
     "             tab-content-transclude=\"tab\">\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <ul class=\"nav\" ng-class=\"{'nav-stacked': vertical}\" ng-transclude></ul>\n" +
+    "    <ul class=\"nav\" ng-class=\"{'nav-stacked': vertical, 'top': topPosition}\" ng-transclude></ul>\n" +
     "    <span id=\"justify\"></span> <!-- Important for alignment - do not remove -->\n" +
-    "</div>");
+    "</div>\n" +
+    "\n" +
+    "");
 }]);
