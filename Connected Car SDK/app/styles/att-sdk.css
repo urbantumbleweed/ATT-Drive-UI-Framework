@@ -2065,7 +2065,7 @@ select[multiple].input-lg {
   border: 2px solid #067ab4;
 }
 .att-toggle-switch .on .btn-group > .btn:first-child:not(:last-child) {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
   color: #999999;
 }
 .att-toggle-switch .on .btn-group > .btn:last-child:not(:first-child) {
@@ -2078,7 +2078,7 @@ select[multiple].input-lg {
   background-color: #e23232;
 }
 .att-toggle-switch .off .btn-group > .btn:last-child:not(:first-child) {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
   color: #999999;
 }
 .att-tabs {
@@ -2399,7 +2399,7 @@ select[multiple].input-lg {
   padding: 0 20px;
   border: 2px solid white;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
   color: white;
   cursor: pointer;
   margin: 0;
@@ -2536,107 +2536,51 @@ input[type="radio"] + label span {
 input[type="radio"]:checked + label span {
   background: url(../images/radio-checked.png) no-repeat;
 }
-.att-dropdown .dropdown-label {
-  font-family: 'omnes_attmedium', sans-serif;
-  font-size: 18px;
-  margin-bottom: 20px;
+.att-dropdown {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  max-width: 768px;
+  position: absolute;
 }
-.att-dropdown .dropcontainer_demo2 {
-  position: relative;
-  font-size: 18px;
-  color: #fff;
-}
-.att-dropdown .trigger_demo2 {
-  margin-top: 20px;
+.att-dropdown .selected {
+  cursor: pointer;
   color: #fff;
   padding: 12px 20px 13px 20px;
   font-size: 24px;
   width: 50%;
-  background: #ffffff url(../images/select-arrow-open.png) 98% center no-repeat transparent;
-  display: block;
+  display: inline-block;
   border: 2px solid white;
   text-decoration: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
-.att-dropdown .trigger_demo2:hover {
+.att-dropdown .selected:hover {
   color: #fff;
   background: transparent;
 }
-.att-dropdown .activetrigger_demo2 {
-  margin-top: 20px;
-  color: #fff;
-  padding: 12px 20px 13px 20px;
-  font-size: 24px;
-  width: 50%;
-  background: transparent;
-  display: block;
-  border: 2px solid white;
-  text-decoration: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.att-dropdown .icon {
+  margin-left: -40px;
 }
-.att-dropdown .activetrigger_demo2:hover {
-  background: transparent;
-  color: #fff;
+.att-dropdown .screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(15, 15, 15, 0.8);
+  width: 100%;
+  height: 100%;
 }
-.att-dropdown .activetrigger_demo2:active {
-  background: transparent;
-  color: #fff;
-}
-.att-dropdown .dropcontainer_demo2 ul {
-  font-size: 24px;
-  border: 2px solid white;
-  border-top: none;
-  background: transparent;
-  list-style-type: none;
-  padding: 20px;
-  margin: 0;
-  width: 50%;
-  z-index: 100;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.att-dropdown .dropcontainer_demo2 ul li {
-  padding: 10px;
+.att-dropdown .list {
+  list-style: none;
   padding-left: 0;
-  color: white;
-  text-decoration: none;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  padding-top: 20px;
+  line-height: 2;
+  font-size: 24px;
 }
-.att-dropdown .dropcontainer_demo2 ul li a {
-  color: white;
-  text-decoration: none;
+.att-dropdown .list li {
+  padding-left: 20px;
 }
-.att-dropdown .dropcontainer_demo2 ul li:hover {
-  background: transparent;
-  outline: none;
-}
-.att-dropdown .dropcontainer_demo2 ul li:first-child {
-  display: none;
-}
-.att-dropdown .dropcontainer_demo2 ul li:last-child {
-  border-bottom: none;
-}
-.att-dropdown .dropdownhidden_demo2 {
-  display: none;
-}
-.att-dropdown .dropdownvisible_demo2 {
-  height: auto;
-}
-.att-dropdown .dropdownvisible_demo2 {
-  height: 200px;
-  overflow-y: scroll;
+.att-dropdown .list li:active,
+.att-dropdown .list li.active {
+  background: #067ab4;
 }
 .att-list-view {
   /* LISTS/MENUS
@@ -2726,4 +2670,21 @@ input[type="radio"]:checked + label span {
 }
 .att-modal.modal-danger {
   background: #a62828;
+}
+.att-badge {
+  padding: 2px 15px;
+  border-radius: 15px;
+  background-color: #067ab4;
+}
+.att-badge.badge-success {
+  background-color: #4ca90c;
+}
+.att-badge.badge-info {
+  background-color: #5bc0de;
+}
+.att-badge.badge-warning {
+  background-color: #ef6f00;
+}
+.att-badge.badge-danger {
+  background-color: #e23232;
 }
