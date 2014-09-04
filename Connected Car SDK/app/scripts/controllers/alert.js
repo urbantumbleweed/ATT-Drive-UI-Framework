@@ -1,58 +1,62 @@
-﻿var sdk = angular.module('connectedCarSDK');
+﻿'use strict';
 
-sdk.controller('AlertCtrl', function($scope) {
+/**
+ * @ngdoc function
+ * @name connectedCarSDK.controller:BadgeCtrl
+ * @description
+ * # AlertCtrl
+ * Controller of the connectedCarSDK
+ */
 
-    $scope.customModel = true;
+angular.module('connectedCarSDK')
+  .controller('AlertCtrl', function ($scope) {
+      $scope.customModel = true;
 
-    $scope.runCustomCode = function() {
+      $scope.runCustomCode = function () {
 
-        //alert('On Close event called');
+          //alert('On Close event called');
 
-    };
+      };
 
-    $scope.onClose = function () {
-        //alert('on Close');
-    };
+      $scope.onClose = function () {
+          //alert('on Close');
+      };
 
-    $scope.onClick = function () {
-        //alert('on Click');
-    };
+      $scope.onClick = function () {
+          //alert('on Click');
+      };
 
-    $scope.alerts = [];
-    //$scope.alerts.push({
-    //    type: 'info',
-    //    showIcon: false,
-    //    showConfirmationBtn: true,
-    //    buttonText: 'OK',
-    //    onClose: $scope.onClose,
-    //    onClick: $scope.onClick,
-    //    autoCloseInterval: undefined,
-    //    title: 'Sample alert title',
-    //    text: 'Sample alert text'
-    //});
+      $scope.alerts = [];
+      //$scope.alerts.push({
+      //    type: 'info',
+      //    showIcon: false,
+      //    showConfirmationBtn: true,
+      //    buttonText: 'OK',
+      //    onClose: $scope.onClose,
+      //    onClick: $scope.onClick,
+      //    autoCloseInterval: undefined,
+      //    title: 'Sample alert title',
+      //    text: 'Sample alert text'
+      //});
 
-    $scope.showAlert = function() {
+      $scope.showAlert = function () {
 
-        $scope.alerts.push({
-            type: $scope.type,
-            showIcon: $scope.showIcon,
-            showConfirmationBtn: $scope.showConfirmationBtn,
-            buttonText: $scope.buttonText,
-            onClose: $scope.onClose,
-            onClick: $scope.onClick,
-            autoCloseInterval: $scope.autoClose,
-            title: $scope.title,
-            text: $scope.text
-        });
-        
-    };
-    
-    $scope.removeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
-    };
+          $scope.alerts.push({
+              type: $scope.type,
+              showIcon: $scope.showIcon,
+              showConfirmationBtn: $scope.showConfirmationBtn,
+              buttonText: $scope.buttonText,
+              onClose: $scope.onClose,
+              onClick: $scope.onClick,
+              autoCloseInterval: $scope.autoClose,
+              title: $scope.title,
+              text: $scope.text
+          });
 
-    
+      };
 
-});
-
+      $scope.removeAlert = function (index) {
+          $scope.alerts.splice(index, 1);
+      };
+  });
 

@@ -3,7 +3,6 @@
     <div class="col-md-9">
         <div class="container" id="main-container">
             <div ng-controller="ButtonsCtrl">
-
                 <button class="btn btn-default">Default</button>
                 <button class="btn btn-primary">Primary</button>
                 <button class="btn btn-success">Success</button>
@@ -44,14 +43,90 @@
 
             <att-tabset style="height: 340px">
                 <att-tab heading="Description">
-
+                    <h2 id="overview">Overview</h2>
+                    <p>Buttons are… well, we should all know what buttons are by now but below you will find all of the variations and guidelines around using them.</p>
+                    <h2 id="appropriate-use">Appropriate Use</h2>
+                    <p>Buttons are not just for submit anymore! In the mobile world especially, buttons create an ability to give the user quick, simple choices to act upon. They usually appear in pairs and can be used for yes/no, continue/cancel, add to cart and countless others. In some cases, a couple of buttons can even replace radio buttons with a separate CTA.</p>
+                    <h2 id="design-breakdown">Design Breakdown</h2>
+                    <p>Placement
+                    The most appropriate placement for buttons are just below the content that they are related to.</p>
+                    <p>Arrangement</p>
+                    <p>Stacked (preferred)
+                    When stacked, the primary action should alway be listed first, followed by secondary and optional, where appropriate.
+                    Horizontal (specialty use)
+                    Buttons can be in a horizontal arrangement in specialty cases. These cases should be limited to modals, dialogs, and special cases where the choices are diametrically opposed. When buttons are placed horizontally, the primary option should be on the right. A maximum of two buttons may be placed side by side.</p>
+                    <h2 id="variations">Variations</h2>
+                    <ul>
+                    <li>Primary (blue/white) Used for navigation or to progress a user through a flow</li>
+                    <li>Default (light grey/blue) Used to provide a contrasting choice to the primary, such as "Cancel."</li>
+                    <li>Transactional/Buy (green/white) Used only for purchasing, such as "Add to Cart."</li>
+                    <li>Warning (red/white) Used for choices that are destructive in nature, such as deleting an account or other information that cannot be recovered</li>
+                    <li>Disabled (grey/grey) Indicate a button that cannot be acted upon until some criteria is met</li>
+                    </ul>
+                    <h2 id="size">Size</h2>
+                    <ul>
+                    <li>Full-width (preferred) spans full browser width, with appropriate padding. Used in stacked arrangement</li>
+                    <li>Half-width (specialty use) spans half browser width, with appropriate padding. Used in horizontal arrangement. Two Buttons maximum may be placed side by side.</li>
+                    </ul>
+                    <h2 id="content">Content</h2>
+                    <p>All buttons shall use sentence case and should not wrap to a second line.</p>
+                    <ul>
+                    <li>Full-width button: 35-40 characters max</li>
+                    <li>Half-width button: 12-14 characters max</li>
+                    </ul>
+                    <h2 id="interactions">Interactions</h2>
+                    <p>Buttons progress a user through/to a flow. Each button variation has a depressed state. For longer processes, there is a "working" state of the buttons that prevents a second tap.(link to button with progress)</p>
                 </att-tab>
 
                 <att-tab heading="Markup">
+                    <pre ng-non-bindable="">
+                        <code data-language="html">
+                            &lt;button class=&quot;btn btn-default&quot;&gt;Default&lt;/button&gt;
+                        &lt;button class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;
+                        &lt;button class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;
+                        &lt;button class=&quot;btn btn-warning&quot;&gt;Warning&lt;/button&gt;
+                        &lt;button class=&quot;btn btn-danger&quot;&gt;Danger&lt;/button&gt;
+                        &lt;button disabled class=&quot;btn&quot;&gt;Disabled&lt;/button&gt;
 
+
+                        &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; ng-model=&quot;singleModel&quot; att-btn-checkbox att-btn-checkbox-true=&quot;1&quot; att-btn-checkbox-false=&quot;0&quot;&gt;
+                            Single Toggle
+                        &lt;/button&gt;
+                        &lt;h5&gt;Checkbox&lt;/h5&gt;
+
+                        &lt;div class=&quot;btn-group&quot;&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;checkModel.left&quot; att-btn-checkbox&gt;Left&lt;/label&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;checkModel.middle&quot; att-btn-checkbox&gt;Middle&lt;/label&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;checkModel.right&quot; att-btn-checkbox&gt;Right&lt;/label&gt;
+                        &lt;/div&gt;
+                        &lt;h5&gt;Radio &amp;amp; Uncheckable Radio&lt;/h5&gt;
+
+                        &lt;div class=&quot;btn-group&quot;&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;radioModel&quot; att-btn-radio=&quot;'Left'&quot;&gt;Left&lt;/label&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;radioModel&quot; att-btn-radio=&quot;'Middle'&quot;&gt;Middle&lt;/label&gt;
+                            &lt;label class=&quot;btn btn-primary&quot; ng-model=&quot;radioModel&quot; att-btn-radio=&quot;'Right'&quot;&gt;Right&lt;/label&gt;
+                        &lt;/div&gt;
+                     </code>
+                 </pre>
                 </att-tab>
-                <att-tab heading="Js">
 
+                <att-tab heading="Js">
+                    <pre ng-non-bindable="">
+                        <code data-language="html">
+                            angular.module('connectedCarSDK')
+                              .controller('ButtonsCtrl', function ($scope) {
+                                  $scope.singleModel = 1;
+
+                                  $scope.radioModel = 'Middle';
+
+                                  $scope.checkModel = {
+                                      left: false,
+                                      middle: true,
+                                      right: false
+                                  };
+                              });
+                      </code>
+                 </pre>
                 </att-tab>
             </att-tabset>
 
