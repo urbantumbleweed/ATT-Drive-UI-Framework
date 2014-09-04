@@ -1,21 +1,33 @@
-﻿<h1 class="main-title">Atlanta</h1>
-<h3 class="main-subtitle">Monday, August 18</h3>
+﻿<att-tabset>
+    <att-tab heading="Now">
+        
+        <h1 class="main-title">Atlanta</h1>
+        <h3 class="main-subtitle">Monday, August 18</h3>
 
-<div class="column-large separate-top-70">
-    <div class="weather-info">
-        <img class="separate-right-10" src="images/icon-sun.png" />
-        <h1>73&deg;</h1>
-    </div>
-    <div class="progress-container">
-        <att-progress-bar type="warning" max="75" value="currentTemp">Current temp</att-progress-bar>
-    </div>
-</div>
-<div class="column-small text-right separate-top-70">
-    <div class="weather-stats">
-        <p>
-            Precipitation: <span class="font-medium">{{precipitation}}%</span><br>
-            Humidity: <span class="font-medium">{{humidity}}%</span><br>
-            Wind: <span class="font-medium">{{wind}}mph</span>
-        </p>
-    </div>
-</div>
+        <div class="column-large separate-top-70">
+            <div class="weather-info">
+                <img class="separate-right-10" src="images/icon-sun.png" />
+                <h1>73&deg;</h1>
+            </div>
+            <div class="progress-container">
+                <att-progress-bar type="warning" max="75" value="currentTemp">Current temp</att-progress-bar>
+            </div>
+        </div>
+        <div class="column-small text-right separate-top-70">
+            <div class="weather-stats">
+                <p>
+                    Precipitation: <span class="font-medium">{{precipitation}}%</span><br>
+                    Humidity: <span class="font-medium">{{humidity}}%</span><br>
+                    Wind: <span class="font-medium">{{wind}}mph</span>
+                </p>
+            </div>
+        </div>
+
+    </att-tab>
+    <att-tab heading="Hourly">
+
+    </att-tab>
+    <att-tab heading="Weekly">
+
+    </att-tab>
+</att-tabset>
