@@ -482,57 +482,6 @@ address {
   font-style: normal;
   line-height: 1.42857143;
 }
-code,
-kbd,
-pre,
-samp {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-code {
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
-}
-kbd {
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #ffffff;
-  background-color: #333333;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-kbd kbd {
-  padding: 0;
-  font-size: 100%;
-  box-shadow: none;
-}
-pre {
-  display: block;
-  padding: 12px;
-  margin: 0 0 12.5px;
-  font-size: 17px;
-  line-height: 1.42857143;
-  word-break: break-all;
-  word-wrap: break-word;
-  color: #666666;
-  background-color: #f5f5f5;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-pre code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  white-space: pre-wrap;
-  background-color: transparent;
-  border-radius: 0;
-}
-.pre-scrollable {
-  max-height: 340px;
-  overflow-y: scroll;
-}
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -2081,18 +2030,21 @@ select[multiple].input-lg {
   background-color: rgba(0, 0, 0, 0.1);
   color: #999999;
 }
+.att-toggle-switch:disabled {
+  background-color: red;
+}
 .att-tabs {
   background-color: transparent;
-  max-height: 470px;
+  width: 100%;
   height: 100%;
   display: block;
 }
 .att-tabs .tab-content {
   height: 100%;
-  max-height: 410px;
   color: #ffffff;
   padding: 10px;
   overflow: auto;
+  padding-bottom: 70px;
 }
 .att-tabs .tab-content > .tab-pane {
   display: none;
@@ -2100,16 +2052,20 @@ select[multiple].input-lg {
 .att-tabs .tab-content > .active {
   display: block;
 }
+.att-tabs .tab-content.top {
+  padding-bottom: 0;
+  padding-top: 70px;
+}
 .att-tabs .nav {
+  position: absolute;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
   width: 100%;
-  max-width: 768px;
+  bottom: 0;
 }
 .att-tabs .nav.top {
-  position: absolute;
-  top: 60px;
+  top: 0;
 }
 .att-tabs .nav > li {
   position: relative;
@@ -2629,7 +2585,6 @@ input[type="radio"]:checked + label span {
   margin-left: -8px;
 }
 .att-modal {
-  max-width: 768px;
   width: 100%;
   max-height: 470px;
   position: absolute;

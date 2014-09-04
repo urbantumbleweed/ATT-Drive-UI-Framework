@@ -1,59 +1,59 @@
-﻿<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <br/>
-            &nbsp;<att-badge></att-badge>&nbsp;&nbsp; Default
-            <br/><br/>
-            &nbsp;<att-badge class="badge-success"></att-badge>&nbsp;&nbsp; Success
-            <br/><br/>
-            &nbsp;<att-badge class="badge-info"></att-badge>&nbsp;&nbsp; Info
-            <br/><br/>
-            &nbsp;<att-badge class="badge-warning"></att-badge>&nbsp;&nbsp; Warning
-            <br/><br/>
-            &nbsp;<att-badge class="badge-danger"></att-badge>&nbsp;&nbsp; Danger
-            <br/>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            This component has no additional options.
-        </div>
-    </div>
+﻿
+
+<div class="container" id="main-container">
+    <br/>
+    &nbsp;<att-badge></att-badge>&nbsp;&nbsp; Default
+    <br/><br/>
+    &nbsp;<att-badge class="badge-success"></att-badge>&nbsp;&nbsp; Success
+    <br/><br/>
+    &nbsp;<att-badge class="badge-info"></att-badge>&nbsp;&nbsp; Info
+    <br/><br/>
+    &nbsp;<att-badge class="badge-warning"></att-badge>&nbsp;&nbsp; Warning
+    <br/><br/>
+    &nbsp;<att-badge class="badge-danger"></att-badge>&nbsp;&nbsp; Danger
+    <br/>
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="details-container">
 
-            <att-tabset >
-                <att-tab heading="Description">
-                    <h1>Badge</h1>
-                </att-tab>
 
-                <att-tab heading="Markup">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            &lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
-                            &lt;br /&gt;
-                            &lt;br /&gt;
-                            &lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
-                        </code>
-                    </pre>
-                </att-tab>
-                <att-tab heading="Js">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            angular.module('connectedCarSDK')
-                            .controller('ToggleSwitchCtrl', function ($scope) {
-                            $scope.customModel = true;
-                            $scope.customModel2 = true;
-                            });
-                        </code>
-                    </pre>
-                </att-tab>
-            </att-tabset>
-
-        </div>
-    </div>
+<div id="options-panel">
+    This component has no additional options.
 </div>
+
+
+
+
+<div class="container" id="details-container">
+
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <h1>Badge</h1>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    &lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
+                    &lt;br /&gt;
+                    &lt;br /&gt;
+                    &lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
+                </code>
+            </pre>
+        </att-tab>
+        <att-tab heading="Js">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    angular.module('connectedCarSDK')
+                    .controller('ToggleSwitchCtrl', function ($scope) {
+                    $scope.customModel = true;
+                    $scope.customModel2 = true;
+                    });
+                </code>
+            </pre>
+        </att-tab>
+    </att-tabset>
+
+</div>
+
+
 
 

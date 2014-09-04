@@ -1,70 +1,66 @@
 ﻿
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <input type="radio" id="radio1" name="radio" ng-model="color" value="red" />
-            <label for="radio1"><span></span>Red</label>
-            <br><br>
 
-            <input type="radio" id="radio2" name="radio" ng-model="color" value="green" />
-            <label for="radio2"><span></span>Green</label>
-            <br><br>
+<div class="container" id="main-container">
+    <input type="radio" id="radio1" name="radio" ng-model="color" value="red" />
+    <label for="radio1"><span></span>Red</label>
+    <br><br>
 
-            <input type="radio" id="radio3" name="radio" ng-model="color" value="blue" />
-            <label for="radio3"><span></span>Blue</label>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            <span>Selected color: </span>{{color}}
-        </div>
-    </div>
+    <input type="radio" id="radio2" name="radio" ng-model="color" value="green" />
+    <label for="radio2"><span></span>Green</label>
+    <br><br>
+
+    <input type="radio" id="radio3" name="radio" ng-model="color" value="blue" />
+    <label for="radio3"><span></span>Blue</label>
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="details-container">
 
-            <att-tabset style="height: 340px">
-                <att-tab heading="Description">
-                    <h2 id="overview">Overview</h2>
-                    <p>Radio Options, or radio buttons, are used to enable a user to choose one item from a list of choices, during the process of entering information into a page. To enable a customer to choose more than one option, use checkboxes. If you are looking for radio button use as a means to select product/service tiles, see Radio Option List or Selectable Product Tile.</p>
-                    <p>Appropriate Use
-                    Radio is very much a "web" UI element and its use in automotive is not ideal. If you can use toggle button instead. Radio Options are ideal when the user has between two and five options to choose from, each being mutually exclusive from the rest. If your experience enables a customer to choose from more than six options, you may want to consider a dropdown/select instead.</p>
-                </att-tab>
 
-                <att-tab heading="Markup">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                                &lt;input type=&quot;radio&quot; id=&quot;radio1&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;red&quot; /&gt;
-                        &lt;label for=&quot;radio1&quot;&gt;&lt;span&gt;&lt;/span&gt;Red&lt;/label&gt;
-                        &lt;br&gt;&lt;br&gt;
-
-                        &lt;input type=&quot;radio&quot; id=&quot;radio2&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;green&quot; /&gt;
-                        &lt;label for=&quot;radio2&quot;&gt;&lt;span&gt;&lt;/span&gt;Green&lt;/label&gt;
-                        &lt;br&gt;&lt;br&gt;
-
-                        &lt;input type=&quot;radio&quot; id=&quot;radio3&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;blue&quot; /&gt;
-                        &lt;label for=&quot;radio3&quot;&gt;&lt;span&gt;&lt;/span&gt;Blue&lt;/label&gt;
-                      </code>
-                 </pre>
-                </att-tab>
-
-                <att-tab heading="Js">
-                    <pre ng-non-bindable="">
-                        <code data-language="html">
-                            angular.module('connectedCarSDK')
-                              .controller('RadioBtnCtrl', function ($scope) {
-
-                                $scope.color = 'green';
-
-                            });
-                      </code>
-                 </pre>
-                </att-tab>
-            </att-tabset>
-
-        </div>
-    </div>
+<div id="options-panel">
+    <span>Selected color: </span>{{color}}
 </div>
+
+
+<div class="container" id="details-container">
+
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <h2 id="overview">Overview</h2>
+            <p>Radio Options, or radio buttons, are used to enable a user to choose one item from a list of choices, during the process of entering information into a page. To enable a customer to choose more than one option, use checkboxes. If you are looking for radio button use as a means to select product/service tiles, see Radio Option List or Selectable Product Tile.</p>
+            <p>Appropriate Use
+            Radio is very much a "web" UI element and its use in automotive is not ideal. If you can use toggle button instead. Radio Options are ideal when the user has between two and five options to choose from, each being mutually exclusive from the rest. If your experience enables a customer to choose from more than six options, you may want to consider a dropdown/select instead.</p>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                        &lt;input type=&quot;radio&quot; id=&quot;radio1&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;red&quot; /&gt;
+                &lt;label for=&quot;radio1&quot;&gt;&lt;span&gt;&lt;/span&gt;Red&lt;/label&gt;
+                &lt;br&gt;&lt;br&gt;
+
+                &lt;input type=&quot;radio&quot; id=&quot;radio2&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;green&quot; /&gt;
+                &lt;label for=&quot;radio2&quot;&gt;&lt;span&gt;&lt;/span&gt;Green&lt;/label&gt;
+                &lt;br&gt;&lt;br&gt;
+
+                &lt;input type=&quot;radio&quot; id=&quot;radio3&quot; name=&quot;radio&quot; ng-model=&quot;color&quot; value=&quot;blue&quot; /&gt;
+                &lt;label for=&quot;radio3&quot;&gt;&lt;span&gt;&lt;/span&gt;Blue&lt;/label&gt;
+              </code>
+         </pre>
+        </att-tab>
+
+        <att-tab heading="Js">
+            <pre ng-non-bindable="">
+                <code data-language="html">
+                    angular.module('connectedCarSDK')
+                      .controller('RadioBtnCtrl', function ($scope) {
+
+                        $scope.color = 'green';
+
+                    });
+              </code>
+         </pre>
+        </att-tab>
+    </att-tabset>
+
+</div>
+
 
 
