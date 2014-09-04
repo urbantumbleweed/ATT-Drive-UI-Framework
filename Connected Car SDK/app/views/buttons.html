@@ -1,28 +1,60 @@
 ﻿
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="main-container">
+            <div ng-controller="ButtonsCtrl">
 
-<div class="container" id="main-container">
-    <div ng-controller="ButtonsCtrl">
-        <h4>Single toggle</h4>
+                <button class="btn btn-default">Default</button>
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-success">Success</button>
+                <button class="btn btn-warning">Warning</button>
+                <button class="btn btn-danger">Danger</button>
+                <button disabled class="btn">Disabled</button>
 
-        <button type="button" class="btn btn-primary" ng-model="singleModel" att-btn-checkbox att-btn-checkbox-true="1" att-btn-checkbox-false="0">
-            Single Toggle
-        </button>
-        <h4>Checkbox</h4>
 
-        <div class="btn-group">
-            <label class="btn btn-primary" ng-model="checkModel.left" att-btn-checkbox>Left</label>
-            <label class="btn btn-primary" ng-model="checkModel.middle" att-btn-checkbox>Middle</label>
-            <label class="btn btn-primary" ng-model="checkModel.right" att-btn-checkbox>Right</label>
+                <button type="button" class="btn btn-primary" ng-model="singleModel" att-btn-checkbox att-btn-checkbox-true="1" att-btn-checkbox-false="0">
+                    Single Toggle
+                </button>
+                <h5>Checkbox</h5>
+
+                <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="checkModel.left" att-btn-checkbox>Left</label>
+                    <label class="btn btn-primary" ng-model="checkModel.middle" att-btn-checkbox>Middle</label>
+                    <label class="btn btn-primary" ng-model="checkModel.right" att-btn-checkbox>Right</label>
+                </div>
+                <h5>Radio &amp; Uncheckable Radio</h5>
+
+                <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Left'">Left</label>
+                    <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Middle'">Middle</label>
+                    <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Right'">Right</label>
+                </div>
+            </div>
         </div>
-        <h4>Radio &amp; Uncheckable Radio</h4>
-
-        <div class="btn-group">
-            <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Left'">Left</label>
-            <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Middle'">Middle</label>
-            <label class="btn btn-primary" ng-model="radioModel" att-btn-radio="'Right'">Right</label>
+    </div>
+    <div class="col-md-3">
+        <div id="options-panel">
+            This component has no additional options.
         </div>
     </div>
 </div>
-<div class="container" id="details-container">
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="details-container">
 
+            <att-tabset style="height: 340px">
+                <att-tab heading="Description">
+
+                </att-tab>
+
+                <att-tab heading="Markup">
+
+                </att-tab>
+                <att-tab heading="Js">
+
+                </att-tab>
+            </att-tabset>
+
+        </div>
+    </div>
 </div>

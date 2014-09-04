@@ -1,28 +1,61 @@
-﻿<div class="container" id="main-container">
+﻿
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="main-container">
+            <att-carousel interval="myInterval">
+                <att-slide ng-repeat="slide in slides" active="slide.active">
+                    <img src="../images/placeholder.jpg" alt=""/>
+                    <div class="carousel-content">
 
-        <att-carousel interval="myInterval">
-                          <att-slide ng-repeat="slide in slides" active="slide.active">
-                              <img src="../images/placeholder.jpg" alt=""/>
-                            <div class="carousel-caption">
-                              <h4>Slide {{$index}}</h4>
-                              <p>Slide text</p>
-                            </div>
-                          </att-slide>
-                        </att-carousel>
+                        <ul>
+                            <li>List item</li>
+                            <li>List item</li>
+                            <li>List item</li>
+                            <li>List item</li>
+                            <li>List item</li>
+                            <li>List item</li>
+                        </ul>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam architecto at beatae commodi explicabo illo impedit, iste, nam quaerat quod reprehenderit repudiandae unde, vero voluptatem? Molestias odio recusandae ut.</p>
+                    </div>
 
-
-</div>
-
-<div class="container" id="details-container">
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+                </att-slide>
+            </att-carousel>
         </div>
-        <div class="col-md-6">
-            Interval, in milliseconds:
-            <input type="number" class="form-control" ng-model="myInterval">
-            <br />
-            Enter a negative number to stop the interval.
+    </div>
+    <div class="col-md-3">
+        <div id="options-panel">
+            <div class="row">
+                <div class="col-md-6">
+                    <button ng-click="addSlide()">Add Slide</button>
+                </div>
+                <div class="col-md-6">
+                    Interval, in milliseconds:
+                    <input type="number" class="form-control" ng-model="myInterval">
+                    <br />
+                    Enter a negative number to stop the interval.
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-9">
+        <div class="container" id="details-container">
+
+            <att-tabset style="height: 340px">
+                <att-tab heading="Description">
+
+                </att-tab>
+
+                <att-tab heading="Markup">
+
+                </att-tab>
+                <att-tab heading="Js">
+
+                </att-tab>
+            </att-tabset>
+
+        </div>
+    </div>
+</div>
+

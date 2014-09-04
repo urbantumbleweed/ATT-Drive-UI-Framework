@@ -1,0 +1,9 @@
+﻿<div class="att-dropdown">
+    <a class="trigger_demo2" ng-bind="defaultOption" ng-click="show=!show"></a>
+    <div class="screen" ng-show="show">
+        <button ng-show="closeButton" type="button" class="btn btn-circ medium btn-close-list" ng-click="show=false">X</button>
+        <ul class="list">
+            <li ng-repeat="item in items" ng-click="selectItem(item)">{{item.text}}</li>
+        </ul>
+    </div>
+</div>

@@ -81,7 +81,7 @@
 
     height: 50%;
 
-    width: 30px;
+    width: 5%;
     // We can't have this transition here because WebKit cancels the carousel
     // animation if you trip this while in the middle of another animation.
 
@@ -170,9 +170,9 @@
 
     li {
       display: inline-block;
-      width:  10px;
-      height: 10px;
-      margin: 1px;
+      width:  8px;
+      height: 8px;
+      margin: 3px;
       text-indent: -999px;
       border: 1px solid @carousel-indicator-border-color;
       border-radius: 10px;
@@ -181,9 +181,9 @@
 
     }
     .active {
-      margin: 0;
-      width:  12px;
-      height: 12px;
+      margin: 2px;
+      width:  10px;
+      height: 10px;
       background-color: @carousel-indicator-active-bg;
     }
   }
@@ -191,16 +191,22 @@
   // Optional captions
   // -----------------------------
   // Hidden by default for smaller viewports
-  .carousel-caption {
+  .carousel-content {
     position: absolute;
-    left: 15%;
-    right: 15%;
-    bottom: 20px;
+    left: 5%;
+    right: 5%;
+    bottom: 0px;
+
+    width: 90%;
+    height: 100%;
     z-index: 10;
     padding-top: 20px;
     padding-bottom: 20px;
+    
+
+
     color: @carousel-caption-color;
-    text-align: center;
+    text-align: justify;
     text-shadow: @carousel-text-shadow;
     & .btn {
       text-shadow: none; // No shadow for button elements in carousel-caption
@@ -208,41 +214,5 @@
   }
 
 
-  // Scale up controls for tablets and up
-  @media screen and (min-width: @screen-sm-min) {
-
-    // Scale up the controls a smidge
-    .carousel-control {
-      .glyphicon-chevron-left,
-      .glyphicon-chevron-right,
-      .icon-prev,
-      .icon-next {
-        width: 30px;
-        height: 30px;
-        margin-top: -15px;
-        font-size: 30px;
-      }
-      .glyphicon-chevron-left,
-      .icon-prev {
-        margin-left: -15px;
-      }
-      .glyphicon-chevron-right,
-      .icon-next {
-        margin-right: -15px;
-      }
-    }
-
-    // Show and left align the captions
-    .carousel-caption {
-      left: 20%;
-      right: 20%;
-      padding-bottom: 30px;
-    }
-
-    // Move up the indicators
-    .carousel-indicators {
-      bottom: 20px;
-    }
-  }
 
 }

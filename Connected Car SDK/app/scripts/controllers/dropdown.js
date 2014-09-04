@@ -11,23 +11,12 @@
 angular.module('connectedCarSDK')
   .controller('DropdownCtrl', function ($scope) {
       $scope.items = [
-        'The first choice!',
-        'And another choice for you.',
-        'but wait! A third!'];
+        { text: 'Item1', value: 1 },
+        { text: 'Item2', value: 2 },
+        { text: 'Item3', value: 3 },
+        { text: 'Item4', value: 4 }];
 
-      $scope.status = {
-          isopen: false
-      };
-
-      $scope.toggled = function (open) {
-          console.log('Dropdown is now: ', open);
-      };
-
-      $scope.toggleDropdown = function ($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
-          $scope.status.isopen = !$scope.status.isopen;
-      };
+      $scope.selectedItem = null;//$scope.items[0];
   });
 
 
