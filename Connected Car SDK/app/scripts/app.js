@@ -16,17 +16,17 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'connectedCarSDK.toggleSwitch',
-    'connectedCarSDK.tab',
-    'connectedCarSDK.progressbar',
-    'connectedCarSDK.carousel',
-    'connectedCarSDK.alert',
-    'connectedCarSDK.buttons',
-    'connectedCarSDK.dropdown',
-    'connectedCarSDK.loader',
-    'connectedCarSDK.badge',
-    'connectedCarSDK.listView',
-    'connectedCarSDK.modal'
+    'connectedCarSDK.attToggleSwitch',
+    'connectedCarSDK.attTab',
+    'connectedCarSDK.attProgressBar',
+    'connectedCarSDK.attCarousel',
+    'connectedCarSDK.attAlert',
+    'connectedCarSDK.attButtons',
+    'connectedCarSDK.attDropdown',
+    'connectedCarSDK.attLoader',
+    'connectedCarSDK.attBadge',
+    'connectedCarSDK.attListView',
+    'connectedCarSDK.attModal'
   ])
   .config(function ($routeProvider) {
       $routeProvider

@@ -80,13 +80,13 @@
   </file>
 </example>
  */
-angular.module('connectedCarSDK.tab', ['connectedCarSDK.tabset'])
+angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
   .directive('attTab', ['$parse', function ($parse) {
       return {
           require: '^attTabset',
           restrict: 'EA',
           replace: true,
-          templateUrl: '/templates/tabs/tab.html',
+          templateUrl: '/templates/tabs/attTab.html',
           transclude: true,
           scope: {
               active: '=?',

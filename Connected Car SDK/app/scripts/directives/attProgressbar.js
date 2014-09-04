@@ -6,7 +6,7 @@
  * @description
  * # attprogressbar
  */
-angular.module('connectedCarSDK.progressbar', [])
+angular.module('connectedCarSDK.attProgressBar', [])
  .constant('progressConfig', {
      animate: true,
      max: 100
@@ -39,7 +39,9 @@ angular.module('connectedCarSDK.progressbar', [])
     this.removeBar = function (bar) {
         this.bars.splice(this.bars.indexOf(bar), 1);
     };
-}]).directive('attProgressBar', function () {
+}])
+
+.directive('attProgressBar', function () {
     return {
         restrict: 'EA',
         replace: true,
@@ -49,7 +51,7 @@ angular.module('connectedCarSDK.progressbar', [])
             value: '=',
             type: '@'
         },
-        templateUrl: '/templates/progressBar.html',
+        templateUrl: '/templates/attProgressBar.html',
         link: function (scope, element, attrs, progressCtrl) {
             progressCtrl.addBar(scope, angular.element(element.children()[0]));
         }

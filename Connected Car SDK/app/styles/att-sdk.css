@@ -2065,7 +2065,7 @@ select[multiple].input-lg {
   border: 2px solid #067ab4;
 }
 .att-toggle-switch .on .btn-group > .btn:first-child:not(:last-child) {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0);
   color: #999999;
 }
 .att-toggle-switch .on .btn-group > .btn:last-child:not(:first-child) {
@@ -2078,12 +2078,12 @@ select[multiple].input-lg {
   background-color: #e23232;
 }
 .att-toggle-switch .off .btn-group > .btn:last-child:not(:first-child) {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0);
   color: #999999;
 }
 .att-tabs {
   background-color: transparent;
-  height: 470px;
+  max-height: 470px;
   height: 100%;
   display: block;
 }
@@ -2105,6 +2105,11 @@ select[multiple].input-lg {
   padding-left: 0;
   list-style: none;
   width: 100%;
+  max-width: 768px;
+}
+.att-tabs .nav.top {
+  position: absolute;
+  top: 60px;
 }
 .att-tabs .nav > li {
   position: relative;
@@ -2174,7 +2179,7 @@ select[multiple].input-lg {
 }
 .att-alert {
   position: absolute;
-  top: 18%;
+  top: 165px;
   background-color: #067ab4;
   min-height: 140px;
   width: 100%;
@@ -2394,8 +2399,7 @@ select[multiple].input-lg {
   padding: 0 20px;
   border: 2px solid white;
   display: inline-block;
-  background: transparent;
-  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
   cursor: pointer;
   margin: 0;
@@ -2404,13 +2408,16 @@ select[multiple].input-lg {
   vertical-align: middle;
   white-space: nowrap;
   padding: 6px 12px;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.8;
   border-radius: 0;
-  background-color: rgba(0, 0, 0, 0.15);
   /* Contextual variants
   ----------------------------------------------------*/
   /* Primary button */
+}
+.btn:focus,
+.btn.focus {
+  padding: 0;
 }
 .btn.disabled,
 .btn[disabled],
@@ -2529,19 +2536,17 @@ input[type="radio"] + label span {
 input[type="radio"]:checked + label span {
   background: url(../images/radio-checked.png) no-repeat;
 }
-/* DROPDOWNS
----------------------------------------------------------------- */
-.dropdown-label {
+.att-dropdown .dropdown-label {
   font-family: 'omnes_attmedium', sans-serif;
   font-size: 18px;
   margin-bottom: 20px;
 }
-.dropcontainer_demo2 {
+.att-dropdown .dropcontainer_demo2 {
   position: relative;
   font-size: 18px;
   color: #fff;
 }
-.trigger_demo2 {
+.att-dropdown .trigger_demo2 {
   margin-top: 20px;
   color: #fff;
   padding: 12px 20px 13px 20px;
@@ -2559,11 +2564,11 @@ input[type="radio"]:checked + label span {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.trigger_demo2:hover {
+.att-dropdown .trigger_demo2:hover {
   color: #fff;
   background: transparent;
 }
-.activetrigger_demo2 {
+.att-dropdown .activetrigger_demo2 {
   margin-top: 20px;
   color: #fff;
   padding: 12px 20px 13px 20px;
@@ -2577,15 +2582,15 @@ input[type="radio"]:checked + label span {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.activetrigger_demo2:hover {
+.att-dropdown .activetrigger_demo2:hover {
   background: transparent;
   color: #fff;
 }
-.activetrigger_demo2:active {
+.att-dropdown .activetrigger_demo2:active {
   background: transparent;
   color: #fff;
 }
-.dropcontainer_demo2 ul {
+.att-dropdown .dropcontainer_demo2 ul {
   font-size: 24px;
   border: 2px solid white;
   border-top: none;
@@ -2599,7 +2604,7 @@ input[type="radio"]:checked + label span {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.dropcontainer_demo2 ul li {
+.att-dropdown .dropcontainer_demo2 ul li {
   padding: 10px;
   padding-left: 0;
   color: white;
@@ -2609,27 +2614,27 @@ input[type="radio"]:checked + label span {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-.dropcontainer_demo2 ul li a {
+.att-dropdown .dropcontainer_demo2 ul li a {
   color: white;
   text-decoration: none;
 }
-.dropcontainer_demo2 ul li:hover {
+.att-dropdown .dropcontainer_demo2 ul li:hover {
   background: transparent;
   outline: none;
 }
-.dropcontainer_demo2 ul li:first-child {
+.att-dropdown .dropcontainer_demo2 ul li:first-child {
   display: none;
 }
-.dropcontainer_demo2 ul li:last-child {
+.att-dropdown .dropcontainer_demo2 ul li:last-child {
   border-bottom: none;
 }
-.dropdownhidden_demo2 {
+.att-dropdown .dropdownhidden_demo2 {
   display: none;
 }
-.dropdownvisible_demo2 {
+.att-dropdown .dropdownvisible_demo2 {
   height: auto;
 }
-.dropdownvisible_demo2 {
+.att-dropdown .dropdownvisible_demo2 {
   height: 200px;
   overflow-y: scroll;
 }
@@ -2679,32 +2684,35 @@ input[type="radio"]:checked + label span {
   top: 5px;
   margin-left: -8px;
 }
-/* MODAL PROMPT
----------------------------------------------------------------- */
-.modal {
+.att-modal {
+  max-width: 768px;
+  width: 100%;
+  max-height: 470px;
   position: absolute;
   z-index: 2;
   top: 0;
-  left: 0;
-  right: 0;
+  opacity: 1;
   padding: 30px 24px;
+  margin: 0;
+  background-color: #067ab4;
+  color: #ffffff;
 }
-.modal-footer {
+.att-modal.modal-footer {
   margin-top: 30px;
 }
-.modal-footer .btn:not(:last-child) {
+.att-modal.modal-footer .btn:not(:last-child) {
   margin-right: 20px;
 }
-.modal h1 {
+.att-modal .modal-title {
   text-transform: uppercase;
   font-size: 24px;
   margin: 0;
   line-height: 1;
 }
-.modal p {
+.att-modal .modal-body {
   margin: 20px 0;
 }
-.modal-backdrop {
+.att-modal.modal-backdrop {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -2713,9 +2721,9 @@ input[type="radio"]:checked + label span {
   height: 100%;
   background: rgba(15, 15, 15, 0.9);
 }
-.modal-primary {
+.att-modal.modal-primary {
   background: #067ab4;
 }
-.modal-danger {
+.att-modal.modal-danger {
   background: #a62828;
 }

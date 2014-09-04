@@ -6,7 +6,7 @@
  * @description
  * # attDropdown
  */
-angular.module('connectedCarSDK.dropdown', [])
+angular.module('connectedCarSDK.attDropdown', [])
 
 .directive('attDropdown', function ($timeout) {
     return {
