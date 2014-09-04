@@ -28,6 +28,7 @@ angular
     'connectedCarSDK.attListView',
     'connectedCarSDK.attModal',
     'connectedCarSDK.attMenu',
+    'connectedCarSDK.attDrawer',
     'connectedCarSDK.attHeader'
   ])
   .config(function ($routeProvider) {
@@ -83,6 +84,10 @@ angular
         .when('/listview', {
             templateUrl: 'views/listView.html',
             controller: 'ListViewCtrl'
+        })
+        .when('/drawer', {
+            templateUrl: 'views/drawer.html',
+            controller: 'DrawerCtrl'
         })
         .when('/menu', {
              templateUrl: 'views/menu.html',
