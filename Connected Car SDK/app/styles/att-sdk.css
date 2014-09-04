@@ -2671,3 +2671,20 @@ input[type="radio"]:checked + label span {
 .att-modal.modal-danger {
   background: #a62828;
 }
+.att-badge {
+  padding: 2px 15px;
+  border-radius: 15px;
+  background-color: #067ab4;
+}
+.att-badge.badge-success {
+  background-color: #4ca90c;
+}
+.att-badge.badge-info {
+  background-color: #5bc0de;
+}
+.att-badge.badge-warning {
+  background-color: #ef6f00;
+}
+.att-badge.badge-danger {
+  background-color: #e23232;
+}
