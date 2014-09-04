@@ -9,34 +9,21 @@ app.controller('SettingsCtrl', ['$rootScope', '$scope', '$modal',
             var modalInstance = $modal.open({
                 templateUrl: 'modalContent.html',
                 controller: ModalInstanceCtrl,
-                size: 'lg',
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
+                size: 'lg'
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
+            modalInstance.result.then(function () {
+            }, function () {});
         };
 }]);
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+var ModalInstanceCtrl = function ($scope, $modalInstance) {
+    
+    $scope.ok = function () {
+        $modalInstance.dismiss('cancel');
+    };
 
-    //$scope.items = items;
-    //$scope.selected = {
-    //    item: $scope.items[0]
-    //};
-
-    //$scope.ok = function () {
-    //    $modalInstance.close($scope.selected.item);
-    //};
-
-    //$scope.cancel = function () {
-    //    $modalInstance.dismiss('cancel');
-    //};
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 };
