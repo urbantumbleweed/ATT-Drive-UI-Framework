@@ -6,7 +6,7 @@
  * @description
  * # attDropdown
  */
-angular.module('connectedCarSDK.dropdown', [])
+angular.module('connectedCarSDK.attDropdown', [])
 
 .constant('dropdownConfig', {
     openClass: 'open'

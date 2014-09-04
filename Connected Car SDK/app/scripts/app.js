@@ -20,12 +20,12 @@ angular
     'connectedCarSDK.tab',
     'connectedCarSDK.progressbar',
     'connectedCarSDK.carousel',
-    'connectedCarSDK.alert',
-    'connectedCarSDK.buttons',
+    'connectedCarSDK.attAlert',
+    'connectedCarSDK.attButtons',
     'connectedCarSDK.dropdown',
     'connectedCarSDK.loader',
-    'connectedCarSDK.badge',
-    'connectedCarSDK.listView',
+    'connectedCarSDK.attBadge',
+    'connectedCarSDK.attListView',
     'connectedCarSDK.modal'
   ])
   .config(function ($routeProvider) {

@@ -6,8 +6,8 @@
  * @description
  * # attTabset
  */
-angular.module('connectedCarSDK.tabset', [])
-  .controller('TabsetController', ['$scope', function TabsetCtrl($scope) {
+angular.module('connectedCarSDK.attTabset', [])
+  .controller('TabsetController', ['$scope', function ($scope) {
       var ctrl = this,
           tabs = ctrl.tabs = $scope.tabs = [];
 
@@ -84,7 +84,7 @@ angular.module('connectedCarSDK.tabset', [])
             type: '@'
         },
         controller: 'TabsetController',
-        templateUrl: '/templates/tabs/tabset.html',
+        templateUrl: '/templates/tabs/attTabset.html',
         link: function (scope, element, attrs) {
             scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
             scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;

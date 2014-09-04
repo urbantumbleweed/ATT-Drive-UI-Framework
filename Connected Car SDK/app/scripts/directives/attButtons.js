@@ -6,7 +6,7 @@
  * @description
  * # attButtons
  */
-angular.module('connectedCarSDK.buttons', [])
+angular.module('connectedCarSDK.attButtons', [])
   .constant('buttonConfig', {
       activeClass: 'active',
       toggleEvent: 'click'

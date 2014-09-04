@@ -6,7 +6,7 @@
  * @description
  * # attcarousel
  */
-angular.module('connectedCarSDK.carousel', ['connectedCarSdk.transition'])
+angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
   .controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
       $animate.enabled(false);
       var self = this,

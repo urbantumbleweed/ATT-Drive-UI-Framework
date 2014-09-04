@@ -24,6 +24,23 @@ module.exports = function (grunt) {
     // Define the configuration for all the tasks
     grunt.initConfig({
 
+        modules: [], //to be filled in by build task
+        meta: {
+            modules: 'angular.module("connectedCarSDK", [<%= srcModules %>]);',
+            tplmodules: 'angular.module("connectedCarSDK.tpls", [<%= tplModules %>]);',
+            all: 'angular.module("connectedCarSDK", ["connectedCarSDK.tpls", <%= srcModules %>]);'
+        },
+
+        html2js: {
+            options: {
+                // custom options, see below
+            },
+            main: {
+                src: ['app/templates/**/*.html'],
+                dest: 'app/templates/templates.js'
+            },
+        },
+
         // Project settings
         sdk: appConfig,
 
@@ -198,16 +215,16 @@ module.exports = function (grunt) {
         },
 
         // Renames files for browser caching purposes
-        filerev: {
-            dist: {
-                src: [
-                  '<%= sdk.dist %>/scripts/{,*/}*.js',
-                  '<%= sdk.dist %>/styles/{,*/}*.css',
-                  '<%= sdk.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                  '<%= sdk.dist %>/styles/fonts/*'
-                ]
-            }
-        },
+        //filerev: {
+        //    dist: {
+        //        src: [
+        //          '<%= sdk.dist %>/scripts/{,*/}*.js',
+        //          '<%= sdk.dist %>/styles/{,*/}*.css',
+        //          '<%= sdk.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+        //          '<%= sdk.dist %>/styles/fonts/*'
+        //        ]
+        //    }
+        //},
 
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
@@ -219,7 +236,7 @@ module.exports = function (grunt) {
                 flow: {
                     html: {
                         steps: {
-                            js: ['concat', 'uglifyjs'],
+                            js: ['concat'],
                             css: ['cssmin']
                         },
                         post: {}
@@ -336,7 +353,7 @@ module.exports = function (grunt) {
                       '*.{ico,png,txt}',
                       '.htaccess',
                       '*.html',
-                      'views/{,*/}*.html',
+                      'templates/{,*/}*.html',
                       'images/{,*/}*.{webp}',
                       'fonts/*'
                     ]
@@ -365,7 +382,7 @@ module.exports = function (grunt) {
             ],
             dist: [
               'copy:styles',
-              'imagemin',
+              //'imagemin',
               'svgmin'
             ]
         },
@@ -416,11 +433,12 @@ module.exports = function (grunt) {
       'autoprefixer',
       'concat',
       'ngmin',
+      'merge',
       'copy:dist',
       'cdnify',
       'cssmin',
-      'uglify',
-      'filerev',
+      //'uglify',
+      //'filerev',
       'usemin',
       'htmlmin'
     ]);
@@ -430,4 +448,77 @@ module.exports = function (grunt) {
       'test',
       'build'
     ]);
+
+    grunt.registerTask('merge', 'Reads content of all directives and merges them together in one file, under one module', function() {
+        grunt.log.writeln('Merging directives');
+    });
+
+    grunt.registerTask('convert', ['html2js']);
+
+    var foundModules = {};
+    function findModule(name) {
+        if (foundModules[name]) { return; }
+        foundModules[name] = true;
+
+        function breakup(text, separator) {
+            return text.replace(/[A-Z]/g, function (match) {
+                return separator + match;
+            });
+        }
+        function ucwords(text) {
+            return text.replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+                return $1.toUpperCase();
+            });
+        }
+        function enquote(str) {
+            return '"' + str + '"';
+        }
+
+        var module = {
+            name: name,
+            moduleName: enquote('connectedCarSDK.' + name),
+            displayName: ucwords(breakup(name, ' ')),
+            srcFiles: grunt.file.expand("app/scripts/directives"+name+"/*.js"),
+            tplFiles: grunt.file.expand("template/"+name+"/*.html"),
+            tpljsFiles: grunt.file.expand("template/"+name+"/*.html.js"),
+            tplModules: grunt.file.expand("template/"+name+"/*.html").map(enquote),
+            dependencies: dependenciesForModule(name),
+            //docs: {
+            //    md: grunt.file.expand("src/"+name+"/docs/*.md")
+            //      .map(grunt.file.read).map(markdown).join("\n"),
+            //    js: grunt.file.expand("src/"+name+"/docs/*.js")
+            //      .map(grunt.file.read).join("\n"),
+            //    html: grunt.file.expand("src/"+name+"/docs/*.html")
+            //      .map(grunt.file.read).join("\n")
+            //}
+        };
+        module.dependencies.forEach(findModule);
+        grunt.config('modules', grunt.config('modules').concat(module));
+    }
+
+    function dependenciesForModule(name) {
+        var deps = [];
+        grunt.file.expand('src/' + name + '/*.js')
+        .map(grunt.file.read)
+        .forEach(function (contents) {
+            //Strategy: find where module is declared,
+            //and from there get everything inside the [] and split them by comma
+            var moduleDeclIndex = contents.indexOf('angular.module(');
+            var depArrayStart = contents.indexOf('[', moduleDeclIndex);
+            var depArrayEnd = contents.indexOf(']', depArrayStart);
+            var dependencies = contents.substring(depArrayStart + 1, depArrayEnd);
+            dependencies.split(',').forEach(function (dep) {
+                if (dep.indexOf('ui.bootstrap.') > -1) {
+                    var depName = dep.trim().replace('ui.bootstrap.', '').replace(/['"]/g, '');
+                    if (deps.indexOf(depName) < 0) {
+                        deps.push(depName);
+                        //Get dependencies for this new dependency
+                        deps = deps.concat(dependenciesForModule(depName));
+                    }
+                }
+            });
+        });
+        return deps;
+    }
+
 };

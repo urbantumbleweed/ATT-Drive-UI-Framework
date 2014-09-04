@@ -6,7 +6,7 @@
  * @description
  * # attModal
  */
-angular.module('connectedCarSDK.modal', ['connectedCarSdk.transition'])
+angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
   /**
  * A helper, internal data structure that acts as a map but also allows getting / removing
  * elements in the LIFO order

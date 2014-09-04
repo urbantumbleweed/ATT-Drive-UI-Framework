@@ -6,10 +6,10 @@
  * @description
  * # attToggleSwitch
  */
-angular.module('connectedCarSDK.toggleSwitch', [])
+angular.module('connectedCarSDK.attToggleSwitch', [])
   .directive('attToggleSwitch', function () {
       return {
-          templateUrl: '/templates/toggleSwitch.html',
+          templateUrl: '/templates/attToggleSwitch.html',
           restrict: 'E',
           scope: {
               ngModel: '='
@@ -17,15 +17,13 @@ angular.module('connectedCarSDK.toggleSwitch', [])
           require: '^ngModel',
           link: function (scope, element, attrs) {
 
-              if (angular.isDefined(attrs.disabled))
-              {
+              if (angular.isDefined(attrs.disabled)) {
                   element.find("label").attr("disabled", "disabled");
               }
 
-              scope.change = function (enabled)
-              {
+              scope.change = function(enabled) {
                   scope.ngModel = enabled;
-              }
+              };
 
           }
       };

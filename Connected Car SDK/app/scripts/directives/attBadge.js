@@ -6,10 +6,10 @@
  * @description
  * # attBadge
  */
-angular.module('connectedCarSDK.badge', [])
+angular.module('connectedCarSDK.attBadge', [])
   .directive('attBadge', function () {
       return {
-          templateUrl: '/templates/badge.html',
+          templateUrl: '/templates/attBadge.html',
           restrict: 'E',
           replace: true,
           link: function (scope, element, attrs) {

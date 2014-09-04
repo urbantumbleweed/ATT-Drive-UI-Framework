@@ -6,13 +6,13 @@
  * @description
  * # attAlert
  */
-angular.module('connectedCarSDK.alert', [])
+angular.module('connectedCarSDK.attAlert', [])
     .directive('attAlert', [
         '$timeout', function($timeout) {
 
             return {
                 restrict: 'AE',
-                templateUrl: '/templates/alert.html',
+                templateUrl: '/templates/attAlert.html',
                 transclude: true,
                 replace: true,
                 scope: {

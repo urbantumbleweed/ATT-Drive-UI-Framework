@@ -6,12 +6,12 @@
  * @description
  * # attLoader
  */
-angular.module('connectedCarSDK.loader', [])
+angular.module('connectedCarSDK.attLoader', [])
   .directive('attLoader', ['$http', function ($http) {
       return {
           restrict: 'E',
           replace: true,
-          templateUrl: '/templates/loader.html',
+          templateUrl: '/templates/attLoader.html',
           link: function (scope, element, attrs) {
 
               scope.isLoading = function () {
