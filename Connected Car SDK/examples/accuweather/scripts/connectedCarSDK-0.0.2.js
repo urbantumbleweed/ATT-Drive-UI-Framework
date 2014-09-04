@@ -6,6 +6,7 @@ angular.module('connectedCarSDK', [
 	'connectedCarSDK.attCarousel',
 	'connectedCarSDK.attDrawer',
 	'connectedCarSDK.attDropdown',
+	'connectedCarSDK.attHeader',
 	'connectedCarSDK.attListView',
 	'connectedCarSDK.attLoader',
 	'connectedCarSDK.attMenu',
@@ -480,6 +481,23 @@ angular.module('connectedCarSDK.attDropdown', [])
         }
     };
 });
+
+angular.module('connectedCarSDK.attHeader', [])
+  .directive('attHeader', function () {
+    return {
+        restrict: 'E',
+        templateUrl: '/templates/attHeader.html',
+        replace: true,
+        scope: {
+            appName:  '@',
+            currentItem: '@',
+            appImage: '@'
+        },
+        link: function (scope, element, attrs) {
+        }
+    };
+  });
+
 
 angular.module('connectedCarSDK.attListView', [])
 .directive('attListView', function() {
@@ -1189,5 +1207,3 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
           }
       };
   });
-
-
