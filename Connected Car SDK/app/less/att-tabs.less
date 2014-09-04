@@ -1,6 +1,7 @@
 .att-tabs{
+
   background-color: transparent;
-  max-height: 470px;
+  width: 100%;
   height: 100%;
   display: block;
 
@@ -14,10 +15,19 @@
 
     }
     height: 100%;
-    max-height: 410px;
+
     color: #ffffff;
     padding: 10px;
     overflow: auto;
+
+    padding-bottom: 70px;
+
+
+    &.top{
+
+      padding-bottom: 0;
+      padding-top: 70px;
+    }
   }
 
 
@@ -28,16 +38,21 @@
 
 
   .nav {
+    position: absolute;
     margin-bottom: 0;
     padding-left: 0; // Override default ul/ol
     list-style: none;
     &:extend(.clearfix all);
     width: 100%;
-    max-width: 768px;
+    bottom: 0;
+
+
+
+
 
    &.top{
-     position: absolute;
-     top: 60px;
+
+     top: 0;
    }
 
 

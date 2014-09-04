@@ -1,42 +1,42 @@
 ﻿
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="main-container">
-            <att-list-view title="title" items="genres" multi-select="true"></att-list-view>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="options-panel">
-            <span>Selected genres:</span>
-            <ul>
-                <li ng-repeat="genre in genres">
-                    <span ng-bind="genre.text"></span>:
-                    <span ng-bind="genre.selected"></span>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+
+<div class="container" id="main-container">
+    <att-list-view title="title" items="genres" multi-select="true"></att-list-view>
 </div>
-<div class="row">
-    <div class="col-md-9">
-        <div class="container" id="details-container">
 
-            <att-tabset style="height: 340px">
-                <att-tab heading="Description">
 
-                </att-tab>
-
-                <att-tab heading="Markup">
-
-                </att-tab>
-                <att-tab heading="Js">
-
-                </att-tab>
-            </att-tabset>
-
-        </div>
-    </div>
+<div id="options-panel">
+    <span>Selected genres:</span>
+    <ul>
+        <li ng-repeat="genre in genres">
+            <span ng-bind="genre.text"></span>:
+            <span ng-bind="genre.selected"></span>
+        </li>
+    </ul>
 </div>
+
+
+
+
+<div class="container" id="details-container">
+
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+
+        </att-tab>
+
+        <att-tab heading="Markup">
+
+        </att-tab>
+        <att-tab heading="Js">
+
+        </att-tab>
+    </att-tabset>
+
+</div>
+
+
 
 
 
