@@ -26,7 +26,8 @@ angular
     'connectedCarSDK.attLoader',
     'connectedCarSDK.attBadge',
     'connectedCarSDK.attListView',
-    'connectedCarSDK.attModal'
+    'connectedCarSDK.attModal',
+    'connectedCarSDK.attMenu'
   ])
   .config(function ($routeProvider) {
       $routeProvider
@@ -81,6 +82,10 @@ angular
         .when('/listview', {
             templateUrl: 'views/listView.html',
             controller: 'ListViewCtrl'
+        })
+        .when('/menu', {
+             templateUrl: 'views/menu.html',
+             controller: 'MenuCtrl'
         })
         .otherwise({
             redirectTo: '/'
