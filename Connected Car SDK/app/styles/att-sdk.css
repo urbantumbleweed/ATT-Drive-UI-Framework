@@ -230,11 +230,11 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 30px;
+  font-size: 24px;
 }
 h4,
 .h4 {
-  font-size: 24px;
+  font-size: 18px;
 }
 h5,
 .h5 {
@@ -2642,4 +2642,32 @@ input[type="radio"]:checked + label span {
 }
 .att-badge.badge-danger {
   background-color: #e23232;
+}
+.att-header {
+  color: #ccc;
+  display: block;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+}
+.att-header .active-screen {
+  background-color: #008000;
+  position: relative;
+  float: left;
+  display: inline-block;
+}
+.att-header .active-screen i {
+  margin-right: 10px;
+}
+.att-header .app-branding {
+  background-color: #0000ff;
+  position: relative;
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+}
+.att-header .app-branding img {
+  display: inline;
 }
