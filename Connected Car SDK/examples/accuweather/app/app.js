@@ -46,9 +46,9 @@ app.run(function($rootScope) {
         });
 
     $rootScope.appLinks = [
-        { text: 'Forecast', desc: 'Watch daily forecast', href: '#/', selected: true },
-        { text: 'Settings', desc: 'Change app settings', href: '#/settings', selected: false },
-        { text: 'About', desc: 'Monitor hourly forecast', href: '#/about', selected: false }
+        { text: 'Forecast', desc: 'Get current, hourly and weekly weather', href: '#/', selected: true },
+        { text: 'Settings', desc: 'Change units and location settings', href: '#/settings', selected: false },
+        { text: 'About', desc: 'Copyright AccuWeather & AT&T, 2014.', href: '#/about', selected: false }
     ];
 
 });
