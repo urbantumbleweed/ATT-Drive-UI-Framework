@@ -3,11 +3,17 @@
 app.controller('ForecastCtrl', ['$rootScope', '$scope',
     function ($rootScope, $scope) {
 
-        $scope.min = 'MIN 65°';
-        $scope.max = 'MAX 75°';
-        $scope.currentTemp = 70;
-        $scope.precipitation = '10';
-        $scope.humidity = '67';
-        $scope.wind = '0';
+        $scope.currentDate = new Date();
 
+        $scope.weatherStats = {
+            minTemp: 'MIN 65°',
+            maxTemp: 'MAX 75°',
+            currentTemp: 70,
+
+            precipitation: '10',
+            chanceOfRain: 30,
+            humidity: '67',
+            wind: '0'
+        };
+        
     }]);

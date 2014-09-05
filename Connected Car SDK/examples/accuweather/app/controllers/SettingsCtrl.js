@@ -4,7 +4,7 @@ app.controller('SettingsCtrl', ['$rootScope', '$scope', '$modal',
     function ($rootScope, $scope, $modal) {        
 
         $scope.temperature = "celsius";
-        $scope.location = true
+        $scope.location = true;
 
         $scope.change = function () {
             var modalInstance = $modal.open({

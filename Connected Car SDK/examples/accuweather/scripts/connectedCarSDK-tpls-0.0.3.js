@@ -1406,14 +1406,16 @@ angular.module("/templates/modal/backdrop.html", []).run(["$templateCache", func
     "");
 }]);
 
-angular.module("/templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/modal/window.html",
-    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
-    "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
-    "        <div class=\"modal-content\" modal-transclude></div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "");
+angular.module("/templates/modal/window.html", []).run(["$templateCache", function ($templateCache) {
+    $templateCache.put("/templates/modal/window.html",
+      "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
+      "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
+      "        <div class=\"att-modal\">\n" +
+      "            <div class=\"modal-content\" modal-transclude></div>\n" +
+      "        </div>\n" +
+      "    </div>\n" +
+      "</div>\n" +
+      "");
 }]);
 
 angular.module("/templates/tabs/attTab.html", []).run(["$templateCache", function($templateCache) {
