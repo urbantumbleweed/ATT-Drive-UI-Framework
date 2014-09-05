@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('connectedCarSDK', [
     'ngAnimate',
     'ngCookies',
@@ -101,3 +101,15 @@ angular
             redirectTo: '/'
         });
   });
+
+
+app.run(function ($rootScope, $timeout) {
+    
+    $rootScope.$on('$routeChangeSuccess',
+        function (event, next, current) {
+            $timeout(function() {
+                prettyPrint();
+            }, 500);
+            
+        });
+});

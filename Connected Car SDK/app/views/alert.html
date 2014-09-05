@@ -53,7 +53,7 @@
         </att-tab>
 
         <att-tab heading="Markup">
-        <pre ng-non-bindable=""><code data-language="html">&lt;att-alert ng-repeat=&quot;alert in alerts&quot;
+            <pre class="prettyprint">&lt;att-alert ng-repeat=&quot;alert in alerts&quot;
   type=&quot;alert.type&quot;
   show-icon=&quot;alert.showIcon&quot;
   show-confirmation-btn=&quot;alert.showConfirmationBtn&quot;
@@ -63,42 +63,25 @@
   auto-close-interval=&quot;alert.autoCloseInterval&quot;
   title=&quot;alert.title&quot;
   text=&quot;alert.text&quot;&gt;
-&lt;/att-alert&gt;</code></pre>
+&lt;/att-alert&gt;</pre>
 </att-tab>
 
         <att-tab heading="JavaScript">
-            <pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+            <pre class="prettyprint">angular.module('connectedCarSDK')
     .controller('AlertCtrl', function ($scope) {
-
       $scope.customModel = true;
-
       $scope.runCustomCode = function () {
-        //alert('On Close event called');
+        alert('On Close event called');
       };
-
       $scope.onClose = function () {
-        //alert('on Close');
+        alert('on Close');
       };
-
       $scope.onClick = function () {
-        //alert('on Click');
+        alert('on Click');
       };
-
       $scope.alerts = [];
-        //$scope.alerts.push({
-        //    type: 'info',
-        //    showIcon: false,
-        //    showConfirmationBtn: true,
-        //    buttonText: 'OK',
-        //    onClose: $scope.onClose,
-        //    onClick: $scope.onClick,
-        //    autoCloseInterval: undefined,
-        //    title: 'Sample alert title',
-        //    text: 'Sample alert text'
-        //});
-
+        
         $scope.showAlert = function () {
-
         $scope.alerts.push({
           type: $scope.type,
           showIcon: $scope.showIcon,
@@ -111,11 +94,10 @@
           text: $scope.text
         });
       };
-
         $scope.removeAlert = function (index) {
         $scope.alerts.splice(index, 1);
         };
-    });</code></pre>
+    });</pre>
         </att-tab>
     </att-tabset>
 </div>
