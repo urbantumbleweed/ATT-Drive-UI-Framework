@@ -1,5 +1,5 @@
 ﻿<div class="att-drawer">
-    <div ng-show="showDrawer">
+    <div ng-class="{ visible: showDrawer == true, invisible: showDrawer == false}">
         <div ng-transclude></div>
     </div>
 </div>
