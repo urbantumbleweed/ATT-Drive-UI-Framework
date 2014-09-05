@@ -26,34 +26,21 @@
 
     <att-tabset top-position="true">
         <att-tab heading="Description">
-            <h1>Badge</h1>
+            <h2>Overview</h2>
+            <p>A Notification badges can be used to enhance the readability of your content but It must not be used to convey status or severity without appropriate content along with it. For example, the text "6 messages" with a red badge on the number does not convey the appropriate severity. Instead, something like "6 Urgent messages" has more meaning.</p>
         </att-tab>
 
-        <att-tab heading="Markup">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    &lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
-                    &lt;br /&gt;
-                    &lt;br /&gt;
-                    &lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
-                </code>
-            </pre>
+        <att-tab heading="Markup"><pre ng-non-bindable=""><code data-language="html">&lt;att-toggle-switch ng-model=&quot;customModel&quot;&gt;&lt;/att-toggle-switch&gt;
+&lt;att-toggle-switch ng-model=&quot;customModel2&quot; disabled&gt;&lt;/att-toggle-switch&gt;
+</code></pre>
         </att-tab>
-        <att-tab heading="Js">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    angular.module('connectedCarSDK')
-                    .controller('ToggleSwitchCtrl', function ($scope) {
-                    $scope.customModel = true;
-                    $scope.customModel2 = true;
-                    });
-                </code>
-            </pre>
+        <att-tab heading="JavaScript">
+            <pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+  .controller('ToggleSwitchCtrl', function ($scope) {
+    $scope.customModel = true;
+    $scope.customModel2 = true;
+});</code></pre>
         </att-tab>
     </att-tabset>
 
 </div>
-
-
-
-

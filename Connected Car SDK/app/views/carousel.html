@@ -4,16 +4,13 @@
 <div class="container" id="main-container">
     <att-carousel interval="myInterval">
         <att-slide ng-repeat="slide in slides" active="slide.active">
-            <img src="../images/placeholder.jpg" alt=""/>
+            <img src="../images/placeholder.png" alt=""/>
             <div class="carousel-content">
                 <ul>
                     <li>List item</li>
                     <li>List item</li>
                     <li>List item</li>
-                    <li>List item</li>
-                    <li>List item</li>
-                    <li>List item</li>
-                </ul>
+
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam architecto at beatae commodi explicabo illo impedit, iste, nam quaerat quod reprehenderit repudiandae unde, vero voluptatem? Molestias odio recusandae ut.</p>
             </div>
         </att-slide>
@@ -41,62 +38,43 @@
 
     <att-tabset top-position="true">
         <att-tab heading="Description">
-            <p>Carousel creates a carousel similar to bootstrap's image carousel.
+          <h2>Overview</h2>
+
+            <p>Carousel creates a carousel similar to bootstrap's image carousel.</p>
+            <p>
             The carousel also offers support for touchscreen devices in the form of swiping. To enable swiping, load the ngTouch module as a dependency.
             Use a &lt;carousel&gt; element with &lt;slide&gt; elements inside it. It will automatically cycle through the slides at a given rate, and a current-index variable will be kept in sync with the currently visible slide.</p>
         </att-tab>
 
         <att-tab heading="Markup">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                             &lt;att-carousel interval=&quot;myInterval&quot;&gt;
-                        &lt;att-slide ng-repeat=&quot;slide in slides&quot; active=&quot;slide.active&quot;&gt;
-                            &lt;img src=&quot;../images/placeholder.jpg&quot; alt=&quot;&quot;/&gt;
-                            &lt;div class=&quot;carousel-content&quot;&gt;
-                                &lt;ul&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                    &lt;li&gt;List item&lt;/li&gt;
-                                &lt;/ul&gt;
-                                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam architecto at beatae commodi explicabo illo impedit, iste, nam quaerat quod reprehenderit repudiandae unde, vero voluptatem? Molestias odio recusandae ut.&lt;/p&gt;
-                            &lt;/div&gt;
-                        &lt;/att-slide&gt;
-                    &lt;/att-carousel&gt;
+            <pre ng-non-bindable=""><code data-language="html">&lt;att-carousel interval=&quot;myInterval&quot;&gt;
+  &lt;att-slide ng-repeat=&quot;slide in slides&quot; active=&quot;slide.active&quot;&gt;
+  &lt;/att-slide&gt;
+&lt;/att-carousel&gt;
                 </code>
             </pre>
         </att-tab>
 
-        <att-tab heading="Js">
-            <pre ng-non-bindable="">
-                <code data-language="html">
-                    angular.module('connectedCarSDK')
-                      .controller('CarouselCtrl', function ($scope) {
-                          $scope.myInterval = 5000;
+        <att-tab heading="JavaScript">
+<pre ng-non-bindable=""><code data-language="html">angular.module('connectedCarSDK')
+  .controller('CarouselCtrl', function ($scope) {
+    $scope.myInterval = 5000;
+      var slides = $scope.slides = [];
 
-                          var slides = $scope.slides = [];
+    $scope.addSlide = function () {
+      var newWidth = 600 + slides.length + 2;
+        slides.push({
+          image: 'http://placekitten.com/' + newWidth + '/300',
+          text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
+          ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+          });
+        };
 
-                          $scope.addSlide = function () {
-                              var newWidth = 600 + slides.length + 2;
-                              slides.push({
-                                  image: 'http://placekitten.com/' + newWidth + '/300',
-                                  text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                                    ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-                              });
-                          };
-
-                          for (var i = 0; i < 4; i++) {
-                              $scope.addSlide();
-                          }
-                      });
-                </code>
-            </pre>
+    for (var i = 0; i < 4; i++) {
+  $scope.addSlide();
+  }
+});</code></pre>
         </att-tab>
     </att-tabset>
 
 </div>
-
-
-
