@@ -1,5 +1,4 @@
 angular.module('connectedCarSDK', [
-	'connectedCarSDK.tpls',
 	'connectedCarSdk.transition',
 	'connectedCarSDK.attAlert',
 	'connectedCarSDK.attBadge',
@@ -16,24 +15,6 @@ angular.module('connectedCarSDK', [
 	'connectedCarSDK.attTab',
 	'connectedCarSDK.attTabset',
 	'connectedCarSDK.attToggleSwitch']);
-	
-angular.module('connectedCarSDK.tpls',[
-	'/templates/attAlert.html',
-	'/templates/attBadge.html',
-	'/templates/carousel/carousel.html',
-	'/templates/carousel/slide.html',
-	'/templates/attDrawer.html',
-	'/templates/attDropdown.html',
-	'/templates/attListView.html',
-	'/templates/attLoader.html',
-	'/templates/attMenu.html',
-	'/templates/attHeader.html',
-	'/templates/modal/backdrop.html',
-	'/templates/modal/window.html',
-	'/templates/attProgressBar.html',
-	'/templates/tabs/attTab.html',
-	'/templates/tabs/attTabset.html',
-	'/templates/attToggleSwitch.html']);
 
 angular.module('connectedCarSdk.transition', [])
 .factory('$transition', ['$q', '$timeout', '$rootScope', function ($q, $timeout, $rootScope) {
@@ -109,86 +90,92 @@ angular.module('connectedCarSdk.transition', [])
 }]);
 
 angular.module('connectedCarSDK.attAlert', [])
-.directive('attAlert', [
-	'$timeout', function($timeout) {
+    .directive('attAlert', [
+        '$timeout', function($timeout) {
 
-		return {
-			restrict: 'AE',
-			templateUrl: '/templates/attAlert.html',
-			transclude: true,
-			replace: true,
-			scope: {
-				type: '=',                  // info, success, danger
-				showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
-				showConfirmationBtn: '=',   // true/false (takes precedence over icon)
-				buttonText: '=',            // string
-				onClick: '&',               // function/callback for confirmation button click
-				onClose: '&',               // function/callback for when the alert is closed
-				autoCloseInterval: '=',     // in miliseconds
-				title: '=',                 // string
-				text: '='                   // string
-			},
-			link: function(scope, element, attrs) {
+            return {
+                restrict: 'AE',
+                templateUrl: '/templates/attAlert.html',
+                transclude: true,
+                replace: true,
+                scope: {
+                    type: '=',                  // info, success, danger
+                    showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
+                    showConfirmationBtn: '=',   // true/false (takes precedence over icon)
+                    buttonText: '=',            // string
+                    onClick: '&',               // function/callback for confirmation button click
+                    onClose: '&',               // function/callback for when the alert is closed
+                    autoCloseInterval: '=',     // in miliseconds
+                    title: '=',                 // string
+                    text: '='                   // string
+                },
+                link: function(scope, element, attrs) {
 
-				console.log('Show Confirmation Button', scope.showConfirmationBtn);
-				console.log('Button Text', scope.buttonText);
-				console.log('Alert Text', scope.text);
+                    console.log('Show Confirmation Button', scope.showConfirmationBtn);
+                    console.log('Button Text', scope.buttonText);
+                    console.log('Alert Text', scope.text);
 
-				var timeoutPromise;
-				if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
+                    var timeoutPromise;
+                    if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
 
-					timeoutPromise = $timeout(function() {
+                        timeoutPromise = $timeout(function() {
 
-						scope.closeAlert = true;
-						scope.close();
+                            scope.closeAlert = true;
+                            scope.close();
 
-					}, scope.autoCloseInterval);
+                        }, scope.autoCloseInterval);
 
-				}
+                    }
 
-				scope.close = function () {
+                    scope.close = function () {
 
-					// if there is no confirmation button
-					// tapping anywhere on the alert will close the alert
-					// otherwise, you must dismiss the alert by clicking
-					// on the confirmation button
-					if (scope.showConfirmationBtn != true) {
+                        // if there is no confirmation button
+                        // tapping anywhere on the alert will close the alert
+                        // otherwise, you must dismiss the alert by clicking
+                        // on the confirmation button
+                        if (scope.showConfirmationBtn != true) {
 
-						if (timeoutPromise)
-							$timeout.cancel(timeoutPromise);
+                            if (timeoutPromise)
+                                $timeout.cancel(timeoutPromise);
 
-						scope.closeAlert = true;
-						scope.onClose();
+                            scope.closeAlert = true;
+                            scope.onClose();
 
-					}
-				};
+                        }
+                    };
 
-			}
-		};
+                }
+            };
 
-	}
-]);
+        }
+    ]);
+
 
 angular.module('connectedCarSDK.attBadge', [])
-.directive('attBadge', function () {
+  .directive('attBadge', function () {
       return {
           templateUrl: '/templates/attBadge.html',
           restrict: 'E',
           replace: true,
+          scope: {
+              value: "@"
+          },
           link: function (scope, element, attrs) {
           }
       };
   });
 
 angular.module('connectedCarSDK.attButtons', [])
-.constant('buttonConfig', {
+  .constant('buttonConfig', {
       activeClass: 'active',
       toggleEvent: 'click'
   })
+
 .controller('ButtonsController', ['buttonConfig', function (buttonConfig) {
     this.activeClass = buttonConfig.activeClass || 'active';
     this.toggleEvent = buttonConfig.toggleEvent || 'click';
 }])
+
 .directive('attBtnRadio', function () {
     return {
         require: ['attBtnRadio', 'ngModel'],
@@ -215,6 +202,7 @@ angular.module('connectedCarSDK.attButtons', [])
         }
     };
 })
+
 .directive('attBtnCheckbox', function () {
     return {
         require: ['attBtnCheckbox', 'ngModel'],
@@ -458,18 +446,24 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
 });
 
 angular.module('connectedCarSDK.attDrawer', [])
-.directive('attDrawer', function() {
-	return {
-		restrict: 'E',
-		templateUrl: '/templates/attDrawer.html',
-		transclude: true,
-		link: function (scope, element, attrs) {
-			
-		}
-	};
-});
+    .directive('attDrawer', function($rootScope) {
+        return {
+            restrict: 'E',
+            templateUrl: '/templates/attDrawer.html',
+            transclude: true,
+            link: function (scope, element, attrs) {
 
+                scope.closeDrawer = function() {
+                    $rootScope.showDrawer = false;
+                };
+
+            }
+        };
+    });
+
+	
 angular.module('connectedCarSDK.attDropdown', [])
+
 .directive('attDropdown', function ($timeout) {
     return {
         restrict: 'E',
@@ -501,6 +495,7 @@ angular.module('connectedCarSDK.attDropdown', [])
     };
 });
 
+
 angular.module('connectedCarSDK.attHeader', [])
   .directive('attHeader', function () {
     return {
@@ -508,8 +503,8 @@ angular.module('connectedCarSDK.attHeader', [])
         templateUrl: '/templates/attHeader.html',
         replace: true,
         scope: {
-            appName:  '@',
-            currentItem: '@',
+            appName:  '=',
+            currentItem: '=',
             appImage: '@'
         },
         link: function (scope, element, attrs) {
@@ -517,96 +512,103 @@ angular.module('connectedCarSDK.attHeader', [])
     };
   });
 
-
 angular.module('connectedCarSDK.attListView', [])
-.directive('attListView', function() {
-	return {
-		restrict: 'E',
-		templateUrl: '/templates/attListView.html',
-		replace: true,
-		
-		scope: {
-			items: '=',         // list of objects to bind {text, desc, selected}
-			title: '=',         // string
-			multiSelect: '='    // true/false
-		},
-		link: function (scope, element, attrs) {
+    .directive('attListView', function() {
+        return {
+            restrict: 'E',
+            templateUrl: '/templates/attListView.html',
+            replace: true,
+            
+            scope: {
+                items: '=',         // list of objects to bind {text, desc, selected}
+                title: '=',         // string
+                multiSelect: '='    // true/false
+            },
+            link: function (scope, element, attrs) {
 
-			scope.onItemClick = function(item) {
+                scope.onItemClick = function(item) {
 
-				console.log("Selected item ", item);
+                    console.log("Selected item ", item);
 
-				if (item.selected) {
-					item.selected = false;
-				} else {
-					if (scope.items) {
-						scope.items.forEach(function(i) {
-							if (i == item) {
-								i.selected = true;
-							} else {
-								if (scope.multiSelect != true) {
-									i.selected = false;
-								}
-							}
-						});
-					}
-				}
-			};
+                    if (item.selected) {
+                        item.selected = false;
+                    } else {
+                        if (scope.items) {
+                            scope.items.forEach(function(i) {
+                                if (i == item) {
+                                    i.selected = true;
+                                } else {
+                                    if (scope.multiSelect != true) {
+                                        i.selected = false;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                };
 
-		}
-	};
-});
-
+            }
+        };
+    });
+	
+	
 angular.module('connectedCarSDK.attLoader', [])
-.directive('attLoader', ['$http', function ($http) {
-  return {
-	  restrict: 'E',
-	  replace: true,
-	  templateUrl: '/templates/attLoader.html',
-	  link: function (scope, element, attrs) {
+  .directive('attLoader', ['$http', function ($http) {
+      return {
+          restrict: 'E',
+          replace: true,
+          templateUrl: '/templates/attLoader.html',
+          link: function (scope, element, attrs) {
 
-		  scope.isLoading = function () {
-			  return $http.pendingRequests.length > 0;
-		  };
+              scope.isLoading = function () {
+                  return $http.pendingRequests.length > 0;
+              };
 
-		  scope.$watch(scope.isLoading, function (v) {
-			  if (v) {
-				  element.css("display", "block");
-			  } else {
-				  element.css("display", "none");
-			  }
-		  });
+              scope.$watch(scope.isLoading, function (v) {
+                  if (v) {
+                      element.css("display", "block");
+                  } else {
+                      element.css("display", "none");
+                  }
+              });
 
-	  }
-  };
-}]);
+          }
+      };
+  }]);
 
+  
 angular.module('connectedCarSDK.attMenu', [])
-.directive('attMenu', function () {
-  return {
-	  templateUrl: '/templates/attMenu.html',
-	  restrict: 'E',
-	  replace: true,
-	  scope: {
-		  items: '=',         // list of objects to bind {text, desc, selected}
-		  title: '='          // string
-	  },
-	  link: function (scope, element, attrs) {
-	      scope.onItemClick = function (item) {
-	          if (scope.items) {
-	              scope.items.forEach(function (i) {
-	                  if (i == item)
-	                      i.selected = true;
-	                  else i.selected = false;
-	              });
-	          }
-	      };
-	  }
-  };
-});
+  .directive('attMenu', function () {
+      return {
+          templateUrl: '/templates/attMenu.html',
+          restrict: 'E',
+          replace: true,
+          scope: {
+              items: '=',         // list of objects to bind {text, desc, selected}
+              title: '='          // string
+          },
+          link: function (scope, element, attrs) {
+
+              scope.onItemClick = function (item) {
+                  if (scope.items) {
+                      scope.items.forEach(function (i) {
+                          if (i == item)
+                              i.selected = true;
+                          else i.selected = false;
+                      });
+                  }
+              };
+
+          }
+      };
+  });
 
 angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
-.factory('$$stackedMap', function () {
+  /**
+ * A helper, internal data structure that acts as a map but also allows getting / removing
+ * elements in the LIFO order
+ */
+  .factory('$$stackedMap', function () {
       return {
           createNew: function () {
               var stack = [];
@@ -655,7 +657,11 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
-.directive('modalBackdrop', ['$timeout', function ($timeout) {
+
+/**
+ * A helper directive for the $modal service. It creates a backdrop element.
+ */
+  .directive('modalBackdrop', ['$timeout', function ($timeout) {
       return {
           restrict: 'EA',
           replace: true,
@@ -672,7 +678,8 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
-.directive('modalWindow', ['$modalStack', '$timeout', function ($modalStack, $timeout) {
+
+  .directive('modalWindow', ['$modalStack', '$timeout', function ($modalStack, $timeout) {
       return {
           restrict: 'EA',
           scope: {
@@ -716,7 +723,8 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
-.directive('modalTransclude', function () {
+
+  .directive('modalTransclude', function () {
       return {
           link: function ($scope, $element, $attrs, controller, $transclude) {
               $transclude($scope.$parent, function (clone) {
@@ -726,7 +734,8 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
-.factory('$modalStack', ['$transition', '$timeout', '$document', '$compile', '$rootScope', '$$stackedMap',
+
+  .factory('$modalStack', ['$transition', '$timeout', '$document', '$compile', '$rootScope', '$$stackedMap',
     function ($transition, $timeout, $document, $compile, $rootScope, $$stackedMap) {
 
         var OPENED_MODAL_CLASS = 'modal-open';
@@ -893,7 +902,8 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
 
         return $modalStack;
     }])
-.provider('$modal', function () {
+
+  .provider('$modal', function () {
 
       var $modalProvider = {
           options: {
@@ -1008,11 +1018,13 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
       return $modalProvider;
   });
 
+  
 angular.module('connectedCarSDK.attProgressBar', [])
-.constant('progressConfig', {
+ .constant('progressConfig', {
      animate: true,
      max: 100
  })
+
 .controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function ($scope, $attrs, progressConfig) {
     var self = this,
         animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
@@ -1041,6 +1053,7 @@ angular.module('connectedCarSDK.attProgressBar', [])
         this.bars.splice(this.bars.indexOf(bar), 1);
     };
 }])
+
 .directive('attProgressBar', function () {
     return {
         restrict: 'EA',
@@ -1057,6 +1070,7 @@ angular.module('connectedCarSDK.attProgressBar', [])
         }
     };
 });
+
 
 angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
 .directive('attTab', ['$parse', function ($parse) {
@@ -1154,6 +1168,7 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
     }
 });
 
+
 angular.module('connectedCarSDK.attTabset', [])
 .controller('TabsetController', [
     '$scope', function($scope) {
@@ -1212,8 +1227,9 @@ angular.module('connectedCarSDK.attTabset', [])
     };
 });
 
+
 angular.module('connectedCarSDK.attToggleSwitch', [])
-.directive('attToggleSwitch', function () {
+  .directive('attToggleSwitch', function () {
       return {
           templateUrl: '/templates/attToggleSwitch.html',
           restrict: 'E',
@@ -1234,193 +1250,3 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
           }
       };
   });
-
-
-angular.module("/templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attAlert.html",
-    "<div class=\"att-alert\" ng-class=\"type && 'alert-' + type\" ng-hide=\"closeAlert\" ng-click=\"close()\">\n" +
-    "    <div class=\"content\">\n" +
-    "        <h1 class=\"alert-heading\" ng-bind=\"title\"></h1>\n" +
-    "        <p class=\"alert-text\" ng-bind=\"text\"></p>\n" +
-    "    </div>\n" +
-    "    <div class=\"alert-button\">\n" +
-    "        <div class=\"btn btn-default\" ng-show=\"showConfirmationBtn\" ng-click=\"onClick()\">{{buttonText}}</div>\n" +
-    "    </div>\n" +
-    "    <span class=\"alert-icon {{type}}\" ng-show=\"showIcon && !showConfirmationBtn\">\n" +
-    "        <i class=\"fa fa-ils\"></i>\n" +
-    "    </span>\n" +
-    "</div>");
-}]);
-
-angular.module("/templates/attBadge.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attBadge.html",
-    "<span class=\"att-badge\" ng-class=\"type && 'badge-' + type\">\n" +
-    "    1\n" +
-    "</span>");
-}]);
-
-angular.module("/templates/attDrawer.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attDrawer.html",
-    "<div ng-show=\"showDrawer\">\n" +
-    "    <div ng-transclude></div>\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attDropdown.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attDropdown.html",
-    "<div class=\"att-dropdown\">\n" +
-    "    <a class=\"selected\" ng-bind=\"defaultOption\" ng-click=\"show=!show\"></a>\n" +
-    "    <span class=\"icon\"><i class=\"fa fa-bars\"></i></span>\n" +
-    "    <div class=\"screen\" ng-show=\"show\">\n" +
-    "        <button ng-show=\"closeButton\" type=\"button\" class=\"btn btn-circ medium btn-close-list\" ng-click=\"show=false\">X</button>\n" +
-    "        <ul class=\"list\">\n" +
-    "            <li ng-repeat=\"item in items\" ng-click=\"selectItem(item)\">{{item.text}}</li>\n" +
-    "\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attHeader.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attHeader.html",
-    "<div class=\"header\">\n" +
-    "    <h3 class=\"active-screen\"><i class=\"fa fa-bars separate-right-10\"></i>{{currentItem}}</h3>\n" +
-    "    <div class=\"app-branding\">\n" +
-    "        <img ng-src=\"{{appImage}}\">\n" +
-    "        <span ng-bind=\"appName\"></span>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attListView.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attListView.html",
-    "<div class=\"att-list-view\">\n" +
-    "    <h3 class=\"active-screen\" ng-bind=\"title\"></h3>\n" +
-    "    <ul class=\"list\">\n" +
-    "        <li ng-repeat=\"item in items\"\n" +
-    "            ng-class=\"{active: item.selected}\"\n" +
-    "            ng-click=\"onItemClick(item)\">\n" +
-    "            {{item.text}}\n" +
-    "            <span ng-bind=\"item.desc\"></span>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "</div>");
-}]);
-
-angular.module("/templates/attLoader.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attLoader.html",
-    "<div style=\"display:none;\">Loader goes here...</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attMenu.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attMenu.html",
-    "<div class=\"att-list-view\">\n" +
-    "    <h3 class=\"active-screen\" ng-bind=\"title\"></h3>\n" +
-    "    <ul class=\"list\">\n" +
-    "        <li ng-repeat=\"item in items\"\n" +
-    "            ng-class=\"{active: item.selected}\"\n" +
-    "            ng-click=\"onItemClick(item)\">\n" +
-    "            <a ng-href=\"{{item.href}}\">{{item.text}}\n" +
-    "            <span ng-bind=\"item.desc\"></span>\n" +
-    "            </a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attProgressBar.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attProgressBar.html",
-    "<div class=\"att-progress-bar\">\n" +
-    "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\">\n" +
-    "      <span class=\"label\" ng-transclude></span>\n" +
-    "  </div>\n" +
-    "    <span class=\"value\">{{value}}</span>\n" +
-    "</div>");
-}]);
-
-angular.module("/templates/attToggleSwitch.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attToggleSwitch.html",
-    "<div class=\"att-toggle-switch\">\n" +
-    "    <div ng-class=\"{on: ngModel == true , off: ngModel == false}\">\n" +
-    "        <div class=\"btn-group\">\n" +
-    "            <label class=\"btn btn-primary\" ng-model=\"ngModel\" ng-click=\"change(false)\" btn-radio=\"OFF\">OFF</label>\n" +
-    "            <label class=\"btn btn-primary\" ng-model=\"ngModel\" ng-click=\"change(true)\" btn-radio=\"ON\">ON</label>            \n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</div>");
-}]);
-
-angular.module("/templates/carousel/carousel.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/carousel/carousel.html",
-    "<div class=\"att-carousel\">\n" +
-    "    <div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\" ng-swipe-right=\"prev()\" ng-swipe-left=\"next()\">\n" +
-    "        <ol class=\"carousel-indicators\" ng-show=\"slides.length > 1\">\n" +
-    "            <li ng-repeat=\"slide in slides track by $index\" ng-class=\"{active: isActive(slide)}\" ng-click=\"select(slide)\"></li>\n" +
-    "        </ol>\n" +
-    "        <div class=\"carousel-inner\" ng-transclude></div>\n" +
-    "        <a class=\"left carousel-control\" ng-click=\"prev()\" ng-show=\"slides.length > 1\"><span class=\"fa fa-chevron-left\"></span></a>\n" +
-    "        <a class=\"right carousel-control\" ng-click=\"next()\" ng-show=\"slides.length > 1\"><span class=\"fa fa-chevron-right\"></span></a>\n" +
-    "    </div>\n" +
-    "</div>");
-}]);
-
-angular.module("/templates/carousel/slide.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/carousel/slide.html",
-    "<div ng-class=\"{\n" +
-    "    'active': leaving || (active && !entering),\n" +
-    "    'prev': (next || active) && direction=='prev',\n" +
-    "    'next': (next || active) && direction=='next',\n" +
-    "    'right': direction=='prev',\n" +
-    "    'left': direction=='next'\n" +
-    "  }\" class=\"item text-center\" ng-transclude></div>");
-}]);
-
-angular.module("/templates/modal/backdrop.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/modal/backdrop.html",
-    "<div class=\"modal-backdrop fade {{ backdropClass }}\"\n" +
-    "    ng-class=\"{in: animate}\"\n" +
-    "    ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\">\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/modal/window.html",
-    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
-    "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
-    "        <div class=\"modal-content\" modal-transclude></div>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/tabs/attTab.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/tabs/attTab.html",
-    "<li ng-class=\"{active: active, disabled: disabled}\">\n" +
-    "    <a ng-click=\"select()\" tab-heading-transclude>{{heading}}</a>\n" +
-    "</li>\n" +
-    "");
-}]);
-
-angular.module("/templates/tabs/attTabset.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/tabs/attTabset.html",
-    "<div class=\"att-tabs\">\n" +
-    "    <div class=\"tab-content\">\n" +
-    "        <div class=\"tab-pane\"\n" +
-    "             ng-repeat=\"tab in tabs\"\n" +
-    "             ng-class=\"{active: tab.active}\"\n" +
-    "             tab-content-transclude=\"tab\">\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <ul class=\"nav\" ng-class=\"{'nav-stacked': vertical, 'top': topPosition}\" ng-transclude></ul>\n" +
-    "    <span id=\"justify\"></span> <!-- Important for alignment - do not remove -->\n" +
-    "</div>\n" +
-    "\n" +
-    "");
-}]);
-

@@ -169,6 +169,7 @@ angular.module('connectedCarSDK.attAlert', [])
         }
     ]);
 
+
 angular.module('connectedCarSDK.attBadge', [])
   .directive('attBadge', function () {
       return {
@@ -184,14 +185,16 @@ angular.module('connectedCarSDK.attBadge', [])
   });
 
 angular.module('connectedCarSDK.attButtons', [])
-.constant('buttonConfig', {
+  .constant('buttonConfig', {
       activeClass: 'active',
       toggleEvent: 'click'
   })
+
 .controller('ButtonsController', ['buttonConfig', function (buttonConfig) {
     this.activeClass = buttonConfig.activeClass || 'active';
     this.toggleEvent = buttonConfig.toggleEvent || 'click';
 }])
+
 .directive('attBtnRadio', function () {
     return {
         require: ['attBtnRadio', 'ngModel'],
@@ -218,6 +221,7 @@ angular.module('connectedCarSDK.attButtons', [])
         }
     };
 })
+
 .directive('attBtnCheckbox', function () {
     return {
         require: ['attBtnCheckbox', 'ngModel'],
@@ -475,8 +479,10 @@ angular.module('connectedCarSDK.attDrawer', [])
             }
         };
     });
+
 	
 angular.module('connectedCarSDK.attDropdown', [])
+
 .directive('attDropdown', function ($timeout) {
     return {
         restrict: 'E',
@@ -507,6 +513,7 @@ angular.module('connectedCarSDK.attDropdown', [])
         }
     };
 });
+
 
 angular.module('connectedCarSDK.attHeader', [])
   .directive('attHeader', function () {
@@ -562,7 +569,8 @@ angular.module('connectedCarSDK.attListView', [])
             }
         };
     });
-
+	
+	
 angular.module('connectedCarSDK.attLoader', [])
   .directive('attLoader', ['$http', function ($http) {
       return {
@@ -587,6 +595,7 @@ angular.module('connectedCarSDK.attLoader', [])
       };
   }]);
 
+  
 angular.module('connectedCarSDK.attMenu', [])
   .directive('attMenu', function () {
       return {
@@ -667,6 +676,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
+
 /**
  * A helper directive for the $modal service. It creates a backdrop element.
  */
@@ -687,6 +697,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
+
   .directive('modalWindow', ['$modalStack', '$timeout', function ($modalStack, $timeout) {
       return {
           restrict: 'EA',
@@ -731,6 +742,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
+
   .directive('modalTransclude', function () {
       return {
           link: function ($scope, $element, $attrs, controller, $transclude) {
@@ -741,6 +753,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
+
   .factory('$modalStack', ['$transition', '$timeout', '$document', '$compile', '$rootScope', '$$stackedMap',
     function ($transition, $timeout, $document, $compile, $rootScope, $$stackedMap) {
 
@@ -908,6 +921,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
 
         return $modalStack;
     }])
+
   .provider('$modal', function () {
 
       var $modalProvider = {
@@ -1023,6 +1037,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
       return $modalProvider;
   });
 
+  
 angular.module('connectedCarSDK.attProgressBar', [])
  .constant('progressConfig', {
      animate: true,
@@ -1074,6 +1089,7 @@ angular.module('connectedCarSDK.attProgressBar', [])
         }
     };
 });
+
 
 angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
 .directive('attTab', ['$parse', function ($parse) {
@@ -1171,6 +1187,7 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
     }
 });
 
+
 angular.module('connectedCarSDK.attTabset', [])
 .controller('TabsetController', [
     '$scope', function($scope) {
@@ -1229,6 +1246,7 @@ angular.module('connectedCarSDK.attTabset', [])
     };
 });
 
+
 angular.module('connectedCarSDK.attToggleSwitch', [])
   .directive('attToggleSwitch', function () {
       return {
@@ -1263,7 +1281,7 @@ angular.module("/templates/attAlert.html", []).run(["$templateCache", function($
     "        <div class=\"btn btn-default\" ng-show=\"showConfirmationBtn\" ng-click=\"onClick()\">{{buttonText}}</div>\n" +
     "    </div>\n" +
     "    <span class=\"alert-icon {{type}}\" ng-show=\"showIcon && !showConfirmationBtn\">\n" +
-    "        <i class=\"fa fa-ils\"></i>\n" +
+    "        <i class=\"fa fa-info-circle\"></i>\n" +
     "    </span>\n" +
     "</div>");
 }]);
@@ -1406,16 +1424,16 @@ angular.module("/templates/modal/backdrop.html", []).run(["$templateCache", func
     "");
 }]);
 
-angular.module("/templates/modal/window.html", []).run(["$templateCache", function ($templateCache) {
-    $templateCache.put("/templates/modal/window.html",
-      "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
-      "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
-      "        <div class=\"att-modal\">\n" +
-      "            <div class=\"modal-content\" modal-transclude></div>\n" +
-      "        </div>\n" +
-      "    </div>\n" +
-      "</div>\n" +
-      "");
+angular.module("/templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("/templates/modal/window.html",
+    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
+    "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
+    "        <div class=\"att-modal\">\n" +
+    "            <div class=\"modal-content\" modal-transclude></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("/templates/tabs/attTab.html", []).run(["$templateCache", function($templateCache) {
@@ -1441,4 +1459,3 @@ angular.module("/templates/tabs/attTabset.html", []).run(["$templateCache", func
     "</div>\n" +
     "");
 }]);
-
