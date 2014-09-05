@@ -176,3 +176,11 @@ h3.main-subtitle {
 .att-tabs .tab-content {
 	padding: 0 24px;
 }
+
+.att-menu ul.list li.active:before {
+	background: rgba(240, 100, 20, 1);
+}
+
+.att-drawer.visible {
+	height: 768px;
+}
