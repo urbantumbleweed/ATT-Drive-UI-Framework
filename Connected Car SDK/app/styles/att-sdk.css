@@ -2699,7 +2699,7 @@ input[type="radio"]:checked + label span {
 .att-header {
   color: #ccc;
   display: block;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   position: absolute;
   top: 0;
   width: 100%;
