@@ -159,7 +159,7 @@ pre{
 }
 
 /* Put a border around prettyprinted code snippets. */
-pre.prettyprint { padding: 2px; border: 1px solid #888 !important; }
+pre.prettyprint { padding: 2px; border: 0px solid #888 !important; }
 
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums { margin-top: 0; margin-bottom: 0 !important; } /* IE indents via margin-left */
@@ -188,7 +188,9 @@ li.L9 { background: #eee }
     padding-left: 0px; 
     margin-left: 0;
 }
-
+.tab-pane {
+padding: 10px;
+}
 @media (max-width: 1000px) {
 .logo img {
     height: 32px;

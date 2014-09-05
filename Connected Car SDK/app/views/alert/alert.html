@@ -1,4 +1,5 @@
-﻿<div class="container" id="main-container">
+<div class="container" id="main-container">
+    <div class="padding">
     <h4>(click "Show Alert")</h4>
     <att-alert ng-repeat="alert in alerts"
         type="alert.type"
@@ -11,6 +12,7 @@
         title="alert.title"
         text="alert.text">
     </att-alert>
+    </div>
 </div>
 
 
@@ -48,7 +50,7 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <att-dynamic-content data-url="/views/alert/alert.html" linenums="true"></att-dynamic-content>
+            <att-dynamic-content data-url="/templates/attAlert.html" linenums="true"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="JavaScript">
