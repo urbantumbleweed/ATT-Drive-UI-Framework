@@ -25,15 +25,16 @@ app.config(function($routeProvider) {
 app.run(function($rootScope) {
 
     $rootScope.showDrawer = false;
-    
+
+    $rootScope.$on('$routeChangeSuccess',
+        function (event, next, current) {
+            $rootScope.showDrawer = false;
+        });
+
     $rootScope.appLinks = [
         { text: 'Forecast', desc: 'Watch daily forecast', href: '#/', selected: true },
         { text: 'About', desc: 'Monitor hourly forecast', href: '#/about', selected: false },
         { text: 'Settings', desc: 'Change app settings', href: '#/settings', selected: false },
     ];
-
-    $rootScope.$on('$routeChangeSuccess',
-        function(event, next, current) {
-            $rootScope.showDrawer = false;
-        });
+    
 });
