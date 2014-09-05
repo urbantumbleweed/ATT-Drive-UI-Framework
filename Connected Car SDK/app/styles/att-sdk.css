@@ -2355,7 +2355,7 @@ select[multiple].input-lg {
   padding: 0 20px;
   border: 2px solid white;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   color: white;
   cursor: pointer;
   margin: 0;
@@ -2609,7 +2609,10 @@ input[type="radio"]:checked + label span {
   line-height: 1;
 }
 .att-modal .modal-body {
-  margin: 20px 0;
+  margin: 20px 0 30px 0;
+}
+.att-modal .btn:not(:last-child) {
+  margin-right: 20px;
 }
 .att-modal.modal-backdrop {
   position: absolute;
