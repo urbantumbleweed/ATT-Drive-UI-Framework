@@ -230,11 +230,11 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 30px;
+  font-size: 24px;
 }
 h4,
 .h4 {
-  font-size: 24px;
+  font-size: 18px;
 }
 h5,
 .h5 {
@@ -2642,4 +2642,94 @@ input[type="radio"]:checked + label span {
 }
 .att-badge.badge-danger {
   background-color: #e23232;
+}
+.att-menu {
+  /* LISTS/MENUS
+---------------------------------------------------------------- */
+  width: 768px;
+  height: 470px;
+  background: rgba(15, 15, 15, 0.9);
+  display: block;
+  padding: 25px 24px 35px 24px;
+  overflow-y: scroll;
+  position: relative;
+}
+.att-menu h3.active-screen {
+  margin: 0;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-family: 'omnes_attmedium', sans-serif;
+  text-transform: uppercase;
+}
+.att-menu ul.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 36px;
+}
+.att-menu ul.list li {
+  margin-bottom: 40px;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+}
+.att-menu ul.list li a {
+  color: #ffffff;
+}
+.att-menu ul.list li a:hover {
+  text-decoration: none;
+}
+.att-menu ul.list li span {
+  display: block;
+  color: #666;
+  font-size: 18px;
+}
+.att-menu ul.list li.active:before {
+  background: #067ab4;
+  height: 50px;
+  width: 8px;
+  content: "";
+  float: left;
+  position: relative;
+  left: -16px;
+  top: 5px;
+  margin-left: -8px;
+}
+.att-header {
+  color: #ccc;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+}
+.att-header .active-screen {
+  background-color: transparent;
+  position: relative;
+  float: left;
+  display: inline-block;
+  margin: 0;
+  font-size: 24px;
+}
+.att-header .active-screen #menu-icon {
+  margin-right: 10px;
+}
+.att-header .app-branding {
+  background-color: transparent;
+  position: relative;
+  float: right;
+  display: inline-block;
+  line-height: 1.25;
+}
+.att-header .app-branding .app-name {
+  position: relative;
+  float: right;
+}
+.att-header .app-branding .app-icon {
+  display: inline-block;
+  position: relative;
+  float: right;
+  width: 24px;
+  margin: 0px 10px;
 }
