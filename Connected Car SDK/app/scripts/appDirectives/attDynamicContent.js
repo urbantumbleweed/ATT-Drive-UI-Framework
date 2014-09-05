@@ -14,7 +14,8 @@ angular.module('connectedCarSDK.attDynamicContent', [])
           replace: true,
           scope: {
               markdown: "=",
-              linenums: "="
+              linenums: "=",
+              selector: "="
           },
           link: function (scope, element, attrs) {
 
@@ -26,6 +27,11 @@ angular.module('connectedCarSDK.attDynamicContent', [])
 
                   $http.get(url).success(function (data) {
                       scope.data = data;
+
+                      if (scope.selector)
+                      {
+                            var a = element.find(scope.selector);
+                      }
 
                       if (scope.markdown) // convert markdown to HTML
                       {
