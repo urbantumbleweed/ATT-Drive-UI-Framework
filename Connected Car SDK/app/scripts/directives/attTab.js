@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
-  .directive('attTab', ['$parse', function ($parse) {
+.directive('attTab', ['$parse', function ($parse) {
       return {
           require: '^attTabset',
           restrict: 'EA',
@@ -51,7 +51,6 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
           }
       };
   }])
-
 .directive('tabHeadingTransclude', [function () {
     return {
         restrict: 'A',
@@ -66,7 +65,6 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
         }
     };
 }])
-
 .directive('tabContentTransclude', function () {
     return {
         restrict: 'A',

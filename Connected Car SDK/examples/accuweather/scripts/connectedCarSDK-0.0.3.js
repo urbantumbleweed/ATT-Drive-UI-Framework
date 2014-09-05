@@ -1,270 +1,242 @@
-'use strict';
+angular.module('connectedCarSDK', [
+	'connectedCarSdk.transition',
+	'connectedCarSDK.attAlert',
+	'connectedCarSDK.attBadge',
+	'connectedCarSDK.attButtons',
+	'connectedCarSDK.attCarousel',
+	'connectedCarSDK.attDrawer',
+	'connectedCarSDK.attDropdown',
+	'connectedCarSDK.attHeader',
+	'connectedCarSDK.attListView',
+	'connectedCarSDK.attLoader',
+	'connectedCarSDK.attMenu',
+	'connectedCarSDK.attModal',
+	'connectedCarSDK.attProgressBar',
+	'connectedCarSDK.attTab',
+	'connectedCarSDK.attTabset',
+	'connectedCarSDK.attToggleSwitch']);
 
-/**
- * @ngdoc directive
- * @name connectedCarSDK.toggleSwitch.directive:attToggleSwitch
- * @description
- * # attToggleSwitch
- */
-angular.module('connectedCarSDK.attToggleSwitch', [])
-  .directive('attToggleSwitch', function () {
+angular.module('connectedCarSdk.transition', [])
+.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q, $timeout, $rootScope) {
+
+    var $transition = function (element, trigger, options) {
+        options = options || {};
+        var deferred = $q.defer();
+        var endEventName = $transition[options.animation ? 'animationEndEventName' : 'transitionEndEventName'];
+
+        var transitionEndHandler = function (event) {
+            $rootScope.$apply(function () {
+                element.unbind(endEventName, transitionEndHandler);
+                deferred.resolve(element);
+            });
+        };
+
+        if (endEventName) {
+            element.bind(endEventName, transitionEndHandler);
+        }
+
+        // Wrap in a timeout to allow the browser time to update the DOM before the transition is to occur
+        $timeout(function () {
+            if (angular.isString(trigger)) {
+                element.addClass(trigger);
+            } else if (angular.isFunction(trigger)) {
+                trigger(element);
+            } else if (angular.isObject(trigger)) {
+                element.css(trigger);
+            }
+            //If browser does not support transitions, instantly resolve
+            if (!endEventName) {
+                deferred.resolve(element);
+            }
+        });
+
+        // Add our custom cancel function to the promise that is returned
+        // We can call this if we are about to run a new transition, which we know will prevent this transition from ending,
+        // i.e. it will therefore never raise a transitionEnd event for that transition
+        deferred.promise.cancel = function () {
+            if (endEventName) {
+                element.unbind(endEventName, transitionEndHandler);
+            }
+            deferred.reject('Transition cancelled');
+        };
+
+        return deferred.promise;
+    };
+
+    // Work out the name of the transitionEnd event
+    var transElement = document.createElement('trans');
+    var transitionEndEventNames = {
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'transitionend',
+        'OTransition': 'oTransitionEnd',
+        'transition': 'transitionend'
+    };
+    var animationEndEventNames = {
+        'WebkitTransition': 'webkitAnimationEnd',
+        'MozTransition': 'animationend',
+        'OTransition': 'oAnimationEnd',
+        'transition': 'animationend'
+    };
+    function findEndEventName(endEventNames) {
+        for (var name in endEventNames) {
+            if (transElement.style[name] !== undefined) {
+                return endEventNames[name];
+            }
+        }
+    }
+    $transition.transitionEndEventName = findEndEventName(transitionEndEventNames);
+    $transition.animationEndEventName = findEndEventName(animationEndEventNames);
+    return $transition;
+}]);
+
+angular.module('connectedCarSDK.attAlert', [])
+    .directive('attAlert', [
+        '$timeout', function($timeout) {
+
+            return {
+                restrict: 'AE',
+                templateUrl: '/templates/attAlert.html',
+                transclude: true,
+                replace: true,
+                scope: {
+                    type: '=',                  // info, success, danger
+                    showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
+                    showConfirmationBtn: '=',   // true/false (takes precedence over icon)
+                    buttonText: '=',            // string
+                    onClick: '&',               // function/callback for confirmation button click
+                    onClose: '&',               // function/callback for when the alert is closed
+                    autoCloseInterval: '=',     // in miliseconds
+                    title: '=',                 // string
+                    text: '='                   // string
+                },
+                link: function(scope, element, attrs) {
+
+                    console.log('Show Confirmation Button', scope.showConfirmationBtn);
+                    console.log('Button Text', scope.buttonText);
+                    console.log('Alert Text', scope.text);
+
+                    var timeoutPromise;
+                    if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
+
+                        timeoutPromise = $timeout(function() {
+
+                            scope.closeAlert = true;
+                            scope.close();
+
+                        }, scope.autoCloseInterval);
+
+                    }
+
+                    scope.close = function () {
+
+                        // if there is no confirmation button
+                        // tapping anywhere on the alert will close the alert
+                        // otherwise, you must dismiss the alert by clicking
+                        // on the confirmation button
+                        if (scope.showConfirmationBtn != true) {
+
+                            if (timeoutPromise)
+                                $timeout.cancel(timeoutPromise);
+
+                            scope.closeAlert = true;
+                            scope.onClose();
+
+                        }
+                    };
+
+                }
+            };
+
+        }
+    ]);
+
+angular.module('connectedCarSDK.attBadge', [])
+  .directive('attBadge', function () {
       return {
-          templateUrl: '/templates/attToggleSwitch.html',
+          templateUrl: '/templates/attBadge.html',
           restrict: 'E',
+          replace: true,
           scope: {
-              ngModel: '='
+              value: "@"
           },
-          require: '^ngModel',
           link: function (scope, element, attrs) {
-
-              if (angular.isDefined(attrs.disabled)) {
-                  element.find("label").attr("disabled", "disabled");
-              }
-
-              scope.change = function(enabled) {
-                  scope.ngModel = enabled;
-              };
-
           }
       };
   });
 
-'use strict';
-
-angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
-  .directive('attTab', ['$parse', function ($parse) {
-      return {
-          require: '^attTabset',
-          restrict: 'EA',
-          replace: true,
-          templateUrl: '/templates/tabs/attTab.html',
-          transclude: true,
-          scope: {
-              active: '=?',
-              heading: '@',
-              onSelect: '&select', //This callback is called in contentHeadingTransclude
-              //once it inserts the tab's content into the dom
-              onDeselect: '&deselect'
-          },
-          controller: function () {
-              //Empty controller so other directives can require being 'under' a tab
-          },
-          compile: function (elm, attrs, transclude) {
-              return function postLink(scope, elm, attrs, tabsetCtrl) {
-                  scope.$watch('active', function (active) {
-                      if (active) {
-                          tabsetCtrl.select(scope);
-                      }
-                  });
-
-                  scope.disabled = false;
-                  if (attrs.disabled) {
-                      scope.$parent.$watch($parse(attrs.disabled), function (value) {
-                          scope.disabled = !!value;
-                      });
-                  }
-
-                  scope.select = function () {
-                      if (!scope.disabled) {
-                          scope.active = true;
-                      }
-                  };
-
-                  tabsetCtrl.addTab(scope);
-                  scope.$on('$destroy', function () {
-                      tabsetCtrl.removeTab(scope);
-                  });
-
-                  //We need to transclude later, once the content container is ready.
-                  //when this link happens, we're inside a tab heading.
-                  scope.$transcludeFn = transclude;
-              };
-          }
-      };
-  }])
-
-.directive('tabHeadingTransclude', [function () {
+angular.module('connectedCarSDK.attButtons', [])
+.constant('buttonConfig', {
+      activeClass: 'active',
+      toggleEvent: 'click'
+  })
+.controller('ButtonsController', ['buttonConfig', function (buttonConfig) {
+    this.activeClass = buttonConfig.activeClass || 'active';
+    this.toggleEvent = buttonConfig.toggleEvent || 'click';
+}])
+.directive('attBtnRadio', function () {
     return {
-        restrict: 'A',
-        require: '^attTab',
-        link: function (scope, elm, attrs, tabCtrl) {
-            scope.$watch('headingElement', function updateHeadingElement(heading) {
-                if (heading) {
-                    elm.html('');
-                    elm.append(heading);
+        require: ['attBtnRadio', 'ngModel'],
+        controller: 'ButtonsController',
+        link: function (scope, element, attrs, ctrls) {
+            var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
+
+            //model -> UI
+            ngModelCtrl.$render = function () {
+                element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, scope.$eval(attrs.attBtnRadio)));
+            };
+
+            //ui->model
+            element.bind(buttonsCtrl.toggleEvent, function () {
+                var isActive = element.hasClass(buttonsCtrl.activeClass);
+
+                if (!isActive || angular.isDefined(attrs.uncheckable)) {
+                    scope.$apply(function () {
+                        ngModelCtrl.$setViewValue(isActive ? null : scope.$eval(attrs.attBtnRadio));
+                        ngModelCtrl.$render();
+                    });
                 }
             });
         }
     };
-}])
-
-.directive('tabContentTransclude', function () {
+})
+.directive('attBtnCheckbox', function () {
     return {
-        restrict: 'A',
-        require: '^attTabset',
-        link: function (scope, elm, attrs) {
-            var tab = scope.$eval(attrs.tabContentTransclude);
+        require: ['attBtnCheckbox', 'ngModel'],
+        controller: 'ButtonsController',
+        link: function (scope, element, attrs, ctrls) {
+            var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
 
-            //Now our tab is ready to be transcluded: both the tab heading area
-            //and the tab content area are loaded.  Transclude 'em both.
-            tab.$transcludeFn(tab.$parent, function (contents) {
-                angular.forEach(contents, function (node) {
-                    if (isTabHeading(node)) {
-                        //Let tabHeadingTransclude know.
-                        tab.headingElement = node;
-                    } else {
-                        elm.append(node);
-                    }
+            function getTrueValue() {
+                return getCheckboxValue(attrs.attBtnCheckboxTrue, true);
+            }
+
+            function getFalseValue() {
+                return getCheckboxValue(attrs.attBtnCheckboxFalse, false);
+            }
+
+            function getCheckboxValue(attributeValue, defaultValue) {
+                var val = scope.$eval(attributeValue);
+                return angular.isDefined(val) ? val : defaultValue;
+            }
+
+            //model -> UI
+            ngModelCtrl.$render = function () {
+                element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
+            };
+
+            //ui->model
+            element.bind(buttonsCtrl.toggleEvent, function () {
+                scope.$apply(function () {
+                    ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
+                    ngModelCtrl.$render();
                 });
             });
         }
     };
-    function isTabHeading(node) {
-        return node.tagName && (
-          node.hasAttribute('tab-heading') ||
-          node.hasAttribute('data-tab-heading') ||
-          node.tagName.toLowerCase() === 'tab-heading' ||
-          node.tagName.toLowerCase() === 'data-tab-heading'
-        );
-    }
 });
 
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.tabset.directive:attTabset
- * @description
- * # attTabset
- */
-angular.module('connectedCarSDK.attTabset', [])
-.controller('TabsetController', [
-    '$scope', function($scope) {
-        var ctrl = this,
-            tabs = ctrl.tabs = $scope.tabs = [];
-
-        ctrl.select = function(selectedTab) {
-            angular.forEach(tabs, function(tab) {
-                if (tab.active && tab !== selectedTab) {
-                    tab.active = false;
-                    tab.onDeselect();
-                }
-            });
-            selectedTab.active = true;
-            selectedTab.onSelect();
-        };
-
-        ctrl.addTab = function addTab(tab) {
-            tabs.push(tab);
-            // we can't run the select function on the first tab
-            // since that would select it twice
-            if (tabs.length === 1) {
-                tab.active = true;
-            } else if (tab.active) {
-                ctrl.select(tab);
-            }
-        };
-
-        ctrl.removeTab = function removeTab(tab) {
-            var index = tabs.indexOf(tab);
-            //Select a new tab if the tab to be removed is selected
-            if (tab.active && tabs.length > 1) {
-                //If this is the last tab, select the previous tab. else, the next tab.
-                var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
-                ctrl.select(tabs[newActiveIndex]);
-            }
-            tabs.splice(index, 1);
-        };
-    }
-])
-.directive('attTabset', function() {
-    return {
-        restrict: 'EA',
-        transclude: true,
-        replace: true,
-        scope: {
-            type: '@'
-        },
-        controller: 'TabsetController',
-        templateUrl: '/templates/tabs/attTabset.html',
-        link: function(scope, element, attrs) {
-            scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
-            scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
-            scope.topPosition = angular.isDefined(attrs.topPosition) ? scope.$parent.$eval(attrs.topPosition) : false;
-        }
-    };
-});
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.progressbar.directive:attProgressbar
- * @description
- * # attprogressbar
- */
-angular.module('connectedCarSDK.attProgressBar', [])
- .constant('progressConfig', {
-     animate: true,
-     max: 100
- })
-
-.controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function ($scope, $attrs, progressConfig) {
-    var self = this,
-        animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
-
-    this.bars = [];
-    $scope.max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : progressConfig.max;
-
-    this.addBar = function (bar, element) {
-        if (!animate) {
-            element.css({ 'transition': 'none' });
-        }
-
-        this.bars.push(bar);
-
-        bar.$watch('value', function (value) {
-            bar.percent = +(100 * value / $scope.max).toFixed(2);
-        });
-
-        bar.$on('$destroy', function () {
-            element = null;
-            self.removeBar(bar);
-        });
-    };
-
-    this.removeBar = function (bar) {
-        this.bars.splice(this.bars.indexOf(bar), 1);
-    };
-}])
-
-.directive('attProgressBar', function () {
-    return {
-        restrict: 'EA',
-        replace: true,
-        transclude: true,
-        controller: 'ProgressController',
-        scope: {
-            value: '=',
-            type: '@'
-        },
-        templateUrl: '/templates/attProgressBar.html',
-        link: function (scope, element, attrs, progressCtrl) {
-            progressCtrl.addBar(scope, angular.element(element.children()[0]));
-        }
-    };
-});
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.carousel.directive:attCarousel
- * @description
- * # attcarousel
- */
 angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
-  .controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
+.controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
       $animate.enabled(false);
       var self = this,
         slides = self.slides = $scope.slides = [],
@@ -428,7 +400,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
       };
 
   }])
-
 .directive('attCarousel', [function () {
     return {
         restrict: 'EA',
@@ -444,7 +415,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
         }
     };
 }])
-
 .directive('attSlide', function () {
     return {
         require: '^attCarousel',
@@ -471,167 +441,19 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
     };
 });
 
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSdk.alert.directive:attAlert
- * @description
- * # attAlert
- */
-angular.module('connectedCarSDK.attAlert', [])
-    .directive('attAlert', [
-        '$timeout', function($timeout) {
-
-            return {
-                restrict: 'AE',
-                templateUrl: '/templates/attAlert.html',
-                transclude: true,
-                replace: true,
-                scope: {
-                    type: '=',                  // info, success, danger
-                    showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
-                    showConfirmationBtn: '=',   // true/false (takes precedence over icon)
-                    buttonText: '=',            // string
-                    onClick: '&',               // function/callback for confirmation button click
-                    onClose: '&',               // function/callback for when the alert is closed
-                    autoCloseInterval: '=',     // in miliseconds
-                    title: '=',                 // string
-                    text: '='                   // string
-                },
-                link: function(scope, element, attrs) {
-
-                    console.log('Show Confirmation Button', scope.showConfirmationBtn);
-                    console.log('Button Text', scope.buttonText);
-                    console.log('Alert Text', scope.text);
-
-                    var timeoutPromise;
-                    if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
-
-                        timeoutPromise = $timeout(function() {
-
-                            scope.closeAlert = true;
-                            scope.close();
-
-                        }, scope.autoCloseInterval);
-
-                    }
-
-                    scope.close = function () {
-
-                        // if there is no confirmation button
-                        // tapping anywhere on the alert will close the alert
-                        // otherwise, you must dismiss the alert by clicking
-                        // on the confirmation button
-                        if (scope.showConfirmationBtn != true) {
-
-                            if (timeoutPromise)
-                                $timeout.cancel(timeoutPromise);
-
-                            scope.closeAlert = true;
-                            scope.onClose();
-
-                        }
-                    };
-
-                }
-            };
-
-        }
-    ]);
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.buttons.directive:attBtnRadio, attBtnCheckbox
- * @description
- * # attButtons
- */
-angular.module('connectedCarSDK.attButtons', [])
-  .constant('buttonConfig', {
-      activeClass: 'active',
-      toggleEvent: 'click'
-  })
-
-.controller('ButtonsController', ['buttonConfig', function (buttonConfig) {
-    this.activeClass = buttonConfig.activeClass || 'active';
-    this.toggleEvent = buttonConfig.toggleEvent || 'click';
-}])
-
-.directive('attBtnRadio', function () {
-    return {
-        require: ['attBtnRadio', 'ngModel'],
-        controller: 'ButtonsController',
-        link: function (scope, element, attrs, ctrls) {
-            var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
-
-            //model -> UI
-            ngModelCtrl.$render = function () {
-                element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, scope.$eval(attrs.attBtnRadio)));
-            };
-
-            //ui->model
-            element.bind(buttonsCtrl.toggleEvent, function () {
-                var isActive = element.hasClass(buttonsCtrl.activeClass);
-
-                if (!isActive || angular.isDefined(attrs.uncheckable)) {
-                    scope.$apply(function () {
-                        ngModelCtrl.$setViewValue(isActive ? null : scope.$eval(attrs.attBtnRadio));
-                        ngModelCtrl.$render();
-                    });
-                }
-            });
-        }
-    };
-})
-
-.directive('attBtnCheckbox', function () {
-    return {
-        require: ['attBtnCheckbox', 'ngModel'],
-        controller: 'ButtonsController',
-        link: function (scope, element, attrs, ctrls) {
-            var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
-
-            function getTrueValue() {
-                return getCheckboxValue(attrs.attBtnCheckboxTrue, true);
+angular.module('connectedCarSDK.attDrawer', [])
+    .directive('attDrawer', function() {
+        return {
+            restrict: 'E',
+            templateUrl: '/templates/attDrawer.html',
+            transclude: true,
+            link: function (scope, element, attrs) {
+                
             }
+        };
+    });
 
-            function getFalseValue() {
-                return getCheckboxValue(attrs.attBtnCheckboxFalse, false);
-            }
-
-            function getCheckboxValue(attributeValue, defaultValue) {
-                var val = scope.$eval(attributeValue);
-                return angular.isDefined(val) ? val : defaultValue;
-            }
-
-            //model -> UI
-            ngModelCtrl.$render = function () {
-                element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
-            };
-
-            //ui->model
-            element.bind(buttonsCtrl.toggleEvent, function () {
-                scope.$apply(function () {
-                    ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
-                    ngModelCtrl.$render();
-                });
-            });
-        }
-    };
-});
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.dropdown.directive:attDropdown
- * @description
- * # attDropdown
- */
 angular.module('connectedCarSDK.attDropdown', [])
-
 .directive('attDropdown', function ($timeout) {
     return {
         restrict: 'E',
@@ -662,68 +484,23 @@ angular.module('connectedCarSDK.attDropdown', [])
         }
     };
 });
-'use strict';
 
-/**
- * @ngdoc directive
- * @name connectedCarSDK.loader.directive:attLoader
- * @description
- * # attLoader
- */
-angular.module('connectedCarSDK.attLoader', [])
-  .directive('attLoader', ['$http', function ($http) {
-      return {
-          restrict: 'E',
-          replace: true,
-          templateUrl: '/templates/attLoader.html',
-          link: function (scope, element, attrs) {
-
-              scope.isLoading = function () {
-                  return $http.pendingRequests.length > 0;
-              };
-
-              scope.$watch(scope.isLoading, function (v) {
-                  if (v) {
-                      element.css("display", "block");
-                  } else {
-                      element.css("display", "none");
-                  }
-              });
-
-          }
-      };
-  }]);
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.badge.directive:attbadge
- * @description
- * # attBadge
- */
-angular.module('connectedCarSDK.attBadge', [])
-  .directive('attBadge', function () {
-      return {
-          templateUrl: '/templates/attBadge.html',
-          restrict: 'E',
-          replace: true,
-          scope: {
-              value: "@"
-          },
-          link: function (scope, element, attrs) {
-          }
-      };
+angular.module('connectedCarSDK.attHeader', [])
+  .directive('attHeader', function () {
+    return {
+        restrict: 'E',
+        templateUrl: '/templates/attHeader.html',
+        replace: true,
+        scope: {
+            appName:  '@',
+            currentItem: '@',
+            appImage: '@'
+        },
+        link: function (scope, element, attrs) {
+        }
+    };
   });
 
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSdkApp.directive:attlistview
- * @description
- * # attlistview
- */
 angular.module('connectedCarSDK.attListView', [])
     .directive('attListView', function() {
         return {
@@ -763,14 +540,56 @@ angular.module('connectedCarSDK.attListView', [])
         };
     });
 
-'use strict';
+angular.module('connectedCarSDK.attLoader', [])
+  .directive('attLoader', ['$http', function ($http) {
+      return {
+          restrict: 'E',
+          replace: true,
+          templateUrl: '/templates/attLoader.html',
+          link: function (scope, element, attrs) {
 
-/**
- * @ngdoc directive
- * @name connectedCarSDK.modal.directive:attModal
- * @description
- * # attModal
- */
+              scope.isLoading = function () {
+                  return $http.pendingRequests.length > 0;
+              };
+
+              scope.$watch(scope.isLoading, function (v) {
+                  if (v) {
+                      element.css("display", "block");
+                  } else {
+                      element.css("display", "none");
+                  }
+              });
+
+          }
+      };
+  }]);
+
+angular.module('connectedCarSDK.attMenu', [])
+  .directive('attMenu', function () {
+      return {
+          templateUrl: '/templates/attMenu.html',
+          restrict: 'E',
+          replace: true,
+          scope: {
+              items: '=',         // list of objects to bind {text, desc, selected}
+              title: '='          // string
+          },
+          link: function (scope, element, attrs) {
+
+              scope.onItemClick = function (item) {
+                  if (scope.items) {
+                      scope.items.forEach(function (i) {
+                          if (i == item)
+                              i.selected = true;
+                          else i.selected = false;
+                      });
+                  }
+              };
+
+          }
+      };
+  });
+
 angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
   /**
  * A helper, internal data structure that acts as a map but also allows getting / removing
@@ -825,7 +644,6 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
-
 /**
  * A helper directive for the $modal service. It creates a backdrop element.
  */
@@ -846,7 +664,6 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
-
   .directive('modalWindow', ['$modalStack', '$timeout', function ($modalStack, $timeout) {
       return {
           restrict: 'EA',
@@ -891,7 +708,6 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   }])
-
   .directive('modalTransclude', function () {
       return {
           link: function ($scope, $element, $attrs, controller, $transclude) {
@@ -902,7 +718,6 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           }
       };
   })
-
   .factory('$modalStack', ['$transition', '$timeout', '$document', '$compile', '$rootScope', '$$stackedMap',
     function ($transition, $timeout, $document, $compile, $rootScope, $$stackedMap) {
 
@@ -1070,7 +885,6 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
 
         return $modalStack;
     }])
-
   .provider('$modal', function () {
 
       var $modalProvider = {
@@ -1186,197 +1000,231 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
       return $modalProvider;
   });
 
-'use strict';
+angular.module('connectedCarSDK.attProgressBar', [])
+ .constant('progressConfig', {
+     animate: true,
+     max: 100
+ })
 
-/**
- * @ngdoc directive
- * @name connectedCarSdkApp.directive:attdrawer
- * @description
- * # attdrawer
- */
-angular.module('connectedCarSDK.attDrawer', [])
-    .directive('attDrawer', function() {
-        return {
-            restrict: 'E',
-            templateUrl: '/templates/attDrawer.html',
-            transclude: true,
-            link: function (scope, element, attrs) {
-                
-            }
-        };
-    });
+.controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function ($scope, $attrs, progressConfig) {
+    var self = this,
+        animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
 
-'use strict';
+    this.bars = [];
+    $scope.max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : progressConfig.max;
 
-/**
- * @ngdoc directive
- * @name connectedCarSDK.attMenu.directive:attMenu
- * @description
- * # attMenu
- */
-angular.module('connectedCarSDK.attMenu', [])
-  .directive('attMenu', function () {
+    this.addBar = function (bar, element) {
+        if (!animate) {
+            element.css({ 'transition': 'none' });
+        }
+
+        this.bars.push(bar);
+
+        bar.$watch('value', function (value) {
+            bar.percent = +(100 * value / $scope.max).toFixed(2);
+        });
+
+        bar.$on('$destroy', function () {
+            element = null;
+            self.removeBar(bar);
+        });
+    };
+
+    this.removeBar = function (bar) {
+        this.bars.splice(this.bars.indexOf(bar), 1);
+    };
+}])
+
+.directive('attProgressBar', function () {
+    return {
+        restrict: 'EA',
+        replace: true,
+        transclude: true,
+        controller: 'ProgressController',
+        scope: {
+            value: '=',
+            type: '@'
+        },
+        templateUrl: '/templates/attProgressBar.html',
+        link: function (scope, element, attrs, progressCtrl) {
+            progressCtrl.addBar(scope, angular.element(element.children()[0]));
+        }
+    };
+});
+
+angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
+.directive('attTab', ['$parse', function ($parse) {
       return {
-          templateUrl: '/templates/attMenu.html',
-          restrict: 'E',
+          require: '^attTabset',
+          restrict: 'EA',
           replace: true,
+          templateUrl: '/templates/tabs/attTab.html',
+          transclude: true,
           scope: {
-              items: '=',         // list of objects to bind {text, desc, selected}
-              title: '='          // string
+              active: '=?',
+              heading: '@',
+              onSelect: '&select', //This callback is called in contentHeadingTransclude
+              //once it inserts the tab's content into the dom
+              onDeselect: '&deselect'
           },
-          link: function (scope, element, attrs) {
+          controller: function () {
+              //Empty controller so other directives can require being 'under' a tab
+          },
+          compile: function (elm, attrs, transclude) {
+              return function postLink(scope, elm, attrs, tabsetCtrl) {
+                  scope.$watch('active', function (active) {
+                      if (active) {
+                          tabsetCtrl.select(scope);
+                      }
+                  });
 
-              scope.onItemClick = function (item) {
-                  if (scope.items) {
-                      scope.items.forEach(function (i) {
-                          if (i == item)
-                              i.selected = true;
-                          else i.selected = false;
+                  scope.disabled = false;
+                  if (attrs.disabled) {
+                      scope.$parent.$watch($parse(attrs.disabled), function (value) {
+                          scope.disabled = !!value;
                       });
                   }
+
+                  scope.select = function () {
+                      if (!scope.disabled) {
+                          scope.active = true;
+                      }
+                  };
+
+                  tabsetCtrl.addTab(scope);
+                  scope.$on('$destroy', function () {
+                      tabsetCtrl.removeTab(scope);
+                  });
+
+                  //We need to transclude later, once the content container is ready.
+                  //when this link happens, we're inside a tab heading.
+                  scope.$transcludeFn = transclude;
+              };
+          }
+      };
+  }])
+.directive('tabHeadingTransclude', [function () {
+    return {
+        restrict: 'A',
+        require: '^attTab',
+        link: function (scope, elm, attrs, tabCtrl) {
+            scope.$watch('headingElement', function updateHeadingElement(heading) {
+                if (heading) {
+                    elm.html('');
+                    elm.append(heading);
+                }
+            });
+        }
+    };
+}])
+.directive('tabContentTransclude', function () {
+    return {
+        restrict: 'A',
+        require: '^attTabset',
+        link: function (scope, elm, attrs) {
+            var tab = scope.$eval(attrs.tabContentTransclude);
+
+            //Now our tab is ready to be transcluded: both the tab heading area
+            //and the tab content area are loaded.  Transclude 'em both.
+            tab.$transcludeFn(tab.$parent, function (contents) {
+                angular.forEach(contents, function (node) {
+                    if (isTabHeading(node)) {
+                        //Let tabHeadingTransclude know.
+                        tab.headingElement = node;
+                    } else {
+                        elm.append(node);
+                    }
+                });
+            });
+        }
+    };
+    function isTabHeading(node) {
+        return node.tagName && (
+          node.hasAttribute('tab-heading') ||
+          node.hasAttribute('data-tab-heading') ||
+          node.tagName.toLowerCase() === 'tab-heading' ||
+          node.tagName.toLowerCase() === 'data-tab-heading'
+        );
+    }
+});
+
+angular.module('connectedCarSDK.attTabset', [])
+.controller('TabsetController', [
+    '$scope', function($scope) {
+        var ctrl = this,
+            tabs = ctrl.tabs = $scope.tabs = [];
+
+        ctrl.select = function(selectedTab) {
+            angular.forEach(tabs, function(tab) {
+                if (tab.active && tab !== selectedTab) {
+                    tab.active = false;
+                    tab.onDeselect();
+                }
+            });
+            selectedTab.active = true;
+            selectedTab.onSelect();
+        };
+
+        ctrl.addTab = function addTab(tab) {
+            tabs.push(tab);
+            // we can't run the select function on the first tab
+            // since that would select it twice
+            if (tabs.length === 1) {
+                tab.active = true;
+            } else if (tab.active) {
+                ctrl.select(tab);
+            }
+        };
+
+        ctrl.removeTab = function removeTab(tab) {
+            var index = tabs.indexOf(tab);
+            //Select a new tab if the tab to be removed is selected
+            if (tab.active && tabs.length > 1) {
+                //If this is the last tab, select the previous tab. else, the next tab.
+                var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
+                ctrl.select(tabs[newActiveIndex]);
+            }
+            tabs.splice(index, 1);
+        };
+    }
+])
+.directive('attTabset', function() {
+    return {
+        restrict: 'EA',
+        transclude: true,
+        replace: true,
+        scope: {
+            type: '@'
+        },
+        controller: 'TabsetController',
+        templateUrl: '/templates/tabs/attTabset.html',
+        link: function(scope, element, attrs) {
+            scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
+            scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
+            scope.topPosition = angular.isDefined(attrs.topPosition) ? scope.$parent.$eval(attrs.topPosition) : false;
+        }
+    };
+});
+
+angular.module('connectedCarSDK.attToggleSwitch', [])
+  .directive('attToggleSwitch', function () {
+      return {
+          templateUrl: '/templates/attToggleSwitch.html',
+          restrict: 'E',
+          scope: {
+              ngModel: '='
+          },
+          require: '^ngModel',
+          link: function (scope, element, attrs) {
+
+              if (angular.isDefined(attrs.disabled)) {
+                  element.find("label").attr("disabled", "disabled");
+              }
+
+              scope.change = function(enabled) {
+                  scope.ngModel = enabled;
               };
 
           }
       };
   });
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.attHeader.directive:attHeader
- * @description
- * # attHeader
- */
-angular.module('connectedCarSDK.attHeader', [])
-  .directive('attHeader', function () {
-    return {
-        restrict: 'E',
-        templateUrl: '/templates/attHeader.html',
-        replace: true,
-        scope: {
-            appName:  '@',
-            currentItem: '@',
-            appImage: '@'
-        },
-        link: function (scope, element, attrs) {
-        }
-    };
-  });
-
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.attDynamicContent.directive:attDynamicContent
- * @description
- * # attDynamicContent
- */
-angular.module('connectedCarSDK.attDynamicContent', [])
-  .directive('attDynamicContent', ['$http', '$location', function ($http, $location) {
-      return {
-          restrict: 'E',
-          templateUrl: '/templates/attDynamicContent.html',
-          replace: true,
-          scope: {
-
-          },
-          link: function (scope, element, attrs) {
-
-              scope.data = null;
-
-              if (angular.isDefined(attrs.url)) {
-
-                  var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + attrs.url;
-
-                  $http.get(url).success(function (data) {
-                      scope.data = data;
-                  });
-              }
-
-          }
-      };
-  }]);
-'use strict';
-
-angular.module('connectedCarSdk.transition', [])
-  /**
- * $transition service provides a consistent interface to trigger CSS 3 transitions and to be informed when they complete.
- * @param  {DOMElement} element  The DOMElement that will be animated.
- * @param  {string|object|function} trigger  The thing that will cause the transition to start:
- *   - As a string, it represents the css class to be added to the element.
- *   - As an object, it represents a hash of style attributes to be applied to the element.
- *   - As a function, it represents a function to be called that will cause the transition to occur.
- * @return {Promise}  A promise that is resolved when the transition finishes.
- */
-.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q, $timeout, $rootScope) {
-
-    var $transition = function (element, trigger, options) {
-        options = options || {};
-        var deferred = $q.defer();
-        var endEventName = $transition[options.animation ? 'animationEndEventName' : 'transitionEndEventName'];
-
-        var transitionEndHandler = function (event) {
-            $rootScope.$apply(function () {
-                element.unbind(endEventName, transitionEndHandler);
-                deferred.resolve(element);
-            });
-        };
-
-        if (endEventName) {
-            element.bind(endEventName, transitionEndHandler);
-        }
-
-        // Wrap in a timeout to allow the browser time to update the DOM before the transition is to occur
-        $timeout(function () {
-            if (angular.isString(trigger)) {
-                element.addClass(trigger);
-            } else if (angular.isFunction(trigger)) {
-                trigger(element);
-            } else if (angular.isObject(trigger)) {
-                element.css(trigger);
-            }
-            //If browser does not support transitions, instantly resolve
-            if (!endEventName) {
-                deferred.resolve(element);
-            }
-        });
-
-        // Add our custom cancel function to the promise that is returned
-        // We can call this if we are about to run a new transition, which we know will prevent this transition from ending,
-        // i.e. it will therefore never raise a transitionEnd event for that transition
-        deferred.promise.cancel = function () {
-            if (endEventName) {
-                element.unbind(endEventName, transitionEndHandler);
-            }
-            deferred.reject('Transition cancelled');
-        };
-
-        return deferred.promise;
-    };
-
-    // Work out the name of the transitionEnd event
-    var transElement = document.createElement('trans');
-    var transitionEndEventNames = {
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'transitionend',
-        'OTransition': 'oTransitionEnd',
-        'transition': 'transitionend'
-    };
-    var animationEndEventNames = {
-        'WebkitTransition': 'webkitAnimationEnd',
-        'MozTransition': 'animationend',
-        'OTransition': 'oAnimationEnd',
-        'transition': 'animationend'
-    };
-    function findEndEventName(endEventNames) {
-        for (var name in endEventNames) {
-            if (transElement.style[name] !== undefined) {
-                return endEventNames[name];
-            }
-        }
-    }
-    $transition.transitionEndEventName = findEndEventName(transitionEndEventNames);
-    $transition.animationEndEventName = findEndEventName(animationEndEventNames);
-    return $transition;
-}]);
