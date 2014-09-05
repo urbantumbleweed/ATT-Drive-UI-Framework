@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attDynamicContent.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
+angular.module('templates-main', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
 angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attAlert.html",
@@ -11,7 +11,7 @@ angular.module("templates/attAlert.html", []).run(["$templateCache", function($t
     "        <div class=\"btn btn-default\" ng-show=\"showConfirmationBtn\" ng-click=\"onClick()\">{{buttonText}}</div>\n" +
     "    </div>\n" +
     "    <span class=\"alert-icon {{type}}\" ng-show=\"showIcon && !showConfirmationBtn\">\n" +
-    "        <i class=\"fa fa-ils\"></i>\n" +
+    "        <i class=\"fa fa-info-circle\"></i>\n" +
     "    </span>\n" +
     "</div>");
 }]);
@@ -45,16 +45,6 @@ angular.module("templates/attDropdown.html", []).run(["$templateCache", function
     "        </ul>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "");
-}]);
-
-angular.module("templates/attDynamicContent.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("templates/attDynamicContent.html",
-    "<pre class=\"prettyprint\" ng-non-bindable=\"\">\n" +
-    "                <code data-language=\"html\">\n" +
-    "                    {{data}}\n" +
-    "                </code>\n" +
-    "</pre>\n" +
     "");
 }]);
 
@@ -168,7 +158,9 @@ angular.module("templates/modal/window.html", []).run(["$templateCache", functio
   $templateCache.put("templates/modal/window.html",
     "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
     "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
-    "        <div class=\"modal-content\" modal-transclude></div>\n" +
+    "        <div class=\"att-modal\">\n" +
+    "            <div class=\"modal-content\" modal-transclude></div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "");
