@@ -1,45 +1,32 @@
-﻿
-
-
-<div class="container" id="main-container">
-
-
+﻿<div class="container" id="main-container">
     <att-drawer>
         <att-menu items="appLinks" title="title"></att-menu>
     </att-drawer>
-
     <a class="drawer-trigger" ng-click="toggleDrawer()">
         <att-header app-name="ACCUWEATHER" current-item="FORECAST" app-image="/images/accuweather.png"></att-header>
     </a>
-
-
-
-
 </div>
-
 
 <div id="options-panel">
     <button ng-click="toggleDrawer()">Toggle drawer</button>
 </div>
 
-
-
-
 <div class="container" id="details-container">
-
-    <att-tabset  top-position="true">
+    <att-tabset top-position="true">
         <att-tab heading="Description">
-
+            <att-dynamic-content data-url="/views/drawer/readme.md" markdown="true" linenums="false"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="Markup">
-
+            <att-dynamic-content data-url="/views/drawer/drawer.html" linenums="true"></att-dynamic-content>
         </att-tab>
-        <att-tab heading="JavaScript">
 
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/drawer.js' "></div>
+            </pre>
         </att-tab>
     </att-tabset>
-
 </div>
 
 

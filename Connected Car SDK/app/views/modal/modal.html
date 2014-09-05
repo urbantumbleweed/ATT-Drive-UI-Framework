@@ -1,25 +1,38 @@
-﻿<div class="att-modal">
-    <div class="modal-header">
-        <h3 class="modal-title">I'm a modal! Select an Item.</h3>
-    </div>
-    <div class="modal-body">
-        <ul>
-            <li ng-repeat="item in items">
-                <a style="color: #ffffff; cursor: pointer" ng-click="selected.item = item">{{ item }}</a>
-            </li>
-        </ul>
-        Selected: <b>{{ selected.item }}</b>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-default" ng-click="ok()">OK</button>
-        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+﻿<div class="container" id="main-container">
+    <div class="att-modal">
+        <div class="modal-header">
+            <h3 class="modal-title">This is a <strong>static representation</strong></h3>
+        </div>
+        <div class="modal-body">
+            <p>You can see how the modal behaves by clicking the "Open me!" button</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="ok()">OK</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
 </div>
 
+<div id="options-panel">
+    <button ng-click="open()">Open me!</button>
 
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>
 
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/modal/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
 
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/modal/modal.html" linenums="true"></att-dynamic-content>
+        </att-tab>
 
-
-
-
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/modal.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

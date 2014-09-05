@@ -39,63 +39,63 @@ var app = angular
             controller: 'MainCtrl'
         })
         .when('/toggle-switch', {
-            templateUrl: 'views/toggleSwitch.html',
+            templateUrl: 'views/toggleSwitch/toggleSwitch.html',
             controller: 'ToggleSwitchCtrl'
         })
         .when('/tabs', {
-            templateUrl: 'views/tabs.html',
+            templateUrl: 'views/tabs/tabs.html',
             controller: 'TabsCtrl'
         })
         .when('/progress-bar', {
-            templateUrl: 'views/progressBar.html',
+            templateUrl: 'views/progressBar/progressBar.html',
             controller: 'ProgressBarCtrl'
         })
         .when('/carousel', {
-            templateUrl: 'views/carousel.html',
+            templateUrl: 'views/carousel/carousel.html',
             controller: 'CarouselCtrl'
         })
         .when('/buttons', {
-            templateUrl: 'views/buttons.html',
+            templateUrl: 'views/buttons/buttons.html',
             controller: 'ButtonsCtrl'
         })
 	    .when('/alert', {
-            templateUrl: 'views/alert.html',
+            templateUrl: 'views/alert/alert.html',
             controller: 'AlertCtrl'
 	    })
         .when('/dropdown', {
-            templateUrl: 'views/dropdown.html',
+            templateUrl: 'views/dropdown/dropdown.html',
             controller: 'DropdownCtrl'
         })
         .when('/loader', {
-            templateUrl: 'views/loader.html',
+            templateUrl: 'views/loader/loader.html',
             controller: 'LoaderCtrl'
         })
         .when('/badge', {
-            templateUrl: 'views/badge.html',
+            templateUrl: 'views/badge/badge.html',
             controller: 'BadgeCtrl'
         })
         .when('/modal', {
-            templateUrl: 'views/modal.html',
+            templateUrl: 'views/modal/modal.html',
             controller: 'ModalCtrl'
         })
         .when('/radio', {
-            templateUrl: 'views/radio.html',
+            templateUrl: 'views/radio/radio.html',
             controller: 'RadioBtnCtrl'
         })
         .when('/listview', {
-            templateUrl: 'views/listView.html',
+            templateUrl: 'views/listView/listView.html',
             controller: 'ListViewCtrl'
         })
         .when('/drawer', {
-            templateUrl: 'views/drawer.html',
+            templateUrl: 'views/drawer/drawer.html',
             controller: 'DrawerCtrl'
         })
         .when('/menu', {
-             templateUrl: 'views/menu.html',
+             templateUrl: 'views/menu/menu.html',
              controller: 'MenuCtrl'
         })
         .when('/header', {
-            templateUrl: 'views/header.html',
+            templateUrl: 'views/header/header.html',
             controller: 'HeaderCtrl'
         })
         .otherwise({

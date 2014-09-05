@@ -1,0 +1,42 @@
+﻿<div class="container" id="main-container">
+  <div class="padding">
+    <br />
+    <br />
+
+    <att-progress-bar max="max" value="dynamic">Default</att-progress-bar>
+
+    <br />
+    <br />
+    <att-progress-bar animate="false" value="dynamic" type="success">Success</att-progress-bar>
+
+    <br />
+    <br />
+    <att-progress-bar value="dynamic" type="warning">Warning</att-progress-bar>
+
+    <br />
+    <br />
+    <att-progress-bar value="dynamic" type="danger">danger</att-progress-bar>
+</div>
+</div>
+
+<div id="options-panel">
+    <button type="button" ng-click="random()">Randomize</button>
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/progressBar/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/progressBar/progressBar.html" linenums="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/progressBar.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

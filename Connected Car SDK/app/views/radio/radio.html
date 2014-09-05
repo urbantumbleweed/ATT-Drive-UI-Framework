@@ -1,0 +1,36 @@
+﻿<div class="container" id="main-container">
+  <div class="padding">
+    <input type="radio" id="radio1" name="radio" ng-model="color" value="red" />
+    <label for="radio1"><span></span>Red</label>
+    <br><br>
+
+    <input type="radio" id="radio2" name="radio" ng-model="color" value="green" />
+    <label for="radio2"><span></span>Green</label>
+    <br><br>
+
+    <input type="radio" id="radio3" name="radio" ng-model="color" value="blue" />
+    <label for="radio3"><span></span>Blue</label>
+</div>
+</div>
+
+<div id="options-panel">
+    <span>Selected color: </span>{{color}}
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/radio/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/radio/radio.html" linenums="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/radio.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

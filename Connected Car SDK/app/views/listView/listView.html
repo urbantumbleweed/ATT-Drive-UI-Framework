@@ -1,10 +1,6 @@
-﻿
-
-
-<div class="container" id="main-container">
+﻿<div class="container" id="main-container">
     <att-list-view title="title" items="genres" multi-select="true"></att-list-view>
 </div>
-
 
 <div id="options-panel">
     <span>Selected genres:</span>
@@ -16,23 +12,20 @@
     </ul>
 </div>
 
-
-
-
 <div class="container" id="details-container">
-
     <att-tabset top-position="true">
         <att-tab heading="Description">
-<h2>Overview</h2>
-<p>Menu list. Use for sorting and filtering thru large list of options and categories.</p>
+            <att-dynamic-content data-url="/views/listView/readme.md" markdown="true" linenums="false"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="Markup">
-
+            <att-dynamic-content data-url="/views/listView/listView.html" linenums="true"></att-dynamic-content>
         </att-tab>
-        <att-tab heading="JavaScript">
 
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/listView.js' "></div>
+            </pre>
         </att-tab>
     </att-tabset>
-
 </div>
