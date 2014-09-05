@@ -27,7 +27,7 @@ angular.module("templates/attDrawer.html", []).run(["$templateCache", function($
   $templateCache.put("templates/attDrawer.html",
     "<div class=\"att-drawer\" ng-class=\"{ visible: showDrawer == true, invisible: showDrawer == false}\">\n" +
     "    <div ng-transclude></div>\n" +
-    "    <div class=\"close-area\" ng-click=\"toggleDrawer()\"></div>\n" +
+    "    <div class=\"close-area\" ng-click=\"closeDrawer()\"></div>\n" +
     "</div>\n" +
     "");
 }]);
