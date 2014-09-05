@@ -9,6 +9,9 @@
  */
 
 angular.module('connectedCarSDK').controller('DrawerCtrl', function($rootScope, $scope) {
+    
+    $scope.appName = 'ACCUWEATHER';
+    $scope.viewName = 'FORECAST';
 
     $scope.title = 'Menu';
     $scope.appLinks = [
