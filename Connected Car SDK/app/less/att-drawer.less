@@ -1,20 +1,41 @@
 .att-drawer{
   position: absolute;
+  z-index: 1000;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 80%;
+  width: 100%;
   height: 100%;
+  
+  .close-area{
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+  }
 
-  .visible{
-    background-color: red;
-    
+
+
+  &.visible{
+
+    height: 100%;
+    transition: left 0.8s;
+    > div{
+      height: 100%;
+      width: 50%;
+    }
+
   }
   
-  .invisible{
-    background-color: #0000ff;
+  &.invisible{
+
     position: absolute;
-    clip: rect(0, 0, 0, 0);
+    left: -100%;
+
+    > div{
+      height: 100%;
+    }
   }
 }
 
