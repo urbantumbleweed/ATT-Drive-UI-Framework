@@ -2137,6 +2137,8 @@ select[multiple].input-lg {
 .att-alert {
   position: absolute;
   top: 165px;
+  left: 0;
+  right: 0;
   background-color: #067ab4;
   min-height: 140px;
   width: 100%;
