@@ -7,15 +7,24 @@ app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'app/views/forecast.html',
-            controller: 'ForecastCtrl'
+            controller: 'ForecastCtrl',
+            settings: {
+                viewName: 'FORECAST'
+            }
         })
         .when('/settings', {
             templateUrl: 'app/views/settings.html',
-            controller: 'SettingsCtrl'
+            controller: 'SettingsCtrl',
+            settings: {
+                viewName: 'SETTINGS'
+            }
         })
         .when('/about', {
             templateUrl: 'app/views/about.html',
-            controller: 'AboutCtrl'
+            controller: 'AboutCtrl',
+            settings: {
+                viewName: 'ABOUT'
+            }
         })
         .otherwise({
             redirectTo: '/'
@@ -24,11 +33,16 @@ app.config(function($routeProvider) {
 
 app.run(function($rootScope) {
 
+    $rootScope.appName = 'ACCUWEATHER';
     $rootScope.showDrawer = false;
 
     $rootScope.$on('$routeChangeSuccess',
         function (event, next, current) {
             $rootScope.showDrawer = false;
+
+            if (next && next.$$route && next.$$route.settings) {
+                $rootScope.viewName = next.$$route.settings.viewName;
+            }
         });
 
     $rootScope.appLinks = [

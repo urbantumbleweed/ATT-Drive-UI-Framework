@@ -32,7 +32,7 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
 'use strict';
 
 angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
-  .directive('attTab', ['$parse', function ($parse) {
+.directive('attTab', ['$parse', function ($parse) {
       return {
           require: '^attTabset',
           restrict: 'EA',
@@ -82,7 +82,6 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
           }
       };
   }])
-
 .directive('tabHeadingTransclude', [function () {
     return {
         restrict: 'A',
@@ -97,7 +96,6 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
         }
     };
 }])
-
 .directive('tabContentTransclude', function () {
     return {
         restrict: 'A',
@@ -264,7 +262,7 @@ angular.module('connectedCarSDK.attProgressBar', [])
  * # attcarousel
  */
 angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
-  .controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
+.controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
       $animate.enabled(false);
       var self = this,
         slides = self.slides = $scope.slides = [],
@@ -428,7 +426,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
       };
 
   }])
-
 .directive('attCarousel', [function () {
     return {
         restrict: 'EA',
@@ -444,7 +441,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
         }
     };
 }])
-
 .directive('attSlide', function () {
     return {
         require: '^attCarousel',
@@ -1195,13 +1191,17 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
  * # attdrawer
  */
 angular.module('connectedCarSDK.attDrawer', [])
-    .directive('attDrawer', function() {
+    .directive('attDrawer', function($rootScope) {
         return {
             restrict: 'E',
             templateUrl: '/templates/attDrawer.html',
             transclude: true,
             link: function (scope, element, attrs) {
-                
+
+                scope.closeDrawer = function() {
+                    $rootScope.showDrawer = false;
+                };
+
             }
         };
     });
@@ -1255,8 +1255,8 @@ angular.module('connectedCarSDK.attHeader', [])
         templateUrl: '/templates/attHeader.html',
         replace: true,
         scope: {
-            appName:  '@',
-            currentItem: '@',
+            appName:  '=',
+            currentItem: '=',
             appImage: '@'
         },
         link: function (scope, element, attrs) {
@@ -1264,39 +1264,6 @@ angular.module('connectedCarSDK.attHeader', [])
     };
   });
 
-'use strict';
-
-/**
- * @ngdoc directive
- * @name connectedCarSDK.attDynamicContent.directive:attDynamicContent
- * @description
- * # attDynamicContent
- */
-angular.module('connectedCarSDK.attDynamicContent', [])
-  .directive('attDynamicContent', ['$http', '$location', function ($http, $location) {
-      return {
-          restrict: 'E',
-          templateUrl: '/templates/attDynamicContent.html',
-          replace: true,
-          scope: {
-
-          },
-          link: function (scope, element, attrs) {
-
-              scope.data = null;
-
-              if (angular.isDefined(attrs.url)) {
-
-                  var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + attrs.url;
-
-                  $http.get(url).success(function (data) {
-                      scope.data = data;
-                  });
-              }
-
-          }
-      };
-  }]);
 'use strict';
 
 angular.module('connectedCarSdk.transition', [])

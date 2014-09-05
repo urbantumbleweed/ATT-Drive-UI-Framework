@@ -11,6 +11,8 @@
 angular.module('connectedCarSDK')
     .controller('HeaderCtrl', function ($scope) {
 
+        $scope.appName = 'ACCUWEATHER';
+        $scope.viewName = 'FORECAST';
 
     });
 
