@@ -2766,6 +2766,7 @@ input[type="radio"]:checked + label span {
 }
 .att-drawer.invisible > div {
   height: 100%;
+  width: 70%;
 }
 .drawer-trigger {
   cursor: pointer;
