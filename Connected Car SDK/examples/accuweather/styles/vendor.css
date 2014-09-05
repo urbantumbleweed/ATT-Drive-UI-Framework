@@ -25,7 +25,7 @@ h3.active-screen {
 }
 
 .screen.bg {
-    background: url('../img/background.jpg') no-repeat;
+    background: url('../images/background.jpg') no-repeat;
     background-size: 768px 470px;
     overflow: hidden;
 }
