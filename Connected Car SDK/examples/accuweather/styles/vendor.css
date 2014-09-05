@@ -64,7 +64,6 @@ h3.active-screen {
     margin: 0;
     margin-bottom: 25px;
     font-size: 24px;
-    font-family: 'omnes_attmedium', sans-serif;
     text-transform: uppercase;
 }
 
@@ -155,6 +154,10 @@ h3.main-subtitle {
 
 
 /* Overrides */
+.att-tabs {
+	height: 400px;
+}
+
 .att-tabs .nav > li.active > a,
 .att-tabs .nav > li > a:hover, .att-tabs .nav > li > a:focus {
 	background-color: rgba(240, 100, 20, 0.9);
