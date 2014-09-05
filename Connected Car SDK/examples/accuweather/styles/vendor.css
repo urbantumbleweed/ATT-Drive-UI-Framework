@@ -43,6 +43,11 @@
     text-align: right;
 }
 
+.progress-container {
+    position: relative;
+    width: 65%;
+}
+
  /* SCREEN */
 .screen {
     width: 768px;
