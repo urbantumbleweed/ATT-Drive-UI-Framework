@@ -1,0 +1,10 @@
+﻿<div>
+    <div ng-if="!markdown">
+        <pre class="prettyprint" ng-class="{linenums: linenums}" >
+          <code data-language="html">
+                {{data}}
+          </code>
+        </pre>
+    </div>
+    <div ng-if="markdown" ng-bind-html="data"></div>
+</div>

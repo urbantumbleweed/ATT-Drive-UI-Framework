@@ -42,22 +42,18 @@
 </div>
 
 <div class="container" id="details-container">
-
     <att-tabset top-position="true">
         <att-tab heading="Description">
-            <h2 id="Readme">Overview</h2>
-            <p>Notification dialogs function the same way as modals and overlay the entire screen, with action buttons fixed at the center of the screen. Dialog animations are predefined.</p>
-            <p>Tap launch dialog to see the animation. Dialogs may have a close button in the header and may rely on the challenge button requiring user action to dismiss them, or may contain timeout.</p>
+            <att-dynamic-content data-url="/views/alert/readme.md" markdown="true" linenums="false"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="Markup">
-            <att-dynamic-content data-url="/views/alert.html"></att-dynamic-content>
+            <att-dynamic-content data-url="/views/alert/alert.html" linenums="true"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="JavaScript">
-            <pre class="prettyprint">
+            <pre class="prettyprint linenums">
                 <div ng-include=" '/scripts/controllers/alert.js' "></div>
-
             </pre>
         </att-tab>
     </att-tabset>

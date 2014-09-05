@@ -10,10 +10,11 @@ angular.module('connectedCarSDK.attDynamicContent', [])
   .directive('attDynamicContent', ['$http', '$location', function ($http, $location) {
       return {
           restrict: 'E',
-          templateUrl: '/templates/attDynamicContent.html',
+          templateUrl: '/appTemplates/attDynamicContent.html',
           replace: true,
           scope: {
-
+              markdown: "=",
+              linenums: "="
           },
           link: function (scope, element, attrs) {
 
@@ -21,10 +22,16 @@ angular.module('connectedCarSDK.attDynamicContent', [])
 
               if (angular.isDefined(attrs.url)) {
 
-                  var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + attrs.url;
+                  var url = $location.protocol() + "://" + $location.host() + ":" + $location.port() + attrs.url; // create URL
 
                   $http.get(url).success(function (data) {
                       scope.data = data;
+
+                      if (scope.markdown) // convert markdown to HTML
+                      {
+                             var converter = new Showdown.converter();
+                             scope.data = converter.makeHtml(scope.data);
+                      }
                   });
               }
 

@@ -12,5 +12,3 @@ angular.module('connectedCarSDK')
   .controller('BadgeCtrl', function ($scope) {
 
   });
-
-

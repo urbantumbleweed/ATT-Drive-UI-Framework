@@ -15,7 +15,7 @@ angular.module('connectedCarSDK')
       $scope.open = function (size) {
 
           var modalInstance = $modal.open({
-              templateUrl: '/views/modal/modal.html',
+              templateUrl: '/views/modal/modal/modal.html',
               controller: ModalInstanceCtrl,
               size: size,
               resolve: {

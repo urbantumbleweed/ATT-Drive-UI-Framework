@@ -1,0 +1,25 @@
+﻿<div class="att-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal! Select an Item.</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a style="color: #ffffff; cursor: pointer" ng-click="selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="ok()">OK</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
