@@ -1,7 +1,8 @@
 ﻿var app = angular.module('app');
 
 app.controller('SettingsCtrl', ['$rootScope', '$scope', '$modal',
-    function ($rootScope, $scope, $modal) {
+    function ($rootScope, $scope, $modal) {        
+
         $scope.temperature = "celsius";
         $scope.location = true
 

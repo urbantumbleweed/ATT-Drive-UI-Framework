@@ -29,7 +29,8 @@ var app = angular
     'connectedCarSDK.attModal',
     'connectedCarSDK.attMenu',
     'connectedCarSDK.attDrawer',
-    'connectedCarSDK.attHeader'
+    'connectedCarSDK.attHeader',
+    'connectedCarSDK.attDynamicContent'
   ])
   .config(function ($routeProvider) {
       $routeProvider
