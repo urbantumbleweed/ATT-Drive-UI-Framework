@@ -3,7 +3,7 @@
     <ul class="list">
         <li ng-repeat="item in items"
             ng-class="{active: item.selected}"
-            ng-click="item.selected = true">
+            ng-click="onItemClick(item)">
             <a ng-href="{{item.href}}">{{item.text}}
             <span ng-bind="item.desc"></span>
             </a>

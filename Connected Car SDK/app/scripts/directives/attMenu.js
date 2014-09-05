@@ -18,6 +18,16 @@ angular.module('connectedCarSDK.attMenu', [])
           },
           link: function (scope, element, attrs) {
 
+              scope.onItemClick = function (item) {
+                  if (scope.items) {
+                      scope.items.forEach(function (i) {
+                          if (i == item)
+                              i.selected = true;
+                          else i.selected = false;
+                      });
+                  }
+              };
+
           }
       };
   });

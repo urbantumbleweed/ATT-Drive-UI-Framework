@@ -592,7 +592,15 @@ angular.module('connectedCarSDK.attMenu', [])
 		  title: '='          // string
 	  },
 	  link: function (scope, element, attrs) {
-
+	      scope.onItemClick = function (item) {
+	          if (scope.items) {
+	              scope.items.forEach(function (i) {
+	                  if (i == item)
+	                      i.selected = true;
+	                  else i.selected = false;
+	              });
+	          }
+	      };
 	  }
   };
 });
@@ -1315,7 +1323,7 @@ angular.module("/templates/attMenu.html", []).run(["$templateCache", function($t
     "    <ul class=\"list\">\n" +
     "        <li ng-repeat=\"item in items\"\n" +
     "            ng-class=\"{active: item.selected}\"\n" +
-    "            ng-click=\"item.selected = true\">\n" +
+    "            ng-click=\"onItemClick(item)\">\n" +
     "            <a ng-href=\"{{item.href}}\">{{item.text}}\n" +
     "            <span ng-bind=\"item.desc\"></span>\n" +
     "            </a>\n" +

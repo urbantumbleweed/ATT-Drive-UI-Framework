@@ -27,9 +27,9 @@ app.run(function($rootScope) {
     $rootScope.showDrawer = false;
     
     $rootScope.appLinks = [
-        { text: 'Forecast', desc: 'Watch daily forecast', href: '#/' },
-        { text: 'About', desc: 'Monitor hourly forecast', href: '#/about' },
-        { text: 'Settings', desc: 'Change app settings', href: '#/settings' },
+        { text: 'Forecast', desc: 'Watch daily forecast', href: '#/', selected: true },
+        { text: 'About', desc: 'Monitor hourly forecast', href: '#/about', selected: false },
+        { text: 'Settings', desc: 'Change app settings', href: '#/settings', selected: false },
     ];
 
     $rootScope.$on('$routeChangeSuccess',
