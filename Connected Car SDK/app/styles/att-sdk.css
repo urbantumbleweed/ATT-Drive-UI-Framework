@@ -2643,25 +2643,6 @@ input[type="radio"]:checked + label span {
 .att-badge.badge-danger {
   background-color: #e23232;
 }
-.att-drawer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 80%;
-  height: 100%;
-}
-.att-drawer .visible {
-  background-color: red;
-}
-.att-drawer .invisible {
-  background-color: #0000ff;
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-}
-.drawer-trigger {
-  cursor: pointer;
-}
 .att-menu {
   width: 100%;
   height: 100%;
@@ -2750,4 +2731,23 @@ input[type="radio"]:checked + label span {
   float: right;
   width: 24px;
   margin: 0px 10px;
+}
+.att-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+}
+.att-drawer .visible {
+  background-color: red;
+}
+.att-drawer .invisible {
+  background-color: #0000ff;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+.drawer-trigger {
+  cursor: pointer;
 }
