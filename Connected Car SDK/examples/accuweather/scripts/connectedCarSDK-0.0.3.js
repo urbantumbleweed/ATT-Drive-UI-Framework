@@ -497,8 +497,8 @@ angular.module('connectedCarSDK.attHeader', [])
         templateUrl: '/templates/attHeader.html',
         replace: true,
         scope: {
-            appName:  '@',
-            currentItem: '@',
+            appName:  '=',
+            currentItem: '=',
             appImage: '@'
         },
         link: function (scope, element, attrs) {
