@@ -2646,28 +2646,38 @@ input[type="radio"]:checked + label span {
 .att-header {
   color: #ccc;
   display: block;
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 0;
   width: 100%;
   padding: 20px;
 }
 .att-header .active-screen {
-  background-color: #008000;
+  background-color: transparent;
   position: relative;
   float: left;
   display: inline-block;
+  margin: 0;
+  font-size: 24px;
 }
-.att-header .active-screen i {
+.att-header .active-screen #menu-icon {
   margin-right: 10px;
 }
 .att-header .app-branding {
-  background-color: #0000ff;
+  background-color: transparent;
   position: relative;
   float: right;
   display: inline-block;
-  vertical-align: middle;
+  line-height: 1.25;
 }
-.att-header .app-branding img {
-  display: inline;
+.att-header .app-branding .app-name {
+  position: relative;
+  float: right;
+}
+.att-header .app-branding .app-icon {
+  display: inline-block;
+  position: relative;
+  float: right;
+  width: 24px;
+  margin: 0px 10px;
 }

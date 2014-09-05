@@ -2,32 +2,41 @@
   color: #ccc;
 
   display: block;
-  background-color: red;
+  background-color: @semi-transparent-backdrop;
   position: absolute;
   top: 0;
   width: 100%;
   padding: 20px;
 
   .active-screen{
-    background-color: #008000;
+    background-color: transparent;
     position: relative;
     float: left;
     display: inline-block;
-
-    i{
+    margin: 0;
+    font-size: 24px;
+    #menu-icon{
       margin-right: 10px;
     }
   }
 
   .app-branding{
-    background-color: #0000ff;
+    background-color: transparent;
     position: relative;
     float: right;
     display: inline-block;
-    vertical-align: middle;
+    line-height: 1.25;
 
-    img{
-      display: inline;
+    .app-name{
+      position: relative;
+      float: right;
+    }
+    .app-icon{
+      display: inline-block;
+      position: relative;
+      float: right;
+      width: 24px;
+      margin: 0px 10px;
     }
   }
 
