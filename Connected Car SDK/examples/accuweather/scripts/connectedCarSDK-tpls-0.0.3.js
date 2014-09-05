@@ -461,17 +461,21 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
 });
 
 angular.module('connectedCarSDK.attDrawer', [])
-    .directive('attDrawer', function() {
+    .directive('attDrawer', function($rootScope) {
         return {
             restrict: 'E',
             templateUrl: '/templates/attDrawer.html',
             transclude: true,
             link: function (scope, element, attrs) {
-                
+
+                scope.closeDrawer = function() {
+                    $rootScope.showDrawer = false;
+                };
+
             }
         };
     });
-
+	
 angular.module('connectedCarSDK.attDropdown', [])
 .directive('attDropdown', function ($timeout) {
     return {
@@ -1275,7 +1279,7 @@ angular.module("/templates/attDrawer.html", []).run(["$templateCache", function(
   $templateCache.put("/templates/attDrawer.html",
     "<div class=\"att-drawer\" ng-class=\"{ visible: showDrawer == true, invisible: showDrawer == false}\">\n" +
     "    <div ng-transclude></div>\n" +
-    "    <div class=\"close-area\" ng-click=\"toggleDrawer()\"></div>\n" +
+    "    <div class=\"close-area\" ng-click=\"closeDrawer()\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -1293,16 +1297,6 @@ angular.module("/templates/attDropdown.html", []).run(["$templateCache", functio
     "        </ul>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "");
-}]);
-
-angular.module("/templates/attDynamicContent.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("/templates/attDynamicContent.html",
-    "<pre class=\"prettyprint\" ng-non-bindable=\"\">\n" +
-    "                <code data-language=\"html\">\n" +
-    "                    {{data}}\n" +
-    "                </code>\n" +
-    "</pre>\n" +
     "");
 }]);
 
