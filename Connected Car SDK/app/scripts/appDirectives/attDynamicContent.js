@@ -7,7 +7,7 @@
  * # attDynamicContent
  */
 angular.module('connectedCarSDK.attDynamicContent', [])
-  .directive('attDynamicContent', ['$http', '$location', function ($http, $location) {
+  .directive('attDynamicContent', ['$http', '$location', '$timeout', function ($http, $location, $timeout) {
       return {
           restrict: 'E',
           templateUrl: '/appTemplates/attDynamicContent.html',
@@ -15,7 +15,7 @@ angular.module('connectedCarSDK.attDynamicContent', [])
           scope: {
               markdown: "=",
               linenums: "=",
-              selector: "="
+              markup: "="
           },
           link: function (scope, element, attrs) {
 
@@ -28,9 +28,9 @@ angular.module('connectedCarSDK.attDynamicContent', [])
                   $http.get(url).success(function (data) {
                       scope.data = data;
 
-                      if (scope.selector)
+                      if (scope.markup)
                       {
-                            var a = element.find(scope.selector);
+                          scope.data = angular.element("<div></div>").append(angular.element(scope.data)[0]).html();
                       }
 
                       if (scope.markdown) // convert markdown to HTML

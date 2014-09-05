@@ -49,7 +49,7 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <att-dynamic-content data-url="/views/alert/alert.html" linenums="true" markup="true"></att-dynamic-content>
+            <att-dynamic-content data-url="/views/alert/alert.html" linenums="true" selector="main-container"></att-dynamic-content>
         </att-tab>
 
         <att-tab heading="JavaScript">
