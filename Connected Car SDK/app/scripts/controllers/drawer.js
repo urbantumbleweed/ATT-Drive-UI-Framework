@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 /**
  * @ngdoc function
@@ -10,14 +10,14 @@
 
 angular.module('connectedCarSDK').controller('DrawerCtrl', function($rootScope, $scope) {
     
-    $scope.appName = 'ACCUWEATHER';
-    $scope.viewName = 'FORECAST';
+    $scope.appName = 'APPNAME';
+    $scope.viewName = 'CURRENT VIEW';
 
     $scope.title = 'Menu';
     $scope.appLinks = [
-        { text: 'Forecast', desc: 'Watch daily forecast', href: '#/forecast' },
-        { text: 'Hourly', desc: 'Monitor hourly forecast', href: '#/hourly' },
-        { text: 'Settings', desc: 'Change app settings', href: '#/settings' },
+        { text: 'First view', desc: 'Description of the view', href: '#/' },
+        { text: 'Second view', desc: 'Description of the view', href: '#/' },
+        { text: 'Third view', desc: 'Description of the view', href: '#/' },
     ];
     
     $rootScope.showDrawer = false;

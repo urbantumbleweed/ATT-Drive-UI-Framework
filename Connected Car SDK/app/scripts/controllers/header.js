@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 /**
  * @ngdoc function
@@ -11,8 +11,8 @@
 angular.module('connectedCarSDK')
     .controller('HeaderCtrl', function ($scope) {
 
-        $scope.appName = 'ACCUWEATHER';
-        $scope.viewName = 'FORECAST';
+        $scope.appName = 'APPNAME';
+        $scope.viewName = 'CURRENT VIEW';
 
     });
 
