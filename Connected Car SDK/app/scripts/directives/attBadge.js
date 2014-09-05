@@ -12,6 +12,9 @@ angular.module('connectedCarSDK.attBadge', [])
           templateUrl: '/templates/attBadge.html',
           restrict: 'E',
           replace: true,
+          scope: {
+              value: "@"
+          },
           link: function (scope, element, attrs) {
           }
       };
