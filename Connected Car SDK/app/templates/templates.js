@@ -11,7 +11,7 @@ angular.module("templates/attAlert.html", []).run(["$templateCache", function($t
     "        <div class=\"btn btn-default\" ng-show=\"showConfirmationBtn\" ng-click=\"onClick()\">{{buttonText}}</div>\n" +
     "    </div>\n" +
     "    <span class=\"alert-icon {{type}}\" ng-show=\"showIcon && !showConfirmationBtn\">\n" +
-    "        <i class=\"fa fa-ils\"></i>\n" +
+    "        <i class=\"fa fa-info-circle\"></i>\n" +
     "    </span>\n" +
     "</div>");
 }]);
