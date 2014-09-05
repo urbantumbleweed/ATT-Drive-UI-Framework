@@ -183,4 +183,23 @@ li.L9 { background: #eee }
 .tab-pane pre {font-size: 14px;}
 .tab-pane ul li {font-size: 14px;}
 
-#sidebar ul {padding-left: 5px; margin-left: 0;}
+#sidebar ul {
+    padding-left: 0px; 
+    margin-left: 0;
+}
+
+@media (max-width: 1000px) {
+.logo img {
+    height: 32px;
+    width: 180px;
+ }   
+.nav ul li {
+    display: inline;
+}
+.nav ul li:after {
+    content: " - ";
+}
+#options-panel {
+    display: none;
+}
+}

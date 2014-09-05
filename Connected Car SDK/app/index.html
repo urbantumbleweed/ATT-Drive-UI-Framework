@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -32,13 +32,14 @@
 
     <div id="page-wrapper" class="container-fluid">
         <div class="col-md-2" id="sidebar">
-            <div>
+            <div class="logo">
                 <img src="images/ATT-logo.jpg" alt="AT&T Drive SDK" width="80%"/>
-                <p class="small">&nbsp;&nbsp;Automotive UX Guidelines</p>
+                <p class="small">Automotive UI Kit</p>
             </div>
+            
+            <div class="nav">
             <hr/>
-            <h5>&nbsp;Components</h5>
-
+            <h5>Components</h5>
             <ul>
                 <li><a href="#/toggle-switch">Toggle Switch</a></li>
                 <li><a href="#/tabs">Tabs</a></li>
@@ -56,6 +57,7 @@
                 <li><a href="#/header">Header</a></li>
                 <li><a href="#/loader">Loader</a></li>
             </ul>
+                </div>
         </div>
 <div class="col-md-10">
     <div ng-view></div>
