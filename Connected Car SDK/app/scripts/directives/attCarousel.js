@@ -7,7 +7,7 @@
  * # attcarousel
  */
 angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
-  .controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
+.controller('CarouselController', ['$scope', '$timeout', '$transition', '$animate', function ($scope, $timeout, $transition, $animate) {
       $animate.enabled(false);
       var self = this,
         slides = self.slides = $scope.slides = [],
@@ -171,7 +171,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
       };
 
   }])
-
 .directive('attCarousel', [function () {
     return {
         restrict: 'EA',
@@ -187,7 +186,6 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSdk.transition'])
         }
     };
 }])
-
 .directive('attSlide', function () {
     return {
         require: '^attCarousel',
