@@ -47,8 +47,8 @@ app.run(function($rootScope) {
 
     $rootScope.appLinks = [
         { text: 'Forecast', desc: 'Watch daily forecast', href: '#/', selected: true },
-        { text: 'About', desc: 'Monitor hourly forecast', href: '#/about', selected: false },
         { text: 'Settings', desc: 'Change app settings', href: '#/settings', selected: false },
+        { text: 'About', desc: 'Monitor hourly forecast', href: '#/about', selected: false }
     ];
-    
+
 });

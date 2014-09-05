@@ -11,7 +11,7 @@ app.controller('ForecastCtrl', ['$rootScope', '$scope',
             currentTemp: 70,
 
             precipitation: '10',
-            chanceOfRain: 30,
+            chanceOfRain: 60,
             humidity: '67',
             wind: '0'
         };
