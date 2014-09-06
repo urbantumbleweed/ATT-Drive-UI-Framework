@@ -1,5 +1,3 @@
-# Downlaod
-
 ## Installation
 In Connected Car SDK folder run `npm install`
 then `bower install`
