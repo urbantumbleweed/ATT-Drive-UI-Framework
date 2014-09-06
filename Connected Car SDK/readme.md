@@ -1,5 +1,4 @@
 # Downlaod
-Fetch project from repo: `git@git.assembla.com:at-t-connected-car.SDK.git`
 
 ## Installation
 In Connected Car SDK folder run `npm install`
