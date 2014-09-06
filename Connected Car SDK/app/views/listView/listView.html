@@ -1,0 +1,31 @@
+﻿<div class="container" id="main-container">
+    <att-list-view title="title" items="genres" multi-select="true"></att-list-view>
+</div>
+
+<div id="options-panel">
+    <span>Selected genres:</span>
+    <ul>
+        <li ng-repeat="genre in genres">
+            <span ng-bind="genre.text"></span>:
+            <span ng-bind="genre.selected"></span>
+        </li>
+    </ul>
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/listView/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/listView/listView.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/listView.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

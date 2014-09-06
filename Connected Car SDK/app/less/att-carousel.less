@@ -1,0 +1,218 @@
+.att-carousel{
+
+  .carousel {
+    position: relative;
+    height: 100%;
+  }
+
+  .carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-height: 470px !important;
+    height: 100%;
+    min-height: 100%;
+
+    > .item {
+      display: none;
+      position: relative;
+      .transition(.6s ease-in-out left);
+
+      // Account for jankitude on images
+      > img,
+      > a > img {
+        &:extend(.img-responsive);
+        line-height: 1;
+      }
+    }
+
+    > .active,
+    > .next,
+    > .prev {
+      display: block;
+    }
+
+    > .active {
+      left: 0;
+    }
+
+    > .next,
+    > .prev {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    > .next {
+      left: 100%;
+    }
+    > .prev {
+      left: -100%;
+    }
+    > .next.left,
+    > .prev.right {
+      left: 0;
+    }
+
+    > .active.left {
+      left: -100%;
+    }
+    > .active.right {
+      left: 100%;
+    }
+
+  }
+
+  // Left/right controls for nav
+  // ---------------------------
+
+  .carousel-control {
+    background-color: @gray-darker;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    bottom: 0;
+
+    .opacity(@carousel-control-opacity);
+    font-size: @carousel-control-font-size;
+    color: @carousel-control-color;
+    text-align: center;
+    text-shadow: @carousel-text-shadow;
+
+    height: 50%;
+
+    width: 5%;
+    // We can't have this transition here because WebKit cancels the carousel
+    // animation if you trip this while in the middle of another animation.
+
+    // Set gradients for backgrounds
+    &.left {
+      border-top-right-radius: 100%;
+      border-bottom-right-radius: 100%;
+    }
+    &.right {
+      left: auto;
+      right: 0;
+      border-top-left-radius: 100%;
+      border-bottom-left-radius: 100%;
+    }
+
+    // Hover/focus state
+    &:hover,
+    &:focus {
+      outline: 0;
+      color: @carousel-control-color;
+      text-decoration: none;
+      .opacity(.9);
+    }
+
+    &:focus,
+    &:active{
+      border: 3px solid #ffffff;
+    }
+
+    // Toggles
+    .icon-prev,
+    .icon-next,
+    .fa-chevron-left,
+    .fa-chevron-right {
+      position: absolute;
+      top: 47%;
+      z-index: 5;
+      display: inline-block;
+    }
+    .icon-prev,
+    .fa-chevron-left {
+      left: 50%;
+      margin-left: -10px;
+    }
+    .icon-next,
+    .fa-chevron-right {
+      right: 50%;
+      margin-right: -10px;
+    }
+    .icon-prev,
+    .icon-next {
+      width:  20px;
+      height: 20px;
+      margin-top: -10px;
+      font-family: serif;
+    }
+
+
+    .icon-prev {
+      &:before {
+        content: '\2039';// SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)
+      }
+    }
+    .icon-next {
+      &:before {
+        content: '\203a';// SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)
+      }
+    }
+  }
+
+  // Optional indicator pips
+  //
+  // Add an unordered list with the following class and add a list item for each
+  // slide your carousel holds.
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    z-index: 15;
+    width: 60%;
+    margin-left: -30%;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      width:  8px;
+      height: 8px;
+      margin: 3px;
+      text-indent: -999px;
+      border: 1px solid @carousel-indicator-border-color;
+      border-radius: 10px;
+      cursor: pointer;
+
+
+    }
+    .active {
+      margin: 2px;
+      width:  10px;
+      height: 10px;
+      background-color: @carousel-indicator-active-bg;
+    }
+  }
+
+  // Optional captions
+  // -----------------------------
+  // Hidden by default for smaller viewports
+  .carousel-content {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    bottom: 0px;
+
+    width: 90%;
+    height: 100%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+
+
+    color: @carousel-caption-color;
+    text-align: justify;
+    text-shadow: @carousel-text-shadow;
+    & .btn {
+      text-shadow: none; // No shadow for button elements in carousel-caption
+    }
+  }
+
+
+
+}

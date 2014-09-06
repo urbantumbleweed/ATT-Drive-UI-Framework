@@ -1,0 +1,42 @@
+<div class="container" id="main-container">
+    <div class="padding">
+    <br />
+    &nbsp;<att-badge value="8"></att-badge>&nbsp;&nbsp; Default
+    <br />
+    <br />
+    &nbsp;<att-badge class="badge-success" value="8"></att-badge>&nbsp;&nbsp; Success
+    <br />
+    <br />
+    &nbsp;<att-badge class="badge-info" value="8"></att-badge>&nbsp;&nbsp; Info
+    <br />
+    <br />
+    &nbsp;<att-badge class="badge-warning" value="8"></att-badge>&nbsp;&nbsp; Warning
+    <br />
+    <br />
+    &nbsp;<att-badge class="badge-danger" value="8"></att-badge>&nbsp;&nbsp; Danger
+    <br />
+    <br />
+        </div>
+</div>
+
+<div id="options-panel">
+    This component has no additional options.
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/badge/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/badge/badge.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/badge.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

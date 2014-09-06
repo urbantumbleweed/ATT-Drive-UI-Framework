@@ -1,0 +1,160 @@
+.btn {
+  font-family: 'omnes_attlight', sans-serif;
+  width: 200px;
+  height: 60px;
+  padding: 0 20px;
+  border: 2px solid white;
+  display: inline-block;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+
+
+  margin: 0;
+  font-weight: @btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+
+
+
+  white-space: nowrap;
+  .button-size(@padding-base-vertical; @padding-base-horizontal; 24px; 1.8; 0);
+
+  &:focus,
+  &.focus {
+    padding: 0;
+  }
+
+
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    .opacity(.65);
+    .box-shadow(none);
+  }
+
+  /* Contextual variants
+  ----------------------------------------------------*/
+
+  &.btn-default {
+    border-color: #ffffff;
+
+      &:focus,
+      &.focus {
+        border: 7px solid white;
+      }
+
+      &:active,
+      &.active {
+        background: white;
+        color: #333;
+      }
+    }
+
+
+
+
+  /* Primary button */
+  &.btn-primary {
+    border-color: @brand-primary;
+
+    &:focus,
+    &.focus {
+      border: 7px solid lighten(@brand-primary, 30%);
+    }
+
+    &:active,
+    &.active {
+      background: #067ab4;
+      border-color: #067ab4;
+    }
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+
+  }
+
+  &.btn.btn-danger {
+    border-color: @brand-danger;
+
+    &:focus,
+    &.focus {
+      border: 7px solid lighten(@brand-danger, 30%);
+    }
+
+    &:active,
+    &.active {
+      background: @brand-danger;
+      border-color: @brand-danger;
+    }
+  }
+
+  &.btn.btn-success {
+    border-color: @brand-success;
+
+    &:focus,
+    &.focus {
+      border: 7px solid lighten(@brand-success, 30%);
+    }
+
+    &:active,
+    &.active {
+      background: @brand-success;
+      border-color: @brand-success;
+    }
+  }
+
+  &.btn.btn-warning {
+    border-color: @brand-warning;
+
+    &:focus,
+    &.focus {
+      border: 7px solid lighten(@brand-warning, 30%);
+    }
+
+    &:active,
+    &.active {
+      background: @brand-warning;
+      border-color: @brand-warning;
+    }
+  }
+
+  &.btn-circ {
+    padding: 0;
+    border-radius: 50%;
+
+    &:focus,
+    &.focus {
+      border: 7px solid white;
+    }
+
+    &:active,
+    &.active {
+      background: white;
+      color: #333;
+    }
+
+    &.medium {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+
+  &.btn-close-list {
+    position: absolute; /* Should switch to fixed in actual project as it's fixed relative to viewport */
+    top: 25px;
+    right: 24px;
+  }
+}
+
+
+
+
+
+

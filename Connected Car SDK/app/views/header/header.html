@@ -1,0 +1,26 @@
+﻿<div class="container" id="main-container">
+    <att-header app-name="appName" current-item="viewName" app-image="/images/accuweather.png"></att-header>
+</div>
+
+<div id="options-panel">
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/header/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/header/header.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/header.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>
+
+

@@ -1,0 +1,27 @@
+﻿<div class="container" id="main-container">
+    <!-- <att-loader></att-loader>  IMPORTANT: this is the actual directive -->
+    <div class="loader"></div>  <!-- this is just static representation -->
+
+</div>
+
+<div id="options-panel">
+    This component has no additional options.
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/loader/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/loader/loader.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/loader.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

@@ -1,0 +1,30 @@
+﻿<div class="container" id="main-container">
+    <div class="padding">
+        <div class="container" id="main-container">
+            <att-menu items="items" title="Title"></att-menu>
+        </div>
+    </div>
+</div>
+
+<div id="options-panel">
+    <button ng-click="open()">Open me!</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/menu/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/menu/menu.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/menu.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

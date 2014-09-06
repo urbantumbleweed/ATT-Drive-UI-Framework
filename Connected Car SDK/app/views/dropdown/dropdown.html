@@ -1,0 +1,26 @@
+﻿<div class="container" id="main-container">
+    <att-dropdown default-option="Please select an option:" items="items" close-button="true" ng-model="selectedItem">
+    </att-dropdown>
+</div>
+
+<div id="options-panel">
+    This component has no additional options.
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <att-dynamic-content data-url="/views/dropdown/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/dropdown/dropdown.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/dropdown.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

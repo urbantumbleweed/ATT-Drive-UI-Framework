@@ -1,0 +1,41 @@
+.att-progress-bar{
+
+  background-color: #ffffff;
+
+  .progress-bar{
+    background-color: @progress-bar-bg;
+    height: 5px;
+  }
+
+  .label{
+    font: @font-size-base;
+    position: relative;
+    top: -1.5em;
+    text-transform: uppercase;
+  }
+
+  .value{
+    position: relative;
+    float: right;
+    top: -1.7em;
+  }
+
+
+
+
+  /* Contextual variants
+  ------------------------------------------*/
+
+  .progress-bar-success{
+    background-color: @progress-bar-success-bg;
+  }
+  .progress-bar-warning{
+    background-color: @progress-bar-warning-bg;
+  }
+  .progress-bar-danger{
+    background-color: @progress-bar-danger-bg;
+  }
+
+
+
+}
