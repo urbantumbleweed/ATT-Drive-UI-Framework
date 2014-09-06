@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', [
+var app = angular.module('app', [
     'ngRoute',
     'connectedCarSDK'
 ]);
@@ -33,7 +33,7 @@ app.config(function($routeProvider) {
 
 app.run(function($rootScope) {
 
-    $rootScope.appName = 'ACCUWEATHER';
+    $rootScope.appName = 'WEATHER';
     $rootScope.showDrawer = false;
 
     $rootScope.$on('$routeChangeSuccess',
