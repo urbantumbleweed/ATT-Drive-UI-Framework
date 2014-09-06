@@ -1,10 +1,11 @@
 ## Installation
-In Connected Car SDK folder run `npm install`
-then `bower install`
-then `grunt serve`
+- With NodeJS installed run as sudo: `$npm install -g grunt bower karma grunt-cli`
+- In Connected Car SDK folder run: `$npm install`
+- Then: `$bower install`
+- and finally: `$grunt serve` or `$grunt server --force` if you see any errors
 
 ## Running the docs website
-Default browser should auto-start and run http://localhost:9000
+Default browser should auto-start and run http://localhost:9000 after you execute grunt serve command. 
 
 ## Running the example app (Weather)
 - Install http-server (node module) globally `npm install –g http-server`
