@@ -1,0 +1,103 @@
+.range-slider {
+    
+  // Slider
+  .input-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: @progress-bar-bg;
+    outline: none;
+    // background-image: -webkit-gradient(linear, left top, right top, color-stop(0.2, @progress-bar-bg), color-stop(0.2, #fff));
+    
+    // Slider Handle
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: @progress-bar-bg;
+      cursor: pointer;
+      -webkit-transition: background .15s ease-in-out;
+      transition: background .15s ease-in-out;
+      
+      &:hover {
+        background: @progress-bar-bg;
+      }
+    }
+    
+    &:active::-webkit-slider-thumb {
+      width: 32px;
+      height: 32px;
+      border: 6px solid white;
+    }
+    
+    &::-moz-range-thumb {
+      width:20px;
+      height: 20px;
+      border: 0;
+      border-radius: 50%;
+      background: @progress-bar-bg;
+      cursor: pointer;
+      -webkit-transition: background .15s ease-in-out;
+      transition: background .15s ease-in-out;
+      
+      &:hover {
+        background: @progress-bar-bg;
+      }
+    }
+    
+    &:active::-moz-range-thumb {
+      background: #e06161;
+    }
+  }
+
+  .input-range-success{
+    background: @progress-bar-success-bg;
+    // background-image: -webkit-gradient(linear, left top, right top, color-stop(0.2, @progress-bar-success-bg), color-stop(0.2, #fff));
+    &::-webkit-slider-thumb {
+      background: @progress-bar-success-bg;
+      &:hover {
+        background: @progress-bar-success-bg;
+      }
+    }
+  }
+  .input-range-warning{
+    background: @progress-bar-warning-bg;
+    // background-image: -webkit-gradient(linear, left top, right top, color-stop(0.2, @progress-bar-warning-bg), color-stop(0.2, #fff));
+    &::-webkit-slider-thumb {
+      background: @progress-bar-warning-bg;
+      &:hover {
+        background: @progress-bar-warning-bg;
+      }
+    }
+  }
+  .input-range-danger{
+    background: @progress-bar-danger-bg;
+    // background-image: -webkit-gradient(linear, left top, right top, color-stop(0.2, @progress-bar-danger-bg), color-stop(0.2, #fff));
+    &::-webkit-slider-thumb {
+      background: @progress-bar-danger-bg;
+      &:hover {
+        background: @progress-bar-danger-bg;
+      }
+    }
+  }
+
+  span.value-left,
+  span.value-right {
+    text-transform: uppercase;
+  }
+  span.value-right {
+    float: right;
+  }
+
+}
+
+// Firefox Overrides
+::-moz-range-track {
+    background: #ccc;
+    border: 0;
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}

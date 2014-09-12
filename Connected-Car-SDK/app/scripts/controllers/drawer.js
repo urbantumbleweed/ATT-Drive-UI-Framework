@@ -20,10 +20,11 @@ angular.module('connectedCarSDK').controller('DrawerCtrl', function($rootScope, 
         { text: 'Third view', desc: 'Description of the view', href: '#/' },
     ];
     
-    $rootScope.showDrawer = false;
+    $scope.showDrawer = false;
 
     $scope.toggleDrawer = function() {
-        $rootScope.showDrawer = !$rootScope.showDrawer;
+        $scope.showDrawer = !$scope.showDrawer;
+        $rootScope.$broadcast('changeDrawer', [$scope.showDrawer]);
     };
 
 });

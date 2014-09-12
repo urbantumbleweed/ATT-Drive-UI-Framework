@@ -9,13 +9,15 @@
 angular.module('connectedCarSDK.attBadge', [])
   .directive('attBadge', function () {
       return {
-          templateUrl: '/templates/attBadge.html',
+          templateUrl: 'templates/attBadge.html',
           restrict: 'E',
           replace: true,
           scope: {
-              value: "@"
+              value: "@",
+              badgeType: "@"
           },
           link: function (scope, element, attrs) {
+              var a = 5;
           }
       };
   });

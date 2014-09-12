@@ -1,0 +1,81 @@
+﻿<div class="container" id="main-container">
+    <div class="padding">
+        
+        <p>Default</p>
+        <att-slider type="default"
+                    min="{{sliderConfig.min}}"
+                    max="{{sliderConfig.max}}"
+                    ng-model="defaultSlider.val"
+                    text-left="{{defaultSlider.textLeft}}"
+                    text-right="{{defaultSlider.textRight}}">
+        </att-slider>
+
+        <br>
+
+        <p>Success</p>
+        <att-slider type="success"
+                    min="{{sliderConfig.min}}"
+                    max="{{sliderConfig.max}}"
+                    ng-model="successSlider.val"
+                    text-left="{{successSlider.textLeft}}"
+                    text-right="{{successSlider.textRight}}">
+        </att-slider>
+
+        <br>
+
+        <p>Warning</p>
+        <att-slider type="warning"
+                    min="{{sliderConfig.min}}"
+                    max="{{sliderConfig.max}}"
+                    ng-model="warningSlider.val"
+                    text-left="{{warningSlider.textLeft}}"
+                    text-right="{{warningSlider.textRight}}">
+        </att-slider>
+
+        <br>
+
+        <p>Danger</p>
+        <att-slider type="danger"
+                    min="{{sliderConfig.min}}"
+                    max="{{sliderConfig.max}}"
+                    ng-model="dangerSlider.val"
+                    text-left="{{dangerSlider.textLeft}}"
+                    text-right="{{dangerSlider.textRight}}">
+        </att-slider>
+
+    </div>
+</div>
+
+<div id="options-panel">
+    
+    <span>Default: </span>{{defaultSlider.val}}
+    <br />
+    
+    <span>Success: </span>{{successSlider.val}}
+    <br />
+    
+    <span>Warning: </span>{{warningSlider.val}}
+    <br />
+    
+    <span>Danger: </span>{{dangerSlider.val}}
+    <br />
+
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/slider/slider.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/slider.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

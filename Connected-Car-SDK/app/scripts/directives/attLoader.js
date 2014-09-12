@@ -11,7 +11,7 @@ angular.module('connectedCarSDK.attLoader', [])
       return {
           restrict: 'E',
           replace: true,
-          templateUrl: '/templates/attLoader.html',
+          templateUrl: 'templates/attLoader.html',
           link: function (scope, element, attrs) {
 
               scope.isLoading = function () {

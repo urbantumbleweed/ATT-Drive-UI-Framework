@@ -10,7 +10,7 @@ angular.module('connectedCarSDK.attListView', [])
     .directive('attListView', function() {
         return {
             restrict: 'E',
-            templateUrl: '/templates/attListView.html',
+            templateUrl: 'templates/attListView.html',
             replace: true,
             
             scope: {

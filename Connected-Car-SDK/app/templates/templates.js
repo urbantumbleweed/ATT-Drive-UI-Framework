@@ -1,11 +1,11 @@
-angular.module('templates-main', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
+angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
 angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attAlert.html",
     "<div class=\"att-alert\" ng-class=\"type && 'alert-' + type\" ng-hide=\"closeAlert\" ng-click=\"close()\">\n" +
     "    <div class=\"content\">\n" +
     "        <h1 class=\"alert-heading\" ng-bind=\"title\"></h1>\n" +
-    "        <p class=\"alert-text\" ng-bind=\"text\"></p>\n" +
+    "        <p class=\"alert-text\" ng-transclude></p>\n" +
     "    </div>\n" +
     "    <div class=\"alert-button\">\n" +
     "        <div class=\"btn btn-default\" ng-show=\"showConfirmationBtn\" ng-click=\"onClick()\">{{buttonText}}</div>\n" +
@@ -18,7 +18,7 @@ angular.module("templates/attAlert.html", []).run(["$templateCache", function($t
 
 angular.module("templates/attBadge.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attBadge.html",
-    "<span class=\"att-badge\">\n" +
+    "<span class=\"att-badge badge-{{badgeType}}\">\n" +
     "    {{value}}\n" +
     "</span>");
 }]);
@@ -51,7 +51,7 @@ angular.module("templates/attDropdown.html", []).run(["$templateCache", function
 angular.module("templates/attHeader.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attHeader.html",
     "<div class=\"att-header\">\n" +
-    "    <h3 class=\"active-screen\"><i id=\"menu-icon\" class=\"fa fa-bars separate-right-10\"></i>{{currentItem}}</h3>\n" +
+    "    <h3 class=\"active-screen\"><i id=\"menu-icon\" class=\"fa fa-bars separate-right-10\" ng-click=\"openMenu()\"></i>{{currentItem}}</h3>\n" +
     "    <div class=\"app-branding\">\n" +
     "        <span class=\"app-name\" ng-bind=\"appName\"></span>\n" +
     "        <img class=\"app-icon\" ng-src=\"{{appImage}}\">\n" +

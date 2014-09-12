@@ -10,7 +10,8 @@
 
 angular.module('connectedCarSDK')
   .controller('ProgressBarCtrl', function ($scope) {
-      $scope.max = 200;
+      $scope.max = 100;
+      $scope.min = 0;
 
       $scope.random = function () {
           var value = Math.floor((Math.random() * 100) + 1);

@@ -30,6 +30,7 @@ var app = angular
     'connectedCarSDK.attMenu',
     'connectedCarSDK.attDrawer',
     'connectedCarSDK.attHeader',
+    'connectedCarSDK.attSlider',
     'connectedCarSDK.attDynamicContent'
   ])
   .config(function ($routeProvider) {
@@ -82,6 +83,10 @@ var app = angular
             templateUrl: 'views/radio/radio.html',
             controller: 'RadioBtnCtrl'
         })
+          .when('/checkbox', {
+              templateUrl: 'views/checkbox/checkbox.html'
+
+          })
         .when('/listview', {
             templateUrl: 'views/listView/listView.html',
             controller: 'ListViewCtrl'
@@ -97,6 +102,10 @@ var app = angular
         .when('/header', {
             templateUrl: 'views/header/header.html',
             controller: 'HeaderCtrl'
+        })
+        .when('/slider', {
+            templateUrl: 'views/slider/slider.html',
+            controller: 'SliderCtrl'
         })
         .otherwise({
             redirectTo: '/'

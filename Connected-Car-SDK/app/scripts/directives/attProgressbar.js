@@ -9,7 +9,8 @@
 angular.module('connectedCarSDK.attProgressBar', [])
  .constant('progressConfig', {
      animate: true,
-     max: 100
+     max: 100,
+     min: 0
  })
 
 .controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function ($scope, $attrs, progressConfig) {
@@ -18,6 +19,9 @@ angular.module('connectedCarSDK.attProgressBar', [])
 
     this.bars = [];
     $scope.max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : progressConfig.max;
+    $scope.min = angular.isDefined($attrs.min) ? $scope.$parent.$eval($attrs.min) : progressConfig.min;
+    $scope.textLeft = angular.isDefined($attrs.textLeft) ? $scope.$parent.$eval($attrs.textLeft) : progressConfig.textLeft;
+    $scope.textRight = angular.isDefined($attrs.textRight) ? $scope.$parent.$eval($attrs.textRight) : progressConfig.textRight;
 
     this.addBar = function (bar, element) {
         if (!animate) {
@@ -45,13 +49,12 @@ angular.module('connectedCarSDK.attProgressBar', [])
     return {
         restrict: 'EA',
         replace: true,
-        transclude: true,
         controller: 'ProgressController',
         scope: {
             value: '=',
             type: '@'
         },
-        templateUrl: '/templates/attProgressBar.html',
+        templateUrl: 'templates/attProgressBar.html',
         link: function (scope, element, attrs, progressCtrl) {
             progressCtrl.addBar(scope, angular.element(element.children()[0]));
         }

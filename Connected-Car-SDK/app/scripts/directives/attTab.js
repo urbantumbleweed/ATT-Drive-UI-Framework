@@ -6,7 +6,7 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
           require: '^attTabset',
           restrict: 'EA',
           replace: true,
-          templateUrl: '/templates/tabs/attTab.html',
+          templateUrl: 'templates/tabs/attTab.html',
           transclude: true,
           scope: {
               active: '=?',

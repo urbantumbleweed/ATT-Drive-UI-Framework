@@ -10,8 +10,8 @@
         on-click="alert.onClick(); removeAlert($index)"
         on-close="alert.onClose(); removeAlert($index)"
         auto-close-interval="alert.autoCloseInterval"
-        title="alert.title"
-        text="alert.text">
+        title="alert.title">
+        {{alert.text}}
     </att-alert>
 </div>
 
@@ -30,9 +30,9 @@
     <input type="text" name="alertText" ng-model="text" /><br />
 
     <label for="showIcon">Show Icon:</label><br />
-    <input type="checkbox" name="showIcon" ng-model="showIcon" /><br />
+    <input type="checkbox" style="display:block" name="showIcon" ng-model="showIcon" /><br />
     <label for="showConfirmationBtn">Show Confirmation Button:</label><br />
-    <input type="checkbox" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
+    <input type="checkbox" style="display:block" name="showConfirmationBtn" ng-model="showConfirmationBtn" /><br />
     <label for="buttonText">Confirmation Button Text:</label><br />
     <input type="text" name="buttonText" ng-model="buttonText" /><br />
 

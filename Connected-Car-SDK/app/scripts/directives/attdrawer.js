@@ -7,17 +7,26 @@
  * # attdrawer
  */
 angular.module('connectedCarSDK.attDrawer', [])
-    .directive('attDrawer', function($rootScope) {
-        return {
-            restrict: 'E',
-            templateUrl: '/templates/attDrawer.html',
-            transclude: true,
-            link: function (scope, element, attrs) {
+    .directive('attDrawer', [
+        '$rootScope', function($rootScope) {
+            return {
+                restrict: 'E',
+                templateUrl: 'templates/attDrawer.html',
+                transclude: true,
+                scope: {},
+                link: function(scope, element, attrs) {
 
-                scope.closeDrawer = function() {
-                    $rootScope.showDrawer = false;
-                };
+                    scope.showDrawer = false;
 
-            }
-        };
-    });
+                    scope.closeDrawer = function() {
+                        scope.showDrawer = false;
+                    };
+
+                    $rootScope.$on('changeDrawer', function(event, args) {
+                        scope.showDrawer = args[0];
+                    });
+
+                }
+            };
+        }
+    ]);

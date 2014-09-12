@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('connectedCarSdk.transition', [])
+angular.module('connectedCarSDK.transition', [])
   /**
  * $transition service provides a consistent interface to trigger CSS 3 transitions and to be informed when they complete.
  * @param  {DOMElement} element  The DOMElement that will be animated.

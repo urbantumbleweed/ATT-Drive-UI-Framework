@@ -6,7 +6,7 @@
  * @description
  * # attModal
  */
-angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
+angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
   /**
  * A helper, internal data structure that acts as a map but also allows getting / removing
  * elements in the LIFO order
@@ -68,7 +68,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
       return {
           restrict: 'EA',
           replace: true,
-          templateUrl: '/templates/modal/backdrop.html',
+          templateUrl: 'templates/modal/backdrop.html',
           link: function (scope, element, attrs) {
               scope.backdropClass = attrs.backdropClass || '';
 
@@ -92,7 +92,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSdk.transition'])
           replace: true,
           transclude: true,
           templateUrl: function (tElement, tAttrs) {
-              return tAttrs.templateUrl || '/templates/modal/window.html';
+              return tAttrs.templateUrl || 'templates/modal/window.html';
           },
           link: function (scope, element, attrs) {
               element.addClass(attrs.windowClass || '');

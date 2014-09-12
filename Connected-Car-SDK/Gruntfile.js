@@ -12,6 +12,8 @@ module.exports = function (grunt) {
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
@@ -23,18 +25,20 @@ module.exports = function (grunt) {
 
     // Define the configuration for all the tasks
     grunt.initConfig({
+        
+        pkg: grunt.file.readJSON('package.json'),
 
         modules: [], //to be filled in by build task
         meta: {
-            modules: 'angular.module("connectedCarSDK", [<%= srcModules %>]);',
-            tplmodules: 'angular.module("connectedCarSDK.tpls", [<%= tplModules %>]);',
-            all: 'angular.module("connectedCarSDK", ["connectedCarSDK.tpls", <%= srcModules %>]);'
+            modules: 'angular.module(\'connectedCarSDK\', [<%= modules %>]);',
+            all: 'angular.module(\'connectedCarSDK\', [\'connectedCarSDK.tpls\', <%= modules %>]);'
         },
 
         html2js: {
             options: {
                 // custom options, see below
-                base: 'app'
+                base: 'app/',
+                module: 'connectedCarSDK.tpls'
             },
             main: {
                 src: ['app/templates/**/*.html'],
@@ -90,7 +94,7 @@ module.exports = function (grunt) {
             },
             styles: {
                 files: ['<%= sdk.app %>/styles/{,*/}*.css'],
-                tasks: ['newer:copy:styles', 'autoprefixer']
+                tasks: ['newer:copy:styles']
             },
             gruntfile: {
                 files: ['Gruntfile.js']
@@ -182,51 +186,22 @@ module.exports = function (grunt) {
                     src: [
                       '.tmp',
                       '<%= sdk.dist %>/{,*/}*',
-                      '!<%= sdk.dist %>/.git*'
+                      '!<%= sdk.dist %>/.git*',
+                      'app/templates/templates.js'
                     ]
                 }]
             },
             server: '.tmp'
         },
-
-        // Add vendor prefixed styles
-        autoprefixer: {
-            options: {
-                browsers: ['last 1 version']
-            },
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '.tmp/styles/',
-                    src: '{,*/}*.css',
-                    dest: '.tmp/styles/'
-                }]
-            }
-        },
-
+        
         // Automatically inject Bower components into the app
         wiredep: {
-            options: {
-                cwd: '<%= sdk.app %>'
-            },
             app: {
                 src: ['<%= sdk.app %>/index.html'],
                 ignorePath: /\.\.\//
             }
         },
-
-        // Renames files for browser caching purposes
-        //filerev: {
-        //    dist: {
-        //        src: [
-        //          '<%= sdk.dist %>/scripts/{,*/}*.js',
-        //          '<%= sdk.dist %>/styles/{,*/}*.css',
-        //          '<%= sdk.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-        //          '<%= sdk.dist %>/styles/fonts/*'
-        //        ]
-        //    }
-        //},
-
+        
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
@@ -268,18 +243,41 @@ module.exports = function (grunt) {
         //     }
         //   }
         // },
-        // uglify: {
-        //   dist: {
-        //     files: {
-        //       '<%= sdk.dist %>/scripts/scripts.js': [
-        //         '<%= sdk.dist %>/scripts/scripts.js'
-        //       ]
-        //     }
-        //   }
-        // },
-        // concat: {
-        //   dist: {}
-        // },
+
+        uglify: {
+            dist: {
+                options: {
+                    mangle: false
+                },
+                files: {
+                    'dist/scripts/<%= pkg.name %>-<%= pkg.version %>.min.js': [
+                        'dist/scripts/<%= pkg.name %>-<%= pkg.version %>.js'
+                    ],
+                    'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.min.js': [
+                        'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js'
+                    ]
+                }
+            }
+        },
+
+        concat: {
+            dist: {
+                options: {
+                    stripBanners: true,
+                    banner: '<%= meta.modules %>',
+                },
+                src: ['app/scripts/services/*', 'app/scripts/directives/*'],
+                dest: 'dist/scripts/<%= pkg.name %>-<%= pkg.version %>.js',
+            },
+            dist_tpls: {
+                options: {
+                    stripBanners: true,
+                    banner: '<%= meta.all %>',
+                },
+                src: ['app/scripts/services/*', 'app/scripts/directives/*', 'app/templates/templates.js'],
+                dest: 'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js',
+            }
+        },
 
         imagemin: {
             dist: {
@@ -334,14 +332,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
-        // Replace Google CDN references
-        cdnify: {
-            dist: {
-                html: ['<%= sdk.dist %>/*.html']
-            }
-        },
-
+        
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
@@ -351,9 +342,9 @@ module.exports = function (grunt) {
                     cwd: '<%= sdk.app %>',
                     dest: '<%= sdk.dist %>',
                     src: [
-                      '*.{ico,png,txt}',
-                      '.htaccess',
-                      '*.html',
+                      //'*.{ico,png,txt}',
+                      //'.htaccess',
+                      //'*.html',
                       'templates/{,*/}*.html',
                       'images/{,*/}*',
                       'fonts/*'
@@ -407,7 +398,6 @@ module.exports = function (grunt) {
           'clean:server',
           'wiredep',
           'concurrent:server',
-          'autoprefixer',
           'connect:livereload',
           'watch'
         ]);
@@ -421,28 +411,29 @@ module.exports = function (grunt) {
     grunt.registerTask('test', [
       'clean:server',
       'concurrent:test',
-      'autoprefixer',
       'connect:test',
       'karma'
     ]);
 
-    grunt.registerTask('build', [
-      'clean:dist',
-      'wiredep',
-      'useminPrepare',
-      'concurrent:dist',
-      'autoprefixer',
-      'concat',
-      'ngmin',
-      'merge',
-      'copy:dist',
-      'cdnify',
-      'cssmin',
-      //'uglify',
-      //'filerev',
-      'usemin',
-      'htmlmin'
-    ]);
+    grunt.registerTask('build', 'build new version of assets/styles/directives into dist folder', function () {
+        
+        grunt.task.run([
+            'clean:dist',
+            'wiredep',
+            'loadModules', // figure out all module names by iterating over directives and services, put the result in modules[] config value
+            'html2js', // go through all template files from app/templates/*.html and create one template.js file with angular templates of each directive 
+            'concat',   // concatenate all services/directives/template.js files into one output in /dist/scripts directory
+            'useminPrepare',
+            'concurrent:dist',
+            'ngmin',
+            'copy:dist',
+            'cssmin',
+            'uglify',
+            'usemin',
+            'htmlmin'
+        ]);
+        
+    });
 
     grunt.registerTask('default', [
       'newer:jshint',
@@ -450,76 +441,24 @@ module.exports = function (grunt) {
       'build'
     ]);
 
-    grunt.registerTask('merge', 'Reads content of all directives and merges them together in one file, under one module', function() {
-        grunt.log.writeln('Merging directives');
-    });
+    grunt.registerTask('loadModules', 'figure out all module names by iterating over directives and services, put the result in modules[] config value', function() {
 
-    grunt.registerTask('convert', ['html2js']);
+        var src = [
+            'app/scripts/directives/*.js',
+            'app/scripts/services/*.js'
+        ];
 
-    var foundModules = {};
-    function findModule(name) {
-        if (foundModules[name]) { return; }
-        foundModules[name] = true;
+        grunt.file.expand({ filter: 'isFile' }, src).forEach(function (path) {
+            grunt.log.ok(path);
 
-        function breakup(text, separator) {
-            return text.replace(/[A-Z]/g, function (match) {
-                return separator + match;
-            });
-        }
-        function ucwords(text) {
-            return text.replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-                return $1.toUpperCase();
-            });
-        }
-        function enquote(str) {
-            return '"' + str + '"';
-        }
-
-        var module = {
-            name: name,
-            moduleName: enquote('connectedCarSDK.' + name),
-            displayName: ucwords(breakup(name, ' ')),
-            srcFiles: grunt.file.expand("app/scripts/directives"+name+"/*.js"),
-            tplFiles: grunt.file.expand("template/"+name+"/*.html"),
-            tpljsFiles: grunt.file.expand("template/"+name+"/*.html.js"),
-            tplModules: grunt.file.expand("template/"+name+"/*.html").map(enquote),
-            dependencies: dependenciesForModule(name),
-            //docs: {
-            //    md: grunt.file.expand("src/"+name+"/docs/*.md")
-            //      .map(grunt.file.read).map(markdown).join("\n"),
-            //    js: grunt.file.expand("src/"+name+"/docs/*.js")
-            //      .map(grunt.file.read).join("\n"),
-            //    html: grunt.file.expand("src/"+name+"/docs/*.html")
-            //      .map(grunt.file.read).join("\n")
-            //}
-        };
-        module.dependencies.forEach(findModule);
-        grunt.config('modules', grunt.config('modules').concat(module));
-    }
-
-    function dependenciesForModule(name) {
-        var deps = [];
-        grunt.file.expand('src/' + name + '/*.js')
-        .map(grunt.file.read)
-        .forEach(function (contents) {
-            //Strategy: find where module is declared,
-            //and from there get everything inside the [] and split them by comma
-            var moduleDeclIndex = contents.indexOf('angular.module(');
-            var depArrayStart = contents.indexOf('[', moduleDeclIndex);
-            var depArrayEnd = contents.indexOf(']', depArrayStart);
-            var dependencies = contents.substring(depArrayStart + 1, depArrayEnd);
-            dependencies.split(',').forEach(function (dep) {
-                if (dep.indexOf('ui.bootstrap.') > -1) {
-                    var depName = dep.trim().replace('ui.bootstrap.', '').replace(/['"]/g, '');
-                    if (deps.indexOf(depName) < 0) {
-                        deps.push(depName);
-                        //Get dependencies for this new dependency
-                        deps = deps.concat(dependenciesForModule(depName));
-                    }
-                }
-            });
+            grunt.config('modules', grunt.config('modules')
+                .concat("'connectedCarSDK." + path.substring(path.lastIndexOf('/') + 1,
+                        path.lastIndexOf('.')) + "'"));
+            
         });
-        return deps;
-    }
 
+        grunt.log.ok(grunt.config('modules'));
+
+    });
+    
 };

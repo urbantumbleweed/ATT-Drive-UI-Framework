@@ -9,7 +9,7 @@
 angular.module('connectedCarSDK.attMenu', [])
   .directive('attMenu', function () {
       return {
-          templateUrl: '/templates/attMenu.html',
+          templateUrl: 'templates/attMenu.html',
           restrict: 'E',
           replace: true,
           scope: {

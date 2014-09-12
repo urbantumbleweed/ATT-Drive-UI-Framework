@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(.) styles/font-asesome.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
@@ -58,6 +58,7 @@
                 <li><a href="#/carousel">Carousel</a></li>
                 <li><a href="#/buttons">Buttons</a></li>
                 <li><a href="#/radio">Radio Buttons</a></li>
+                <li><a href="#/checkbox">Checkboxes</a></li>
                 <li><a href="#/alert">Alert</a></li>
                 <li><a href="#/dropdown">Dropdown</a></li>
                 <li><a href="#/badge">Badge</a></li>
@@ -67,19 +68,22 @@
                 <li><a href="#/menu">Menu</a></li>
                 <li><a href="#/header">Header</a></li>
                 <li><a href="#/loader">Loader</a></li>
+                <li><a href="#/slider">Slider</a></li>
             </ul>
                 </div>
         </div>
 <div class="col-md-10">
     <div ng-view></div>
 </div>
+        <footer>
+            <div class="footer">
+                <p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
+                <p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
+            </div>
+        </footer>
     </div>
-    <footer>
-    <div class="footer">
-<p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
-<p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
-        </div>
-</footer>
+
+
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -102,6 +106,8 @@
 
     <!-- build:js({.tmp,app}) scripts/ui.connected-car.js -->
     <!--<script src="directives/ui.connected-car.js"></script>-->
+    
+    <script src="scripts/services/transition.js"></script>
 
     <script src="scripts/directives/attToggleSwitch.js"></script>
     <script src="scripts/directives/attTab.js"></script>
@@ -118,8 +124,8 @@
     <script src="scripts/directives/attDrawer.js"></script>
     <script src="scripts/directives/attMenu.js"></script>
     <script src="scripts/directives/attHeader.js"></script>
-
-    <script src="scripts/services/transition.js"></script>
+    <script src="scripts/directives/attSlider.js"></script>
+    
     <!-- endbuild -->
 
     <script src="scripts/app.js"></script>
@@ -140,7 +146,8 @@
     <script src="scripts/controllers/drawer.js"></script>
     <script src="scripts/controllers/menu.js"></script>
     <script src="scripts/controllers/header.js"></script>
-        
+    <script src="scripts/controllers/slider.js"></script>    
+
     <script src="scripts/appDirectives/attDynamicContent.js"></script>
 </body>
 </html>

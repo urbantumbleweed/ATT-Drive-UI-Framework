@@ -36,9 +36,12 @@ app.run(function($rootScope) {
     $rootScope.appName = 'WEATHER';
     $rootScope.showDrawer = false;
 
+
     $rootScope.$on('$routeChangeSuccess',
         function (event, next, current) {
             $rootScope.showDrawer = false;
+
+            $rootScope.$broadcast('changeDrawer', [false]);
 
             if (next && next.$$route && next.$$route.settings) {
                 $rootScope.viewName = next.$$route.settings.viewName;

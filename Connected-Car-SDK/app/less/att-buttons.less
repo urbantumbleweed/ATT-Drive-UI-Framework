@@ -1,6 +1,5 @@
 .btn {
   font-family: 'omnes_attlight', sans-serif;
-  width: 200px;
   height: 60px;
   padding: 0 20px;
   border: 2px solid white;
@@ -8,7 +7,7 @@
   background-color: transparent;
   color: white;
   cursor: pointer;
-
+  font-size: 24px;
 
   margin: 0;
   font-weight: @btn-font-weight;
@@ -18,13 +17,13 @@
 
 
   white-space: nowrap;
-  .button-size(@padding-base-vertical; @padding-base-horizontal; 24px; 1.8; 0);
+  // .button-size(@padding-base-vertical; @padding-base-horizontal; 24px; 1.8; 0);
+
 
   &:focus,
   &.focus {
-    padding: 0;
+    padding: 0 16px;
   }
-
 
 
   &.disabled,
@@ -44,7 +43,7 @@
 
       &:focus,
       &.focus {
-        border: 7px solid white;
+        border: 6px solid white;
       }
 
       &:active,
@@ -63,7 +62,7 @@
 
     &:focus,
     &.focus {
-      border: 7px solid lighten(@brand-primary, 30%);
+      border: 6px solid lighten(@brand-primary, 30%);
     }
 
     &:active,
@@ -84,7 +83,7 @@
 
     &:focus,
     &.focus {
-      border: 7px solid lighten(@brand-danger, 30%);
+      border: 6px solid lighten(@brand-danger, 30%);
     }
 
     &:active,
@@ -99,7 +98,7 @@
 
     &:focus,
     &.focus {
-      border: 7px solid lighten(@brand-success, 30%);
+      border: 6px solid lighten(@brand-success, 30%);
     }
 
     &:active,
@@ -114,7 +113,7 @@
 
     &:focus,
     &.focus {
-      border: 7px solid lighten(@brand-warning, 30%);
+      border: 6px solid lighten(@brand-warning, 30%);
     }
 
     &:active,
@@ -130,7 +129,7 @@
 
     &:focus,
     &.focus {
-      border: 7px solid white;
+      border: 6px solid white;
     }
 
     &:active,

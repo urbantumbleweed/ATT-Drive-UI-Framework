@@ -12,7 +12,7 @@ angular.module('connectedCarSDK.attAlert', [])
 
             return {
                 restrict: 'AE',
-                templateUrl: '/templates/attAlert.html',
+                templateUrl: 'templates/attAlert.html',
                 transclude: true,
                 replace: true,
                 scope: {
@@ -23,14 +23,9 @@ angular.module('connectedCarSDK.attAlert', [])
                     onClick: '&',               // function/callback for confirmation button click
                     onClose: '&',               // function/callback for when the alert is closed
                     autoCloseInterval: '=',     // in miliseconds
-                    title: '=',                 // string
-                    text: '='                   // string
+                    title: '='                 // string
                 },
                 link: function(scope, element, attrs) {
-
-                    console.log('Show Confirmation Button', scope.showConfirmationBtn);
-                    console.log('Button Text', scope.buttonText);
-                    console.log('Alert Text', scope.text);
 
                     var timeoutPromise;
                     if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
