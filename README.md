@@ -5,7 +5,7 @@ This AT&T Drive Automotive App development UI Kit is built to enable you -the de
 At this time this is only an UI toolkit, with a goal to by 2015 include Drive Platform APIS and become an all-around SDK.
 
 ## App examples
-<img src="https://github.com/dmustafic/AT-T-Drive-UI-Framework-CTIA/blob/master/Connected-Car-SDK/app/images/att-drive-apps-onesheet.png">
+<img src="/app/images/att-drive-apps-onesheet.png">
 
 ## Installation
 - With NodeJS installed run as sudo: `$npm install -g grunt bower karma grunt-cli`
