@@ -2,16 +2,7 @@
     <div class="padding">
     <h4>(click "Show Alert")</h4>
     </div>
-    <att-alert ng-repeat="alert in alerts"
-        type="alert.type"
-        show-icon="alert.showIcon"
-        show-confirmation-btn="alert.showConfirmationBtn"
-        button-text="alert.buttonText"
-        on-click="alert.onClick(); removeAlert($index)"
-        on-close="alert.onClose(); removeAlert($index)"
-        auto-close-interval="alert.autoCloseInterval"
-        title="alert.title">
-        {{alert.text}}
+    <att-alert ng-repeat="alert in alerts">
     </att-alert>
 </div>
 
@@ -37,7 +28,7 @@
     <input type="text" name="buttonText" ng-model="buttonText" /><br />
 
     <label for="autoClose">Auto Close interval:</label><br />
-    <input type="number" name="autoClose" ng-model="autoClose" /><br />
+    <input type="number" name="autoCloseInterval" ng-model="autoCloseInterval" /><br />
     <br />
 
     <button type="button" ng-click="showAlert()">Show Alert</button><br />

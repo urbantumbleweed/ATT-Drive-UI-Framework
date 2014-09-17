@@ -17,7 +17,7 @@ angular.module('connectedCarSDK')
           //alert('On Close event called');
 
       };
-
+      
       $scope.onClose = function () {
           //alert('on Close');
       };
@@ -27,17 +27,17 @@ angular.module('connectedCarSDK')
       };
 
       $scope.alerts = [];
-      //$scope.alerts.push({
-      //    type: 'info',
-      //    showIcon: false,
-      //    showConfirmationBtn: true,
-      //    buttonText: 'OK',
-      //    onClose: $scope.onClose,
-      //    onClick: $scope.onClick,
-      //    autoCloseInterval: undefined,
-      //    title: 'Sample alert title',
-      //    text: 'Sample alert text'
-      //});
+      $scope.alerts.push({
+          type: 'info',
+          showIcon: false,
+          showConfirmationBtn: true,
+          buttonText: 'OK',
+          onClose: $scope.onClose,
+          onClick: $scope.onClick,
+          autoCloseInterval: undefined,
+          title: 'Sample alert title',
+          text: 'Sample alert text'
+      });
 
       $scope.showAlert = function () {
 
@@ -48,7 +48,7 @@ angular.module('connectedCarSDK')
               buttonText: $scope.buttonText,
               onClose: $scope.onClose,
               onClick: $scope.onClick,
-              autoCloseInterval: $scope.autoClose,
+              autoCloseInterval: $scope.autoCloseInterval,
               title: $scope.title,
               text: $scope.text
           });

@@ -31,6 +31,7 @@ var app = angular
     'connectedCarSDK.attDrawer',
     'connectedCarSDK.attHeader',
     'connectedCarSDK.attSlider',
+    'connectedCarSDK.attMediaPlayer',
     'connectedCarSDK.attDynamicContent'
   ])
   .config(function ($routeProvider) {
@@ -106,6 +107,10 @@ var app = angular
         .when('/slider', {
             templateUrl: 'views/slider/slider.html',
             controller: 'SliderCtrl'
+        })
+        .when('/mediaPlayer', {
+            templateUrl: 'views/mediaPlayer/mediaPlayer.html',
+            controller: 'MediaPlayerCtrl'
         })
         .otherwise({
             redirectTo: '/'

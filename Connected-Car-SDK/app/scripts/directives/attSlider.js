@@ -43,6 +43,10 @@ angular.module('connectedCarSDK.attSlider', [])
                     
                 }
 
+                scope.sliderMoved = function () {
+                    scope.$emit("sliderMoved", null);
+                };
+
                 // watch for model changes and repaint the slider
                 // using new calculated gradient stops
                 scope.$watch(function () {

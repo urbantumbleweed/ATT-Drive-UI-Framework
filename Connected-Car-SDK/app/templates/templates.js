@@ -1,4 +1,4 @@
-angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
+angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMenu.html', 'templates/attProgressBar.html', 'templates/attSlider.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
 angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attAlert.html",
@@ -101,11 +101,20 @@ angular.module("templates/attMenu.html", []).run(["$templateCache", function($te
 angular.module("templates/attProgressBar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attProgressBar.html",
     "<div class=\"att-progress-bar\">\n" +
-    "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\">\n" +
-    "      <span class=\"label\" ng-transclude></span>\n" +
+    "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"{{min}}\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\">\n" +
+    "     <span class=\"label\">{{textLeft}}</span>\n" +
     "  </div>\n" +
-    "    <span class=\"value\">{{value}}</span>\n" +
+    "    <span class=\"value\">{{textRight}}</span>\n" +
     "</div>");
+}]);
+
+angular.module("templates/attSlider.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attSlider.html",
+    "<div class=\"range-slider\">\n" +
+    "    <span class=\"value-left\">{{textLeft}}</span>\n" +
+    "    <span class=\"value-right\">{{textRight}}</span>\n" +
+    "    <input class=\"input-range input-range-{{type}}\" type=\"range\" ng-model=\"ngModel\" min=\"{{min}}\" max=\"{{max}}\">\n" +
+    "</div> ");
 }]);
 
 angular.module("templates/attToggleSwitch.html", []).run(["$templateCache", function($templateCache) {

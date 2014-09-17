@@ -1,0 +1,24 @@
+﻿<div class="container" id="main-container">
+    <att-media-player playlist="playlist" autoplay="true"></att-media-player>
+</div>
+
+<div id="options-panel">
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            <!--<att-dynamic-content data-url="/views/listView/readme.md" markdown="true" linenums="false"></att-dynamic-content>-->
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/mediaPlayer/mediaPlayer.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+                <div ng-include=" '/scripts/controllers/mediaPlayer.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

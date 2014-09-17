@@ -1,0 +1,27 @@
+﻿<div>
+    <a ng-click="changeFile(-1)">Previous</a>
+    <a ng-mousedown="changePosition(true, false)" ng-mouseup="changePosition(true, true)">Rewind</a>
+    <a ng-click="changeStatus()">{{ (!audio.paused && audio.duration > 0) ? 'Pause' : 'Play' }}</a>
+    <a ng-mousedown="changePosition(false, false)" ng-mouseup="changePosition(false, true)">Fast Forward</a>
+    <a ng-click="changeFile(1)">Next</a>
+    <br />
+    <br />
+    <!--<att-slider type="default"
+        min="{{sliderConfig.min}}"
+        max="{{sliderConfig.max}}"
+        ng-model="sliderConfig.val"
+        text-left="{{sliderConfig.elapsedTime}}"
+        text-right="{{sliderConfig.remainingTime}}">
+        </att-slider>-->
+    <att-slider type="default"
+        min="{{sliderConfig.min}}"
+        max="{{sliderConfig.max}}"
+        ng-model="sliderConfig.val"
+        text-left="{{sliderConfig.elapsedTime | filter: countdown(true)}}"
+        text-right="{{sliderConfig.remainingTime | filter: countdown(false)}}">
+        </att-slider>
+    <br />
+    <span>Currently playing: {{audio.attributes.src.value.replace("audio/", "")}}</span><br />
+    <a ng-click="changeVolume(changeVolumeQuantity)">Volume up</a>
+    <a ng-click="changeVolume(-changeVolumeQuantity)">Volume down</a>
+</div>

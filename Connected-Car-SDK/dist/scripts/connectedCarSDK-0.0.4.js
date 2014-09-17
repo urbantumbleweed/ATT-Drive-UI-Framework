@@ -1,4 +1,4 @@
-angular.module('connectedCarSDK', ['connectedCarSDK.attAlert','connectedCarSDK.attBadge','connectedCarSDK.attButtons','connectedCarSDK.attCarousel','connectedCarSDK.attDrawer','connectedCarSDK.attDropdown','connectedCarSDK.attHeader','connectedCarSDK.attListView','connectedCarSDK.attLoader','connectedCarSDK.attMenu','connectedCarSDK.attModal','connectedCarSDK.attProgressBar','connectedCarSDK.attTab','connectedCarSDK.attTabset','connectedCarSDK.attToggleSwitch','connectedCarSDK.transition']);'use strict';
+angular.module('connectedCarSDK', ['connectedCarSDK.attAlert','connectedCarSDK.attBadge','connectedCarSDK.attButtons','connectedCarSDK.attCarousel','connectedCarSDK.attDrawer','connectedCarSDK.attDropdown','connectedCarSDK.attHeader','connectedCarSDK.attListView','connectedCarSDK.attLoader','connectedCarSDK.attMenu','connectedCarSDK.attModal','connectedCarSDK.attProgressBar','connectedCarSDK.attSlider','connectedCarSDK.attTab','connectedCarSDK.attTabset','connectedCarSDK.attToggleSwitch','connectedCarSDK.transition']);'use strict';
 
 angular.module('connectedCarSDK.transition', [])
   /**
@@ -1117,7 +1117,8 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
 angular.module('connectedCarSDK.attProgressBar', [])
  .constant('progressConfig', {
      animate: true,
-     max: 100
+     max: 100,
+     min: 0
  })
 
 .controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function ($scope, $attrs, progressConfig) {
@@ -1126,6 +1127,9 @@ angular.module('connectedCarSDK.attProgressBar', [])
 
     this.bars = [];
     $scope.max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : progressConfig.max;
+    $scope.min = angular.isDefined($attrs.min) ? $scope.$parent.$eval($attrs.min) : progressConfig.min;
+    $scope.textLeft = angular.isDefined($attrs.textLeft) ? $scope.$parent.$eval($attrs.textLeft) : progressConfig.textLeft;
+    $scope.textRight = angular.isDefined($attrs.textRight) ? $scope.$parent.$eval($attrs.textRight) : progressConfig.textRight;
 
     this.addBar = function (bar, element) {
         if (!animate) {
@@ -1153,7 +1157,6 @@ angular.module('connectedCarSDK.attProgressBar', [])
     return {
         restrict: 'EA',
         replace: true,
-        transclude: true,
         controller: 'ProgressController',
         scope: {
             value: '=',
@@ -1165,6 +1168,75 @@ angular.module('connectedCarSDK.attProgressBar', [])
         }
     };
 });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name connectedCarSdkApp.directive:attSlider
+ * @description
+ * # attSlider
+ */
+angular.module('connectedCarSDK.attSlider', [])
+    .directive('attSlider', function() {
+        return {
+            restrict: 'EA',
+            templateUrl: 'templates/attSlider.html',
+            scope: {
+                type: '@',
+                ngModel: '=',
+                min: '@',
+                max: '@',
+                textLeft: '@',
+                textRight: '@'
+            },
+            link: function (scope, element, attrs) {
+
+                // set default values
+                scope.min = scope.min || 0;
+                scope.max = scope.max || 100;
+                scope.ngModel = scope.ngModel || 0;
+                
+                var input = element.find('input');
+                if (input && input.length > 0) {
+
+                    // calculate gradient stop position
+                    var value = (scope.ngModel - scope.min) / (scope.max - scope.min);
+                    input[0].style.backgroundImage = [
+                        '-webkit-gradient(',
+                        'linear, ',
+                        'left top, ',
+                        'right top, ',
+                        'color-stop(' + value + ', ' + getComputedStyle(input[0]).backgroundColor + '), ',
+                        'color-stop(' + value + ', #ffffff)',
+                        ')'
+                    ].join('');
+                    
+                }
+
+                // watch for model changes and repaint the slider
+                // using new calculated gradient stops
+                scope.$watch(function () {
+                    return scope.ngModel;
+                }, function () {
+
+                    if (input && input.length > 0) {
+                        // calculate gradient stop position
+                        var gradStop = (scope.ngModel - scope.min) / (scope.max - scope.min);
+                        input[0].style.backgroundImage = [
+                            '-webkit-gradient(',
+                            'linear, ',
+                            'left top, ',
+                            'right top, ',
+                            'color-stop(' + gradStop + ', ' + getComputedStyle(input[0]).backgroundColor + '), ',
+                            'color-stop(' + gradStop + ', #ffffff)',
+                            ')'
+                        ].join('');
+                    }
+                });
+            }
+        };
+    });
 
 'use strict';
 

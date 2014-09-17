@@ -7,53 +7,67 @@
  * # attAlert
  */
 angular.module('connectedCarSDK.attAlert', [])
-    .directive('attAlert', [
-        '$timeout', function($timeout) {
+    .factory('alertProvider', [ '$timeout', function ($timeout) {
+        return {
+            alerts: [],
+            timeoutPromise: null,
 
+            addAlert: function (alert) {
+                if (this.alerts.length == 0)
+                    alert.isActive = true;
+
+                this.alerts.push(alert);
+            },
+
+            removeActiveAlert: function () {
+                this.alerts[0].isActive = false;
+                this.alerts.splice(0, 1);
+
+                if (this.alerts.length > 0)
+                    this.alerts[0].isActive = true;
+            },
+
+            closeAlert: function () {
+                // if there is no confirmation button
+                // tapping anywhere on the alert will close the alert
+                // otherwise, you must dismiss the alert by clicking
+                // on the confirmation button
+                if (!this.alerts[0].showConfirmationBtn) {
+                    if (this.timeoutPromise)
+                        $timeout.cancel(this.timeoutPromise);
+
+                    this.alerts[0].onClose();
+                }
+
+                this.removeActiveAlert();
+                this.handleAutoClose();
+            },
+
+            handleAutoClose: function () {                
+                if (this.alerts[0] && this.alerts[0].autoCloseInterval && parseInt(this.alerts[0].autoCloseInterval) > 0) {
+                    var that = this;
+                    this.timeoutPromise = $timeout(function () {
+                        that.closeAlert();
+                    }, this.alerts[0].autoCloseInterval);
+                }
+            }
+        }
+    }])
+    .directive('attAlert', [
+         'alertProvider', function (alertProvider) {
             return {
                 restrict: 'AE',
                 templateUrl: 'templates/attAlert.html',
-                transclude: true,
                 replace: true,
-                scope: {
-                    type: '=',                  // info, success, danger
-                    showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
-                    showConfirmationBtn: '=',   // true/false (takes precedence over icon)
-                    buttonText: '=',            // string
-                    onClick: '&',               // function/callback for confirmation button click
-                    onClose: '&',               // function/callback for when the alert is closed
-                    autoCloseInterval: '=',     // in miliseconds
-                    title: '='                 // string
-                },
-                link: function(scope, element, attrs) {
+                link: function (scope, element, attrs) {
 
-                    var timeoutPromise;
-                    if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
+                    alertProvider.addAlert(scope.alert);
 
-                        timeoutPromise = $timeout(function() {
-
-                            scope.closeAlert = true;
-                            scope.close();
-
-                        }, scope.autoCloseInterval);
-
-                    }
+                    if (scope.alert.isActive)
+                        alertProvider.handleAutoClose();
 
                     scope.close = function () {
-
-                        // if there is no confirmation button
-                        // tapping anywhere on the alert will close the alert
-                        // otherwise, you must dismiss the alert by clicking
-                        // on the confirmation button
-                        if (scope.showConfirmationBtn != true) {
-
-                            if (timeoutPromise)
-                                $timeout.cancel(timeoutPromise);
-
-                            scope.closeAlert = true;
-                            scope.onClose();
-
-                        }
+                        alertProvider.closeAlert();
                     };
 
                 }
