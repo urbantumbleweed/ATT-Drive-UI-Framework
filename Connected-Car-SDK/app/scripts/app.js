@@ -32,10 +32,11 @@ var app = angular
     'connectedCarSDK.attHeader',
     'connectedCarSDK.attSlider',
     'connectedCarSDK.attMediaPlayer',
-    'connectedCarSDK.attDynamicContent'
+    'connectedCarSDK.attDynamicContent',
+    'connectedCarSDK.attPinPad'
   ])
   .config(function ($routeProvider) {
-      $routeProvider
+    $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
@@ -60,10 +61,10 @@ var app = angular
             templateUrl: 'views/buttons/buttons.html',
             controller: 'ButtonsCtrl'
         })
-	    .when('/alert', {
+        .when('/alert', {
             templateUrl: 'views/alert/alert.html',
             controller: 'AlertCtrl'
-	    })
+        })
         .when('/dropdown', {
             templateUrl: 'views/dropdown/dropdown.html',
             controller: 'DropdownCtrl'
@@ -84,10 +85,10 @@ var app = angular
             templateUrl: 'views/radio/radio.html',
             controller: 'RadioBtnCtrl'
         })
-          .when('/checkbox', {
-              templateUrl: 'views/checkbox/checkbox.html'
+        .when('/checkbox', {
+            templateUrl: 'views/checkbox/checkbox.html'
 
-          })
+        })
         .when('/listview', {
             templateUrl: 'views/listView/listView.html',
             controller: 'ListViewCtrl'
@@ -97,8 +98,8 @@ var app = angular
             controller: 'DrawerCtrl'
         })
         .when('/menu', {
-             templateUrl: 'views/menu/menu.html',
-             controller: 'MenuCtrl'
+            templateUrl: 'views/menu/menu.html',
+            controller: 'MenuCtrl'
         })
         .when('/header', {
             templateUrl: 'views/header/header.html',
@@ -112,10 +113,22 @@ var app = angular
             templateUrl: 'views/mediaPlayer/mediaPlayer.html',
             controller: 'MediaPlayerCtrl'
         })
+        .when('/pinPad', {
+            templateUrl: 'views/pinPad/pinPad.html',
+            controller: 'PinPadCtrl'
+        })
+        .when('/pinPadProvider', {
+            templateUrl: 'views/pinPad/pinPadProvider.html',
+            controller: 'PinPadProviderCtrl'
+        })
+        .when('/simError', {
+            templateUrl: 'views/simError/simError.html'
+
+        })
         .otherwise({
             redirectTo: '/'
         });
-  });
+});
 
 
 app.run(function ($rootScope, $timeout) {

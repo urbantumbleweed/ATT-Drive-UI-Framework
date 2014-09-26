@@ -21,18 +21,19 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               scope.audio = null;
               scope.sliderConfig = { val: 0 };
               scope.changeVolumeQuantity = 0.1;
-              var currentIndex = 0,
-                  changePositionInterval = 5, // seconds
+              scope.currentIndex = 0;
+              var changePositionInterval = 5, // seconds
                   changePositionTimeInterval = 500, // miliseconds                 
                   intervalpromise = null,
                   secondsleft = 0,
                   secondsElapsed = 0,
-                  sliderInterval = null;
+                  sliderInterval = null,
+                  intervalCounter = 0;
 
               if (scope.playlist && scope.playlist.length > 0) {
                   scope.audio = document.createElement("audio");
                   if (scope.audio != null && scope.audio.canPlayType && scope.audio.canPlayType("audio/mpeg")) {
-                      scope.audio.src = scope.playlist[currentIndex];
+                      scope.audio.src = scope.playlist[scope.currentIndex];
 
                       if (scope.autoplay) {
                           startPlayer(true);
@@ -79,12 +80,14 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               };
 
               function setTime() {
-                  secondsElapsed = scope.audio.currentTime;
                   scope.audio.currentTime = scope.sliderConfig.val;
+                  secondsElapsed = scope.audio.currentTime;
+                  scope.sliderConfig.elapsedTime = secondsElapsed;
+                  secondsleft = scope.audio.duration - scope.sliderConfig.val;
+                  scope.sliderConfig.remainingTime = secondsleft;
               };
 
               scope.$on("sliderMoved", function (event, message) {
-                  secondsleft = scope.audio.duration - scope.sliderConfig.val;
                   setTime();
               });
 
@@ -108,25 +111,57 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   else scope.sliderConfig.remainingTime = "-" + min + ":" + sec;
               };
 
+              scope.repeat = function () {
+                  scope.audio.currentTime = 0;
+                  startPlayer(true);
+              };
+
+              scope.shuffle = function () {
+                  var currentSong = scope.playlist[scope.currentIndex];
+
+                  scope.playlist.sort(function () {
+                      return .5 - Math.random();
+                  });
+
+                  angular.forEach(scope.playlist, function (song, index) {
+                      if (song == currentSong)
+                          scope.currentIndex = index;
+                  });
+
+              };
+
               scope.changePosition = function (rewind, stop) {
-                  if (stop) // key released, stop changing position                  
+                  if (stop) { // key released, stop changing position   
                       $interval.cancel(intervalpromise);
+
+                      // if user kept button pressed less than intervalCounter * 2
+                      // then move to next song
+                      // othwerwise it means there occured rewind/fast forward operations, so just reset the counter
+                      if (intervalCounter < 2) {
+                          var index = rewind ? -1 : 1;
+                          intervalCounter = 0;
+                          scope.changeFile(index);
+                      }
+                      else intervalCounter = 0;
+                  }
                   else {
                       intervalpromise = $interval(function () {
-                          if (rewind) {
-                              if (scope.audio.currentTime < changePositionInterval)
-                                  scope.audio.currentTime = 0;
-                              else scope.audio.currentTime -= changePositionInterval;
-                          }
-                          else {
-                              if ((scope.audio.duration - scope.audio.currentTime) < changePositionInterval)
-                                  scope.audio.currentTime = scope.audio.duration;
-                              else scope.audio.currentTime += changePositionInterval;
-                          }
+                          intervalCounter++;
+                          if (intervalCounter >= 2) {
+                              if (rewind) {
+                                  if (scope.audio.currentTime < changePositionInterval)
+                                      scope.audio.currentTime = 0;
+                                  else scope.audio.currentTime -= changePositionInterval;
+                              }
+                              else {
+                                  if ((scope.audio.duration - scope.audio.currentTime) < changePositionInterval)
+                                      scope.audio.currentTime = scope.audio.duration;
+                                  else scope.audio.currentTime += changePositionInterval;
+                              }
 
-                          scope.sliderConfig.val = scope.audio.currentTime;
-                          setTime();
-
+                              scope.sliderConfig.val = scope.audio.currentTime;
+                              setTime();
+                          }
                       }, changePositionTimeInterval);
                   }
               };
@@ -140,18 +175,24 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               };
 
               scope.changeFile = function (index) {
-                  currentIndex += index;
-                  if (!scope.playlist[currentIndex]) {
+                  scope.currentIndex += index;
+                  if (!scope.playlist[scope.currentIndex]) {
 
                       // if the last song on the list is playing and user click "Next"
                       // then reset to 0
                       // otherwise, user clicked "Previous" while on first song
-                      if (scope.playlist.length == currentIndex)
-                          currentIndex = 0;
-                      else currentIndex = scope.playlist.length - 1;
+                      if (scope.playlist.length == scope.currentIndex)
+                          scope.currentIndex = 0;
+                      else scope.currentIndex = scope.playlist.length - 1;
                   }
 
-                  scope.audio.src = scope.playlist[currentIndex];
+                  scope.audio.src = scope.playlist[scope.currentIndex];
+                  startPlayer(true);
+              };
+
+              scope.setFile = function (index) {
+                  scope.currentIndex = index;
+                  scope.audio.src = scope.playlist[scope.currentIndex];
                   startPlayer(true);
               };
 

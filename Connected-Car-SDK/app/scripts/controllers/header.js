@@ -9,11 +9,17 @@
  */
 
 angular.module('connectedCarSDK')
-    .controller('HeaderCtrl', function ($scope) {
+    .controller('HeaderCtrl', ['$scope', '$header', '$timeout', function ($scope, $header, $timeout) {
 
         $scope.appName = 'APPNAME';
         $scope.viewName = 'CURRENT VIEW';
 
-    });
+        //$header.showBackButton(true, function () { alert("preda");});
+
+        $scope.headerCallback = function () {
+            alert("Header Callback");
+        };
+
+    }]);
 
 

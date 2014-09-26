@@ -20,12 +20,13 @@ module.exports = function (grunt) {
     // Configurable paths for the application
     var appConfig = {
         app: require('./bower.json').appPath || 'app',
-        dist: 'dist'
+        dist: 'dist',
+        seedPath: require('./bower.json').seedPath || 'myFirstApp'
     };
 
     // Define the configuration for all the tasks
     grunt.initConfig({
-        
+
         pkg: grunt.file.readJSON('package.json'),
 
         modules: [], //to be filled in by build task
@@ -108,6 +109,14 @@ module.exports = function (grunt) {
                   '.tmp/styles/{,*/}*.css',
                   '<%= sdk.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
+            },
+            seed: {
+                options: {
+                    reload: true
+                },
+                files: [
+                  '<%= sdk.seedApp %>/{,*/}*.html'
+                ]
             }
         },
 
@@ -153,7 +162,23 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     open: true,
-                    base: '<%= sdk.dist %>'
+                    base: '<%= sdk.dist %>',
+                    middleware: function (connect) {
+                        return [
+                          connect.static('.tmp'),
+                          connect().use(
+                            '/bower_components',
+                            connect.static('./bower_components')
+                          ),
+                          connect.static(appConfig.app)
+                        ];
+                    }
+                }
+            },
+            seed: {
+                options: {
+                    open: true,
+                    base: '<%= sdk.seedPath %>'
                 }
             }
         },
@@ -191,9 +216,10 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: '.tmp',
+            seed: ['<%= sdk.seedPath %>']
         },
-        
+
         // Automatically inject Bower components into the app
         wiredep: {
             app: {
@@ -201,7 +227,7 @@ module.exports = function (grunt) {
                 ignorePath: /\.\.\//
             }
         },
-        
+
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
@@ -332,7 +358,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        
+
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
@@ -361,6 +387,21 @@ module.exports = function (grunt) {
                 cwd: '<%= sdk.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
+            },
+            seed: {
+                files: [{
+                    cwd: 'seed',                        // set working folder / root to copy
+                    src: '**/*',                        // copy all files and subfolders
+                    dest: '<%= sdk.seedPath %>',            // destination folder
+                    expand: true                        // required when using cwd
+                },
+                {
+                    cwd: 'dist',                        // set working folder / root to copy
+                    src: '**/*',                        // copy all files and subfolders
+                    dest: '<%= sdk.seedPath %>/att-sdk',    // destination folder
+                    expand: true                        // required when using cwd
+                }
+                ]
             }
         },
 
@@ -390,15 +431,30 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'connect:dist:keepalive']);
-        }
+        //if (target === 'dist') {
+        //    return grunt.task.run(['build', 'connect:dist:keepalive']);
+        //}
 
         grunt.task.run([
           'clean:server',
           'wiredep',
           'concurrent:server',
-          'connect:livereload',
+          'connect:dist:keepalive',
+          //'connect:livereload',
+          'watch'
+        ]);
+    });
+
+    grunt.registerTask('seed', 'Compile then start a connect web server', function () {
+        if (grunt.option('name')) {
+            appConfig.seedPath = grunt.option('name');
+        }
+
+        grunt.task.run([
+          'clean:seed',
+          'build',
+          'copy:seed',
+          'connect:seed:keepalive',
           'watch'
         ]);
     });
@@ -416,7 +472,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', 'build new version of assets/styles/directives into dist folder', function () {
-        
+
         grunt.task.run([
             'clean:dist',
             'wiredep',
@@ -432,7 +488,7 @@ module.exports = function (grunt) {
             'usemin',
             'htmlmin'
         ]);
-        
+
     });
 
     grunt.registerTask('default', [
@@ -441,7 +497,7 @@ module.exports = function (grunt) {
       'build'
     ]);
 
-    grunt.registerTask('loadModules', 'figure out all module names by iterating over directives and services, put the result in modules[] config value', function() {
+    grunt.registerTask('loadModules', 'figure out all module names by iterating over directives and services, put the result in modules[] config value', function () {
 
         var src = [
             'app/scripts/directives/*.js',
@@ -454,11 +510,11 @@ module.exports = function (grunt) {
             grunt.config('modules', grunt.config('modules')
                 .concat("'connectedCarSDK." + path.substring(path.lastIndexOf('/') + 1,
                         path.lastIndexOf('.')) + "'"));
-            
+
         });
 
         grunt.log.ok(grunt.config('modules'));
 
     });
-    
+
 };

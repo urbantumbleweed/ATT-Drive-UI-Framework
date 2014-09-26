@@ -12,18 +12,24 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
           templateUrl: 'templates/attToggleSwitch.html',
           restrict: 'E',
           scope: {
-              ngModel: '='
+              ngModel: '=',
+              onChange: '&'
           },
           require: '^ngModel',
           link: function (scope, element, attrs) {
 
               if (angular.isDefined(attrs.disabled)) {
-                  element.find("label").attr("disabled", "disabled");
+                  element.find('*').attr('disabled', 'disabled');
               }
 
-              scope.change = function(enabled) {
+              scope.click = function(enabled) {
                   scope.ngModel = enabled;
               };
+
+              scope.$watch('ngModel', function (newValue, oldValue) {
+                  if (angular.isDefined(oldValue) && newValue != oldValue)
+                      scope.onChange();
+              });
 
           }
       };

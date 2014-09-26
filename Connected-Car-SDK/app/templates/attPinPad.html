@@ -1,0 +1,38 @@
+<div class="att-pin-pad">
+    <div class="title">
+        <h1>Enter driver PIN</h1>
+        <p>Four-digit PIN</p>
+    </div>
+
+    <div class="left">
+        <div class="input-fields">
+            <input type="password" ng-model="ngModel">
+            <button id="backspace" class="btn btn-default" ng-click="backspace()"><i class="fa fa-chevron-left"></i></button>
+            <button id="confirm" class="btn btn-default" ng-click="onConfirm()" ng-disabled="isDisabled()"><i class="fa fa-check fa-2x"></i></button>
+        </div>
+
+    </div>
+    <div class="right">
+        <div class="keypad">
+            <div class="panel-row">
+                <button class="btn btn-default" ng-click="appendToPin(1)">1</button>
+                <button class="btn btn-default" ng-click="appendToPin(2)">2</button>
+                <button class="btn btn-default" ng-click="appendToPin(3)">3</button>
+            </div>
+            <div class="panel-row">
+                <button class="btn btn-default" ng-click="appendToPin(4)">4</button>
+                <button class="btn btn-default" ng-click="appendToPin(5)">5</button>
+                <button class="btn btn-default" ng-click="appendToPin(6)">6</button>
+            </div>
+            <div class="panel-row">
+                <button class="btn btn-default" ng-click="appendToPin(7)">7</button>
+                <button class="btn btn-default" ng-click="appendToPin(8)">8</button>
+                <button class="btn btn-default" ng-click="appendToPin(9)">9</button>
+            </div>
+            <div class="panel-row">
+                <button class="btn btn-default" ng-click="appendToPin(0)">0</button>
+
+            </div>
+        </div>
+    </div>
+</div>

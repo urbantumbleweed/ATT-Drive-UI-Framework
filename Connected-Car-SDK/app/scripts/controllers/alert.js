@@ -9,54 +9,31 @@
  */
 
 angular.module('connectedCarSDK')
-  .controller('AlertCtrl', function ($scope) {
-      $scope.customModel = true;
+  .controller('AlertCtrl', function ($scope, $alert) {
 
-      $scope.runCustomCode = function () {
+    $scope.someClosingMethod = function() {
+        console.log('someClosingMethod() called');
+    };
 
-          //alert('On Close event called');
+    $scope.onClick = function() {
+        alert('Alert button click');
+    };
 
-      };
-      
-      $scope.onClose = function () {
-          //alert('on Close');
-      };
+    $scope.showAlert = function() {
 
-      $scope.onClick = function () {
-          //alert('on Click');
-      };
+        $alert.show({
+            type: $scope.type,
+            showIcon: $scope.showIcon,
+            showConfirmationBtn: $scope.showConfirmationBtn,
+            buttonText: $scope.buttonText,
+            onClose: $scope.someClosingMethod,
+            onClick: $scope.onClick,
+            autoCloseInterval: $scope.autoCloseInterval,
+            title: $scope.title,
+            text: $scope.text
+        });
 
-      $scope.alerts = [];
-      $scope.alerts.push({
-          type: 'info',
-          showIcon: false,
-          showConfirmationBtn: true,
-          buttonText: 'OK',
-          onClose: $scope.onClose,
-          onClick: $scope.onClick,
-          autoCloseInterval: undefined,
-          title: 'Sample alert title',
-          text: 'Sample alert text'
-      });
+    };
 
-      $scope.showAlert = function () {
-
-          $scope.alerts.push({
-              type: $scope.type,
-              showIcon: $scope.showIcon,
-              showConfirmationBtn: $scope.showConfirmationBtn,
-              buttonText: $scope.buttonText,
-              onClose: $scope.onClose,
-              onClick: $scope.onClick,
-              autoCloseInterval: $scope.autoCloseInterval,
-              title: $scope.title,
-              text: $scope.text
-          });
-
-      };
-
-      $scope.removeAlert = function (index) {
-          $scope.alerts.splice(index, 1);
-      };
-  });
+});
 

@@ -20,7 +20,7 @@ angular.module('connectedCarSDK.attLoader', [])
 
               scope.$watch(scope.isLoading, function (v) {
                   if (v) {
-                      element.css("display", "block");
+                      element.css("display", "flex");
                   } else {
                       element.css("display", "none");
                   }

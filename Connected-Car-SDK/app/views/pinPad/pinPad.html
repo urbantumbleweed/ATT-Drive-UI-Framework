@@ -1,0 +1,27 @@
+
+
+<div class="container" id="main-container">
+    <att-pin-pad num-digits="4" ng-model="pin" on-confirm="confirm()"></att-pin-pad>
+</div>
+
+<div id="options-panel">
+    Correct PIN is: 7516
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/pinPad/pinPad.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+            <div ng-include=" '/scripts/controllers/pinPad.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>

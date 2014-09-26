@@ -40,6 +40,7 @@
 
   &.btn-default {
     border-color: #ffffff;
+    min-width: 200px;
 
       &:focus,
       &.focus {
@@ -59,6 +60,7 @@
   /* Primary button */
   &.btn-primary {
     border-color: @brand-primary;
+    min-width: 200px;
 
     &:focus,
     &.focus {
@@ -80,6 +82,7 @@
 
   &.btn.btn-danger {
     border-color: @brand-danger;
+    min-width: 200px;
 
     &:focus,
     &.focus {
@@ -95,6 +98,7 @@
 
   &.btn.btn-success {
     border-color: @brand-success;
+    min-width: 200px;
 
     &:focus,
     &.focus {
@@ -110,6 +114,7 @@
 
   &.btn.btn-warning {
     border-color: @brand-warning;
+    min-width: 200px;
 
     &:focus,
     &.focus {
@@ -126,6 +131,9 @@
   &.btn-circ {
     padding: 0;
     border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
 
     &:focus,
     &.focus {
@@ -141,9 +149,39 @@
     &.medium {
       width: 64px;
       height: 64px;
+      line-height: 64px;
+    }
+    &.large {
+      width: 90px;
+      height: 90px;
+      line-height: 90px;
+    }
+    &.small {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 16px;
     }
   }
 
+  &.btn-icon {
+    padding: 0;
+    color: #666;
+    border: none;
+    height: auto;
+    text-decoration: none;
+    font-size: 20px;
+
+    &:focus,
+    &.focus {
+      color: #fff;
+    }
+
+    &:active,
+    &.active {
+      color: #fff;
+    }
+  }
 
   &.btn-close-list {
     position: absolute; /* Should switch to fixed in actual project as it's fixed relative to viewport */
@@ -152,7 +190,11 @@
   }
 }
 
-
+.btn-group-media {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+}
 
 
 

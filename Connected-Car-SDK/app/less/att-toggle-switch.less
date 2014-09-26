@@ -20,7 +20,8 @@
   .btn{
     border: none;
     border-radius: 0;
-    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
     height: 100%;
     font-size: 24px;
     .button-size(@padding-base-vertical; @padding-base-horizontal; 24px; 1.8; 0);
@@ -55,9 +56,6 @@
       color: @gray;
 
     }
-  }
-  &:disabled{
-    background-color: red;
   }
 
 

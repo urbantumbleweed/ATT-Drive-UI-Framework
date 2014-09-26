@@ -2,7 +2,11 @@
     <div class="padding">
     <h4>(click "Show Alert")</h4>
     </div>
-    <att-alert ng-repeat="alert in alerts">
+    <att-alert type="danger" on-close="someClosingMethod()" show-icon="true" auto-close-interval="3000" title="Attention">
+        <b>This is a danger alert!</b>
+    </att-alert>
+    <att-alert type="success" on-close="someClosingMethod()" show-confirmation-btn="true" button-text="OK" title="Great">
+        <span>This is a danger alert!</span>
     </att-alert>
 </div>
 

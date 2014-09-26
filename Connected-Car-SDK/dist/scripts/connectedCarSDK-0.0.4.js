@@ -1,4 +1,4 @@
-angular.module('connectedCarSDK', ['connectedCarSDK.attAlert','connectedCarSDK.attBadge','connectedCarSDK.attButtons','connectedCarSDK.attCarousel','connectedCarSDK.attDrawer','connectedCarSDK.attDropdown','connectedCarSDK.attHeader','connectedCarSDK.attListView','connectedCarSDK.attLoader','connectedCarSDK.attMenu','connectedCarSDK.attModal','connectedCarSDK.attProgressBar','connectedCarSDK.attSlider','connectedCarSDK.attTab','connectedCarSDK.attTabset','connectedCarSDK.attToggleSwitch','connectedCarSDK.transition']);'use strict';
+angular.module('connectedCarSDK', ['connectedCarSDK.attAlert','connectedCarSDK.attBadge','connectedCarSDK.attButtons','connectedCarSDK.attCarousel','connectedCarSDK.attDrawer','connectedCarSDK.attDropdown','connectedCarSDK.attHeader','connectedCarSDK.attListView','connectedCarSDK.attLoader','connectedCarSDK.attMediaPlayer','connectedCarSDK.attMenu','connectedCarSDK.attModal','connectedCarSDK.attPinPad','connectedCarSDK.attProgressBar','connectedCarSDK.attSlider','connectedCarSDK.attTab','connectedCarSDK.attTabset','connectedCarSDK.attToggleSwitch','connectedCarSDK.transition']);'use strict';
 
 angular.module('connectedCarSDK.transition', [])
   /**
@@ -90,59 +90,149 @@ angular.module('connectedCarSDK.transition', [])
  * # attAlert
  */
 angular.module('connectedCarSDK.attAlert', [])
-    .directive('attAlert', [
-        '$timeout', function($timeout) {
+     .constant('alertConfig', {
+         type: 'info',
+         max: 100,
+         min: 0
+     })
+    .factory('alertProvider', ['$timeout', 'alertConfig', function ($timeout, alertConfig) {
+        return {
+            alerts: [],
+            timeoutPromise: null,
 
-            return {
-                restrict: 'AE',
-                templateUrl: 'templates/attAlert.html',
-                transclude: true,
-                replace: true,
-                scope: {
-                    type: '=',                  // info, success, danger
-                    showIcon: '=',              // true/false (if showConfirmationBtn is set to true, icon will not be shown)
-                    showConfirmationBtn: '=',   // true/false (takes precedence over icon)
-                    buttonText: '=',            // string
-                    onClick: '&',               // function/callback for confirmation button click
-                    onClose: '&',               // function/callback for when the alert is closed
-                    autoCloseInterval: '=',     // in miliseconds
-                    title: '='                 // string
-                },
-                link: function(scope, element, attrs) {
+            addAlert: function(scope) {
 
-                    var timeoutPromise;
-                    if (scope.autoCloseInterval && parseInt(scope.autoCloseInterval) > 0) {
+                scope.alert = {
+                    type: angular.isDefined(scope.type) ? scope.type : alertConfig.type,
+                    onClose: angular.isDefined(scope.onClose) ? scope.onClose : null,
+                    onClick: angular.isDefined(scope.onClick) ? scope.onClick : null,
+                    showIcon: angular.isDefined(scope.showIcon) ? scope.showIcon : false,
+                    showConfirmationBtn: angular.isDefined(scope.showConfirmationBtn) ? scope.showConfirmationBtn : false,
+                    buttonText: angular.isDefined(scope.buttonText) ? scope.buttonText : '',
+                    autoCloseInterval: angular.isDefined(scope.autoCloseInterval) ? scope.autoCloseInterval : null,
+                    title: angular.isDefined(scope.title) ? scope.title : '',
+                };
 
-                        timeoutPromise = $timeout(function() {
+                if (this.alerts.length == 0)
+                    scope.alert.isActive = true;
 
-                            scope.closeAlert = true;
-                            scope.close();
+                this.alerts.push(scope.alert);
+            },
 
-                        }, scope.autoCloseInterval);
+            removeActiveAlert: function() {
+                this.alerts[0].isActive = false;
+                this.alerts.splice(0, 1);
 
-                    }
+                if (this.alerts.length > 0)
+                    this.alerts[0].isActive = true;
+            },
 
-                    scope.close = function () {
+            closeAlert: function() {
+                
+                    if (this.timeoutPromise)
+                        $timeout.cancel(this.timeoutPromise);
 
-                        // if there is no confirmation button
-                        // tapping anywhere on the alert will close the alert
-                        // otherwise, you must dismiss the alert by clicking
-                        // on the confirmation button
-                        if (scope.showConfirmationBtn != true) {
+                    this.alerts[0].onClose();
+                    this.removeActiveAlert();
+                
 
-                            if (timeoutPromise)
-                                $timeout.cancel(timeoutPromise);
+                this.handleAutoClose();
+            },
 
-                            scope.closeAlert = true;
-                            scope.onClose();
-
-                        }
-                    };
-
+            handleAutoClose: function() {
+                if (this.alerts[0] && this.alerts[0].autoCloseInterval && parseInt(this.alerts[0].autoCloseInterval) > 0) {
+                    var that = this;
+                    this.timeoutPromise = $timeout(function() {
+                        that.closeAlert();
+                    }, this.alerts[0].autoCloseInterval);
                 }
-            };
+            }
+        };
+    }])
+    .factory('$alert', ['$rootScope', '$compile', '$document', function ($rootScope, $compile, $document) {
 
-        }
+        return {
+            
+            show: function(options) {
+                var angularDomEl = angular.element('<att-alert on-close="onClose()" on-click="onClick()">' + options.text + '</att-alert>');
+                angularDomEl.attr({
+                    'type': options.type,
+                    'title': options.title,
+                    'show-icon': options.showIcon,
+                    'show-confirmation-btn': options.showConfirmationBtn,
+                    'button-text': options.buttonText,
+                    'auto-close-interval': options.autoCloseInterval ? options.autoCloseInterval : null,
+                });
+
+                var alertScope = $rootScope.$new(false);
+                alertScope.onClose = options.onClose ? options.onClose : null;
+                alertScope.onClick = options.onClick ? options.onClick : null;
+                
+                var alertDomEl = $compile(angularDomEl)(alertScope);
+                $document.find('body').eq(0).append(alertDomEl);
+            },
+
+            info: function(options) {
+                options.type = 'info';
+                this.show(options);
+            },
+
+            success: function(options) {
+                options.type = 'success';
+                this.show(options);
+            },
+
+            danger: function(options) {
+                options.type = 'danger';
+                this.show(options);
+            }
+
+        };
+    }])
+    .directive('attAlert', [
+         'alertProvider', function (alertProvider) {
+             return {
+                 restrict: 'AE',
+                 templateUrl: 'templates/attAlert.html',
+                 replace: true,
+                 transclude: true,
+                 scope: {
+                     type: '@',
+                     showIcon: '=',
+                     showConfirmationBtn: '=',
+                     buttonText: '@',
+                     onClick: '&',  // click on confirmation button
+                     onClose: '&',
+                     autoCloseInterval: '=',
+                     title: '@',
+                     text: '@'
+                 },
+                 link: function (scope, element, attrs) {
+
+                     alertProvider.addAlert(scope);
+
+                     if (scope.alert.isActive)
+                         alertProvider.handleAutoClose();
+
+                     scope.close = function () {
+                         // if there is no confirmation button
+                         // tapping anywhere on the alert will close the alert
+                         // otherwise, you must dismiss the alert by clicking
+                         // on the confirmation button
+                         if (!scope.showConfirmationBtn) {
+                             alertProvider.closeAlert();
+                         }
+                     };
+
+                     scope.btnClick = function() {
+                         scope.onClick();
+                         alertProvider.closeAlert();
+                     };
+
+                 }
+             };
+
+         }
     ]);
 
 'use strict';
@@ -548,8 +638,21 @@ angular.module('connectedCarSDK.attDropdown', [])
  * # attHeader
  */
 angular.module('connectedCarSDK.attHeader', [])
+    .factory('$header', ['$rootScope', '$interval', function ($rootScope, $interval) {
+        return {
+            showBackButton: function (show, callback) {
+                var that = this,
+                    backButtonInterval;
+                this.backButtonInterval = $interval(function () {
+                    $rootScope.$broadcast('showBackButton', [show, callback, function () {
+                        $interval.cancel(that.backButtonInterval);
+                    }]);
+                }, 100);
+            }
+        };
+    }])
     .directive('attHeader', [
-        '$rootScope', function($rootScope) {
+        '$rootScope', function ($rootScope) {
             return {
                 restrict: 'E',
                 templateUrl: 'templates/attHeader.html',
@@ -557,13 +660,24 @@ angular.module('connectedCarSDK.attHeader', [])
                 scope: {
                     appName: '=',
                     currentItem: '=',
-                    appImage: '@'
+                    appImage: '@',
+                    showBackButton: '=',
+                    backButtonCallback: '&'
                 },
-                link: function(scope, element, attrs) {
+                link: function (scope, element, attrs) {
 
-                    scope.openMenu = function() {
+                    scope.backButton = scope.showBackButton ? scope.showBackButton : false;
+                    scope.backCallback = scope.backButtonCallback ? scope.backButtonCallback : null;
+
+                    scope.openMenu = function () {
                         $rootScope.$broadcast('changeDrawer', [true]);
                     };
+
+                    $rootScope.$on('showBackButton', function (event, args) {
+                        scope.backButton = args[0];
+                        scope.backCallback = args[1];
+                        args[2]();
+                    });
 
                 }
             };
@@ -639,11 +753,220 @@ angular.module('connectedCarSDK.attLoader', [])
 
               scope.$watch(scope.isLoading, function (v) {
                   if (v) {
-                      element.css("display", "block");
+                      element.css("display", "flex");
                   } else {
                       element.css("display", "none");
                   }
               });
+
+          }
+      };
+  }]);
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name connectedCarSDK.directive:attMediaPlayer
+ * @description
+ * # attMediaPlayer
+ */
+angular.module('connectedCarSDK.attMediaPlayer', [])
+  .directive('attMediaPlayer', ['$http', '$interval', '$timeout', function ($http, $interval, $timeout) {
+      return {
+          restrict: 'E',
+          replace: true,
+          templateUrl: 'templates/attMediaPlayer.html',
+          scope: {
+              playlist: "=",
+              autoplay: "="
+          },
+          link: function (scope, element, attrs) {
+
+              scope.audio = null;
+              scope.sliderConfig = { val: 0 };
+              scope.changeVolumeQuantity = 0.1;
+              scope.currentIndex = 0;
+              var changePositionInterval = 5, // seconds
+                  changePositionTimeInterval = 500, // miliseconds                 
+                  intervalpromise = null,
+                  secondsleft = 0,
+                  secondsElapsed = 0,
+                  sliderInterval = null,
+                  intervalCounter = 0;
+
+              if (scope.playlist && scope.playlist.length > 0) {
+                  scope.audio = document.createElement("audio");
+                  if (scope.audio != null && scope.audio.canPlayType && scope.audio.canPlayType("audio/mpeg")) {
+                      scope.audio.src = scope.playlist[scope.currentIndex];
+
+                      if (scope.autoplay) {
+                          startPlayer(true);
+                      }
+                  }
+              }
+
+              function startPlayer(reset) {
+                  if (reset && sliderInterval)
+                      $interval.cancel(sliderInterval);
+
+                  scope.audio.play();
+                  $timeout(function () {
+                      setupSlider(reset);
+                  }, 200);
+              };
+
+              function setupSlider(reset) {
+                  if (reset) {
+                      scope.sliderConfig = {
+                          min: 0,
+                          max: scope.audio.duration,
+                          val: 0,
+                          elapsedTime: 0,
+                          remainingTime: scope.audio.duration
+                      };
+
+                      secondsleft = scope.audio.duration;
+                      secondsElapsed = 0;
+                  }
+
+                  // setup count down timer
+                  sliderInterval = $interval(function () {
+                      if (parseInt(secondsleft) == 0) { // if time elapsed, move to next file
+                          $interval.cancel(sliderInterval);
+                          scope.changeFile(1);
+                          return;
+                      }
+
+                      secondsleft--;
+                      secondsElapsed++;
+                      scope.sliderConfig.val++;
+                  }, 1000);
+              };
+
+              function setTime() {
+                  scope.audio.currentTime = scope.sliderConfig.val;
+                  secondsElapsed = scope.audio.currentTime;
+                  scope.sliderConfig.elapsedTime = secondsElapsed;
+                  secondsleft = scope.audio.duration - scope.sliderConfig.val;
+                  scope.sliderConfig.remainingTime = secondsleft;
+              };
+
+              scope.$on("sliderMoved", function (event, message) {
+                  setTime();
+              });
+
+              scope.countdown = function (isElapsed) {
+                  var min, sec;
+                  if (isElapsed) {
+                      min = parseInt(secondsElapsed / 60);
+                      sec = parseInt(secondsElapsed % 60);
+                  } else {
+                      min = parseInt(secondsleft / 60);
+                      sec = parseInt(secondsleft % 60);
+                  }
+
+                  if (min.toString().length == 1)
+                      min = "0" + min;
+                  if (sec.toString().length == 1)
+                      sec = "0" + sec;
+
+                  if (isElapsed)
+                      scope.sliderConfig.elapsedTime = min + ":" + sec;
+                  else scope.sliderConfig.remainingTime = "-" + min + ":" + sec;
+              };
+
+              scope.repeat = function () {
+                  scope.audio.currentTime = 0;
+                  startPlayer(true);
+              };
+
+              scope.shuffle = function () {
+                  var currentSong = scope.playlist[scope.currentIndex];
+
+                  scope.playlist.sort(function () {
+                      return .5 - Math.random();
+                  });
+
+                  angular.forEach(scope.playlist, function (song, index) {
+                      if (song == currentSong)
+                          scope.currentIndex = index;
+                  });
+
+              };
+
+              scope.changePosition = function (rewind, stop) {
+                  if (stop) { // key released, stop changing position   
+                      $interval.cancel(intervalpromise);
+
+                      // if user kept button pressed less than intervalCounter * 2
+                      // then move to next song
+                      // othwerwise it means there occured rewind/fast forward operations, so just reset the counter
+                      if (intervalCounter < 2) {
+                          var index = rewind ? -1 : 1;
+                          intervalCounter = 0;
+                          scope.changeFile(index);
+                      }
+                      else intervalCounter = 0;
+                  }
+                  else {
+                      intervalpromise = $interval(function () {
+                          intervalCounter++;
+                          if (intervalCounter >= 2) {
+                              if (rewind) {
+                                  if (scope.audio.currentTime < changePositionInterval)
+                                      scope.audio.currentTime = 0;
+                                  else scope.audio.currentTime -= changePositionInterval;
+                              }
+                              else {
+                                  if ((scope.audio.duration - scope.audio.currentTime) < changePositionInterval)
+                                      scope.audio.currentTime = scope.audio.duration;
+                                  else scope.audio.currentTime += changePositionInterval;
+                              }
+
+                              scope.sliderConfig.val = scope.audio.currentTime;
+                              setTime();
+                          }
+                      }, changePositionTimeInterval);
+                  }
+              };
+
+              scope.changeStatus = function () {
+                  if (!scope.audio.paused && scope.audio.duration > 0) {
+                      scope.audio.pause();
+                      $interval.cancel(sliderInterval);
+                  }
+                  else startPlayer(false);
+              };
+
+              scope.changeFile = function (index) {
+                  scope.currentIndex += index;
+                  if (!scope.playlist[scope.currentIndex]) {
+
+                      // if the last song on the list is playing and user click "Next"
+                      // then reset to 0
+                      // otherwise, user clicked "Previous" while on first song
+                      if (scope.playlist.length == scope.currentIndex)
+                          scope.currentIndex = 0;
+                      else scope.currentIndex = scope.playlist.length - 1;
+                  }
+
+                  scope.audio.src = scope.playlist[scope.currentIndex];
+                  startPlayer(true);
+              };
+
+              scope.setFile = function (index) {
+                  scope.currentIndex = index;
+                  scope.audio.src = scope.playlist[scope.currentIndex];
+                  startPlayer(true);
+              };
+
+              scope.changeVolume = function (quantity) {
+                  if ((scope.audio.volume + quantity) > 1 || (scope.audio.volume + quantity) < 0)
+                      return;
+
+                  scope.audio.volume += quantity;
+              };
 
           }
       };
@@ -1110,6 +1433,90 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
 
 /**
  * @ngdoc directive
+ * @name connectedCarSdkApp.directive:attpinpad
+ * @description
+ * # attpinpad
+ */
+angular.module('connectedCarSDK.attPinPad', [])
+    .factory('$pinPad', ['$rootScope', '$compile', '$document', function ($rootScope, $compile, $document) {
+
+        return {
+
+            show: function (options) {
+
+                // first remove any existing pinPad elements from DOM
+                var pinPadDomEl = $document.find('body').find('att-pin-pad');
+                if (pinPadDomEl)
+                    pinPadDomEl.remove();
+
+                var angularDomEl = angular.element('<att-pin-pad ng-model="ngModel" on-confirm="onConfirm(ngModel)"></att-pin-pad>');
+                angularDomEl.attr({
+                    'num-digits': options.numDigits
+                });
+
+                var pinPadScope = $rootScope.$new(false);
+                pinPadScope.ngModel = options.ngModel || '';
+                pinPadScope.onConfirm = options.onConfirm ? options.onConfirm : null;
+                
+                pinPadDomEl = $compile(angularDomEl)(pinPadScope);
+                
+                $document.find('body').eq(0).append(pinPadDomEl);
+            },
+
+            close: function() {
+                var pinPadDomEl = $document.find('body').find('att-pin-pad');
+                if (pinPadDomEl)
+                    pinPadDomEl.remove();
+            }
+
+        };
+    }])
+    .directive('attPinPad', function() {
+        return {
+            templateUrl: 'templates/attPinPad.html',
+            restrict: 'EA',
+            scope: {
+                numDigits: '@',
+                ngModel: '=',
+                onConfirm: '&'
+            },
+            link: function(scope, element, attrs) {
+
+                // if model is undefined, set to empty string
+                if (!scope.ngModel) {
+                    scope.ngModel = '';
+                }
+
+                // if number of digits is undefined, default is 4 digits for pin number
+                var numberOfDigits = 4;
+                if (scope.numDigits) {
+                    numberOfDigits = scope.numDigits;
+                }
+
+                scope.backspace = function () {
+                    if (scope.ngModel && scope.ngModel.length > 0) {
+                        scope.ngModel = scope.ngModel.slice(0, -1);
+                    }
+                };
+
+                scope.appendToPin = function (val) {
+                    if (val>=0 && scope.ngModel.length < numberOfDigits)
+                        scope.ngModel += val.toString();
+                };
+
+                scope.isDisabled = function() {
+                    if (scope.ngModel.length < numberOfDigits)
+                        return true;
+                    else return false;
+                };
+            }
+        };
+    });
+
+'use strict';
+
+/**
+ * @ngdoc directive
  * @name connectedCarSDK.progressbar.directive:attProgressbar
  * @description
  * # attprogressbar
@@ -1213,6 +1620,10 @@ angular.module('connectedCarSDK.attSlider', [])
                     ].join('');
                     
                 }
+
+                scope.sliderMoved = function () {
+                    scope.$emit("sliderMoved", null);
+                };
 
                 // watch for model changes and repaint the slider
                 // using new calculated gradient stops
@@ -1416,18 +1827,24 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
           templateUrl: 'templates/attToggleSwitch.html',
           restrict: 'E',
           scope: {
-              ngModel: '='
+              ngModel: '=',
+              onChange: '&'
           },
           require: '^ngModel',
           link: function (scope, element, attrs) {
 
               if (angular.isDefined(attrs.disabled)) {
-                  element.find("label").attr("disabled", "disabled");
+                  element.find('*').attr('disabled', 'disabled');
               }
 
-              scope.change = function(enabled) {
+              scope.click = function(enabled) {
                   scope.ngModel = enabled;
               };
+
+              scope.$watch('ngModel', function (newValue, oldValue) {
+                  if (angular.isDefined(oldValue) && newValue != oldValue)
+                      scope.onChange();
+              });
 
           }
       };

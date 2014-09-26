@@ -2,11 +2,12 @@
     <div class="padding">
         Active:
         <br>
-        <att-toggle-switch ng-model="customModel"></att-toggle-switch>
+        <att-toggle-switch ng-model="customModel" on-change="onChange()"></att-toggle-switch>
         <br>
-        Dissabled:
         <br>
-        <att-toggle-switch ng-model="customModel2" disabled></att-toggle-switch>
+        Disabled:
+        <br>
+        <att-toggle-switch ng-model="customModel2" on-change="onChange2()" disabled></att-toggle-switch>
     </div>
 </div>
 

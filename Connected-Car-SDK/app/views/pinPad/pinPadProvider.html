@@ -1,0 +1,26 @@
+﻿<div class="container" id="main-container">
+    <button class="btn btn-default" ng-click="purchase()">Purchase</button>
+</div>
+
+
+<div id="options-panel">
+    <span>Correct PIN is: 6189</span>
+</div>
+
+<div class="container" id="details-container">
+    <att-tabset top-position="true">
+        <att-tab heading="Description">
+            
+        </att-tab>
+
+        <att-tab heading="Markup">
+            <att-dynamic-content data-url="/views/pinPad/pinPadProvider.html" linenums="true" markup="true"></att-dynamic-content>
+        </att-tab>
+
+        <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums">
+            <div ng-include=" '/scripts/controllers/pinPadProvider.js' "></div>
+            </pre>
+        </att-tab>
+    </att-tabset>
+</div>
