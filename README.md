@@ -1,4 +1,4 @@
-# AT&T Drive UI Framework CTIA
+# AT&T Drive UI Framework
 
 ## UI Kit for AT&T Drive Platform
 This AT&T Drive Automotive App development UI Kit is built to enable you -the developer, to effortlessly create apps to be deployed on AT&T Drive Automotive Services Delivery Platform.
