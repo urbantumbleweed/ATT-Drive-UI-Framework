@@ -18,7 +18,11 @@ Default browser should auto-start and open your localhost URL: [http://localhost
 To compile directives into a blank app in Connected Car SDK folder run `grunt seed -name=/path/to/AppName` where AppName is your app name like: `grunt seed -name=/Users/damirmustafic/Sites/myFirstApp`
 You will see a two view app example (just add your background image)...
 
-Go nuts!
+## Updating to latest UI Kit
+- Pull the latest from [Github](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework)
+- Run `grunt build` inside the Connected Car SDK
+- New build of att-sdk will be created in 'dist' folder
+- Copy the folder and files from 'dist' folder and paste them (overwrite) files in yourapp/att-sdk folder
 
 ## Running the example app (Weather)
 - Install http-server (node module) globally `npm install –g http-server`
