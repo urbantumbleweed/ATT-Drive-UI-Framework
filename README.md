@@ -12,7 +12,7 @@ At this time this is only an UI toolkit, with a goal to by 2015 include Drive Pl
 - and finally: `$grunt serve` or `$grunt serve --force` if you see any errors
 
 ## Running the docs website
-Default browser should auto-start and run http://localhost:9000 after you execute grunt serve command.
+Default browser should auto-start and open your localhost URL: [http://localhost:9000](http://localhost:9000) after you execute grunt serve command.
 
 ## Hello World app seed
 To compile directives into a blank app in Connected Car SDK folder run `grunt seed -name=/path/to/AppName` where AppName is your app name like: `grunt seed -name=/Users/damirmustafic/Sites/myFirstApp`
@@ -23,7 +23,7 @@ Go nuts!
 ## Running the example app (Weather)
 - Install http-server (node module) globally `npm install –g http-server`
 - CD into example app folder (/examples/accuweather) and run `http-server`
-- Using your favorite browser open http://localhost:8080
+- Using your favorite browser open [http://localhost:8080](http://localhost:8080)
 
 ## App examples
 <img src="/att-drive-apps-onesheet.png">
