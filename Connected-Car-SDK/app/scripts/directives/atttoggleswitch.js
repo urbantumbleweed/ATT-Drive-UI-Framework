@@ -18,7 +18,7 @@ angular.module('connectedCarSDK.attToggleSwitch', [])
           require: '^ngModel',
           link: function (scope, element, attrs) {
 
-              if (angular.isDefined(attrs.disabled)) {
+              if (angular.isDefined(attrs.disabled) && (attrs.disabled == "true" || attrs.disabled == "")) {
                   element.find('*').attr('disabled', 'disabled');
               }
 

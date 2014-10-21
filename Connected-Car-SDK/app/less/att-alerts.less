@@ -5,9 +5,11 @@
   left: 0;
   right: 0;
   padding: 30px 24px;
-  background-color: fade(@brand-primary, 90%);
+  background-color: @brand-primary;
   width: 100%;
   height: 100px;
+  z-index: 1001;
+  color: #fff;
 
 
   .alert-icon {
@@ -36,18 +38,25 @@
 
   &.alert-info
   {
-    background-color: fade(@brand-primary, 90%);
+    background-color: @brand-primary;
   }
   &.alert-success
   {
-    background-color: fade(@brand-success, 90%);
+    background-color: @brand-success;
   }
 
   &.alert-danger
   {
-    background-color: fade(@brand-danger, 90%);
+    background-color: @brand-danger;
   }
-
+  &.alert-volume
+  {
+    background-color: darken(@brand-primary, 10%);
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+  }
 
 
   .content{

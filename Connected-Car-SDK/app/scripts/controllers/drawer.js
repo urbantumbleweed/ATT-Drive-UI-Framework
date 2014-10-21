@@ -15,9 +15,9 @@ angular.module('connectedCarSDK').controller('DrawerCtrl', function($rootScope, 
 
     $scope.title = 'Menu';
     $scope.appLinks = [
-        { text: 'First view', desc: 'Description of the view', href: '#/' },
+        { text: 'First view', desc: 'Description of the view', href: '#/', selected: true },
         { text: 'Second view', desc: 'Description of the view', href: '#/' },
-        { text: 'Third view', desc: 'Description of the view', href: '#/' },
+        { text: 'Third view', desc: 'Description of the view', href: '#/' }
     ];
     
     $scope.showDrawer = false;

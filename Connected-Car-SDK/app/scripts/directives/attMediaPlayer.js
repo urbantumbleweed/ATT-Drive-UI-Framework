@@ -20,8 +20,15 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
 
               scope.audio = null;
               scope.sliderConfig = { val: 0 };
-              scope.changeVolumeQuantity = 0.1;
               scope.currentIndex = 0;
+
+              // volume data
+              scope.showVolume = false;
+              scope.currentVolume = 50;
+              scope.minVolume = 0;
+              scope.maxVolume = 100;
+              scope.changeVolumeQuantity = 10;
+
               var changePositionInterval = 5, // seconds
                   changePositionTimeInterval = 500, // miliseconds                 
                   intervalpromise = null,
@@ -87,8 +94,15 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   scope.sliderConfig.remainingTime = secondsleft;
               };
 
+              function setVolume() {
+                  scope.audio.volume = (scope.currentVolume / 100);
+              };
+
               scope.$on("sliderMoved", function (event, message) {
-                  setTime();
+                  if (message == "time")
+                      setTime();
+                  else if (message == "volume")
+                      setVolume();
               });
 
               scope.countdown = function (isElapsed) {
@@ -196,11 +210,15 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   startPlayer(true);
               };
 
-              scope.changeVolume = function (quantity) {
-                  if ((scope.audio.volume + quantity) > 1 || (scope.audio.volume + quantity) < 0)
-                      return;
+              scope.volume = function () {
+                  scope.showVolume = !scope.showVolume;
+              };
 
-                  scope.audio.volume += quantity;
+              scope.nextSong = function () {
+                  var index = scope.currentIndex;
+                  if (scope.playlist.length == (scope.currentIndex + 1))
+                      index = -1;
+                  return scope.playlist[index + 1].replace("audio/", "");
               };
 
           }

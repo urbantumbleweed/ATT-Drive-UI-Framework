@@ -13,13 +13,13 @@ angular.module('connectedCarSDK')
 
         $scope.purchase = function() {
             $pinPad.show({
-                numDigits: 4,
+                numDigits: 6,
                 onConfirm: $scope.validatePin
             });
         };
 
         $scope.validatePin = function (pin) {
-            if (pin == "6189") {
+            if (pin == "751645") {
                 alert("Correct PIN");
             } else {
                 alert("Incorrect PIN");

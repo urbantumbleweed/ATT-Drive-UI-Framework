@@ -12,7 +12,7 @@ angular.module('connectedCarSDK')
   .controller('PinPadCtrl', function ($scope) {
 
     $scope.confirm = function() {
-        if ($scope.pin == "7516") {
+        if ($scope.pin == "751645") {
             alert("Correct PIN");
         } else {
             alert("Incorrect PIN");

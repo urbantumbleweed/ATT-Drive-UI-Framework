@@ -13,7 +13,8 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-
+	grunt.loadNpmTasks('grunt-git');
+	
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
@@ -35,6 +36,16 @@ module.exports = function (grunt) {
             all: 'angular.module(\'connectedCarSDK\', [\'connectedCarSDK.tpls\', <%= modules %>]);'
         },
 
+		gitpull: {
+            pull: {
+                options: {
+                    verbose: true,
+                    cwd: '../',
+                    branch: 'master'
+                }
+            }
+        },
+		
         html2js: {
             options: {
                 // custom options, see below
@@ -108,14 +119,6 @@ module.exports = function (grunt) {
                   '<%= sdk.app %>/{,*/}*.html',
                   '.tmp/styles/{,*/}*.css',
                   '<%= sdk.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-                ]
-            },
-            seed: {
-                options: {
-                    reload: true
-                },
-                files: [
-                  '<%= sdk.seedApp %>/{,*/}*.html'
                 ]
             }
         },
@@ -431,16 +434,16 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-        //if (target === 'dist') {
-        //    return grunt.task.run(['build', 'connect:dist:keepalive']);
-        //}
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'connect:dist:keepalive']);
+        }
 
         grunt.task.run([
           'clean:server',
           'wiredep',
           'concurrent:server',
-          'connect:dist:keepalive',
-          //'connect:livereload',
+          //'connect:dist:keepalive',
+          'connect:livereload',
           'watch'
         ]);
     });
@@ -454,8 +457,7 @@ module.exports = function (grunt) {
           'clean:seed',
           'build',
           'copy:seed',
-          'connect:seed:keepalive',
-          'watch'
+          'connect:seed:keepalive'
         ]);
     });
 
@@ -517,4 +519,13 @@ module.exports = function (grunt) {
 
     });
 
+	grunt.registerTask('update-sdk', 'pull latest code from git and build newest version of sdk', function() {
+	
+        grunt.task.run([
+            'gitpull:pull',
+            'build'
+        ]);
+
+    });
+	
 };

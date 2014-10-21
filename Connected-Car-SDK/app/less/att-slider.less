@@ -81,6 +81,16 @@
       }
     }
   }
+  .input-range-volume{
+    background: darken(@progress-bar-bg, 20%);
+    // background-image: -webkit-gradient(linear, left top, right top, color-stop(0.2, @progress-bar-danger-bg), color-stop(0.2, #fff));
+    &::-webkit-slider-thumb {
+      background: darken(@progress-bar-bg, 20%);
+      &:hover {
+        background: darken(@progress-bar-bg, 20%);
+      }
+    }
+  }
 
   span.value-left,
   span.value-right {

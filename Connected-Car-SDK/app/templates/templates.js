@@ -29,7 +29,6 @@ angular.module("templates/attDrawer.html", []).run(["$templateCache", function($
   $templateCache.put("templates/attDrawer.html",
     "<div class=\"att-drawer\" ng-class=\"{visible: showDrawer == true}\">\n" +
     "    <div ng-transclude></div>\n" +
-    "    <div class=\"close-area\" ng-click=\"closeDrawer()\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -99,12 +98,12 @@ angular.module("templates/attLoader.html", []).run(["$templateCache", function($
 
 angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attMediaPlayer.html",
-    "<div class=\"padding\" style=\"padding-top: 20px\">\n" +
+    "<div class=\"padding\" style=\"padding-top: 20px\" ng-show=\"audio\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\">\n" +
     "            <h2 class=\"view-title\">{{audio.attributes.src.value.replace(\"audio/\", \"\")}}</h2>\n" +
-    "            <h4 class=\"view-subtitle\">Queen</h2>\n" +
-    "            <h4 class=\"text-uppercase text-muted\">Next: <span class=\"font-medium\">Happy</span></h4>\n" +
+    "            <!--<h4 class=\"view-subtitle\">Queen</h2>-->\n" +
+    "            <h4 class=\"text-uppercase text-muted\">Next: <span class=\"font-medium\">{{nextSong()}}</span></h4>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"btn-group-media sep-t-40\">\n" +
@@ -112,28 +111,37 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
     "        <a ng-click=\"changeStatus()\" class=\"btn btn-circ large sep-lr-40\"><span ng-class=\"{'icon-pause' : (!audio.paused), 'icon-play' : audio.paused}\"></span></a>\n" +
     "        <a ng-mousedown=\"changePosition(false, false)\" ng-mouseup=\"changePosition(false, true)\" class=\"btn btn-circ small\"><span class=\"icon-skip-right\"></span></a>\n" +
     "    </div>\n" +
-    "\n" +
+    "    \n" +
     "    <div style=\"position: absolute; bottom: 0; left: 0; width: 100%; padding: 0 24px 36px;\">\n" +
     "        <a class=\"btn btn-icon sep-r-40\"><span class=\"icon-shuffle\" ng-click=\"shuffle()\"></span></a>\n" +
     "        <a class=\"btn btn-icon\"><span class=\"icon-repeat\" ng-click=\"repeat()\"></span></a>\n" +
-    "        <a class=\"btn btn-icon pull-right\"><span class=\"icon-volume-down\"></span></a>\n" +
+    "        <a class=\"btn btn-icon volume-icon pull-right\" ng-class=\"{'active': showVolume}\" ng-click=\"volume()\"><span class=\"icon-volume-down\"></span></a>\n" +
     "        <div class=\"sep-top-10\">\n" +
     "            <att-slider type=\"default\"\n" +
     "                min=\"{{sliderConfig.min}}\"\n" +
     "                max=\"{{sliderConfig.max}}\"\n" +
     "                ng-model=\"sliderConfig.val\"\n" +
     "                text-left=\"{{sliderConfig.elapsedTime | filter: countdown(true)}}\"\n" +
-    "                text-right=\"{{sliderConfig.remainingTime | filter: countdown(false)}}\">\n" +
+    "                text-right=\"{{sliderConfig.remainingTime | filter: countdown(false)}}\"\n" +
+    "                parent-control=\"time\">\n" +
     "            </att-slider>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    \n" +
+    "\n" +
     "    <div style=\"display: none\" ng-repeat=\"song in playlist\" ng-class=\"{'active-song' : currentIndex == $index}\" ng-click=\"setFile($index)\">\n" +
     "        <span ng-bind=\"song\"></span>\n" +
     "    </div>\n" +
     "\n" +
-    "    <!--<a ng-click=\"changeVolume(changeVolumeQuantity)\">Volume up</a>\n" +
-    "    <a ng-click=\"changeVolume(-changeVolumeQuantity)\">Volume down</a>-->\n" +
+    "    <div class=\"volume-panel\" ng-class=\"{'show': showVolume}\">\n" +
+    "        VOLUME AT {{currentVolume}}%\n" +
+    "        <att-slider type=\"default\"\n" +
+    "                min=\"{{minVolume}}\"\n" +
+    "                max=\"{{maxVolume}}\"\n" +
+    "                ng-model=\"currentVolume\"\n" +
+    "                text-left=\"{{minVolume}}\"\n" +
+    "                text-right=\"{{maxVolume}}\"\n" +
+    "                parent-control=\"volume\">\n" +
+    "    </div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -141,15 +149,24 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
 angular.module("templates/attMenu.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attMenu.html",
     "<div class=\"att-menu\">\n" +
-    "    <h3 class=\"active-screen\" ng-bind=\"title\"></h3>\n" +
+    "    <style>\n" +
+    "        .activeTemp\n" +
+    "        {\n" +
+    "            float: left;\n" +
+    "            height:0px;\n" +
+    "            width:0px;\n" +
+    "        }\n" +
+    "    </style>\n" +
+    "    <h3 class=\"active-screen\" ng-bind=\"title\" ></h3>\n" +
     "    <ul class=\"list\">\n" +
-    "        <li ng-repeat=\"item in items\"\n" +
-    "            ng-class=\"{active: item.selected}\"\n" +
-    "            ng-click=\"onItemClick(item)\">\n" +
+    "        <li ng-repeat=\"item in items\" id=\"item{{$index}}\"\n" +
+    "            ng-class=\"{active: item.selected, activeTemp: item.selectedTemp}\"\n" +
+    "            ng-click=\"onItemClick(item, false)\">\n" +
     "            <a ng-href=\"{{item.href}}\">{{item.text}}\n" +
     "            <span ng-bind=\"item.desc\"></span>\n" +
     "            </a>\n" +
     "        </li>\n" +
+    "        <li id=\"sejo\" ng-class=\"{activeTemp: activeTemp}\"></li>\n" +
     "    </ul>\n" +
     "</div>\n" +
     "");
@@ -158,42 +175,44 @@ angular.module("templates/attMenu.html", []).run(["$templateCache", function($te
 angular.module("templates/attPinPad.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attPinPad.html",
     "<div class=\"att-pin-pad\">\n" +
-    "    <div class=\"title\">\n" +
-    "        <h1>Enter driver PIN</h1>\n" +
-    "        <p>Four-digit PIN</p>\n" +
-    "    </div>\n" +
     "\n" +
-    "    <div class=\"left\">\n" +
-    "        <div class=\"input-fields\">\n" +
-    "            <input type=\"password\" ng-model=\"ngModel\">\n" +
-    "            <button id=\"backspace\" class=\"btn btn-default\" ng-click=\"backspace()\"><i class=\"fa fa-chevron-left\"></i></button>\n" +
-    "            <button id=\"confirm\" class=\"btn btn-default\" ng-click=\"onConfirm()\" ng-disabled=\"isDisabled()\"><i class=\"fa fa-check fa-2x\"></i></button>\n" +
+    "\n" +
+    "<div class=\"pin-pad-heading\">\n" +
+    "\n" +
+    "        <input type=\"password\" ng-model=\"ngModel\">\n" +
+    "        <h1>Please enter your pin</h1>\n" +
+    "</div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"keypad\">\n" +
+    "        <div class=\"panel-row\">\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(1)\">1</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(2)\">2</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(3)\">3</button>\n" +
     "        </div>\n" +
-    "\n" +
-    "    </div>\n" +
-    "    <div class=\"right\">\n" +
-    "        <div class=\"keypad\">\n" +
-    "            <div class=\"panel-row\">\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(1)\">1</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(2)\">2</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(3)\">3</button>\n" +
-    "            </div>\n" +
-    "            <div class=\"panel-row\">\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(4)\">4</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(5)\">5</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(6)\">6</button>\n" +
-    "            </div>\n" +
-    "            <div class=\"panel-row\">\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(7)\">7</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(8)\">8</button>\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(9)\">9</button>\n" +
-    "            </div>\n" +
-    "            <div class=\"panel-row\">\n" +
-    "                <button class=\"btn btn-default\" ng-click=\"appendToPin(0)\">0</button>\n" +
-    "\n" +
-    "            </div>\n" +
+    "        <div class=\"panel-row\">\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(4)\">4</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(5)\">5</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(6)\">6</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"panel-row\">\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(7)\">7</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(8)\">8</button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(9)\">9</button>\n" +
+    "        </div>\n" +
+    "        <div class=\"panel-row\">\n" +
+    "            <button class=\"btn keypad-button confirm\" ng-click=\"onConfirm()\" ng-disabled=\"isDisabled()\"><i class=\"icon-check-thin\"></i></button>\n" +
+    "            <button class=\"btn keypad-button\" ng-click=\"appendToPin(0)\">0</button>\n" +
+    "            <button class=\"btn keypad-button backspace\" ng-click=\"backspace()\"><i class=\"icon-backspace\"></i></button>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "</div>");
 }]);
 

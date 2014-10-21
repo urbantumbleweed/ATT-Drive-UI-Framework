@@ -1,9 +1,9 @@
-﻿<div class="padding" style="padding-top: 20px">
+﻿<div class="padding" style="padding-top: 20px" ng-show="audio">
     <div class="row">
         <div class="col-xs-12">
             <h2 class="view-title">{{audio.attributes.src.value.replace("audio/", "")}}</h2>
-            <h4 class="view-subtitle">Queen</h2>
-            <h4 class="text-uppercase text-muted">Next: <span class="font-medium">Happy</span></h4>
+            <!--<h4 class="view-subtitle">Queen</h2>-->
+            <h4 class="text-uppercase text-muted">Next: <span class="font-medium">{{nextSong()}}</span></h4>
         </div>
     </div>
     <div class="btn-group-media sep-t-40">
@@ -11,26 +11,35 @@
         <a ng-click="changeStatus()" class="btn btn-circ large sep-lr-40"><span ng-class="{'icon-pause' : (!audio.paused), 'icon-play' : audio.paused}"></span></a>
         <a ng-mousedown="changePosition(false, false)" ng-mouseup="changePosition(false, true)" class="btn btn-circ small"><span class="icon-skip-right"></span></a>
     </div>
-
+    
     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 0 24px 36px;">
         <a class="btn btn-icon sep-r-40"><span class="icon-shuffle" ng-click="shuffle()"></span></a>
         <a class="btn btn-icon"><span class="icon-repeat" ng-click="repeat()"></span></a>
-        <a class="btn btn-icon pull-right"><span class="icon-volume-down"></span></a>
+        <a class="btn btn-icon volume-icon pull-right" ng-class="{'active': showVolume}" ng-click="volume()"><span class="icon-volume-down"></span></a>
         <div class="sep-top-10">
             <att-slider type="default"
                 min="{{sliderConfig.min}}"
                 max="{{sliderConfig.max}}"
                 ng-model="sliderConfig.val"
                 text-left="{{sliderConfig.elapsedTime | filter: countdown(true)}}"
-                text-right="{{sliderConfig.remainingTime | filter: countdown(false)}}">
+                text-right="{{sliderConfig.remainingTime | filter: countdown(false)}}"
+                parent-control="time">
             </att-slider>
         </div>
     </div>
-    
+
     <div style="display: none" ng-repeat="song in playlist" ng-class="{'active-song' : currentIndex == $index}" ng-click="setFile($index)">
         <span ng-bind="song"></span>
     </div>
 
-    <!--<a ng-click="changeVolume(changeVolumeQuantity)">Volume up</a>
-    <a ng-click="changeVolume(-changeVolumeQuantity)">Volume down</a>-->
+    <div class="volume-panel" ng-class="{'show': showVolume}">
+        VOLUME AT {{currentVolume}}%
+        <att-slider type="default"
+                min="{{minVolume}}"
+                max="{{maxVolume}}"
+                ng-model="currentVolume"
+                text-left="{{minVolume}}"
+                text-right="{{maxVolume}}"
+                parent-control="volume">
+    </div>
 </div>

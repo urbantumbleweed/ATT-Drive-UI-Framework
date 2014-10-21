@@ -55,7 +55,7 @@
   src:url('../fonts/sdk-icons.eot?#iefixhq59ds') format('embedded-opentype'),
     url('../fonts/sdk-icons.woff?hq59ds') format('woff'),
     url('../fonts/sdk-icons.ttf?hq59ds') format('truetype'),
-    url('../fonts/sdk-icons.svg?hq59ds#icomoon') format('svg');
+    url('../fonts/sdk-icons.svg?hq59ds#sdk-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -74,10 +74,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-backspace:before {
+  content: "\e60c";
+}
+.icon-check-thin:before {
+  content: "\e60d";
+}
 .icon-back:before {
   content: "\e60b";
 }
-
 .icon-volume-down:before {
   content: "\e60a";
 }

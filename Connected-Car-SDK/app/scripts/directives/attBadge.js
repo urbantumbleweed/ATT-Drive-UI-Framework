@@ -18,6 +18,8 @@ angular.module('connectedCarSDK.attBadge', [])
           },
           link: function (scope, element, attrs) {
               var a = 5;
+              // sejo
+              // ramiz
           }
       };
   });

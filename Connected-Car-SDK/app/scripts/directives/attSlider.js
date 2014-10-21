@@ -17,7 +17,8 @@ angular.module('connectedCarSDK.attSlider', [])
                 min: '@',
                 max: '@',
                 textLeft: '@',
-                textRight: '@'
+                textRight: '@',
+                parentControl: '@'
             },
             link: function (scope, element, attrs) {
 
@@ -44,7 +45,7 @@ angular.module('connectedCarSDK.attSlider', [])
                 }
 
                 scope.sliderMoved = function () {
-                    scope.$emit("sliderMoved", null);
+                    scope.$emit("sliderMoved", scope.parentControl);
                 };
 
                 // watch for model changes and repaint the slider
