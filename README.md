@@ -8,7 +8,7 @@ At this time this is only an UI toolkit, with a goal to by 2015 include Drive Pl
 - Install NodeJS http://nodejs.org
 - Using terminal as sudo install globally Grunt, Karma, Bower and Grunt-Cli: `$npm install -g grunt bower karma grunt-cli`
 - Change directory to Connected Car SDK folder and run: `$npm install`
-- Then: `$bower install`
+- Then: ```$bower install```
 - and finally: `$grunt serve` or `$grunt serve --force` if you see any errors
 
 ## Running the docs website
