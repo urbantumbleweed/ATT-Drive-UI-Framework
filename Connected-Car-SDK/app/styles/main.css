@@ -3,7 +3,9 @@ body {
   margin: 0;
     padding: 0;
     padding-top: 1em;
-
+    background-color: white;
+    color: #222222;
+    overflow: auto;
 }
 
 #page-wrapper{

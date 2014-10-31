@@ -2,7 +2,7 @@
     <a class="selected" ng-bind="defaultOption" ng-click="show=!show"></a>
     <span class="icon"><i class="fa fa-caret-down"></i></span>
     <div class="screen" ng-show="show">
-        <button ng-show="closeButton" type="button" class="btn btn-circ medium btn-close-list" ng-click="show=false">X</button>
+        <button ng-show="closeButton" type="button" class="btn btn-circ medium btn-close-list" ng-click="show=false"><span class="icon-close"></span></button>
         <ul class="list">
             <li ng-repeat="item in items" ng-click="selectItem(item)">{{item.text}}</li>
 

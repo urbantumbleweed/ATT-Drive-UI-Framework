@@ -1,9 +1,9 @@
 ﻿<div class="padding" style="padding-top: 20px" ng-show="audio">
     <div class="row">
         <div class="col-xs-12">
-            <h2 class="view-title">{{audio.attributes.src.value.replace("audio/", "")}}</h2>
+            <h2 class="view-title">{{currentSong().author}} - {{currentSong().title}}</h2>
             <!--<h4 class="view-subtitle">Queen</h2>-->
-            <h4 class="text-uppercase text-muted">Next: <span class="font-medium">{{nextSong()}}</span></h4>
+            <h4 class="text-uppercase text-muted">Next: <span class="font-medium">{{nextSong().author}} - {{nextSong().title}}</span></h4>
         </div>
     </div>
     <div class="btn-group-media sep-t-40">
@@ -29,17 +29,18 @@
     </div>
 
     <div style="display: none" ng-repeat="song in playlist" ng-class="{'active-song' : currentIndex == $index}" ng-click="setFile($index)">
-        <span ng-bind="song"></span>
+        <span ng-bind="song.title"></span>
     </div>
 
     <div class="volume-panel" ng-class="{'show': showVolume}">
         VOLUME AT {{currentVolume}}%
         <att-slider type="default"
-                min="{{minVolume}}"
-                max="{{maxVolume}}"
-                ng-model="currentVolume"
-                text-left="{{minVolume}}"
-                text-right="{{maxVolume}}"
-                parent-control="volume">
+                    min="{{minVolume}}"
+                    max="{{maxVolume}}"
+                    ng-model="currentVolume"
+                    text-left="{{minVolume}}"
+                    text-right="{{maxVolume}}"
+                    parent-control="volume">
+        </att-slider>
     </div>
 </div>

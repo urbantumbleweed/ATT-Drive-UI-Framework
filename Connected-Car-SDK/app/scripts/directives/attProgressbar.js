@@ -56,6 +56,10 @@ angular.module('connectedCarSDK.attProgressBar', [])
         },
         templateUrl: 'templates/attProgressBar.html',
         link: function (scope, element, attrs, progressCtrl) {
+
+            if (attrs.max && scope.value > scope.$parent.$eval(attrs.max))
+                scope.value = attrs.max;
+
             progressCtrl.addBar(scope, angular.element(element.children()[0]));
         }
     };

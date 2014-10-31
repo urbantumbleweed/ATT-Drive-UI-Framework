@@ -5,18 +5,15 @@
     <title>myFirstApp</title>
     <link rel="stylesheet" href="att-sdk/styles/att-sdk.css">
     <link rel="stylesheet" href="att-sdk/styles/font-asesome.css">
+    <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body ng-app="app">
     <div id="main-container">
-        <div class="screen">
-            <div class="content">
-                <att-header app-name="appName" current-item="viewName"></att-header>
-                <div id="view-container" ng-view></div>
-            </div>
+            <att-header app-name="appName" current-item="viewName"></att-header>
+            <div id="view-container" ng-view></div>
             <att-drawer>
                 <att-menu title="title" items="appLinks"></att-menu>
             </att-drawer>
-        </div>
     </div>
     <att-loader></att-loader>
 </body>

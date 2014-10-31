@@ -7,7 +7,7 @@
  * # attMediaPlayer
  */
 angular.module('connectedCarSDK.attMediaPlayer', [])
-  .directive('attMediaPlayer', ['$http', '$interval', '$timeout', function ($http, $interval, $timeout) {
+  .directive('attMediaPlayer', ['$http', '$interval', '$timeout', '$document', function ($http, $interval, $timeout, $document) {
       return {
           restrict: 'E',
           replace: true,
@@ -38,9 +38,29 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   intervalCounter = 0;
 
               if (scope.playlist && scope.playlist.length > 0) {
-                  scope.audio = document.createElement("audio");
+
+                  var audioEl = $document.find('body').find('audio');
+
+                  if (audioEl.length == 0) {
+                      audioEl = document.createElement("audio");
+                      scope.audio = audioEl;
+                  } else {
+                      scope.audio = audioEl[0];
+                  }
+
+                  $document.find('body').eq(0).append(audioEl);
+
+                  scope.audio.addEventListener("error", function() {
+                      console.log("error loading file");
+                      // invalidate current file in the playlist
+                      scope.playlist[scope.currentIndex].isValid = false;
+                      if (sliderInterval)
+                          $interval.cancel(sliderInterval);
+                      scope.changeFile(1);
+                  });
+
                   if (scope.audio != null && scope.audio.canPlayType && scope.audio.canPlayType("audio/mpeg")) {
-                      scope.audio.src = scope.playlist[scope.currentIndex];
+                      scope.audio.src = scope.playlist[scope.currentIndex].src;
 
                       if (scope.autoplay) {
                           startPlayer(true);
@@ -52,10 +72,21 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   if (reset && sliderInterval)
                       $interval.cancel(sliderInterval);
 
-                  scope.audio.play();
-                  $timeout(function () {
-                      setupSlider(reset);
-                  }, 200);
+                  var counter = 0;
+                  var maxValue = 100;
+
+                  var intervalDuration = $interval(function () {
+                      var isDurationAvailable = !isNaN(scope.audio.duration);
+                      if (counter >= maxValue || isDurationAvailable) {
+                          $interval.cancel(intervalDuration);
+
+                          if (isDurationAvailable) {
+                              scope.audio.play();
+                              setupSlider(reset);
+                          } 
+                      }
+                      counter++;
+                  }, 50);
               };
 
               function setupSlider(reset) {
@@ -71,6 +102,9 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                       secondsleft = scope.audio.duration;
                       secondsElapsed = 0;
                   }
+
+                  if (sliderInterval)
+                      $interval.cancel(sliderInterval);
 
                   // setup count down timer
                   sliderInterval = $interval(function () {
@@ -106,6 +140,7 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               });
 
               scope.countdown = function (isElapsed) {
+                  //console.log('countdown, isElapsed: ' + isElapsed);
                   var min, sec;
                   if (isElapsed) {
                       min = parseInt(secondsElapsed / 60);
@@ -200,13 +235,16 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                       else scope.currentIndex = scope.playlist.length - 1;
                   }
 
-                  scope.audio.src = scope.playlist[scope.currentIndex];
+                  if (scope.playlist[scope.currentIndex].isValid == false)
+                      scope.changeFile(1);
+
+                  scope.audio.src = scope.playlist[scope.currentIndex].src;
                   startPlayer(true);
               };
 
               scope.setFile = function (index) {
                   scope.currentIndex = index;
-                  scope.audio.src = scope.playlist[scope.currentIndex];
+                  scope.audio.src = scope.playlist[scope.currentIndex].src;
                   startPlayer(true);
               };
 
@@ -218,9 +256,12 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   var index = scope.currentIndex;
                   if (scope.playlist.length == (scope.currentIndex + 1))
                       index = -1;
-                  return scope.playlist[index + 1].replace("audio/", "");
+                  return scope.playlist[index + 1];
               };
 
+              scope.currentSong = function() {
+                  return scope.playlist[scope.currentIndex];
+              };
           }
       };
   }]);

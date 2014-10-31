@@ -109,7 +109,7 @@ h3.active-screen {
 .content {
     position: relative;
     z-index: 3;
-    padding-top: 70px;
+    height: 100%;
 }
 
 
@@ -170,7 +170,11 @@ h3.main-subtitle {
 }
 
 .weather-stats {
+    position: absolute;
+    bottom: 80px;
+    right: 24px;
     font-size: 24px;
+
 }
 
 .weather-column img {
@@ -191,9 +195,16 @@ h3.main-subtitle {
     margin-bottom: 5px;
 }
 
+.current-weather{
+    position: absolute;
+    bottom: 80px;
+    width: 500px;
+    left: 24px;
+}
+
 /* Overrides */
 .att-tabs {
-	height: 400px;
+
 }
 
 .att-tabs .nav > li.active > a,
@@ -212,7 +223,8 @@ h3.main-subtitle {
 }
 
 .att-tabs .tab-content {
-	padding: 0 24px;
+
+    width: 100%;
 }
 
 .att-menu ul.list li.active:before {
@@ -221,4 +233,8 @@ h3.main-subtitle {
 
 .att-drawer.visible {
 	height: 768px;
+}
+
+div[ng-view]{
+    height: 100%;
 }
