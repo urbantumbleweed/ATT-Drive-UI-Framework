@@ -28,8 +28,11 @@ angular.module("templates/attBadge.html", []).run(["$templateCache", function($t
 angular.module("templates/attDrawer.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attDrawer.html",
     "<div class=\"att-drawer\" ng-class=\"{visible: showDrawer == true}\">\n" +
+    "\n" +
     "    <div ng-transclude></div>\n" +
     "</div>\n" +
+    "\n" +
+    "<span id=\"att-drawer-menu-icon\" class=\"icon-menu\" ng-class=\"{visible: showDrawer == true}\" ng-click=\"closeDrawer()\"></span>\n" +
     "");
 }]);
 
@@ -101,9 +104,9 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
     "<div class=\"padding\" style=\"padding-top: 20px\" ng-show=\"audio\">\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-xs-12\">\n" +
-    "            <h2 class=\"view-title\">{{audio.attributes.src.value.replace(\"audio/\", \"\")}}</h2>\n" +
+    "            <h2 class=\"view-title\">{{currentSong().author}} - {{currentSong().title}}</h2>\n" +
     "            <!--<h4 class=\"view-subtitle\">Queen</h2>-->\n" +
-    "            <h4 class=\"text-uppercase text-muted\">Next: <span class=\"font-medium\">{{nextSong()}}</span></h4>\n" +
+    "            <h4 class=\"text-uppercase text-muted\">Next: <span class=\"font-medium\">{{nextSong().author}} - {{nextSong().title}}</span></h4>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"btn-group-media sep-t-40\">\n" +
@@ -129,18 +132,19 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
     "    </div>\n" +
     "\n" +
     "    <div style=\"display: none\" ng-repeat=\"song in playlist\" ng-class=\"{'active-song' : currentIndex == $index}\" ng-click=\"setFile($index)\">\n" +
-    "        <span ng-bind=\"song\"></span>\n" +
+    "        <span ng-bind=\"song.title\"></span>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"volume-panel\" ng-class=\"{'show': showVolume}\">\n" +
     "        VOLUME AT {{currentVolume}}%\n" +
     "        <att-slider type=\"default\"\n" +
-    "                min=\"{{minVolume}}\"\n" +
-    "                max=\"{{maxVolume}}\"\n" +
-    "                ng-model=\"currentVolume\"\n" +
-    "                text-left=\"{{minVolume}}\"\n" +
-    "                text-right=\"{{maxVolume}}\"\n" +
-    "                parent-control=\"volume\">\n" +
+    "                    min=\"{{minVolume}}\"\n" +
+    "                    max=\"{{maxVolume}}\"\n" +
+    "                    ng-model=\"currentVolume\"\n" +
+    "                    text-left=\"{{minVolume}}\"\n" +
+    "                    text-right=\"{{maxVolume}}\"\n" +
+    "                    parent-control=\"volume\">\n" +
+    "        </att-slider>\n" +
     "    </div>\n" +
     "</div>\n" +
     "");

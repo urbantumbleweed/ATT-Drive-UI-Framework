@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                 tasks: ['newer:jshint:test', 'karma']
             },
             styles: {
-                files: ['<%= sdk.app %>/styles/{,*/}*.css'],
+                files: ['<%= sdk.app %>/sdkstyles/{,*/}*.css'],
                 tasks: ['newer:copy:styles']
             },
             gruntfile: {
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                   '<%= sdk.app %>/{,*/}*.html',
-                  '.tmp/styles/{,*/}*.css',
+                  '.tmp/sdkstyles/{,*/}*.css',
                   '<%= sdk.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
@@ -387,8 +387,8 @@ module.exports = function (grunt) {
             },
             styles: {
                 expand: true,
-                cwd: '<%= sdk.app %>/styles',
-                dest: '.tmp/styles/',
+                cwd: '<%= sdk.app %>/sdkstyles',
+                dest: '.tmp/sdkstyles/',
                 src: '{,*/}*.css'
             },
             seed: {

@@ -30,6 +30,10 @@ angular.module('connectedCarSDK.attMenu', [])
                   }
               };
 
+              $rootScope.$on('setMenuItem', function (event, args) {
+                  scope.onItemClick(args[0]);
+              });
+
               $rootScope.$on('changeDrawer', function (event, args) {
                   $timeout(function () {
                       scope.activeTemp = true;
