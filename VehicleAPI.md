@@ -138,7 +138,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |climateControl.heater	|Boolean	|False	|No	|Heating system T/F|
 |climateControl.seatHeater	|Integer	|False	|No	|Seat warmer (0: off, 1: least warm ~ 10: warmest)|
 |climateControl.seatCooler	|Integer	|False	|No	|Seat ventilation (0: off, 1: least warm ~ 10: warmest)|
-|climateControl.airRecirculation	|Boolean	|False	|No	air recirculation. (True : on, |False : pulling in outside air)|
+|climateControl.airRecirculation	|Boolean	|False	|No	|Air recirculation. (True : on, False : pulling in outside air)|
 |climateControl.steeringWheelHeater	|Integer	|False	|No	|Steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
 |sideWindow.lock	|Boolean	|False	|No	|Whether or not the window is locked T/F|
 |sideWindow.openness	|Integer	|False	|No	|Side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
