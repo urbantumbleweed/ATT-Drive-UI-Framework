@@ -10,7 +10,9 @@ For instance, if an application wants to use the vehicle information SDK, the ap
 ## Vehicle Information
 This Javascript SDK allows retrieving and setting vehicle information.
 The following interface represents a base interface to all vehicle properties (from W3C):
-```interface VehicleInterface {
+
+<pre>
+interface VehicleInterface {
     Promise get (optional object options);
     Promise set (object value, optional object options);
     Promise delete (object value, optional object options);
@@ -55,7 +57,8 @@ enum EventType {
 interface VehicleCommonDataType {
     readonly    attribute Zone         zone;
     readonly    attribute DOMTimeStamp timeStamp;
-};```
+};
+</pre>
 
 Object options can be of type Zone or extended options (to keep compatibility with W3C).
 Optional parameter “options” allows filtering the set of attributes the method is applied to. For instance, chose logical or physical vehicle zone.
