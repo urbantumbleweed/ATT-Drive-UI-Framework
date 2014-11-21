@@ -3,10 +3,10 @@
 ## Context initialization
 Application must call the init function to setup the context of a given SDK before usage.
 The callback function will be called by DEC to notify the application of any changes made to its data store space made by external applications or components.
-```callback InterfaceCallback = void(object value, EventType eventType); ();```
+`callback InterfaceCallback = void(object value, EventType eventType); ();`
 
 For instance, if an application wants to use the vehicle information SDK, the application would have to call:
-```init(appId, callBack, ["vehicleinfo","navigation"]);```
+`init(appId, callBack, ["vehicleinfo","navigation"]);`
 
 ## Vehicle Information
 This Javascript SDK allows retrieving and setting vehicle information.
@@ -151,12 +151,12 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |seat.seatbelt	|Boolean	|False	|Yes	|Whether or not the seat belt is fasten T/F|
 
 ##Get Vehicle information
-**Usage:** ```drive.vehicleinfo.get(options).then(resolve, reject);```
+**Usage:** `drive.vehicleinfo.get(options).then(resolve, reject);`
 **Description:** The get method returns vehicle information object.
 ###Parameters:
-    - {function} resolve - Function called with vehicle information data object if the operation is successful. See data object format below.
-    - {function} reject Optional - Function called in case of error retrieving vehicle information.
-    - {object} options Optional - "options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
+- {function} resolve - Function called with vehicle information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving vehicle information.
+- {object} options Optional - "options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
     
 **Returns:** Promise
 
@@ -224,10 +224,10 @@ function getVehicleInfo(){
 **Usage:** `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
 **Description:** The set method allows setting some vehicle parameters like climate control (HVAC).
 **Parameters:**
-   - {object} settings - Settings object value (attributes values) 
-   - {object} options - Optional "options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
-   - {function} resolve - Function called if the operation is successful. 
-   - {function} reject Optional - Function called in case of error setting vehicle information.
+- {object} settings - Settings object value (attributes values) 
+- {object} options - Optional "options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
 
 **Returns:** Promise
 
