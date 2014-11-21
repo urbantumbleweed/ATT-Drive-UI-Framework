@@ -399,7 +399,7 @@ function getPositionInfo(){
 ```
 
 ####Example: get all navigation information
-``javascript
+```javascript
 function getNavigationInfo(data){
    console.log(data);
 }
@@ -459,7 +459,7 @@ function setNavigationInfo(){
 ```
 
 ####Example: add new poi to the map and make it visible
-``javascript
+```javascript
 var settings = {"poi":"DFW Airport", "visible": true};
 
 function resolve(){
@@ -493,7 +493,7 @@ function setNavigationInfo(){
 ```
 
 ####Example: Start navigation session
-``javascript
+```javascript
 var settings = {"started":true};
 
 function resolve(){
