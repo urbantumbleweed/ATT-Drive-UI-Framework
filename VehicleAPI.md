@@ -107,10 +107,10 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |configuration.fuelType	|String	|False	|Yes	|Fuel type|
 |configuration.refuelPosition	|String	|False	|Yes	|Side of the vehicle with access to the fuel door|
 |configuration.color.interior	|{array}	|False	|Yes	|Vehicle interior colors|
-|configuration.color.interior.colorCode	|String	True	|Yes	|Color code|
+|configuration.color.interior.colorCode	|String	|True	|Yes	|Color code|
 |configuration.color.interior.colorName	|String	|False	|Yes	|Color description|
 |configuration.color.exterior	|{array}	|False	|Yes	|Vehicle exterior colors|
-|configuration.color.exterior.colorCode	|String	True	|Yes	|Color code|
+|configuration.color.exterior.colorCode	|String	|True	|Yes	|Color code|
 |configuration.color.exterior.colorName	|String	|False	|Yes	|Color description|
 |configuration.transmissionType	|String	|False	|Yes	|Vehicle transmission type|
 |configuration.weight	|Float	|False	|Yes	|Vehicle weight|
@@ -132,7 +132,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |engineCoolant.temperature	|Integer	|False	|Yes	|Engine coolant temperature(in degrees Celsius)|
 |**Vehicle climate control**	
 |climateControl.airflowDirection	|String	|False	|No	Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"|
-|climateControl.fanSpeedLevel	Integer	|False	|No	fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
+|climateControl.fanSpeedLevel	|Integer	|False	|No	fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
 |climateControl.targetTemperature	|Integer	|False	|No	desired temperature(in degrees Celsius)|
 |climateControl.airConditioning	|Boolean	|False	|No	air conditioning system T/F|
 |climateControl.heater	|Boolean	|False	|No	heating system T/F|
