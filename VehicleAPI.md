@@ -95,26 +95,26 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |identification.owner.id	|String	|True	|Yes	|Owner ID|
 |identification.owner.type	|String	|True	|Yes	|Owner Type: subscriber, dealer, oem|
 |**Vehicle equipment**				
-|devices	{array}	|False	|Yes	|Vehicle devices: HU, TCU, Rear screens, DAC, etc|
-|devices.deviceId	|String	True	|Yes	|Device identifier|
+|devices	|{array}	|False	|Yes	|Vehicle devices: HU, TCU, Rear screens, DAC, etc|
+|devices.deviceId	|String	|True	|Yes	|Device identifier|
 |devices.description	|String	|False	|Yes	|Device description|
-|devices.metas	{array}	|False	|Yes	|Device metadata (array of attribute:value)|
+|devices.metas	|{array}	|False	|Yes	|Device metadata (array of attribute:value)|
 |**Vehicle life cycle**				
-|lifecycle.status	|String	True	|Yes	|Inventory, demo, trial, retail, service, junk|
+|lifecycle.status	|String	|True	|Yes	|Inventory, demo, trial, retail, service, junk|
 |lifecycle.condition	|String	|False	|Yes	|Vehicle condition. Excellent, Good, Poor, Unknown.|
 |Vehicle configuration	
 |configuration.totalDoors	|Integer	|False	|Yes	|Number of doors|
 |configuration.fuelType	|String	|False	|Yes	|Fuel type|
 |configuration.refuelPosition	|String	|False	|Yes	|Side of the vehicle with access to the fuel door|
-|configuration.color.interior	{array}	|False	|Yes	|Vehicle interior colors|
+|configuration.color.interior	|{array}	|False	|Yes	|Vehicle interior colors|
 |configuration.color.interior.colorCode	|String	True	|Yes	|Color code|
 |configuration.color.interior.colorName	|String	|False	|Yes	|Color description|
-|configuration.color.exterior	{array}	|False	|Yes	Vehicle exterior colors|
+|configuration.color.exterior	|{array}	|False	|Yes	|Vehicle exterior colors|
 |configuration.color.exterior.colorCode	|String	True	|Yes	|Color code|
 |configuration.color.exterior.colorName	|String	|False	|Yes	|Color description|
 |configuration.transmissionType	|String	|False	|Yes	|Vehicle transmission type|
 |configuration.weight	|Float	|False	|Yes	|Vehicle weight|
-|configuration.options	{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
+|configuration.options	|{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
 |**Vehicle status **	
 |vehicleSpeed.speed	|Integer	|False	|Yes	|Vehicle speed (KM/h or MP/h|
 |vehicleSpeed.averageSpeed	|Integer	|False	|Yes	|Estimated average speed in KM/h |
