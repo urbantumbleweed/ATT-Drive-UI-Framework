@@ -12,7 +12,7 @@ For instance, if an application wants to use the vehicle information SDK, the ap
 This Javascript SDK allows retrieving and setting vehicle information.
 The following interface represents a base interface to all vehicle properties (from W3C):
 
-<pre>
+```javascript
 interface VehicleInterface {
     Promise get (optional object options);
     Promise set (object value, optional object options);
@@ -59,7 +59,7 @@ interface VehicleCommonDataType {
     readonly    attribute Zone         zone;
     readonly    attribute DOMTimeStamp timeStamp;
 };
-</pre>
+```
 
 Object options can be of type Zone or extended options (to keep compatibility with W3C).
 Optional parameter "options" allows filtering the set of attributes the method is applied to. For instance, chose logical or physical vehicle zone.
@@ -153,7 +153,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 ##Get Vehicle information
 **Usage:** `drive.vehicleinfo.get(options).then(resolve, reject);`
 **Description:** The get method returns vehicle information object.
-###Parameters:
+**Parameters:**
 - {function} resolve - Function called with vehicle information data object if the operation is successful. See data object format below.
 - {function} reject Optional - Function called in case of error retrieving vehicle information.
 - {object} options Optional - "options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
@@ -161,7 +161,8 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 **Returns:** Promise
 
 ####Example: GET vehicle speed
-<pre>var vehicleinfo = drive.vehicleinfo;
+```javascript
+var vehicleinfo = drive.vehicleinfo;
 
 function getVehicleSpeed(data){
   console.log(data.timeStamp +":"+ data.speed);
@@ -173,10 +174,12 @@ function logError(err){
 
 function getVehicleSpeed(){
     vehicleinfo.vehicleSpeed.get().then(getVehicleSpeed,logError);
-}</pre>
+}
+```
 
 ####Example: GET vehicle climate information (HVAC)
-<pre>var vehicleinfo = drive.vehicleinfo;
+```javascript
+var vehicleinfo = drive.vehicleinfo;
 
 function logHVAC(data){
   console.log(data.targetTemperature+","+data.airConditioning);
@@ -188,10 +191,12 @@ function logError(error){
 
 function getClimateInfo(){
  vehicleinfo.climateControl.get(zone.driver).then(logHVAC,logError);
-}</pre>
+}
+```
 
 ####Example: GET door status
-<pre>var vehicleinfo = drive.vehicleinfo;
+```javascript
+var vehicleinfo = drive.vehicleinfo;
 
 function getDoorStatus(door){
   console.log(door.status);
@@ -203,10 +208,12 @@ function logError(error){
 
 function getDoorStatus(){
  vehicleinfo.door.get(zone.passenger).then(getDoorStatus,logError);
-}</pre>
+}
+```
 
 ####Example: GET all vehicle information
-<pre>var vehicleinfo = drive.vehicleinfo;
+```javascript
+var vehicleinfo = drive.vehicleinfo;
 
 function logVehicleInfo(data){
   console.log(data);
@@ -218,7 +225,8 @@ function logError(error){
 
 function getVehicleInfo(){
      vehicleinfo.get().then(logVehicleInfo,logError);
-}</pre>
+}
+```
 
 ##Set Vehicle information
 **Usage:** `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
@@ -229,10 +237,11 @@ function getVehicleInfo(){
 - {function} resolve - Function called if the operation is successful. 
 - {function} reject Optional - Function called in case of error setting vehicle information.
 
-**Returns:** Promise
+****Returns:**** Promise
 
 ####Example: lock driver side door
-<pre>var zone = Zone;
+```javascript
+var zone = Zone;
 var vehicleinfo = drive.vehicleinfo;
 
 function resolve(){
@@ -245,10 +254,12 @@ function reject(error){
 
 function setVehicleInfo(){
 vehicleinfo.door.set({"lock":true},zone.driver).then(resolve,reject);
-}</pre>
+}
+```
 
 ####Example: turn on AC
-<pre>var zone = new Zone;
+```javascript 
+var zone = new Zone;
 var vehicleinfo = drive.vehicleinfo;
 var zones = vehicleinfo.climateControl.zones;
 
@@ -267,843 +278,1028 @@ for(var i in zones)
           }
       );
    }        
-}</pre>
+}
+```
 
-Delete vehicle information settings
-Usage: drive.vehicleinfo.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Note: in the current data model there is no attribute that requires delete settings. This method should be supported for tha sake of uniformity and future use.
-Subscribe to vehicle information
-Usage: handle = drive.vehicleinfo.subscribe(callBack, options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with vehicle information data object. See data object format below.
-{object} options Optional
-"options" object corresponds to a Zone or any other attribute value that will be used as a filter to limite subscription scope.
-Returns: 
-{Integer} handle
+###Delete vehicle information settings
+**Usage:** `drive.vehicleinfo.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
+
+**Returns:** Promise
+
+> Note: in the current data model there is no attribute that requires delete settings. This method should be supported for tha sake of uniformity and future use.
+
+###Subscribe to vehicle information
+**Usage:** `handle = drive.vehicleinfo.subscribe(callBack, options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with vehicle information data object. See data object format below.
+- {object} options Optional - "options" object corresponds to a Zone or any other attribute value that will be used as a filter to limite subscription scope.
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to vehicle speed
 
-Example: subscribe to any vehicle information
+####Example: subscribe to vehicle speed
+```javascript
+function logSpeedInfo(vehicleSpeed){
+  console.log(vehicleSpeed.speed);
+}
 
-Unsubscribe from vehicle information
-Usage: drive.vehicleinfo.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+function subscribe(){
+     handle=drive.vehicleinfo.vehicleSpeed.subscribe(logSpeedInfo);
+}
+```
 
-Access/Availability check
-Usage: drive.vehicleinfo.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+####Example: subscribe to any vehicle information
+```javascript
+function logVehicleInfo(data){
+  console.log(data);
+}
+
+function subscribe(){
+     handle=drive.vehicleinfo.subscribe(logVehicleInfo);
+}
+```
+
+###Unsubscribe from vehicle information
+**Usage:** `drive.vehicleinfo.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
+**Returns:** void
+
+####Example:
+```javascript
+function unsubscribe(){
+    drive.vehicleinfo.unsubscribe(handle);
+}
+```
+
+###Access/Availability check
+**Usage:** `drive.vehicleinfo.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
-See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
 
-Navigation
+See policy manager section for more details.
+
+**Parameters:**
+- None.
+
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
+
+####Example:
+```javascript
+function isAvailable(){
+    return drive.vehicleinfo.vehicleSpeed.available();
+}
+```
+
+##Navigation
 This Javascript SDK allows interacting with navigation system.
 The following interface represents a base interface to all navigation properties:
+- CommonDataType interface represents common data type for all data types
+- Navigation properties
 
-CommonDataType interface represents common data type for all data types.
-Navigation properties
-Below properties is a subset of possible attributes that a navigation system may support. More attributes shall be added in the next version of this SDK.
-Navigation properties that are not supported by a given navigation system will not be returned in a get method performed on parent object but will trigger an error if methods (get, set, subscribe, delete) are called on a specific unsupported property.
+Below properties is a subset of possible attributes that a navigation system may support. More attributes shall be added in the next version of this SDK. Navigation properties that are not supported by a given navigation system will not be returned in a get method performed on parent object but will trigger an error if methods (get, set, subscribe, delete) are called on a specific unsupported property.
 
- Get Navigation Information
-Usage: drive.navigation.get(options).then(resolve, reject);
-Description: The get method returns navigation information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with navigation information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving navigation information.
-Returns: Promise
-Example: get current position
+###Get Navigation Information
+**Usage:** `drive.navigation.get(options).then(resolve, reject);`
+**Description:** The get method returns navigation information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with navigation information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving navigation information.
 
-Example: get all navigation information
+**Returns:** Promise
 
-Set Navigation information
-Usage: drive.navigation.set(settings,options).then(resolve, reject)
-Description: The set method allows setting some navigation parameters like destination.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Example: set new destination by poi
+####Example: get current position
+``javascript
 
-Example: set new destination by latitude and Longitude
+```
 
-Example: add new poi to the map and make it visible
+####Example: get all navigation information
+``javascript
 
-Example: Hide POI
+```
 
-Example: Start navigation session
+###Set Navigation information
+**Usage:** `drive.navigation.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows setting some navigation parameters like destination.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
 
-Delete Navigation settings
-Usage: drive.navigation.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting navigation information.
-Returns: Promise
-Example: delete a specific poi
+**Returns:** Promise
 
-Example: delete all POIs by type (parking)
+####Example: set new destination by poi
+``javascript
 
-Subscribe to navigation information
-Usage: handle = drive.navigation.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with navigation information data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+```
+
+####Example: set new destination by latitude and Longitude
+``javascript
+
+```
+
+####Example: add new poi to the map and make it visible
+``javascript
+
+```
+
+####Example: Hide POI
+``javascript
+
+```
+
+####Example: Start navigation session
+``javascript
+
+```
+
+###Delete Navigation settings
+**Usage:** `drive.navigation.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting navigation information.
+
+**Returns:** Promise
+
+####Example: delete a specific poi
+```javascript
+
+```
+
+####Example: delete all POIs by type (parking)
+```javascript
+
+```
+
+###Subscribe to navigation information
+**Usage:** `handle = drive.navigation.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with navigation information data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
+
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to destination
+####Example: subscribe to destination
+```javascript
 
-Unsubscribe from navigation information
-Usage: drive.navigation.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+```
 
-Access/Availability check
-Usage: drive.navigation.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+###Unsubscribe from navigation information
+**Usage:** `drive.navigation.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example:
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.navigation.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None.
 
-Identity
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
+####Example:
+```javascript
+
+```
+
+##Identity
 This Javascript SDK allows interacting with Identity Manager.
 The following interface represents a base interface to all identity properties:
+- CommonDataType interface represents common data type for all data types.
 
-CommonDataType interface represents common data type for all data types.
-Identity properties
+###Identity properties
 Below properties is a subset of possible attributes that identity manager supports. More attributes shall be added in the next version of this SDK.
 
-Get Identity Information
-Usage: drive.identity.get(options).then(resolve, reject);
-Description: The get method returns identity information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with identity information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving identity information.
-Returns: Promise
-Example: get current user
+###Get Identity Information
+**Usage:** `drive.identity.get(options).then(resolve, reject);`
+**Description:** The get method returns identity information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with identity information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving identity information.
 
-Example: Check if user is logged in
+**Returns:** Promise
 
-Set Identity information
-Usage: drive.identity.set(settings,options).then(resolve, reject);
-Description: The set method allows setting some identity parameters like user preferences.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Example: trigger user login
+####Example: get current user
+```javascript
 
-Delete Identity settings
-Usage: drive.identity.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Note: in the current data model there is no attribute that requires delete settings. This method should be supported for tha sake of uniformity and future use.
-Subscribe to Identity information
-Usage: handle = drive.identity.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with identity information data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+```
+
+####Example: Check if user is logged in
+```javascript
+
+```
+
+###Set Identity information
+**Usage:** `drive.identity.set(settings,options).then(resolve, reject);`
+**Description:** The set method allows setting some identity parameters like user preferences.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
+
+**Returns:** Promise
+
+####Example: trigger user login
+```javascript
+
+```
+
+###Delete Identity settings
+**Usage:** `drive.identity.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
+
+**Returns:** Promise
+
+>Note: in the current data model there is no attribute that requires delete settings. This method should be supported for tha sake of uniformity and future use.
+
+###Subscribe to Identity information
+**Usage:** `handle = drive.identity.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with identity information data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: get notification when user logs in
 
-Unsubscribe from Identity information
-Usage: drive.identity.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+####Example: get notification when user logs in
+  ```javascript
 
-Access/Availability check
-Usage: drive.identity.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
-When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
+```
+
+###Unsubscribe from Identity information
+**Usage:** `drive.identity.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle -"handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.identity.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None
 
+**Returns:** String
+- "available": resource is available (read/write).
+-"readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit
+-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
 
-Application and System Settings
+####Example
+```javascript
+
+```
+
+##Application and System Settings
 This Javascript SDK allows managing application and system settings. Applications can use this SDK to store and retrieve their own settings and benefit from built in data events handling.
 The following interface represents a base interface to all system/application properties:
 
-CommonDataType interface represents common data type for all data types.
-System properties
+- CommonDataType interface represents common data type for all data types.
+
+###System properties
 Below properties is a subset of possible attributes that system settings support. More attributes shall be added in the next version of this SDK.
 
-Application properties
+###Application properties
 Application properties shall start with application name.
+- Vehicle information user settings
+- Navigation user settings
+- Identity user settings
+- Notification user settings
+- Media user settings
+- Search user settings
 
-Vehicle information user settings
+###Application user settings
 
-Navigation user settings
+###Get System/Application User Settings
+**Usage:** `drive.settings.get(options).then(resolve, reject);`
+**Description:** The get method returns system information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters on returned data.
+- {function} resolve - Function called with system/application information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving system/application information.
 
-Identity user settings
+**Returns:** Promise
 
-Notification user settings
+####Example: get default language
+```javascript
 
-Media user settings
+```
 
-Search user settings
+####Example: get baseURL
+```javascript
 
-Application user settings
+```
 
-Get System/Application User Settings
-Usage: drive.settings.get(options).then(resolve, reject);
-Description: The get method returns system information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters on returned data.
-{function} resolve
-Function called with system/application information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving system/application information.
-Returns: Promise
-Example: get default language
+####Example: get vehicle seat adjustment user preferences
+```javascript
 
-Example: get baseURL
+```
 
-Example: get vehicle seat adjustment user preferences
+####Example: get navigation latest destination user preferences
+```javascript
 
-Example: get navigation latest destination user preferences
+```
 
-Set System/Application User Settings
-Usage: drive.settings.set(settings,options).then(resolve, reject);
-Description: The set method allows set system/application configuration (settings).
-Parameters:
-{object} settings
-Settings object value (attributes values).
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting policy information.
-Returns: Promise
-Example: system settings
+###Set System/Application User Settings
+**Usage:** `drive.settings.set(settings,options).then(resolve, reject);`
+**Description:** The set method allows set system/application configuration (settings).
+**Parameters:**
+- {object} settings - Settings object value (attributes values).
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting policy information.
 
-Example: Application global settings
+**Returns:** Promise
 
-Example: Application user preference
+####Example: system settings
+```javascript
 
-Delete System/Application User Settings
-Usage: drive.settings.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Example: Delete settings of a given user
+```
 
-Subscribe to System/Application User Settings
-Usage: handle = drive.settings.subscribe(callBack, options)
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} callBack
-Function called on value change with settings data object. See data object format below.
-Returns: 
-{Integer} handle
+####Example: Application global settings
+```javascript
+
+```
+
+####Example: Application user preference
+```javascript
+
+```
+
+###Delete System/Application User Settings
+**Usage:** `drive.settings.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
+
+**Returns:** Promise
+
+####Example: Delete settings of a given user
+```javascript
+
+```
+
+###Subscribe to System/Application User Settings
+**Usage:** `handle = drive.settings.subscribe(callBack, options)`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} callBack - Function called on value change with settings data object. See data object format below.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to all system properties
 
-Example: subscribe to application properties
+####Example: subscribe to all system properties
+```javascript
 
-Unsubscribe from System/Application User Settings
-Usage: drive.settings.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-"handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+```
 
-Access/Availability check
-Usage: drive.settings.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+####Example: subscribe to application properties
+```javascript
+
+```
+
+###Unsubscribe from System/Application User Settings
+**Usage:** `drive.settings.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.settings.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None.
 
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
 
-Notification
-This Javascript SDK allows interacting with notification service.
+####Example
+```javascript
+
+```
+
+##Notifications
+This Javascript SDK allows interacting with notifications service.
 The following interface represents a base interface to all notification properties:
-
 CommonDataType interface represents common data type for all data types.
-Notification properties
-Below properties is a subset of possible attributes that a notification service may support. More attributes shall be added in the next version of this SDK.
 
-SMS data format
+###Notification properties
+Below properties is a subset of possible attributes that a notification service may support. More attributes shall be added in the next version of this SDK:
 
-Weather alert data format
+- SMS data format
+- Weather alert data format
+- Tracking data format
+- Site automation data format
 
-Tracking data format
+###Get Notification Information
+**Usage:** `drive.notification.get(options).then(resolve, reject);`
+**Description:** The get method returns navigation information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with notification information data object if the operation is successful. 
+- {function} reject Optional - Function called in case of error retrieving navigation information.
 
-Site automation data format
+**Returns:** Promise
 
-Get Notification Information
-Usage: drive.notification.get(options).then(resolve, reject);
-Description: The get method returns navigation information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with notification information data object if the operation is successful. 
-{function} reject Optional
-Function called in case of error retrieving navigation information.
-Returns: Promise
-Example: get sms messages
+####Example: get sms messages
+```javascript
 
-Set Notification information
-Usage: drive.notification.set(settings,options).then(resolve, reject)
-Description: The set method allows setting some notification parameters like read flag.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting notification information.
-Returns: Promise
-Example:
+```
 
-Delete Notification settings
-Usage: drive.notification.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Example:
+###Set Notification information
+**Usage:** `drive.notification.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows setting some notification parameters like read flag.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting notification information.
 
-Subscribe to notification information
-Usage: handle = drive.notification.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with notification information data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+**Returns:** Promise
+
+####Example:
+```javascript
+
+```
+
+###Delete Notification settings
+**Usage:** `drive.notification.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting vehicle information.
+
+**Returns:** Promise
+
+####Example:
+```javascript
+
+```
+
+###Subscribe to notification information
+**Usage:** `handle = drive.notification.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with notification information data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to incoming sms
 
-Unsubscribe from notification information
-Usage: drive.notification.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+####Example: subscribe to incoming sms
+```javascript
 
-Access/Availability check
-Usage: drive.notification.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+```
+
+###Unsubscribe from notification information
+**Usage:** `drive.notification.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle = "handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.notification.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
 
-Media
+**Parameters:**
+- None.
+
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
+
+####Example
+```javascript
+
+```
+
+##Media
 This Javascript SDK allows interacting with media player.
 The following interface represents a base interface to all media player properties:
-
 CommonDataType interface represents common data type for all data types.
-Media properties
+
+###Media properties
 Below properties is a subset of possible attributes that a Media service may support. More attributes shall be added in the next version of this SDK.
 
-Get Media Information
-Usage: drive.media.get(options).then(resolve, reject);
-Description: The get method returns media information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with media information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving media information.
-Returns: Promise
-Example: get current media
+###Get Media Information
+**Usage:** `drive.media.get(options).then(resolve, reject);`
+**Description:** The get method returns media information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with media information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving media information.
 
-Set Media information
-Usage: drive.media.set(settings,options).then(resolve, reject)
-Description: The set method allows setting some media parameters like audio/video source URI.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting notification information.
-Returns: Promise
-Example: Request/Release media player
+**Returns:** Promise
 
-Example: set source URI and start media player
+####Example: get current media
+```javascript
 
+```
 
+###Set Media information
+**Usage:** `drive.media.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows setting some media parameters like audio/video source URI.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting notification information.
 
-Delete Media settings
-Usage: drive.media.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting media information.
-Returns: Promise
-Example:
+**Returns:** Promise
+
+####Example: Request/Release media player
+```javascript
+
+```
+
+####Example: set source URI and start media player
+```javascript
+
+```
+
+###Delete Media settings
+**Usage:** `drive.media.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting media information.
+**Returns:** Promise
+####Example:
+```javascript
+
+```
 
 Subscribe to media information
-Usage: handle = drive.media.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with media information data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+**Usage:** `handle = drive.media.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with media information data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to destination
+
+####Example: subscribe to destination
+```javascript
+
+```
 
 Unsubscribe from media information
-Usage: drive.media.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+**Usage:** `drive.media.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
 
-Access/Availability check
-Usage: drive.media.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+**Returns:** void
+
+####Example:
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.media.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None
 
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
 
+####Example
+```javascript
 
+```
 
-
-SMS
+##SMS
 This Javascript SDK allows interacting with SMS/MMS Messaging.
 The following interface represents a base interface to all SMS/MMS properties:
-
 CommonDataType interface represents common data type for all data types.
-SMS/MMS properties
+
+###SMS/MMS properties
 Below properties is a subset of possible attributes that SMS/MMS may support. More attributes shall be added in the next version of this SDK.
 
-Get SMS/MMS Messages
-Usage: drive.sms.get(options).then(resolve, reject);
-Description: The get method returns SMS information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with sms information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving SMS information.
-Returns: Promise
-Example: get inbox messages
+###Get SMS/MMS Messages
+**Usage:** `drive.sms.get(options).then(resolve, reject);`
+**Description:** The get method returns SMS information object.
+**Parameters:**
+- {object} options Optional -Options object allows specifying filters.
+- {function} resolve - Function called with sms information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving SMS information.
 
-Set SMS/MMS messages
-Usage: drive.sms.set(settings,options).then(resolve, reject)
-Description: The set method allows interact with SMS/MMS messaging service for instance send SMS message.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting SMS information.
-Returns: Promise
-Example: Send SMS
+**Returns:** Promise
 
-Delete SMS messages
-Usage: drive.sms.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete SMS messages.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting sms data.
-Returns: Promise
-Example:
+####Example: get inbox messages
+```javascript
 
-Subscribe to SMS
-Usage: handle = drive.sms.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with SMS data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+```
+
+###Set SMS/MMS messages
+**Usage:** `drive.sms.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows interact with SMS/MMS messaging service for instance send SMS message.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting SMS information.
+
+**Returns:** Promise
+
+####Example: Send SMS
+```javascript
+
+```
+
+###Delete SMS messages
+**Usage:** `drive.sms.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete SMS messages.
+**Parameters:** 
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting sms data.
+
+**Returns:** Promise
+
+####Example:
+```javascript
+
+```
+
+###Subscribe to SMS
+**Usage:** `handle = drive.sms.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with SMS data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** - {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: receive SMS
+
+####Example: receive SMS
+```javascript
+
+```
 
 Unsubscribe from SMS
-Usage: drive.sms.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+**Usage:** `drive.sms.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
 
-Access/Availability check
-Usage: drive.sms.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+**Returns:** void
+
+####Example
+  ```javascript
+
+```
+
+###Access/Availability check
+**Usage:**  `drive.sms.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None.
 
-Search service
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
+
+####Example
+```javascript
+
+```
+
+##Search service
 This Javascript SDK allows interacting with search service.
 The following interface represents a base interface to all Contacts properties:
 
 CommonDataType interface represents common data type for all data types.
-Search properties
+
+###Search properties
 Below properties is a subset of possible attributes that Search service may support. More attributes shall be added in the next version of this SDK.
 
-Get search results
-Usage: drive.search.get(options).then(resolve, reject);
-Description: The get method returns search results object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with contact information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving search result information.
-Returns: Promise
-Example: get contacts
+###Get search results
+**Usage:** `drive.search.get(options).then(resolve, reject);`
+**Description:** The get method returns search results object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with contact information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving search result information.
 
-Set search request
-Usage: drive.search.set(settings,options).then(resolve, reject)
-Description: The set method allows interact with search service for instance get places.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting search information.
-Returns: Promise
-Example: Search POIs
+**Returns:** Promise
 
-Example: Search current weather
+####Example: get contacts
+```javascript
 
-Example: Search forecast weather
+```
 
-Delete search requests/results
-Usage: drive.search.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete search requests/results.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting search data.
-Returns: Promise
-Example:
+###Set search request
+**Usage:** `drive.search.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows interact with search service for instance get places.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting search information.
 
-Subscribe to search service
-Usage: handle = drive.search.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with search results/request object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+**Returns:** Promise
+
+####Example: Search POIs
+```javascript
+
+```
+
+####Example: Search current weather
+```javascript
+
+```
+
+####Example: Search forecast weather
+```javascript
+
+```
+
+###Delete search requests/results
+**Usage:** `drive.search.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete search requests/results.
+**Parameters:**
+- {object} settings - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting search data.
+
+**Returns:** Promise
+
+####Example:
+```javascript
+
+```
+
+###Subscribe to search service
+**Usage:** `handle = drive.search.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with search results/request object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to running apps
 
-Unsubscribe from search service
-Usage: drive.search.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+####Example: subscribe to running apps
+```javascript
 
-Access/Availability check
-Usage: drive.search.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+```
+
+###Unsubscribe from search service
+**Usage:** `drive.search.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+- {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.search.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None
 
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
 
+####Example
+```javascript
 
-Site Automation (Digital Life)
+```
+
+##Site Automation (Digital Life)
 This Javascript SDK describes how to interact with site automation.
 The following interface represents a base interface to all site automation properties:
-
 CommonDataType interface represents common data type for all data types.
-Site automation properties
+
+###Site automation properties
 Below properties is a subset of possible attributes that site automation may support. More attributes shall be added in the next version of this SDK.
 
-Get Site Automation Information
-Usage: drive.sa.get(options).then(resolve, reject);
-Description: The get method returns site automation information object.
-Parameters:
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called with site automation information data object if the operation is successful. See data object format below.
-{function} reject Optional
-Function called in case of error retrieving site automation information.
-Returns: Promise
-Example: get site automation resource status
+###Get Site Automation Information
+**Usage:** `drive.sa.get(options).then(resolve, reject);`
+**Description:** The get method returns site automation information object.
+**Parameters:**
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called with site automation information data object if the operation is successful. See data object format below.
+- {function} reject Optional - Function called in case of error retrieving site automation information.
 
-Set site automation Information
-Usage: drive.sa.set(settings,options).then(resolve, reject)
-Description: The set method allows setting some site automation parameters.
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting site automation information.
-Returns: Promise
-Example: Send request
+**Returns:** Promise
 
-Delete Site automation Settings
-Usage: drive.sa.delete(settings,options).then(resolve, reject)
-Description: The delete method allows delete previous settings.
-Parameters:
-{object} settings
-Settings attribute names 
-{object} options Optional
-Options object allows specifying filters.
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting site automation information.
-Returns: Promise
-Example:
+####Example: get site automation resource status
+```javascript
 
-Subscribe to site automation
-Usage: handle = drive.sa.subscribe(callBack,options);
-Description: The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
-Parameters:
-{function} callBack
-Function called on value change with site automation information data object. See data object format below.
-{object} options Optional
-Options object allows specifying filters.
-Returns: 
-{Integer} handle
+```
+
+###Set site automation Information
+**Usage:** `drive.sa.set(settings,options).then(resolve, reject)`
+**Description:** The set method allows setting some site automation parameters.
+**Parameters:**
+- {object} settings - Settings object value (attributes values) 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting site automation information.
+
+**Returns:** Promise
+
+####Example: Send request
+```javascript
+
+```
+
+###Delete Site automation Settings
+**Usage:** `drive.sa.delete(settings,options).then(resolve, reject)`
+**Description:** The delete method allows delete previous settings.
+**Parameters:**
+- {object} setting - Settings attribute names 
+- {object} options Optional - Options object allows specifying filters.
+- {function} resolve - Function called if the operation is successful. 
+- {function} reject Optional - Function called in case of error setting site automation information.
+
+**Returns:** Promise
+
+####Example:
+```javascript
+
+```
+
+##Subscribe to site automation
+**Usage:** `handle = drive.sa.subscribe(callBack,options);`
+**Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
+**Parameters:**
+- {function} callBack - Function called on value change with site automation information data object. See data object format below.
+- {object} options Optional - Options object allows specifying filters.
+
+**Returns:** {Integer} handle
 Subscribe returns handle to subscription or 0 if error. 
-Example: subscribe to site automation result
 
-Unsubscribe from site automation
-Usage: drive.sa.unsubscribe(handle);
-Description: The unsubscribe method allows application to stop data notifications.
-Parameters:
-{object} handle
-“handle" corresponds to subscription handle object returned by subscribe method. 
-Returns: void
-Example
+####Example: subscribe to site automation result
+```javascript
 
-Access/Availability check
-Usage: drive.sa.available();
-Description: This method allows to check whether a given attribute or object is supported and accessible. 
+```
+
+###Unsubscribe from site automation
+**Usage:** `drive.sa.unsubscribe(handle);`
+**Description:** The unsubscribe method allows application to stop data notifications.
+**Parameters:**
+{object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
+
+**Returns:** void
+
+####Example
+```javascript
+
+```
+
+###Access/Availability check
+**Usage:** `drive.sa.available();`
+**Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
-Parameters:
-None.
-Returns: String
-"available": resource is available (read/write).
-"readonly": resource is available in read only mode.
-"not_supported": resource is not supported by current vehicle or head unit.
-"not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
-"not_supported_security": the resource is not accessible by other applications (private access).
-"not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
-Example
+**Parameters:**
+- None.
 
-Error object format
+**Returns:** String
+- "available": resource is available (read/write).
+- "readonly": resource is available in read only mode.
+- "not_supported": resource is not supported by current vehicle or head unit.
+- "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
+- "not_supported_security": the resource is not accessible by other applications (private access).
+- "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
 
-Common error codes
+####Example:
+```javascript
+
+```
+
+**Error object format**
+|Parameter	|Type	|Required	|Description
+|---    |---    |---    |---    |
+|error	|String	|True	|Error code
+|message	|String	|False	|Error message
+
+**Common error codes**
+|Code	|Description
+|---    |---    |
+|invalid_parameter	|Invalid parameters
+|not_authenticated	|Not authenticated
+|not_authorized	|Not authorized
+|connection_timeout	|Communication error
 
 
