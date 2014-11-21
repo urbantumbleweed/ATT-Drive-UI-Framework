@@ -115,7 +115,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |configuration.transmissionType	|String	|False	|Yes	|Vehicle transmission type|
 |configuration.weight	|Float	|False	|Yes	|Vehicle weight|
 |configuration.options	|{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
-|**Vehicle status **	
+|**Vehicle status**	
 |vehicleSpeed.speed	|Integer	|False	|Yes	|Vehicle speed (KM/h or MP/h|
 |vehicleSpeed.averageSpeed	|Integer	|False	|Yes	|Estimated average speed in KM/h |
 |vehicleCompass.direction	|Float	|False	|Yes	|Degree direction of the vehicle compass to be used by navigation identify the car direction| inside garage or when it is not moving|
@@ -152,6 +152,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 
 ##Get Vehicle information
 **Usage:** `drive.vehicleinfo.get(options).then(resolve, reject);`
+
 **Description:** The get method returns vehicle information object.
 **Parameters:**
 - {function} resolve - Function called with vehicle information data object if the operation is successful. See data object format below.
@@ -230,6 +231,7 @@ function getVehicleInfo(){
 
 ##Set Vehicle information
 **Usage:** `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
+
 **Description:** The set method allows setting some vehicle parameters like climate control (HVAC).
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -283,6 +285,7 @@ for(var i in zones)
 
 ###Delete vehicle information settings
 **Usage:** `drive.vehicleinfo.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -296,6 +299,7 @@ for(var i in zones)
 
 ###Subscribe to vehicle information
 **Usage:** `handle = drive.vehicleinfo.subscribe(callBack, options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with vehicle information data object. See data object format below.
@@ -327,6 +331,7 @@ function subscribe(){
 
 ###Unsubscribe from vehicle information
 **Usage:** `drive.vehicleinfo.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -341,6 +346,7 @@ function unsubscribe(){
 
 ###Access/Availability check
 **Usage:** `drive.vehicleinfo.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 
@@ -415,6 +421,7 @@ function getNavigationInfo(){
 
 ###Set Navigation information
 **Usage:** `drive.navigation.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows setting some navigation parameters like destination.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -511,6 +518,7 @@ function setNavigationInfo(){
 
 ###Delete Navigation settings
 **Usage:** `drive.navigation.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -556,6 +564,7 @@ function setNavigationInfo(){
 
 ###Subscribe to navigation information
 **Usage:** `handle = drive.navigation.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with navigation information data object. See data object format below.
@@ -577,6 +586,7 @@ handle=drive.navigation.destination.subscribe(getDestinationInfo);
 
 ###Unsubscribe from navigation information
 **Usage:** `drive.navigation.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -592,6 +602,7 @@ function unsubscribe(){
 
 ###Access/Availability check
 **Usage:** `drive.navigation.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
@@ -644,100 +655,100 @@ interface CommonDataType {
 Below properties is a subset of possible attributes that identity manager supports. More attributes shall be added in the next version of this SDK.
 
 |Parameter	|Type	|Required	|Read only	|Description|
-Current Session	
-session.loggedInTime	Long	False	Yes	Session duration in milliseconds 
-session.timeOut	Long	False	Yes	Session timeout in milliseconds
-session.loggedIn	Boolean	True	Yes	Set to true is user is logged in.
-session.reset	Boolean	False	No	When reset is true, the user should be prompted to change PIN. Default is false.
-session.login	{array}	False	No	Request to login. Identity manager will remove this request when processed and set loggedIn to true if susccessfull.
-session.login.userId	String	True	No	userId
-session.login.pin	String	True	No	PIN
-session.login.oldPin	String	False	No	If specified, identity manager will change current oldPin with specified PIN.
-session.status	String	False	Yes	"Status of current login request. Possible values:
-connecting, connected or
-failure: with error message"
-Current User	
-currentUser	{object}	True	Yes	Current user info
-currentUser.uid	String	True	Yes	If not specified subscriber identifier is automatically generated (unique identifier).
-currentUser.language	String	False	No	User preferred language
-currentUser.firstName	String	False	Yes	
-currentUser.lastName	String	False	Yes	
-currentUser.middleName	String	False	Yes	
-currentUser.namePrefix	String	False	Yes	
-currentUser.picture	String	False	Yes	URI (Link) to picture
-currentUser.dob	Date	False	Yes	Date of birth
-currentUser.owner	Boolean	False	Yes	Owner of the vehicle if set to true.
-currentUser.company	String	False	Yes	Company name
-currentUser.address.default	{object}	False	Yes	Default address
-currentUser.address.default.addressType	String	True	Yes	Address type: home, work.
-currentUser.address.default.street	String	False	Yes	
-currentUser.address.default.city	String	True	Yes	
-currentUser.address.default.region	String	False	Yes	state, province or region
-currentUser.address.default.country	String	False	Yes	
-currentUser.address.default.postalCode	String	False	Yes	zip or postalCode
-currentUser.address.default.metas	{array}	False	Yes	Array of {attribute: value}
-currentUser.addresses	{array}	False	Yes	Array of other addresses. Same attributes as default address.
-currentUser.default.phone	{object}	False	Yes	Default phone
-currentUser.default.phone.phoneType	String	False	Yes	Phone type: mobile, home, work, etc.
-currentUser.default.phone.phoneNumber	String	True	Yes	
-currentUser.default.phone.deviceId	String	False	Yes	deviceId from device repository
-currentUser.default.phone.metas	{array}	False	Yes	Array of {attribute: value}
-currentUser.phones	{array}	False	Yes	Array of phones (same attribute as default phone).
-currentUser.default.email	{object}	False	Yes	Default email.
-currentUser.default.email.emailType	String	False	Yes	Email type: personal, work, etc.
-currentUser.default.email.emailAddress	String	True	Yes	
-currentUser.default.email.metas	{array}	False	Yes	Array of {attribute: value}
-currentUser.emails	{array}	False	Yes	Other emails (same attributes as default email).
-currentUser.metas	{array}	False	Yes	Array of {attribute: value}
-currentUser.groups	{object}	False	yes	Contact groups array
-currentUser.groups.id	String	True	yes	Group identifier
-currentUser.groups.name	String	True	yes	Group name
-currentUser.contacts	{object}	False	yes	Contacts array
-currentUser.contacts.uid	String	True	yes	User identifier
-currentUser.contacts.firstName	String	False	yes	First name
-currentUser.contacts.lastName	String	False	yes	Last name
-currentUser.contacts.middleName	String	False	yes	Middle name
-currentUser.contacts.namePrefix	String	False	yes	Name prefix
-currentUser.contacts.picture	String	False	yes	URI (link) to picture
-currentUser.contacts.dob	Date	False	yes	Date of birth
-currentUser.contacts.company	String	False	yes	Company name
-currentUser.contacts.address	{object}	False	yes	Array of addresses
-currentUser.contacts.address.id	String	True	yes	Address identifier
-currentUser.contacts.address.type	String	False	yes	Address type: home, work, ...
-currentUser.contacts.address.street	String	False	yes	Address street number, name, apartment, etc.
-currentUser.contacts.address.city	String	False	yes	City name
-currentUser.contacts.address.region	String	False	yes	State, province, …
-currentUser.contacts.address.country	String	False	yes	Country name
-currentUser.contacts.address.postalCode	String	False	yes	Postal/Zip code
-currentUser.contacts.address.metas	{array}	False	yes	Array of {key, value} objects
-currentUser.contacts.address.defaultAddress	{object}	False	yes	Primary address object 
-currentUser.contacts.phone	{object}	False	yes	Array of phones
-currentUser.contacts.phone.id	String	True	yes	Phone identifier
-currentUser.contacts.phone.type	String	False	yes	Phone type: mobile, home, work, …
-currentUser.contacts.phone.number	String	True	yes	Phone number
-currentUser.contacts.phone.deviceId	String	False	yes	Device identifier. Refers to device repository.
-currentUser.contacts.phone.metas	{array}	False	yes	Array of {key, value} objects
-currentUser.contacts.phone.defaultPhone	{object}	False	yes	Primary phone object
-currentUser.contacts.email	{object}	False	yes	Array of emails
-currentUser.contacts.email.id	String	True	yes	email identifier
-currentUser.contacts.email.type	String	False	yes	email type: mobile, home, work, …
-currentUser.contacts.email.address	String	True	yes	Email address
-currentUser.contacts.email.metas	{array}	False	yes	Array of {key, value} objects
-currentUser.contacts.email.defaultEmail	{object}	False	yes	Primary email object
-currentUser.contacts.groupId	String	False	yes	Group identifier
-User accounts	
-users.accounts	{object}	False	Yes	Application accounts (credentials to login to application’s backend system)
-users.accounts.appId	String	True	Yes	Application ID
-users.accounts.userId	String	True	Yes	User identification
-users.accounts.authToken	String	True	Yes	Password, PIN, token.
-users.accounts.authMethod	String	True	Yes	Basic authentication, oAuth, etc.
-users.accounts.reset	Boolean	True	Yes	When reset is true, the user should be prompted to change PIN. Default is false.
-vehicle users	
-users	{array}	False	Yes	Array of subscribers (vehicle users). Same attribute as currentUser.
+|**Current Session**	|
+|session.loggedInTime	 |Long	|False	    |Yes	|Session duration in milliseconds |
+|session.timeOut	|Long	|False	|Yes	|Session timeout in milliseconds |
+|session.loggedIn	|Boolean |True	|Yes	|Set to true is user is logged in.|
+|session.reset	|Boolean	|False	|No	|When reset is true, the user should be prompted to change PIN. Default is false.|
+|session.login	|{array}	|False	|No	|Request to login. Identity manager will remove this request when processed and set loggedIn to true if susccessfull. |
+|session.login.userId	|String	|True	|No	|userId |
+|session.login.pin	|String	|True	|No	|PIN|
+|session.login.oldPin	|String	|False	|No	|If specified, identity manager will change current oldPin with specified PIN.|
+|session.status	|String	|False	|Yes	|Status of current login request. Possible values:
+connecting, connected or failure: with error message|
+|**Current User**|	
+|currentUser	|{object}	|True	|Yes	|Current user info|
+|currentUser.uid	|String	|True	|Yes	|If not specified subscriber identifier is automatically generated (unique identifier).|
+|currentUser.language	|String	|False	|No	|User preferred language|
+|currentUser.firstName	|String	|False	|Yes	| 
+|currentUser.lastName	|String	|False	|Yes	|
+|currentUser.middleName	|String	|False	|Yes	|
+|currentUser.namePrefix	|String	|False	|Yes	|
+|currentUser.picture	|String	|False	|Yes	|URI (Link) to picture|
+|currentUser.dob	|Date	|False	|Yes	|Date of birth|
+|currentUser.owner	|Boolean	|False	|Yes	|Owner of the vehicle if set to true.|
+|currentUser.company	|String	|False	|Yes	|Company name|
+|currentUser.address.default	|{object}	|False	|Yes	|Default address|
+|currentUser.address.default.addressType	|String	|True	|Yes	|Address type: home, work.|
+|currentUser.address.default.street	|String	|False	Yes	|
+|currentUser.address.default.city	|String	|True	Yes	|
+|currentUser.address.default.region	|String	|False	|Yes	tstate, province or region|
+|currentUser.address.default.country	|String	|False	|Yes|	
+|currentUser.address.default.postalCode	|String	|False	|Yes zip or postalCode|
+|currentUser.address.default.metas	|{array}	|False	|Yes, Array of {attribute: value}|
+|currentUser.addresses	|{array}	|False	|Yes	|Array of other addresses. Same attributes as default address.|
+|currentUser.default.phone	|{object}	|False	|Yes, Default phone|
+|currentUser.default.phone.phoneType	|String	|False	|Yes, Phone type: mobile, home, work, etc.|
+|currentUser.default.phone.phoneNumber	|String	|True	|Yes|	
+|currentUser.default.phone.deviceId	|String	|False	|Yes	deviceId from device repository|
+|currentUser.default.phone.metas	|{array}	|False |Yes	Array of {attribute: value}|
+|currentUser.phones	|{array}	|False	|Yes	|Array of phones (same attribute as default phone).|
+|currentUser.default.email |{object}	|False	|Yes	|Default email.|
+|currentUser.default.email.emailType	|String	|False	|Yes	Email type: personal, work, etc.|
+|currentUser.default.email.emailAddress	|String	|True	|Yes|	
+|currentUser.default.email.metas	|{array}	|False	|Yes	Array of {attribute: value}|
+|currentUser.emails	|{array}	|False	|Yes	|Other emails (same attributes as default email).|
+|currentUser.metas	|{array}	|False	|Yes	|Array of {attribute: value}|
+|currentUser.groups	|{object}	|False	|Yes	|Contact groups array|
+|currentUser.groups.id	|String	|True	|Yes	|Group identifier|
+|currentUser.groups.name	|String	|True	|Yes	|Group name|
+|currentUser.contacts	|{object}	|False	|Yes	|Contacts array|
+|currentUser.contacts.uid	|String	|True	|Yes	|User identifier|
+|currentUser.contacts.firstName	|String	|False	|Yes	|First name|
+|currentUser.contacts.lastName	|String	|False	|Yes|	Last name|
+|currentUser.contacts.middleName	|String	False	yes	Middle name|
+|currentUser.contacts.namePrefix	|String	|False	|Yes	|Name prefix|
+|currentUser.contacts.picture	|String	|False	|Yes	|URI (link) to picture|
+|currentUser.contacts.dob	|Date	|False |Yes	|Date of birth|
+|currentUser.contacts.company	|String	|False	|Yes	|Company name|
+|currentUser.contacts.address	|{object}	|False	|Yes	Array of addresses|
+|currentUser.contacts.address.id	|String	|True	|Yes	Address identifier|
+|currentUser.contacts.address.type |String	|False	|Yes	|Address type: home, work, ...|
+|currentUser.contacts.address.street	|String	|False	|Yes	|Address street number, name, apartment, etc.|
+|currentUser.contacts.address.city	|String	|False	|Yes	|City name|
+|currentUser.contacts.address.region	|String	|False	|Yes	State, province, …|
+|currentUser.contacts.address.country	|String	|False	|Yes	|Country name|
+|currentUser.contacts.address.postalCode	|String	|False	|Yes	|Postal/Zip code|
+|currentUser.contacts.address.metas	|{array}	|False	|Yes	|Array of {key, value} objects|
+|currentUser.contacts.address.defaultAddress	|{object}	|False	|Yes |Primary address object| 
+|currentUser.contacts.phone	|{object}	|False |Yes	|Array of phones|
+|currentUser.contacts.phone.id	|String	|True	|Yes	|Phone identifier|
+|currentUser.contacts.phone.type	|String	|False	|Yes	|Phone type: mobile, home, work, …|
+|currentUser.contacts.phone.number	|String	|True	|Yes	|Phone number|
+|currentUser.contacts.phone.deviceId	|String	|False	|Yes	|Device identifier. Refers to device repository.|
+|currentUser.contacts.phone.metas	|{array}	|False	|Yes	|Array of {key, value} objects|
+|currentUser.contacts.phone.defaultPhone	|{object}	|False	|Yes	|Primary phone object|
+|currentUser.contacts.email	|{object}	|False	|Yes	|Array of emails|
+|currentUser.contacts.email.id	|String  |True	|Yes	|Email identifier|
+|currentUser.contacts.email.type	|String	|False	|Yes	|Email type: mobile, home, work, …|
+|currentUser.contacts.email.address	|String	|True	|Yes	|Email address|
+|currentUser.contacts.email.metas	|{array}	|False	|Yes	|Array of {key, value} objects|
+|currentUser.contacts.email.defaultEmail	|{object} |False	|Yes	|Primary email object|
+|currentUser.contacts.groupId	|String |False	|Yes	|Group identifier|
+|**User accounts**	|
+|users.accounts	|{object}	|False	|Yes	|Application accounts (credentials to login to application’s backend system)|
+|users.accounts.appId	|String	|True	|Yes	Application ID|
+|users.accounts.userId	|String	|True	|Yes	|User identification|
+|users.accounts.authToken	|String	|True	|Yes	|Password, PIN, token.|
+|users.accounts.authMethod	|String	|True	|Yes	|Basic authentication, oAuth, etc.|
+|users.accounts.reset	|Boolean	|True	|Yes	|When reset is true, the user should be prompted to change PIN. Default is false.|
+|**vehicle users**|	
+|users	{array}	False	Yes	Array of subscribers (vehicle users). Same attribute as currentUser.|
 
 
 ###Get Identity Information
 **Usage:** `drive.identity.get(options).then(resolve, reject);`
+
 **Description:** The get method returns identity information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -778,6 +789,7 @@ function getIdentityInfo(){
 
 ###Set Identity information
 **Usage:** `drive.identity.set(settings,options).then(resolve, reject);`
+
 **Description:** The set method allows setting some identity parameters like user preferences.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -806,6 +818,7 @@ function login(){
 
 ###Delete Identity settings
 **Usage:** `drive.identity.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -819,6 +832,7 @@ function login(){
 
 ###Subscribe to Identity information
 **Usage:** `handle = drive.identity.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with identity information data object. See data object format below.
@@ -840,6 +854,7 @@ handle=drive.identity.session.loggedIn.subscribe(userLoggedIn);
 
 ###Unsubscribe from Identity information
 **Usage:** `drive.identity.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle -"handle" corresponds to subscription handle object returned by subscribe method. 
@@ -855,6 +870,7 @@ function unsubscribe(){
 
 ###Access/Availability check
 **Usage:** `drive.identity.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
 **Parameters:**
@@ -925,6 +941,7 @@ Application properties shall start with application name.
 
 ###Get System/Application User Settings
 **Usage:** `drive.settings.get(options).then(resolve, reject);`
+
 **Description:** The get method returns system information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters on returned data.
@@ -955,6 +972,7 @@ Application properties shall start with application name.
 
 ###Set System/Application User Settings
 **Usage:** `drive.settings.set(settings,options).then(resolve, reject);`
+
 **Description:** The set method allows set system/application configuration (settings).
 **Parameters:**
 - {object} settings - Settings object value (attributes values).
@@ -981,6 +999,7 @@ Application properties shall start with application name.
 
 ###Delete System/Application User Settings
 **Usage:** `drive.settings.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -997,6 +1016,7 @@ Application properties shall start with application name.
 
 ###Subscribe to System/Application User Settings
 **Usage:** `handle = drive.settings.subscribe(callBack, options)`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -1017,6 +1037,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Unsubscribe from System/Application User Settings
 **Usage:** `drive.settings.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1030,9 +1051,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Access/Availability check
 **Usage:** `drive.settings.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
-When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
-See policy manager section for more details.
+When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes. See policy manager section for more details.
 **Parameters:**
 - None.
 
@@ -1064,6 +1085,7 @@ Below properties is a subset of possible attributes that a notification service 
 
 ###Get Notification Information
 **Usage:** `drive.notification.get(options).then(resolve, reject);`
+
 **Description:** The get method returns navigation information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -1079,6 +1101,7 @@ Below properties is a subset of possible attributes that a notification service 
 
 ###Set Notification information
 **Usage:** `drive.notification.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows setting some notification parameters like read flag.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -1095,6 +1118,7 @@ Below properties is a subset of possible attributes that a notification service 
 
 ###Delete Notification settings
 **Usage:** `drive.notification.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -1111,6 +1135,7 @@ Below properties is a subset of possible attributes that a notification service 
 
 ###Subscribe to notification information
 **Usage:** `handle = drive.notification.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with notification information data object. See data object format below.
@@ -1126,6 +1151,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Unsubscribe from notification information
 **Usage:** `drive.notification.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle = "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1139,6 +1165,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Access/Availability check
 **Usage:** `drive.notification.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
@@ -1169,6 +1196,7 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 ###Get Media Information
 **Usage:** `drive.media.get(options).then(resolve, reject);`
+
 **Description:** The get method returns media information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -1184,6 +1212,7 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 ###Set Media information
 **Usage:** `drive.media.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows setting some media parameters like audio/video source URI.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -1205,6 +1234,7 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 ###Delete Media settings
 **Usage:** `drive.media.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -1219,6 +1249,7 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 Subscribe to media information
 **Usage:** `handle = drive.media.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with media information data object. See data object format below.
@@ -1234,6 +1265,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 Unsubscribe from media information
 **Usage:** `drive.media.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1247,6 +1279,7 @@ Unsubscribe from media information
 
 ###Access/Availability check
 **Usage:** `drive.media.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
@@ -1276,6 +1309,7 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ###Get SMS/MMS Messages
 **Usage:** `drive.sms.get(options).then(resolve, reject);`
+
 **Description:** The get method returns SMS information object.
 **Parameters:**
 - {object} options Optional -Options object allows specifying filters.
@@ -1291,6 +1325,7 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ###Set SMS/MMS messages
 **Usage:** `drive.sms.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows interact with SMS/MMS messaging service for instance send SMS message.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -1307,6 +1342,7 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ###Delete SMS messages
 **Usage:** `drive.sms.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete SMS messages.
 **Parameters:** 
 - {object} settings - Settings attribute names 
@@ -1323,6 +1359,7 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ###Subscribe to SMS
 **Usage:** `handle = drive.sms.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with SMS data object. See data object format below.
@@ -1338,6 +1375,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 Unsubscribe from SMS
 **Usage:** `drive.sms.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1351,6 +1389,7 @@ Unsubscribe from SMS
 
 ###Access/Availability check
 **Usage:**  `drive.sms.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
@@ -1381,6 +1420,7 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ###Get search results
 **Usage:** `drive.search.get(options).then(resolve, reject);`
+
 **Description:** The get method returns search results object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -1396,6 +1436,7 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ###Set search request
 **Usage:** `drive.search.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows interact with search service for instance get places.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -1422,6 +1463,7 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ###Delete search requests/results
 **Usage:** `drive.search.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete search requests/results.
 **Parameters:**
 - {object} settings - Settings attribute names 
@@ -1438,6 +1480,7 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ###Subscribe to search service
 **Usage:** `handle = drive.search.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with search results/request object. See data object format below.
@@ -1453,6 +1496,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Unsubscribe from search service
 **Usage:** `drive.search.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 - {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1466,6 +1510,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Access/Availability check
 **Usage:** `drive.search.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
@@ -1495,6 +1540,7 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ###Get Site Automation Information
 **Usage:** `drive.sa.get(options).then(resolve, reject);`
+
 **Description:** The get method returns site automation information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -1510,6 +1556,7 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ###Set site automation Information
 **Usage:** `drive.sa.set(settings,options).then(resolve, reject)`
+
 **Description:** The set method allows setting some site automation parameters.
 **Parameters:**
 - {object} settings - Settings object value (attributes values) 
@@ -1526,6 +1573,7 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ###Delete Site automation Settings
 **Usage:** `drive.sa.delete(settings,options).then(resolve, reject)`
+
 **Description:** The delete method allows delete previous settings.
 **Parameters:**
 - {object} setting - Settings attribute names 
@@ -1542,6 +1590,7 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ##Subscribe to site automation
 **Usage:** `handle = drive.sa.subscribe(callBack,options);`
+
 **Description:** The subscribe method allows registering for value change events. Specified callback function will be called when that event occurs.
 **Parameters:**
 - {function} callBack - Function called on value change with site automation information data object. See data object format below.
@@ -1557,6 +1606,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Unsubscribe from site automation
 **Usage:** `drive.sa.unsubscribe(handle);`
+
 **Description:** The unsubscribe method allows application to stop data notifications.
 **Parameters:**
 {object} handle - "handle" corresponds to subscription handle object returned by subscribe method. 
@@ -1570,6 +1620,7 @@ Subscribe returns handle to subscription or 0 if error.
 
 ###Access/Availability check
 **Usage:** `drive.sa.available();`
+
 **Description:** This method allows to check whether a given attribute or object is supported and accessible. 
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
