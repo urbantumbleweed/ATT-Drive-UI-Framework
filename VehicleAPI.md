@@ -73,7 +73,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 
 |Parameter   	        |Type   	    |Required  	|Read only  	|Description  	|
 |---	|---	|---	|---	|---	|
-|Vehicle identification  
+|**Vehicle identification** 
 |identification.vin   	||String   	    |True   	||Yes   	        |Vehicle |identification number   	|
 |identification.wmi	|String	|False	|Yes	|World Manufacture Identifier|
 |identification.iccid	|String	|False	|Yes	|Integrated Circuit Card Identifier|
@@ -94,12 +94,12 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |identification.category	|String	|True	|Yes	|Sedan, SUV, …|
 |identification.owner.id	|String	|True	|Yes	|Owner ID|
 |identification.owner.type	|String	|True	|Yes	|Owner Type: subscriber, dealer, oem|
-|Vehicle equipment				
+|**Vehicle equipment**				
 |devices	{array}	|False	|Yes	|Vehicle devices: HU, TCU, Rear screens, DAC, etc|
 |devices.deviceId	|String	True	|Yes	|Device identifier|
 |devices.description	|String	|False	|Yes	|Device description|
 |devices.metas	{array}	|False	|Yes	|Device metadata (array of attribute:value)|
-|Vehicle life cycle				
+|**Vehicle life cycle**				
 |lifecycle.status	|String	True	|Yes	|Inventory, demo, trial, retail, service, junk|
 |lifecycle.condition	|String	|False	|Yes	|Vehicle condition. Excellent, Good, Poor, Unknown.|
 |Vehicle configuration	
@@ -115,7 +115,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |configuration.transmissionType	|String	|False	|Yes	|Vehicle transmission type|
 |configuration.weight	|Float	|False	|Yes	|Vehicle weight|
 |configuration.options	{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
-|Vehicle status 	
+|**Vehicle status **	
 |vehicleSpeed.speed	|Integer	|False	|Yes	|Vehicle speed (KM/h or MP/h|
 |vehicleSpeed.averageSpeed	|Integer	|False	|Yes	|Estimated average speed in KM/h |
 |vehicleCompass.direction	|Float	|False	|Yes	|Degree direction of the vehicle compass to be used by navigation identify the car direction| inside garage or when it is not moving|
@@ -130,7 +130,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |engineOil.change	|Boolean	|False	|Yes	|Engine oil change indicator status|
 |engineCoolant.level	|Integer	|False	|Yes	|Engine coolant level as percentage of fullness|
 |engineCoolant.temperature	|Integer	|False	|Yes	|Engine coolant temperature(in degrees Celsius)|
-|Vehicle climate control	
+|**Vehicle climate control**	
 |climateControl.airflowDirection	|String	|False	|No	Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"|
 |climateControl.fanSpeedLevel	Integer	|False	|No	fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
 |climateControl.targetTemperature	|Integer	|False	|No	desired temperature(in degrees Celsius)|
@@ -142,7 +142,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |climateControl.steeringWheelHeater	|Integer	|False	|No	steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
 |sideWindow.lock	|Boolean	|False	|No	whether or not the window is locked T/F|
 |sideWindow.openness	|Integer	|False	|No	side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
-|Driving safety	
+|**Driving safety**	
 |door.status	|String	|False	|Yes	|Door status enum: "open", "ajar", "close"|
 |door.lock	|Boolean	|False	|No	whether or not the door is locked T/F|
 |airBagStatus.activated	|Boolean	|False	|Yes	|Whether or not the airbag is activated T/F|
@@ -151,16 +151,14 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |seat.seatbelt	|Boolean	|False	|Yes	|Whether or not the seat belt is fasten T/F|
 
 ##Get Vehicle information
-`Usage: drive.vehicleinfo.get(options).then(resolve, reject);`
-Description: The get method returns vehicle information object.
+**Usage:** ```drive.vehicleinfo.get(options).then(resolve, reject);```
+**Description:** The get method returns vehicle information object.
 ###Parameters:
-`{function} resolve`
-Function called with vehicle information data object if the operation is successful. See data object format below.
-`{function} reject Optional`
-Function called in case of error retrieving vehicle information.
-`{object} options Optional`
-"options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
-*Returns:* Promise
+    - {function} resolve - Function called with vehicle information data object if the operation is successful. See data object format below.
+    - {function} reject Optional - Function called in case of error retrieving vehicle information.
+    - {object} options Optional - "options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
+    
+**Returns:** Promise
 
 ####Example: GET vehicle speed
 <pre>var vehicleinfo = drive.vehicleinfo;
@@ -223,15 +221,15 @@ function getVehicleInfo(){
 }</pre>
 
 ##Set Vehicle information
-*Usage:* `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
-*Description:* The set method allows setting some vehicle parameters like climate control (HVAC).
-*Parameters:*
+**Usage:** `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
+**Description:** The set method allows setting some vehicle parameters like climate control (HVAC).
+**Parameters:**
    - {object} settings - Settings object value (attributes values) 
    - {object} options - Optional "options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
    - {function} resolve - Function called if the operation is successful. 
    - {function} reject Optional - Function called in case of error setting vehicle information.
 
-*Returns:* Promise
+**Returns:** Promise
 
 ####Example: lock driver side door
 <pre>var zone = Zone;
