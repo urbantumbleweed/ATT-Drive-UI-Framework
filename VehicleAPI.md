@@ -102,7 +102,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |**Vehicle life cycle**				
 |lifecycle.status	|String	|True	|Yes	|Inventory, demo, trial, retail, service, junk|
 |lifecycle.condition	|String	|False	|Yes	|Vehicle condition. Excellent, Good, Poor, Unknown.|
-|Vehicle configuration	
+|**Vehicle configuration**	
 |configuration.totalDoors	|Integer	|False	|Yes	|Number of doors|
 |configuration.fuelType	|String	|False	|Yes	|Fuel type|
 |configuration.refuelPosition	|String	|False	|Yes	|Side of the vehicle with access to the fuel door|
@@ -139,7 +139,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |climateControl.seatHeater	|Integer	|False	|No	|Seat warmer (0: off, 1: least warm ~ 10: warmest)|
 |climateControl.seatCooler	|Integer	|False	|No	|Seat ventilation (0: off, 1: least warm ~ 10: warmest)|
 |climateControl.airRecirculation	|Boolean	|False	|No	air recirculation. (True : on, |False : pulling in outside air)|
-|climateControl.steeringWheelHeater	|Integer	|False	|No	steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
+|climateControl.steeringWheelHeater	|Integer	|False	|No	|Steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
 |sideWindow.lock	|Boolean	|False	|No	|Whether or not the window is locked T/F|
 |sideWindow.openness	|Integer	|False	|No	|Side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
 |**Driving safety**	
