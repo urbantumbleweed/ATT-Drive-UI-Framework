@@ -1109,7 +1109,7 @@ Below properties is a subset of possible attributes that system settings support
 ###Application properties
 Application properties shall start with application name.
 
-|Parameter||Type||Required||Read only||Description|
+|Parameter|Type|Required|Read only|Description|
 |--- |--- |--- |--- |--- |
 |{appname}|{object}|False|No|Application name: application specific properties.|
 |{appname}.users|{array}|False|No|User preferences for appname|
@@ -1139,7 +1139,7 @@ Application properties shall start with application name.
 
 ###Vehicle information user settings
 
-|Parameter||Type||Required||Read only||Description|
+|Parameter|Type|Required|Read only|Description|
 |--- |--- |--- |--- |--- |
 |Vehicleinfo|{object}|False|No|Vehicle information user settings|
 |vehicleinfo.users.unitsOfMeasure|{object}|False|No|Units of mesure.|
@@ -1470,15 +1470,44 @@ function isAvailable(){
 ##Notifications
 This Javascript SDK allows interacting with notifications service.
 The following interface represents a base interface to all notification properties:
+```javascript
+interface NotificationInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
+
 CommonDataType interface represents common data type for all data types.
 
 ###Notification properties
 Below properties is a subset of possible attributes that a notification service may support. More attributes shall be added in the next version of this SDK:
 
-- SMS data format
-- Weather alert data format
-- Tracking data format
-- Site automation data format
+###SMS data format
+
+
+###Weather alert data format
+
+
+###Tracking data format
+
+
+###Site automation data format
 
 ###Get Notification Information
 **Usage:** `drive.notification.get(options).then(resolve, reject);`
