@@ -2347,8 +2347,7 @@ Below properties is a subset of possible attributes that Search service may supp
 |search.requests.metas.position.longitude|Float|False|No|Longitude|
 |search.requests.metas.radius|Float|False|No|Search radius|
 |search.requests.metas.details|Boolean|False|No|Return detailed result|
-|search.history.requests|{array}|True|Yes|"Array of previous requests (same format as |search.requests).
-Up to 10 requests should be saved in the history. The search history maximum size should be configurable in drive.settings namespace."|
+|search.history.requests|{array}|True|Yes|"Array of previous requests (same format as search.requests).Up to 10 requests should be saved in the history. The search history maximum size should be configurable in drive.settings namespace."|
 |search.results|{array}|True|Yes|Array of results.|
 |search.results.requestId|String|True|Yes|Request ID.|
 |search.results.pagination|Boolean|False|Yes|Set to true if pagination is supported.|
@@ -2373,8 +2372,7 @@ Up to 10 requests should be saved in the history. The search history maximum siz
 |search.results.items.poi.velocity|Integer|False|Yes|Speed in km/h|
 |search.results.items.poi.phone|String|False|Yes|Default phone number|
 |search.results.items.poi.type|String|False|Yes|POI type|
-|search.results.items.poi.categories|{array}|False|Yes|"POI categories (Array of string). Example: ["grossery", "gas station"].
-For Parking: categories possible values are: off-street, block, facility"|
+|search.results.items.poi.categories|{array}|False|Yes|"POI categories (Array of string). Example: ["grossery", "gas station"]. For Parking: categories possible values are: off-street, block, facility"|
 |search.results.items.poi.comments|String|False|Yes|General comments|
 |search.results.items.poi.link|String|False|Yes|POI URL|
 |search.results.items.poi.symbol|String|False|Yes|POI symbol|
@@ -2586,14 +2584,8 @@ For Parking: categories possible values are: off-street, block, facility"|
 |search.results.items.app.purchase.providerId|String|False|Yes|The Provider ID.|
 |search.results.items.app.purchase.vatCode|String|False|Yes|The VAT code.|
 |search.results.items.app.purchase.vatPrice|Long|False|Yes|The VAT price.|
-|search.results.items.app.purchase.type|String|False|Yes|"The purchase type. It is an enumeration type and defined as follows:
-• NORMAL
-• GIFT_PURCHASE
-• GIFT"|
-|search.results.items.app.purchase.state|String|False|Yes|"The purchase state. It is an enumeration type and defined as follows:
-• OPEN
-• OFFERED
-• CLOSED|
+|search.results.items.app.purchase.type|String|False|Yes|"The purchase type. It is an enumeration type and defined as follows: NORMAL, GIFT_PURCHASE, GIFT"|
+|search.results.items.app.purchase.state|String|False|Yes|"The purchase state. It is an enumeration type and defined as follows: OPEN, OFFERED, CLOSED|
 |search.results.items.app.purchase.recurrentPurchaseId|String|False|Yes|The ID of the recurrent purchase. If the purchase is a recurrent purchase then it has a value, otherwise it is empty.|
 |search.results.items.app.purchase.recurrentIntervalExpirationTime|String|False|Yes|The time when the recurrent purchase is expired.|
 |search.results.items.app.purchase.recurrenceCancelTime|String|False|Yes|The time when the recurrent purchase is canceled.|
@@ -2606,9 +2598,7 @@ For Parking: categories possible values are: off-street, block, facility"|
 |search.results.items.app.rating.ratingDetails|{array}|False|Yes|Array of rating details object.|
 |search.results.items.app.rating.ratingDetails.level|Integer|False|Yes|The rating level (From level 1 to 5 in 5 star rating).|
 |search.results.items.app.rating.ratingDetails.number|Integer|False|Yes|The number of raters for each level.|
-|search.results.items.app.search.score|Float|True|Yes|"Specifies the score of search results. The range of the score value is from 0 to 1.
-The app search results will be sorted as the descending order of the score.
-The larger the score is, the better the searching result is matched.|
+|search.results.items.app.search.score|Float|True|Yes|"Specifies the score of search results. The range of the score value is from 0 to 1. The app search results will be sorted as the descending order of the score. The larger the score is, the better the searching result is matched.|
 |search.results.items.app.permissions|{array}|False|Yes|Permission info|
 |search.results.items.app.permissions.permission.description|String|False|Yes|Resource description|
 |search.results.items.app.permissions.permission.icon|String|False|Yes|URI to the icon representing the resource|
@@ -2883,8 +2873,7 @@ sa|{object}|False|yes|Application name|
 |sa.results.sites.id|String|True|Yes|The site ID.|
 |sa.results.sites.name|String|False|Yes|The site name.|
 |sa.results.sites.description|String|False|Yes|The site description.|
-|sa.results.site.state|String|False|Yes|"The site state. It is an enumeration type and defined as follows:
-enabled|disabled|unkown|error:code"|
+|sa.results.site.state|String|False|Yes|"The site state. It is an enumeration type and defined as follows: enabled|disabled|unkown|error:code"|
 |sa.results.sites.metas|{array}|False|Yes|Meta data of the resource. Array of {attribute: value}|
 |sa.results.sites.groups|{array}|False|Yes|Array of resource groups the resource belongs to.|
 |sa.results.sites.resourcetypes|{array}|False|Yes|Array of resource types the resource belongs to.|
@@ -2894,8 +2883,7 @@ enabled|disabled|unkown|error:code"|
 |sa.results.resources.id|String|True|Yes|The resource ID.|
 |sa.results.resources.name|String|False|Yes|The resource name.|
 |sa.results.resources.description|String|False|Yes|The resource description.|
-|sa.results.resources.state|String|False|Yes|"The resource state. It is an enumeration type and defined as follows:
-on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.resources.state|String|False|Yes|"The resource state. It is an enumeration type and defined as follows: on, off, starting, stopping, disabled, unkown, error:code"|
 |sa.results.resources.metas|{array}|False|Yes|Meta data of the resource. Array of {attribute: value}|
 |sa.results.resources.groups|{array}|False|Yes|Array of resource groups the resource belongs to.|
 |sa.results.resources.resourcetypes|{array}|False|Yes|Array of resource types the resource belongs to.|
@@ -2905,16 +2893,14 @@ on|off|starting|stopping|disabled|unkown|error:code"|
 |sa.results.resources.settings.id|String|False|Yes|Setting/Feature ID.|
 |sa.results.resources.settings.name|String|False|Yes|Setting/Feature name.|
 |sa.results.resources.settings.description|String|False|Yes|Setting/Feature description.|
-|sa.results.resources.settings.state|String|False|Yes|"The resource feature state. It is an enumeration type and defined as follows:
-on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.resources.settings.state|String|False|Yes|"The resource feature state. It is an enumeration type and defined as follows: on, off, starting, stopping, disabled, unkown, error:code"|
 |sa.results.resources.settings.metas|{array}|False|Yes|Meta data of the resource setting/feature. Array of {attribute: value}|
 |**Resource type**|
 |sa.results.resourcetypes|{array}|False|Yes|Resource types|
 |sa.results.resourcetypes.id|String|True|Yes|The resource type ID.|
 |sa.results.resourcetypes.name|String|True|Yes|The resource type name.|
 |sa.results.resourcetypes.description|String|False|Yes|The resource type description.|
-|sa.results.resourcetypes.state|String|False|Yes|"The resource type state. It is an enumeration type and defined as follows:
-on, off, starting, stopping. disabled, unkown, error:code"|
+|sa.results.resourcetypes.state|String|False|Yes|"The resource type state. It is an enumeration type and defined as follows: on, off, starting, stopping. disabled, unkown, error:code"|
 |sa.results.resourcetypes.metas|{array}|False|Yes|Resource type metadata. Array of {attribute: value}|
 |sa.results.resourcetypes.resources|{array}|False|Yes|Array of resources under this resource type|
 |sa.results.resourcetypes.groups|{array}|False|Yes|Array of resources groups under this resource type|
@@ -2923,8 +2909,7 @@ on, off, starting, stopping. disabled, unkown, error:code"|
 |sa.results.groups.id|String|True|Yes|The resource group ID.|
 |sa.results.groups.name|String|True|Yes|The resource group name.|
 |sa.results.groups.description|String|False|Yes|The resource group description.|
-|sa.results.groups.state|String|False|Yes|"The resource group state. It is an enumeration type and defined as follows:
-on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.groups.state|String|False|Yes|"The resource group state. It is an enumeration type and defined as follows: on, off, starting, stopping, disabled, unkown, error:code"|
 |sa.results.groups.metas|{array}|False|Yes|Resource group metadata. Array of {attribute: value}|
 |sa.results.groups.resources|{array}|False|Yes|Array of resources under this resource group|
 |sa.results.groups.groups|{array}|False|Yes|Array of resources groups under this resource group|
@@ -3078,17 +3063,17 @@ function isAvailable(){
 ```
 
 **Error object format**
-|Parameter	|Type	|Required	|Description
+|Parameter	|Type	|Required	|Description|
 |---    |---    |---    |---    |
-|error	|String	|True	|Error code
-|message	|String	|False	|Error message
+|error	|String	|True	|Error code|
+|message	|String	|False	|Error message|
 
 **Common error codes**
-|Code	|Description
+|Code	|Description|
 |---    |---    |
-|invalid_parameter	|Invalid parameters
-|not_authenticated	|Not authenticated
-|not_authorized	|Not authorized
-|connection_timeout	|Communication error
+|invalid_parameter	|Invalid parameters|
+|not_authenticated	|Not authenticated|
+|not_authorized	|Not authorized|
+|connection_timeout	|Communication error|
 
 
