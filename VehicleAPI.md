@@ -122,8 +122,8 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |engineSpeed.speed	|Integer	|False	|Yes	|Engine RPM 10X1000.|
 |transmission.transmissionMode	|String	|False	|Yes	|Transmission mode: P R N D |
 |chime.status	|Boolean	|False	|Yes	|Chime status when a door is open: T/F|
-|fuel.level	Integer	|False	|Yes	|Fuel level as a percentage of fullness|
-|fuel.range	Integer	|False	|Yes	|Estimated fuel range in kilometers/miles (depending on unit configuration)|
+|fuel.level	|Integer	|False	|Yes	|Fuel level as a percentage of fullness|
+|fuel.range	|Integer	|False	|Yes	|Estimated fuel range in kilometers/miles (depending on unit configuration)|
 |engineOil.remaining	|Integer	|False	|Yes	|Remaining engine oil as percentage of fullness|
 |engineOil.temperature	|Long	|False	|Yes	|Engine Oil Temperature(in degrees Celsius)|
 |engineOil.pressure	|Integer	|False	|Yes	|Engine Oil Pressure in PSi|
@@ -131,20 +131,20 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |engineCoolant.level	|Integer	|False	|Yes	|Engine coolant level as percentage of fullness|
 |engineCoolant.temperature	|Integer	|False	|Yes	|Engine coolant temperature(in degrees Celsius)|
 |**Vehicle climate control**	
-|climateControl.airflowDirection	|String	|False	|No	Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"|
-|climateControl.fanSpeedLevel	|Integer	|False	|No	fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
-|climateControl.targetTemperature	|Integer	|False	|No	desired temperature(in degrees Celsius)|
-|climateControl.airConditioning	|Boolean	|False	|No	air conditioning system T/F|
-|climateControl.heater	|Boolean	|False	|No	heating system T/F|
-|climateControl.seatHeater	|Integer	|False	|No	seat warmer (0: off, 1: least warm ~ 10: warmest)|
-|climateControl.seatCooler	|Integer	|False	|No	seat ventilation (0: off, 1: least warm ~ 10: warmest)|
+|climateControl.airflowDirection	|String	|False	|No	|Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"|
+|climateControl.fanSpeedLevel	|Integer	|False	|No	|Fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
+|climateControl.targetTemperature	|Integer	|False	|No	|Desired temperature(in degrees Celsius)|
+|climateControl.airConditioning	|Boolean	|False	|No	|Air conditioning system T/F|
+|climateControl.heater	|Boolean	|False	|No	|Heating system T/F|
+|climateControl.seatHeater	|Integer	|False	|No	|Seat warmer (0: off, 1: least warm ~ 10: warmest)|
+|climateControl.seatCooler	|Integer	|False	|No	|Seat ventilation (0: off, 1: least warm ~ 10: warmest)|
 |climateControl.airRecirculation	|Boolean	|False	|No	air recirculation. (True : on, |False : pulling in outside air)|
 |climateControl.steeringWheelHeater	|Integer	|False	|No	steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
-|sideWindow.lock	|Boolean	|False	|No	whether or not the window is locked T/F|
-|sideWindow.openness	|Integer	|False	|No	side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
+|sideWindow.lock	|Boolean	|False	|No	|Whether or not the window is locked T/F|
+|sideWindow.openness	|Integer	|False	|No	|Side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
 |**Driving safety**	
 |door.status	|String	|False	|Yes	|Door status enum: "open", "ajar", "close"|
-|door.lock	|Boolean	|False	|No	whether or not the door is locked T/F|
+|door.lock	|Boolean	|False	|No	|Whether or not the door is locked T/F|
 |airBagStatus.activated	|Boolean	|False	|Yes	|Whether or not the airbag is activated T/F|
 |airBagStatus.deployed	|Boolean	|False	|Yes	|Whether the airbag is deployed T/F|
 |seat.occupant	|String	|False	|Yes	|Status of seat occupant enum: "adult", "child", "vacant"|
