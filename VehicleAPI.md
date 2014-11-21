@@ -74,7 +74,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |Parameter   	        |Type   	    |Required  	|Read only  	|Description  	|
 |---	|---	|---	|---	|---	|
 |**Vehicle identification** 
-|identification.vin   	||String   	    |True   	||Yes   	        |Vehicle |identification number   	|
+|identification.vin   	|String   	    |True   	|Yes   	        |Vehicle |identification number   	|
 |identification.wmi	|String	|False	|Yes	|World Manufacture Identifier|
 |identification.iccid	|String	|False	|Yes	|Integrated Circuit Card Identifier|
 |identification.imsi	|String	|False	|Yes	|International Mobile Subscriber Identity|
