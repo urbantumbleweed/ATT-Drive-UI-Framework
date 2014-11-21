@@ -378,10 +378,169 @@ function isAvailable(){
 ##Navigation
 This Javascript SDK allows interacting with navigation system.
 The following interface represents a base interface to all navigation properties:
-- CommonDataType interface represents common data type for all data types
-- Navigation properties
+```javascript
+interface NavigationInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
+CommonDataType interface represents common data type for all data types
+
+###Navigation properties
 
 Below properties is a subset of possible attributes that a navigation system may support. More attributes shall be added in the next version of this SDK. Navigation properties that are not supported by a given navigation system will not be returned in a get method performed on parent object but will trigger an error if methods (get, set, subscribe, delete) are called on a specific unsupported property.
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|**Current positon**|
+|position.latitude|Float|False|Yes|
+|position.longitude|Float|False|Yes|
+|position.altitude|Float|False|Yes|Location altitude in meters|
+|position.heading|Float|False|Yes|Azimuth values calculated in degree with reference to north |
+|position.velocity|Integer|False|Yes|GPS estimated velocity (in km/h).|
+|position.precision |Float|False|Yes|GPS position precision |
+|**Current destination**|
+|destination.id|String|False|No|Destination ID|
+|destination.name|String|False|No|Destination name |
+|destination.selected|Boolean|Yes|No|This flag is ture if the destination object is selected on the map, other wise false. The default is false|
+|destination.street|String|False|No|Destination street including street number|
+|destination.city|String|False|No|Destination city|
+|destination.region|String|False|No|Destination state/province|
+|destination.country|String|False|No|Destination Country|
+|destination.postalCode|Integer|False|No|5 digits ZIP code or postalCode alphanumeric|
+|destination.display.latitude|Float|False|No|Displayed latitude in degrees|
+|destination.display.longitude|Float|False|No|Displayed longitude in degrees|
+|destination.display.altitude|Float|False|No|Displayed altitude in meters|
+|destination.routing.latitude|Float|False|No|Routing latitude in degrees|
+|destination.routing.longitude|Float|False|No|Routing Longitude in degrees|
+|destination.routing.altitude|Float|False|No|Routing altitude in meters|
+|destination.phone|String|False|No|Primary destination phone number|
+|destination.type |String|False|No|list of POI type|
+|destination.categories|{array}|False|No|POI categories. Example: ["grossery", "gas station"]|
+|destination.comments|String|False|No|Comments on distination|
+|destination.link|String|False|No|POI URL|
+|destination.symbol|String|False|No|Symbol (icon)|
+|destination.formattedAddress|String|False|No|Full address format based on the country|
+|destination.metas|{array}|False|No|Array of {attribute: value}|
+|**Current location**|
+|location.id|String|False|No|Current location ID|
+|location.name|String|False|No|Current location name |
+|location.street|String|False|No|Current location street including street number|
+|location.city|String|False|No|Current location city|
+|location.region|String|False|No|Current location state/province|
+|location.country|String|False|No|Current location Country|
+|location.postalCode|Integer|False|No|5 digits ZIP code or postalCode alphanumeric|
+|**Navigation session information**|
+|session.timeToDestination|Integer|False|Yes|Estimated remaining time to arrive at |destination in minutes |
+|session.arrivalTime|Date|False|Yes|Estimated arrival time |
+|session.distanceToDestination|Integer|False|Yes|Remaining distance to destination in km|
+|session.speedLimit|Integer|False|Yes|Current speed limit in km/h|
+|session.started|Boolean|True|No|Navigation session started|
+|**Current routes**|
+|routes|{array}|False|No|Current route|
+|route.name|String|False|No|Route name|
+|routes.selected|Boolean|Yes|No|This flag is ture if the route object is selected on the map, other wise false. The default is false|
+|routes.bounds|{object}|False|No|Route bounding box|
+|routes.distance|Float|False|No|Route distance in meters|
+|routes.delay|Float|False|No|Total delay time in seconds|
+|routes.waypoints|{array}|False|No|Way points array|
+|routes.waypoints.latitude|Float|False|No|Track latitude in degrees|
+|routes.waypoints.longitude|Float|False|No|Track Longitude in degrees|
+|routes.waypoints.altitude|Float|False|No|Track altitude in meters|
+|routes.waypoints.time|Date|False|No|Track Date/time|
+|routes.waypoints.name|String|False|No|Track name|
+|routes.waypoints.description|String|False|No|Track description|
+|routes.waypoints.symbol|String|False|No|Track symbol: dot, crossing, etc.|
+|routes.waypoints.type|String|False|No|Track type: crossing, intersection|
+|routes.waypoints.visible|Boolean|False|No|When set to True route waypoint will be visible on the map|
+|routes.metas|{array}|False|No|Array of {attribute: value}|
+|**Tracking waypoints**|
+|track|{object}|No|No|Tracking waypoints|
+|track.name|String|Yes|Yes|
+|track.selected|Boolean|Yes|No|This flag is ture if the track object is selected on the map, other wise false. The default is false|
+|track.waypoints|{array}|Yes|No|Array of waypoints|
+|track.waypoints.latitude|Float|False|Yes|Track latitude in degrees|
+|track.waypoints.longitude|Float|False|Yes|Track Longitude in degrees|
+|track.waypoints.altitude|Float|False|Yes|Track altitude in meters|
+|track.waypoints.heading|Float|False|Yes|Azimuth values calculated in degree with reference to north|
+|track.waypoints.velocity|Integer|False|Yes|Speed in km/h|
+|track.waypoints.time|Date|False|Yes|Track Date/time|
+|track.waypoints.name|String|False|Yes|Track name|
+|track.waypoints.description|String|False|Yes|Track description|
+|track.waypoints.symbol|String|False|Yes|Track symbol: dot, crossing, etc.|
+|track.waypoints.type|String|False|Yes|Track type: crossing, intersection|
+|track.waypoints.visible|Boolean|False|Yes|When set to True track waypoint will be visible on the map|
+|track.metas|{array}|False|Yes|Array of {attribute: value}|
+|**Current POIs**|
+|pois|{array}|False|No|Array of POIs|
+|pois.id|String|False|No|POI ID|
+|pois.name|String|False|No|POI name |
+|pois.selected|Boolean|Yes|No|This flag is ture if the POI object is selected on the map, other wise false. The default is false|
+|pois.street|String|False|No|Street|
+|pois.city|String|False|No|City|
+|pois.region|String|False|No|state/province|
+|pois.postalCode|String|False|No|5 digits ZIP code or postalCode alphanumeric|
+|pois.country|String|False|No|Country|
+|pois.formattedAddress|String|False|No|Full address format based on the country|
+|pois.latitude|Float|False|Yes|
+|pois.longitude|Float|False|Yes|
+|pois.altitude|Float|False|Yes|Location altitude in meters|
+|pois.heading|Float|False|Yes|Azimuth values calculated in degree with reference to north |
+|pois.velocity|Integer|False|Yes|POI speed (in km/h).|
+|pois.phone|String|False|No|Phone number|
+|pois.type|String|False|No|POI type/category|
+|poi.categories|{array}|False|No|POI categories. Example: ["grossery", "gas station"]|
+|pois.comments|String|False|No|General comments|
+|pois.link|String|False|No|POI URL|
+|pois.symbol|String|False|No|POI symbol|
+|pois.visible|Boolean|False|No|When set to True POI will be visible on the map|
+|pois.|destination|{object}|False|No|POI object representing the |destination (same format as current |destination).|
+|pois.timeToExpire|Integer|False|No|Time to expire the POI in seconds|
+|pois.metas|{array}|False|No|Array of {attribute: value}|
+|**POI Tracking Waypoints** |
+|pois.track.name|String||Yes|
+|pois.track.selected|Boolean|Yes|No|This flag is ture if the |track object is selected on the map, other wise false. The default is false|
+|pois.track.waypoints|{array}|False|No|Waypoints array|
+|pois.track.waypoints.latitude|Float|False|Yes|Track latitude in degrees|
+|pois.track.waypoints.longitude|Float|False|Yes|Track Longitude in degrees|
+|pois.track.waypoints.altitude|Float|False|Yes|Track altitude in meters|
+|pois.track.waypoints.heading|Float|False|Yes|Azimuth values calculated in degree with reference to north|
+|pois.track.waypoints.velocity|Integer|False|Yes|Speed in km/h|
+|pois.track.waypoints.time|Date|False|Yes|Track Date/time|
+|pois.track.waypoints.name|String|False|Yes|Track name|
+|pois.track.waypoints.description|String|False|Yes|Track description|
+|pois.track.waypoints.symbol|String|False|Yes|Track symbol: dot, crossing, etc.|
+|pois.track.waypoints.type|String|False|Yes|Track type: crossing, intersection|
+|pois.track.waypoints.visible|Boolean|False|Yes|When set to True |track waypoint will be visible on the map|
+|pois.track.metas|{array}|False|Yes|Array of {attribute: value}|
+|map.zoomLevel|Integer|False|No|0 to 20+ (20 is street level)|
+|map.zoomToPoiType|{array}|False|No|"String array of POI types: This makes the map to zoom in/out so that all POI of specified types are visible. 
+Values:
+Empty array/null: normal mode
+[“all”]: zoom to all POI types
+[“all”, “<me>”]: all POI type and include the vehicle.
+[“type1”,”type2”,…]: zoom to specified POI types (parking, restaurant, etc). POI type <me> refers to the vehicle."|
+|map.zoomToPoiId|String|False|No|POI ID: This makes the map to zoom in/out so that specified poi ID becomes visible (center to).|
+"map.follow|String|False|No|"Make map follow a specific POI name instead of following the car. Values:
+“<me>” empty null: follow vehicle
+<poi ID>: follow specified POI ID. This parameter should be ignored if the specified POI ID does not exist."|
+
 
 ###Get Navigation Information
 **Usage:** `drive.navigation.get(options).then(resolve, reject);`
@@ -949,14 +1108,113 @@ Below properties is a subset of possible attributes that system settings support
 
 ###Application properties
 Application properties shall start with application name.
-- Vehicle information user settings
-- Navigation user settings
-- Identity user settings
-- Notification user settings
-- Media user settings
-- Search user settings
+
+|Parameter||Type||Required||Read only||Description|
+|--- |--- |--- |--- |--- |
+|{appname}|{object}|False|No|Application name: application specific properties.|
+|{appname}.users|{array}|False|No|User preferences for appname|
+|{appname}.users.{object}|{object}|False|No|User preferences|
+|{appname}.{object}|{object}|False|No|Global application preferences|
+|**Application user UI settings**|
+|{appname}.ui|{object}|False|No|UI presentation|
+|{appname}.ui.categories|{object}|False|No|UI presentation section|
+|{appname}.ui.categories.uiType|String|Fase|No|UI type maps to a UI presentation construct or style|
+|{appname}.ui.categories.title|String|False|No|Cateory title|
+|{appname}.ui.categories.description|String|False|No|Cateory description or hint|
+|{appname}.ui.categories.options|{object}|False|No|Category aspect option (future use)|
+|{appname}.ui.categories.properties|{array}|False|No|Array of properties for a given category|
+|{appname}.ui.categories.properties.propertyId|String|False|No|Refers to full qualified property (|{appname}.{object}…)|
+|{appname}.ui.categories.properties.uiType|String|False|No|UI type maps to a UI presentation construct or style|
+|{appname}.ui.categories.properties.title|String|False|No|Property title or label|
+|{appname}.ui.categories.properties.defualtIndex|Integer|False|No|Position in the options or possible values|
+|{appname}.ui.categories.properties.options|{array}|False|No|Possible values|
+|{appname}.ui.categories.properties.options.name|String|False|No|Value name or label|
+|{appname}.ui.categories.properties.options.value|{type}|False|No|Actual value |
+|{appname}.ui.categories.properties.options.uiType|String|False|No|UI type maps to a UI presentation construct or style|
+|{appname}.ui.categories.properties.validation|{object}|False|No|Validation object|
+|{appname}.ui.categories.properties.validation.required|Boolean|False|No|True means required property|
+|{appname}.ui.categories.properties.validation.min|Float|False|No|Min value for numeric and min length for alphanumeric |
+|{appname}.ui.categories.properties.validation.max|Float|False|No|Max value for numeric and max length for alphanumeric|
+|{appname}.ui.categories.properties.validation.type|String|False|No|Predefined types: email, password, url, date, number, digits|
+
+###Vehicle information user settings
+
+|Parameter||Type||Required||Read only||Description|
+|--- |--- |--- |--- |--- |
+|Vehicleinfo|{object}|False|No|Vehicle information user settings|
+|vehicleinfo.users.unitsOfMeasure|{object}|False|No|Units of mesure.|
+|vehicleinfo.users.unitsOfMeasure.metric|Boolean|False|No|True: metric|
+|vehicleinfo.users.unitsOfMeasure.unitsFuelVolume|String|False|No|litter or gallon|
+|vehicleinfo.users.unitsOfMeasure.unitsDistance|String|False|No|km or mile|
+|vehicleinfo.users.unitsOfMeasure.unitsSpeed|String|False|No|km/h or mph|
+|vehicleinfo.users.unitsOfMeasure.unitsFuelConsumption|String|False|No|l/100, mpg, km/l|
+|vehicleinfo.users.mirror.mirrorTilt|short|False|No|Mirror tilt position in percentage distance travelled, from downward-facing to upward-facing position (Unit: percentage, Resolution: 1, Min: -100, Max: 100, 0 represents center position)|
+|vehicleinfo.users.mirror.mirrorPan|short|False|No|Mirror pan position in percentage distance travelled, from left to right position (Unit: percentage, Resolution: 1, Min: -100, Max: 100, 0 represents center position)|
+|vehicleinfo.users.steeringWheel.steeringWheelTelescopingPosition|Integer|False|No|Steering wheel position as percentage of extension from the dash (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents steering wheel positioned closest to dash)|
+|vehicleinfo.users.steeringWheel.steeringWheelPositionTilt|Integer|False|No|Steering wheel position as percentage of tilt (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents steering wheel tilted lowest downward-facing position)|
+|vehicleinfo.users.driveMode|String|False|No|""comfort",  "auto", "sport",
+ "eco", "manual""|
+|vehicleinfo.users.seatAjustment.reclineSeatBack|short|False|No|Seat back recline position as percent to completely reclined (Unit: percentage, Resolution: 1, Min: -100, Max: 100, center 0 represents the seatback upright at a 90 degree angle)|
+|vehicleinfo.users.seatAjustment.seatSlide|Integer|False|No|Seat slide position as percentage of distance travelled away from forwardmost position (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents seat position farthest forward)|
+|vehicleinfo.users.seatAjustment.seatCushionHeight|Integer|False|No|Seat cushion height position as a percentage of upward distance travelled (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents the lowest seat position)|
+|vehicleinfo.users.seatAjustment.seatHeadrest|Integer|False|No|Headrest position as a percentage of upward distance travelled (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents the lowest headrest position)|
+|vehicleinfo.users.seatAjustment.seatBackCushion|Integer|False|No|Back cushion position as a percentage of lumbar curvature (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents flat, and 100 is maximum curvature)|
+|vehicleinfo.users.seatAjustment.seatSideCushion|Integer|False|No|Sides of back cushion position as a percentage of curvature (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents flat, and 100 is maximum curvature)|
+|vehicleinfo.users.dashboardIllumination|Integer|False|No|Illumination of dashboard as a percentage (Unit: percentage, Resolution: 1, Min: 0, Max: 100, 0 represents none and 100 maximum illumination)|
+|vehicleinfo.users.vehicleSound.activeNoiseControlMode|Boolean|False|No|Active noise control status (False: not-activated, True: activated)|
+|vehicleinfo.users.vehicleSound.engineSoundEnhancementMode|String|False|No|Engine sound enhancement mode where a null string means not-activated, and any other value represents a manufacture specific setting|
+
+###Navigation user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|navigation|{object}|False|No|Navigation user settings|
+|navigation.users.destinations|{array}|False|No|Favorite destinations (See navigation destination data type)|
+|navigation.users.pois|{array}|False|No|Array of favorite POIs (See navigation POI data type)|
+|navigation.users.routing.calculation|String|False|No|fastest, shortest, offroad|
+|navigation.users.routing.avoiding|{array}|False|No|String array: ["tollways", "highways","parkways"]|
+
+###Identity user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|identity|{object}|False|No|Indentity manager user settings|
+|identity.users.session.autoLogout|Boolean|False|No|Auto logout when set to true|
+|identity.users.session.timeout|Integer|False|No|Number of seconds being idle before logging out.|
+
+###Notification user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|notification|{object}|False|No|Notification manager user settings|
+|notification.users.silent|Boolean|False|No|When set to true, notifications will not be read out|
+|notification.users.apps|{array}|False|No|Array of applications|
+|notification.users.apps.silent|Boolean|False|No|When set to true, notifications will not be read out for specific application|
+|notification.users.apps.keepNumber|Integer|False|No|Number of messages to keep|
+|notification.users.apps.keepDays|Integer|False|No|Number of days messages are kept|
+
+###Media user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|media|{object}|False|No|Media manager user settings|
+|media.users.autoplay|Boolean|False|No|Autoplay after login|
+|media.users.favorite|{array}|False|No|Array of favorite media files|
+
+###Search user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|search|{object}|False|No|Search controller user settings|
+|search.users.history.maxItem|Integer|False|No|Search request history max items|
+|search.users.history.requests|{array}|False|No|Array of search requests|
 
 ###Application user settings
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|apps|{object}|False|No|Application manager user settings|
+|apps.users.favorite|{array}|False|No|Array of favorite apps|
 
 ###Get System/Application User Settings
 **Usage:** `drive.settings.get(options).then(resolve, reject);`
@@ -972,22 +1230,70 @@ Application properties shall start with application name.
 
 ####Example: get default language
 ```javascript
+function logLanguage(language){
+   console.log(language);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getDefaultLanguage(){
+  drive.settings.system.language.get().then(logLanguage,logError);
+}
 ```
 
 ####Example: get baseURL
 ```javascript
+function logBaseURL (baseUrl){
+   console.log(language);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getBaseURL(){
+  drive.settings.system.baseUrl.get().then(logBaseURL,logError);
+}
 ```
 
 ####Example: get vehicle seat adjustment user preferences
 ```javascript
+var userSettings = drive.settings.vehicleinfo.users;
+var user = {"userId":"user1"};
 
+function getSeatPrefs(seatAjustment){
+   console.log(seatAjustment);
+}
+
+function logError(error){
+   console.log(error);
+}
+
+function getUserSeatSettings(){
+
+userSettings.seatAjustment.get(user).then(getSeatPrefs,logError);
+}
 ```
 
 ####Example: get navigation latest destination user preferences
 ```javascript
+var userSettings = drive.settings.navigation.users;
+var user = {"userId":"user1"};
 
+function getDestPrefs(dest){
+   console.log(dest);
+}
+
+function logError(error){
+   console.log(error);
+}
+
+function getUserLastDestination(){
+
+userSettings.destination.get(user).then(getDestPrefs,logError);
+}
 ```
 
 ###Set System/Application User Settings
@@ -1005,17 +1311,53 @@ Application properties shall start with application name.
 
 ####Example: system settings
 ```javascript
+var language = {"language":"en"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setDefaultLanguage(){
+   drive.settings.system.set(language).then(resolve,reject);
+}
 ```
 
 ####Example: Application global settings
 ```javascript
+var settings = {"timeout":2000};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setTimeout(){
+   drive.settings.sms.set(settings).then(resolve,reject);
+}
 ```
 
 ####Example: Application user preference
 ```javascript
+var settings = {"name":"home", "userId":"user1"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setVehicleSpeedInfo(){
+   drive.settings.navigation.users.set(settings).then(resolve,reject);
+}
 ```
 
 ###Delete System/Application User Settings
@@ -1033,7 +1375,19 @@ Application properties shall start with application name.
 
 ####Example: Delete settings of a given user
 ```javascript
+var user = {"userId":"user1"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function deleteUserSettings(){
+   drive.settings.navigation.users.delete(user).then(resolve,reject);
+}
 ```
 
 ###Subscribe to System/Application User Settings
@@ -1050,12 +1404,26 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: subscribe to all system properties
 ```javascript
+function logSystemSettings(data){
+  console.log(data);
+}
 
+function subscribe(){
+  handle=drive.settings.system.subscribe(logSystemSettings);
+}
 ```
 
 ####Example: subscribe to application properties
 ```javascript
+var userSettings = drive.settings.navigation.users;
 
+function destSettings(data){
+  console.log(data);
+}
+
+function subscribe(){
+  handle= userSettings.destination.subscribe(destSettings);
+}
 ```
 
 ###Unsubscribe from System/Application User Settings
@@ -1070,7 +1438,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example
 ```javascript
-
+function unsubscribe(){
+     drive.settings.system.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -1092,7 +1462,9 @@ When available method returns not_supported_policy, application can subscribe to
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.settings.system.available();
+}
 ```
 
 ##Notifications
@@ -1122,7 +1494,26 @@ Below properties is a subset of possible attributes that a notification service 
 
 ####Example: get sms messages
 ```javascript
+interface NotificationInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
 
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
 ```
 
 ###Set Notification information
