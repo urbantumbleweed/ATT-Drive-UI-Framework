@@ -237,7 +237,7 @@ function getVehicleInfo(){
 - {function} resolve - Function called if the operation is successful. 
 - {function} reject Optional - Function called in case of error setting vehicle information.
 
-****Returns:**** Promise
+**Returns:** Promise
 
 ####Example: lock driver side door
 ```javascript
@@ -374,6 +374,7 @@ Below properties is a subset of possible attributes that a navigation system may
 
 ###Get Navigation Information
 **Usage:** `drive.navigation.get(options).then(resolve, reject);`
+
 **Description:** The get method returns navigation information object.
 **Parameters:**
 - {object} options Optional - Options object allows specifying filters.
@@ -383,13 +384,33 @@ Below properties is a subset of possible attributes that a navigation system may
 **Returns:** Promise
 
 ####Example: get current position
-``javascript
+```javascript
+function getPosition(position){
+console.log(position.latitude+","+position.longitude+","+ position.altitude+","+position.direction;
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getPositionInfo(){
+     drive.navigation.position.get().then(getPosition,logError);
+}
 ```
 
 ####Example: get all navigation information
 ``javascript
+function getNavigationInfo(data){
+   console.log(data);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getNavigationInfo(){
+     drive.navigation.get().then(getNavigationInfo,logError);
+}
 ```
 
 ###Set Navigation information
@@ -404,28 +425,88 @@ Below properties is a subset of possible attributes that a navigation system may
 **Returns:** Promise
 
 ####Example: set new destination by poi
-``javascript
+```javascript
+var settings = {"poi":"DFW Airport"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+   drive.navigation.destination.set(settings).then(resolve,reject);
+}
 ```
 
 ####Example: set new destination by latitude and Longitude
-``javascript
+```javascript
+var settings = {"latitude":45.5009320, "longitude":-73.6628050};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+   drive.navigation.destination.routing.set(settings).then(resolve,reject);
+}
 ```
 
 ####Example: add new poi to the map and make it visible
 ``javascript
+var settings = {"poi":"DFW Airport", "visible": true};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+   drive.navigation.pois.set(settings).then(resolve,reject);
+}
 ```
 
 ####Example: Hide POI
-``javascript
+```javascript
+var settings = {"poi":"DFW Airport", "visible": false};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+   drive.navigation.pois.set(settings).then(resolve,reject);
+}
 ```
 
 ####Example: Start navigation session
 ``javascript
+var settings = {"started":true};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+   drive.navigation.session.set(settings).then(resolve,reject);
+}
 ```
 
 ###Delete Navigation settings
@@ -441,12 +522,36 @@ Below properties is a subset of possible attributes that a navigation system may
 
 ####Example: delete a specific poi
 ```javascript
+var settings = {"poi":"DFW Airport"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+  drive.navigation.pois.delete(settings).then(resolve,reject);
+}
 ```
 
 ####Example: delete all POIs by type (parking)
 ```javascript
+var settings = {"type":"parking"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setNavigationInfo(){
+  drive.navigation.pois.delete(settings).then(resolve,reject);
+}
 ```
 
 ###Subscribe to navigation information
@@ -461,7 +566,13 @@ Below properties is a subset of possible attributes that a navigation system may
 Subscribe returns handle to subscription or 0 if error. 
 ####Example: subscribe to destination
 ```javascript
+function getDestinationInfo(data){
+  console.log(data.latitude+":"+data.Longitude);
+}
 
+function subscribe(){
+handle=drive.navigation.destination.subscribe(getDestinationInfo);
+}
 ```
 
 ###Unsubscribe from navigation information
@@ -474,7 +585,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example:
 ```javascript
-
+function unsubscribe(){
+     drive.navigation.destination.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -483,7 +596,7 @@ Subscribe returns handle to subscription or 0 if error.
 When available method returns not_supported_policy, application can subscribe to policy manager to get notifications when resource state changes.
 See policy manager section for more details.
 **Parameters:**
-- None.
+- None
 
 **Returns:** String
 - "available": resource is available (read/write).
@@ -492,18 +605,136 @@ See policy manager section for more details.
 - "not_supported_yet": resource is not currently supported by current vehicle or head unit but planned to be supported in future releases.
 - "not_supported_security": the resource is not accessible by other applications (private access).
 - "not_supported_policy": resource cannot be accessed at this time because of policy constraints. Application can subscribe to policy events to get notified when state of resource changes (allowed, denied or restricted).
+
 ####Example:
 ```javascript
-
+function isAvailable(){
+    return drive.navigation.destination.available();
+}
 ```
 
 ##Identity
 This Javascript SDK allows interacting with Identity Manager.
 The following interface represents a base interface to all identity properties:
+```javascript
+ interface IdentityInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
 - CommonDataType interface represents common data type for all data types.
 
 ###Identity properties
 Below properties is a subset of possible attributes that identity manager supports. More attributes shall be added in the next version of this SDK.
+
+|Parameter	|Type	|Required	|Read only	|Description|
+Current Session	
+session.loggedInTime	Long	False	Yes	Session duration in milliseconds 
+session.timeOut	Long	False	Yes	Session timeout in milliseconds
+session.loggedIn	Boolean	True	Yes	Set to true is user is logged in.
+session.reset	Boolean	False	No	When reset is true, the user should be prompted to change PIN. Default is false.
+session.login	{array}	False	No	Request to login. Identity manager will remove this request when processed and set loggedIn to true if susccessfull.
+session.login.userId	String	True	No	userId
+session.login.pin	String	True	No	PIN
+session.login.oldPin	String	False	No	If specified, identity manager will change current oldPin with specified PIN.
+session.status	String	False	Yes	"Status of current login request. Possible values:
+connecting, connected or
+failure: with error message"
+Current User	
+currentUser	{object}	True	Yes	Current user info
+currentUser.uid	String	True	Yes	If not specified subscriber identifier is automatically generated (unique identifier).
+currentUser.language	String	False	No	User preferred language
+currentUser.firstName	String	False	Yes	
+currentUser.lastName	String	False	Yes	
+currentUser.middleName	String	False	Yes	
+currentUser.namePrefix	String	False	Yes	
+currentUser.picture	String	False	Yes	URI (Link) to picture
+currentUser.dob	Date	False	Yes	Date of birth
+currentUser.owner	Boolean	False	Yes	Owner of the vehicle if set to true.
+currentUser.company	String	False	Yes	Company name
+currentUser.address.default	{object}	False	Yes	Default address
+currentUser.address.default.addressType	String	True	Yes	Address type: home, work.
+currentUser.address.default.street	String	False	Yes	
+currentUser.address.default.city	String	True	Yes	
+currentUser.address.default.region	String	False	Yes	state, province or region
+currentUser.address.default.country	String	False	Yes	
+currentUser.address.default.postalCode	String	False	Yes	zip or postalCode
+currentUser.address.default.metas	{array}	False	Yes	Array of {attribute: value}
+currentUser.addresses	{array}	False	Yes	Array of other addresses. Same attributes as default address.
+currentUser.default.phone	{object}	False	Yes	Default phone
+currentUser.default.phone.phoneType	String	False	Yes	Phone type: mobile, home, work, etc.
+currentUser.default.phone.phoneNumber	String	True	Yes	
+currentUser.default.phone.deviceId	String	False	Yes	deviceId from device repository
+currentUser.default.phone.metas	{array}	False	Yes	Array of {attribute: value}
+currentUser.phones	{array}	False	Yes	Array of phones (same attribute as default phone).
+currentUser.default.email	{object}	False	Yes	Default email.
+currentUser.default.email.emailType	String	False	Yes	Email type: personal, work, etc.
+currentUser.default.email.emailAddress	String	True	Yes	
+currentUser.default.email.metas	{array}	False	Yes	Array of {attribute: value}
+currentUser.emails	{array}	False	Yes	Other emails (same attributes as default email).
+currentUser.metas	{array}	False	Yes	Array of {attribute: value}
+currentUser.groups	{object}	False	yes	Contact groups array
+currentUser.groups.id	String	True	yes	Group identifier
+currentUser.groups.name	String	True	yes	Group name
+currentUser.contacts	{object}	False	yes	Contacts array
+currentUser.contacts.uid	String	True	yes	User identifier
+currentUser.contacts.firstName	String	False	yes	First name
+currentUser.contacts.lastName	String	False	yes	Last name
+currentUser.contacts.middleName	String	False	yes	Middle name
+currentUser.contacts.namePrefix	String	False	yes	Name prefix
+currentUser.contacts.picture	String	False	yes	URI (link) to picture
+currentUser.contacts.dob	Date	False	yes	Date of birth
+currentUser.contacts.company	String	False	yes	Company name
+currentUser.contacts.address	{object}	False	yes	Array of addresses
+currentUser.contacts.address.id	String	True	yes	Address identifier
+currentUser.contacts.address.type	String	False	yes	Address type: home, work, ...
+currentUser.contacts.address.street	String	False	yes	Address street number, name, apartment, etc.
+currentUser.contacts.address.city	String	False	yes	City name
+currentUser.contacts.address.region	String	False	yes	State, province, …
+currentUser.contacts.address.country	String	False	yes	Country name
+currentUser.contacts.address.postalCode	String	False	yes	Postal/Zip code
+currentUser.contacts.address.metas	{array}	False	yes	Array of {key, value} objects
+currentUser.contacts.address.defaultAddress	{object}	False	yes	Primary address object 
+currentUser.contacts.phone	{object}	False	yes	Array of phones
+currentUser.contacts.phone.id	String	True	yes	Phone identifier
+currentUser.contacts.phone.type	String	False	yes	Phone type: mobile, home, work, …
+currentUser.contacts.phone.number	String	True	yes	Phone number
+currentUser.contacts.phone.deviceId	String	False	yes	Device identifier. Refers to device repository.
+currentUser.contacts.phone.metas	{array}	False	yes	Array of {key, value} objects
+currentUser.contacts.phone.defaultPhone	{object}	False	yes	Primary phone object
+currentUser.contacts.email	{object}	False	yes	Array of emails
+currentUser.contacts.email.id	String	True	yes	email identifier
+currentUser.contacts.email.type	String	False	yes	email type: mobile, home, work, …
+currentUser.contacts.email.address	String	True	yes	Email address
+currentUser.contacts.email.metas	{array}	False	yes	Array of {key, value} objects
+currentUser.contacts.email.defaultEmail	{object}	False	yes	Primary email object
+currentUser.contacts.groupId	String	False	yes	Group identifier
+User accounts	
+users.accounts	{object}	False	Yes	Application accounts (credentials to login to application’s backend system)
+users.accounts.appId	String	True	Yes	Application ID
+users.accounts.userId	String	True	Yes	User identification
+users.accounts.authToken	String	True	Yes	Password, PIN, token.
+users.accounts.authMethod	String	True	Yes	Basic authentication, oAuth, etc.
+users.accounts.reset	Boolean	True	Yes	When reset is true, the user should be prompted to change PIN. Default is false.
+vehicle users	
+users	{array}	False	Yes	Array of subscribers (vehicle users). Same attribute as currentUser.
+
 
 ###Get Identity Information
 **Usage:** `drive.identity.get(options).then(resolve, reject);`
@@ -517,12 +748,32 @@ Below properties is a subset of possible attributes that identity manager suppor
 
 ####Example: get current user
 ```javascript
+function logIdentityInfo(currentUser){
+   console.log("userId:"+currentUser.uid);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getIdentityInfo(){
+  drive.identity.currentUser.get().then(logIdentityInfo,logError);
+}
 ```
 
 ####Example: Check if user is logged in
 ```javascript
+function logIdentityInfo(session){
+   console.log("user logged in:"+session.loggedIn);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getIdentityInfo(){
+  drive.identity.session.get().then(logIdentityInfo,logError);
+}
 ```
 
 ###Set Identity information
@@ -538,7 +789,19 @@ Below properties is a subset of possible attributes that identity manager suppor
 
 ####Example: trigger user login
 ```javascript
+var settings = {"loggedIn":true};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function login(){
+   drive.identity.session.set(settings).then(resolve,reject);
+}
 ```
 
 ###Delete Identity settings
@@ -565,8 +828,14 @@ Below properties is a subset of possible attributes that identity manager suppor
 Subscribe returns handle to subscription or 0 if error. 
 
 ####Example: get notification when user logs in
-  ```javascript
+```javascript
+function userLoggedIn(loggedIn){
+  if (loggedIn){ console.log("user logged in");}
+}
 
+function subscribe(){
+handle=drive.identity.session.loggedIn.subscribe(userLoggedIn);
+}
 ```
 
 ###Unsubscribe from Identity information
@@ -579,7 +848,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example
 ```javascript
-
+function unsubscribe(){
+     drive.identity.currentUser.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -599,17 +870,47 @@ See policy manager section for more details.
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.identity.currentUser.available();
+}
 ```
 
 ##Application and System Settings
 This Javascript SDK allows managing application and system settings. Applications can use this SDK to store and retrieve their own settings and benefit from built in data events handling.
+
 The following interface represents a base interface to all system/application properties:
+```javascript
+interface SettingsInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
 
 - CommonDataType interface represents common data type for all data types.
 
 ###System properties
 Below properties is a subset of possible attributes that system settings support. More attributes shall be added in the next version of this SDK.
+
+|Parameter	|Type	|Required	|Read only	|Description|
+|system.baseUrl	|String	|True	|Yes	|ASDP base URL in the following format: https://asdphost:port/
+|system.language	|String	|True	|No	|Default system language
+|system.metric	|Boolean	|True	|No	|Unit of mesure Metric (True)
 
 ###Application properties
 Application properties shall start with application name.
