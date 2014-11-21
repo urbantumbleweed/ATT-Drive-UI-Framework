@@ -74,109 +74,163 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |Parameter   	        |Type   	    |Required  	|Read only  	|Description  	|
 |---	|---	|---	|---	|---	|
 |Vehicle identification  
-|identification.vin   	|String   	    |True   	|Yes   	        |Vehicle identification number   	|
-identification.wmi	String	False	Yes	World Manufacture Identifier
-identification.iccid	String	False	Yes	Integrated Circuit Card Identifier
-identification.imsi	String	False	Yes	International Mobile Subscriber Identity
-identification.tcusn	String	False	Yes	TCU Serial Number
-identification.vehicleType	String	False	Yes	Vehicle type
-identification.brand	String	False	Yes	Vehicle brand
-identification.model	String	False	Yes	Vehicle model
-identification.description	String	False	Yes	Model name description
-identification.year	Integer	False	Yes	Vehicle model year
-identification.deliveryMileage	Long	False	Yes	Odometer at delivery
-identification.deliveryDate	Date	False	Yes	Sale date (retail)
-identification.licenseNumber	String	False	Yes	License plate number
-identification.transmissionNumber	String	False	Yes	Transmission serial number
-identification.engineNumber	String	False	Yes	Serial number of the engine
-identification.ignitionKeyNumber	String	False	Yes	Vehicle ignition key number
-identification.doorKeyNumber	String	False	Yes	Door key number
-identification.category	String	True	Yes	Sedan, SUV, …
-identification.owner.id	String	True	Yes	Owner ID
-identification.owner.type	String	True	Yes	Owner Type: subscriber, dealer, oem
-Vehicle equipment				
-devices	{array}	False	Yes	Vehicle devices: HU, TCU, Rear screens, DAC, etc.
-devices.deviceId	String	True	Yes	Device identifier
-devices.description	String	False	Yes	Device description
-devices.metas	{array}	False	Yes	Device metadata (array of attribute:value). 
-Vehicle life cycle				
-lifecycle.status	String	True	Yes	inventory, demo, trial, retail, service, junk
-lifecycle.condition	String	False	Yes	Vehicle condition. For instance Excellent, Good, Poor, Unknown.
-Vehicle configuration	
-configuration.totalDoors	Integer	False	Yes	Number of doors
-configuration.fuelType	String	False	Yes	Fuel type
-configuration.refuelPosition	String	False	Yes	Side of the vehicle with access to the fuel door
-configuration.color.interior	{array}	False	Yes	Vehicle interior colors
-configuration.color.interior.colorCode	String	True	Yes	Color code
-configuration.color.interior.colorName	String	False	Yes	Color description
-configuration.color.exterior	{array}	False	Yes	Vehicle exterior colors
-configuration.color.exterior.colorCode	String	True	Yes	Color code
-configuration.color.exterior.colorName	String	False	Yes	Color description
-configuration.transmissionType	String	False	Yes	Vehicle transmission type
-configuration.weight	Float	False	Yes	Vehicle weight
-configuration.options	{array}	False	Yes	Vehicle options (array of attribute: value)
-Vehicle status 	
-vehicleSpeed.speed	Integer	False	Yes	Vehicle speed (in km/h or mile/h depending on the API personalization).
-vehicleSpeed.averageSpeed	Integer	False	Yes	Estimated average speed in KM/H 
-vehicleCompass.direction	Float	False	Yes	Degree direction of the vehicle compass to be used by navigation identify the car direction inside garage or when it is not moving
-engineSpeed.speed	Integer	False	Yes	Engine speed in rotation per minute [0-100,000].
-transmission.transmissionMode	String	False	Yes	Transmission mode: “park”, “reverse”, “neutral”, “drive”
-chime.status	Boolean	False	Yes	Chime status when a door is open: On (true) or off (false).
-fuel.level	Integer	False	Yes	Fuel level as a percentage of fullness
-fuel.range	Integer	False	Yes	Estimated fuel range in kilometers/miles (depending on unit configuration).
-engineOil.remaining	Integer	False	Yes	remaining engine oil as percentage of fullness
-engineOil.temperature	Long	False	Yes	Engine Oil Temperature(in degrees Celsius)
-engineOil.pressure	Integer	False	Yes	Engine Oil Pressure in psi
-engineOil.change	Boolean	False	Yes	engine oil change indicator status
-engineCoolant.level	Integer	False	Yes	engine coolant level as percentage of fullness
-engineCoolant.temperature	Integer	False	Yes	engine coolant temperature(in degrees Celsius)
-Vehicle climate control	
-climateControl.airflowDirection	String	False	No	Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"
-climateControl.fanSpeedLevel	Integer	False	No	fan speed of the air flowing ( 0: off, 1: weakest ~ 10: strongest )
-climateControl.targetTemperature	Integer	False	No	desired temperature(in degrees Celsius)
-climateControl.airConditioning	Boolean	False	No	air conditioning system (true: on, false: off)
-climateControl.heater	Boolean	False	No	heating system (true: on, false: off)
-climateControl.seatHeater	Integer	False	No	seat warmer ( 0: off, 1: least warm ~ 10: warmest )
-climateControl.seatCooler	Integer	False	No	seat ventilation ( 0: off, 1: least warm ~ 10: warmest )
-climateControl.airRecirculation	Boolean	False	No	air recirculation. (true : on, false : pulling in outside air).
-climateControl.steeringWheelHeater	Integer	False	No	steering wheel heater ( 0: off, 1: least warm ~ 10: warmest ).
-sideWindow.lock	Boolean	False	No	whether or not the window is locked (true) or unlocked (false)
-sideWindow.openness	Integer	False	No	side window as a percentage of openness. (0:Closed, 100:Fully Opened)
-Driving safety	
-door.status	String	False	Yes	Door status enum: "open", "ajar", "close"
-door.lock	Boolean	False	No	whether or not the door is locked (true) or unlocked (false)
-airBagStatus.activated	Boolean	False	Yes	whether or not the airbag is activated (true) or deactivated (false)
-airBagStatus.deployed	Boolean	False	Yes	whether the airbag is deployed (true) or not (false)
-seat.occupant	String	False	Yes	status of seat occupant enum: "adult", "child", "vacant"
-seat.seatbelt	Boolean	False	Yes	whether or not the seat belt is fasten (true) or unfasten (false)
+|identification.vin   	||String   	    |True   	||Yes   	        |Vehicle |identification number   	|
+|identification.wmi	|String	|False	|Yes	|World Manufacture Identifier|
+|identification.iccid	|String	|False	|Yes	|Integrated Circuit Card Identifier|
+|identification.imsi	|String	|False	|Yes	|International Mobile Subscriber Identity|
+|identification.tcusn	|String	|False	|Yes	|TCU Serial Number|
+|identification.vehicleType	|String	|False	|Yes	|Vehicle type|
+|identification.brand	|String	|False	|Yes	|Vehicle brand|
+|identification.model	|String	|False	|Yes	|Vehicle model|
+|identification.description	|String	|False	|Yes	|Model name description|
+|identification.year	|Integer	|False	|Yes	|Vehicle model year|
+|identification.deliveryMileage	|Long	|False	|Yes	|Odometer at delivery|
+|identification.deliveryDate	|Date	|False	|Yes	|Sale date (retail)|
+|identification.licenseNumber	|String	|False	|Yes	|License plate number|
+|identification.transmissionNumber	|String	|False	|Yes	|Transmission serial number|
+|identification.engineNumber	|String	|False	|Yes	|Serial number of the engine|
+|identification.ignitionKeyNumber	|String	|False	|Yes	|Vehicle ignition key number|
+|identification.doorKeyNumber	|String	|False	|Yes	|Door key number|
+|identification.category	|String	True	|Yes	|Sedan, SUV, …|
+|identification.owner.id	|String	True	|Yes	|Owner ID|
+|identification.owner.type	|String	True	|Yes	|Owner Type: subscriber, dealer, oem|
+|Vehicle equipment				
+|devices	{array}	|False	|Yes	|Vehicle devices: HU, TCU, Rear screens, DAC, etc|
+|devices.deviceId	|String	True	|Yes	|Device identifier|
+|devices.description	|String	|False	|Yes	|Device description|
+|devices.metas	{array}	|False	|Yes	|Device metadata (array of attribute:value)|
+|Vehicle life cycle				
+|lifecycle.status	|String	True	|Yes	inventory, demo, trial, retail, service, junk|
+|lifecycle.condition	|String	|False	|Yes	|Vehicle condition. Excellent, Good, Poor, Unknown.|
+|Vehicle configuration	
+|configuration.totalDoors	|Integer	|False	|Yes	|Number of doors|
+|configuration.fuelType	|String	|False	|Yes	|Fuel type|
+|configuration.refuelPosition	|String	|False	|Yes	|Side of the vehicle with access to the fuel door|
+|configuration.color.interior	{array}	|False	|Yes	|Vehicle interior colors|
+|configuration.color.interior.colorCode	|String	True	|Yes	|Color code|
+|configuration.color.interior.colorName	|String	|False	|Yes	|Color description|
+|configuration.color.exterior	{array}	|False	|Yes	Vehicle exterior colors|
+|configuration.color.exterior.colorCode	|String	True	|Yes	|Color code|
+|configuration.color.exterior.colorName	|String	|False	|Yes	|Color description|
+|configuration.transmissionType	|String	|False	|Yes	|Vehicle transmission type|
+|configuration.weight	|Float	|False	|Yes	|Vehicle weight|
+|configuration.options	{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
+|Vehicle status 	
+|vehicleSpeed.speed	|Integer	|False	|Yes	|Vehicle speed (KM/h or MP/h|
+|vehicleSpeed.averageSpeed	|Integer	|False	|Yes	Estimated average speed in KM/h |
+|vehicleCompass.direction	|Float	|False	|Yes	|Degree direction of the vehicle compass to be used by navigation identify the car direction| inside garage or when it is not moving|
+|engineSpeed.speed	|Integer	|False	|Yes	|Engine RPM 10X1000.|
+|transmission.transmissionMode	|String	|False	|Yes	|Transmission mode: P R N D |
+|chime.status	|Boolean	|False	|Yes	|Chime status when a door is open: T/F|
+|fuel.level	Integer	|False	|Yes	|Fuel level as a percentage of fullness|
+|fuel.range	Integer	|False	|Yes	|Estimated fuel range in kilometers/miles (depending on unit configuration)|
+|engineOil.remaining	|Integer	|False	|Yes	|Remaining engine oil as percentage of fullness|
+|engineOil.temperature	|Long	|False	|Yes	|Engine Oil Temperature(in degrees Celsius)|
+|engineOil.pressure	|Integer	|False	|Yes	|Engine Oil Pressure in PSi|
+|engineOil.change	|Boolean	|False	|Yes	|Engine oil change indicator status|
+|engineCoolant.level	|Integer	|False	|Yes	|Engine coolant level as percentage of fullness|
+|engineCoolant.temperature	|Integer	|False	|Yes	|Engine coolant temperature(in degrees Celsius)|
+|Vehicle climate control	
+|climateControl.airflowDirection	|String	|False	|No	Airflow direction: "frontpanel", "floorduct",   "bilevel", "defrostfloor"|
+|climateControl.fanSpeedLevel	Integer	|False	|No	fan speed of the air flowing (0: off, 1: weakest ~ 10: strongest )|
+|climateControl.targetTemperature	|Integer	|False	|No	desired temperature(in degrees Celsius)|
+|climateControl.airConditioning	|Boolean	|False	|No	air conditioning system T/F|
+|climateControl.heater	|Boolean	|False	|No	heating system T/F|
+|climateControl.seatHeater	|Integer	|False	|No	seat warmer (0: off, 1: least warm ~ 10: warmest)|
+|climateControl.seatCooler	|Integer	|False	|No	seat ventilation (0: off, 1: least warm ~ 10: warmest)|
+|climateControl.airRecirculation	|Boolean	|False	|No	air recirculation. (True : on, |False : pulling in outside air)|
+|climateControl.steeringWheelHeater	|Integer	|False	|No	steering wheel heater (0: off, 1: least warm ~ 10: warmest)|
+|sideWindow.lock	|Boolean	|False	|No	whether or not the window is locked T/F|
+|sideWindow.openness	|Integer	|False	|No	side window as a percentage of openness. (0:Closed, 100:Fully Opened)|
+|Driving safety	
+|door.status	|String	|False	|Yes	|Door status enum: "open", "ajar", "close"|
+|door.lock	|Boolean	|False	|No	whether or not the door is locked T/F|
+|airBagStatus.activated	|Boolean	|False	|Yes	|Whether or not the airbag is activated T/F|
+|airBagStatus.deployed	|Boolean	|False	|Yes	|Whether the airbag is deployed T/F|
+|seat.occupant	|String	|False	|Yes	|Status of seat occupant enum: "adult", "child", "vacant"|
+|seat.seatbelt	|Boolean	|False	|Yes	|Whether or not the seat belt is fasten T/F|
 
-Get Vehicle information
-Usage: drive.vehicleinfo.get(options).then(resolve, reject);
+##Get Vehicle information
+`Usage: drive.vehicleinfo.get(options).then(resolve, reject);`
 Description: The get method returns vehicle information object.
-Parameters:
-{function} resolve
+###Parameters:
+`{function} resolve`
 Function called with vehicle information data object if the operation is successful. See data object format below.
-{function} reject Optional
+`{function} reject Optional`
 Function called in case of error retrieving vehicle information.
-{object} options Optional
+`{object} options Optional`
 "options" object corresponds to a Zone (See Zone data structure below) or any other {attribute : value} that will be used as a filter for returned result.
-Returns: Promise
-Example: get vehicle speed
+*Returns:* Promise
 
-Example: get vehicle climate information (HVAC)
+####Example: GET vehicle speed
+<pre>var vehicleinfo = drive.vehicleinfo;
 
-Example: get door status
+function getVehicleSpeed(data){
+  console.log(data.timeStamp +":"+ data.speed);
+}
 
-Example: get all vehicle information
+function logError(err){
+  console.log("code:"+err.error+" message:"+ err.message);
+}
 
-Set Vehicle information
-Usage: drive.vehicleinfo.set(settings,options).then(resolve, reject);
-Description: The set method allows setting some vehicle parameters like climate control (HVAC).
+function getVehicleSpeed(){
+    vehicleinfo.vehicleSpeed.get().then(getVehicleSpeed,logError);
+}</pre>
+
+####Example: GET vehicle climate information (HVAC)
+<pre>var vehicleinfo = drive.vehicleinfo;
+
+function logHVAC(data){
+  console.log(data.targetTemperature+","+data.airConditioning);
+}
+
+function logError(error){
+  console.log(error);
+}
+
+function getClimateInfo(){
+ vehicleinfo.climateControl.get(zone.driver).then(logHVAC,logError);
+}</pre>
+
+####Example: GET door status
+<pre>var vehicleinfo = drive.vehicleinfo;
+
+function getDoorStatus(door){
+  console.log(door.status);
+}
+
+function logError(error){
+  console.log(error);
+}
+
+function getDoorStatus(){
+ vehicleinfo.door.get(zone.passenger).then(getDoorStatus,logError);
+}</pre>
+
+####Example: GET all vehicle information
+<pre>var vehicleinfo = drive.vehicleinfo;
+
+function logVehicleInfo(data){
+  console.log(data);
+}
+
+function logError(error){
+  console.log(error);
+}
+
+function getVehicleInfo(){
+     vehicleinfo.get().then(logVehicleInfo,logError);
+}</pre>
+
+##Set Vehicle information
+*Usage:* drive.vehicleinfo.set(settings,options).then(resolve, reject);
+*Description:* The set method allows setting some vehicle parameters like climate control (HVAC).
 Parameters:
 {object} settings
 Settings object value (attributes values) 
 {object} options Optional
 "options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
+
 {function} resolve
 Function called if the operation is successful. 
 {function} reject Optional
