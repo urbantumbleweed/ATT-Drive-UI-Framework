@@ -91,16 +91,16 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |identification.engineNumber	|String	|False	|Yes	|Serial number of the engine|
 |identification.ignitionKeyNumber	|String	|False	|Yes	|Vehicle ignition key number|
 |identification.doorKeyNumber	|String	|False	|Yes	|Door key number|
-|identification.category	|String	True	|Yes	|Sedan, SUV, …|
-|identification.owner.id	|String	True	|Yes	|Owner ID|
-|identification.owner.type	|String	True	|Yes	|Owner Type: subscriber, dealer, oem|
+|identification.category	|String	|True	|Yes	|Sedan, SUV, …|
+|identification.owner.id	|String	|True	|Yes	|Owner ID|
+|identification.owner.type	|String	|True	|Yes	|Owner Type: subscriber, dealer, oem|
 |Vehicle equipment				
 |devices	{array}	|False	|Yes	|Vehicle devices: HU, TCU, Rear screens, DAC, etc|
 |devices.deviceId	|String	True	|Yes	|Device identifier|
 |devices.description	|String	|False	|Yes	|Device description|
 |devices.metas	{array}	|False	|Yes	|Device metadata (array of attribute:value)|
 |Vehicle life cycle				
-|lifecycle.status	|String	True	|Yes	inventory, demo, trial, retail, service, junk|
+|lifecycle.status	|String	True	|Yes	|Inventory, demo, trial, retail, service, junk|
 |lifecycle.condition	|String	|False	|Yes	|Vehicle condition. Excellent, Good, Poor, Unknown.|
 |Vehicle configuration	
 |configuration.totalDoors	|Integer	|False	|Yes	|Number of doors|
@@ -117,7 +117,7 @@ Vehicle properties that are not supported by a given VIC will not be returned in
 |configuration.options	{array}	|False	|Yes	|Vehicle options (array of attribute: value)|
 |Vehicle status 	
 |vehicleSpeed.speed	|Integer	|False	|Yes	|Vehicle speed (KM/h or MP/h|
-|vehicleSpeed.averageSpeed	|Integer	|False	|Yes	Estimated average speed in KM/h |
+|vehicleSpeed.averageSpeed	|Integer	|False	|Yes	|Estimated average speed in KM/h |
 |vehicleCompass.direction	|Float	|False	|Yes	|Degree direction of the vehicle compass to be used by navigation identify the car direction| inside garage or when it is not moving|
 |engineSpeed.speed	|Integer	|False	|Yes	|Engine RPM 10X1000.|
 |transmission.transmissionMode	|String	|False	|Yes	|Transmission mode: P R N D |
@@ -223,22 +223,53 @@ function getVehicleInfo(){
 }</pre>
 
 ##Set Vehicle information
-*Usage:* drive.vehicleinfo.set(settings,options).then(resolve, reject);
+*Usage:* `drive.vehicleinfo.set(settings,options).then(resolve, reject);`
 *Description:* The set method allows setting some vehicle parameters like climate control (HVAC).
-Parameters:
-{object} settings
-Settings object value (attributes values) 
-{object} options Optional
-"options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
+*Parameters:*
+   - {object} settings - Settings object value (attributes values) 
+   - {object} options - Optional "options" object corresponds to a Zone (See Zone data structure above) or any other attribute value that will be used as a filter to limite update scope.
+   - {function} resolve - Function called if the operation is successful. 
+   - {function} reject Optional - Function called in case of error setting vehicle information.
 
-{function} resolve
-Function called if the operation is successful. 
-{function} reject Optional
-Function called in case of error setting vehicle information.
-Returns: Promise
-Example: lock driver side door
+*Returns:* Promise
 
-Example: turn on AC
+####Example: lock driver side door
+<pre>var zone = Zone;
+var vehicleinfo = drive.vehicleinfo;
+
+function resolve(){
+///success	
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function setVehicleInfo(){
+vehicleinfo.door.set({"lock":true},zone.driver).then(resolve,reject);
+}</pre>
+
+####Example: turn on AC
+<pre>var zone = new Zone;
+var vehicleinfo = drive.vehicleinfo;
+var zones = vehicleinfo.climateControl.zones;
+
+for(var i in zones)
+{
+   if(i.equals(zone.driver))
+   {
+      var value = {};
+      value["acStatus"] = true;
+      vehicleinfo.climateControl.set(value,zone.driver).then(   
+          function(){
+             console.log("successfully set acStatus");
+          },
+          function(error) {
+              console.log("there was an error");
+          }
+      );
+   }        
+}</pre>
 
 Delete vehicle information settings
 Usage: drive.vehicleinfo.delete(settings,options).then(resolve, reject)
