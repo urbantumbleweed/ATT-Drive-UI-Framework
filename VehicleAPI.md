@@ -1498,16 +1498,127 @@ CommonDataType interface represents common data type for all data types.
 ###Notification properties
 Below properties is a subset of possible attributes that a notification service may support. More attributes shall be added in the next version of this SDK:
 
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|messages|{array}|False|No|Array of messages|
+|messages.id|String|False|No|Message ID|
+|messages.userURI|String|False|No|Target user|
+|messages.priority|String|False|No|Normal/High|
+|messages.sender|String|False|No|Contact or service provider name|
+|messages.subject|String|False|No|Message subject|
+|messages.type|String|False|No|Category of message (weather, sms, tracking, siteautomation, …)|
+|messages.data|{object}|False|No|Message body depends on message (see format below)|
+|messages.read|Boolean|False|No|True means that messages were read.|
+|messages.spokenText|String|False|No|Text that should be sent to TTS (text to speech)|
+|messages.displayText|String|False|No|Text corresponding to spoken text that should be displayed while TTS is playing.|
+
 ###SMS data format
 
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|data.sms|{object}|False|No|Text message object|
+|data.sms.contactId|String|False|No|Sender contact ID from user contacts (if sender is one of user’s contacts). More information could be retreieved from identity contacts (name, picture, etc).|
+|data.sms.text|String|False|No|Text message|
+|data.sms.type|String|False|No|TEXT or MMS|
+|data.sms.attachments|{array}|False|No|MMS content|
+|data.sms.attachments.contentName|String|False|No|File name|
+|data.sms.attachments.contentType|String|False|No|Content MIME type: audio/wav for instance|
+|data.sms.attachments.content|String|False|No|File binary in RIFF format.|
 
 ###Weather alert data format
 
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|data.weather|{object}|False|No|Weather alert object|
+|data.weather.alerts|{array}|False|No|Weather alerts array|
+|data.weather.alerts.alertId|String|False|No|Alert ID|
+|data.weather.alerts.description|String|False|No|Alert description|
+|data.weather.alerts.category|String|False|No|Alert category|
+|data.weather.alerts.priority|Integer|False|No|Priority number (lowest number is highest priority)|
+|data.weather.alerts.type|String|False|No|Alert short description|
+|data.weather.alerts.typeId|String|False|No|Alert type ID|
+|data.weather.alerts.alertClass|Integer|False|No|Classification of alert|
+|data.weather.alerts.level|Integer|False|No|Alert level|
+|data.weather.alerts.color.name|String|False|No|Alert color name: red, green, blue.|
+|data.weather.alerts.color.code|String|False|No|Hexa decimal value of color|
+|data.weather.alerts.source|String|False|No|Source of the alert|
+|data.weather.alerts.sourceId|String|False|No|Source ID of the alert|
+|data.weather.alerts.area|{array}|False|No|Array of areas|
+|data.weather.alerts.area.name|String|False|No|Location name|
+|data.weather.alerts.area.startTime|Date|False|No|Alert start time|
+|data.weather.alerts.area.endTime|Date|False|No|Alert end time|
+|data.weather.alerts.area.status|String|False|No|Status of alert|
+|data.weather.alerts.area.text|String|False|No|Full text description of the alert|
 
 ###Tracking data format
 
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|data.tracking|{object}|False|No|Tracking object|
+|data.tracking.contactId|String|False|No|Sender contact ID from user contacts (if sender is one of user’s contacts). More information could be retreieved from identity contacts (name, picture, etc).|
+|data.tracking.provider|String|False|No|Provider name: e.g. glympse|
+|data.tracking.startTime|Date|False|No|Tracking start time|
+|data.tracking.endTime|Date|False|No|Tracking expiry time|
+|data.tracking.picture|String|False|No|Avatar or picture URL. If sender is a registered contact then you can find more details about the sender in the identity.users.contacts|
+|data.tracking.text|String|False|No|Personal message sent as part of the tracking invite|
+|data.tracking.position|{object}|False|
+|data.tracking.position.latitude|Float|False|No|
+|data.tracking.position.longitude|Float|False|No|
+|data.tracking.position.altitude|Float|False|No|Location altitude in meters|
+|data.tracking.position.heading|Float|False|No|Azimuth values calculated in degree with reference to north |
+|data.tracking.position.velocity|Integer|False|No|GPS estimated velocity (in km/h).|
+|data.tracking.position.precision|Float|False|No|GPS position precision |
+|data.tracking.destination|{object}|False|No|Destination of tracked device.|
+|data.tracking.destination.id|String|False|No|Destination ID|
+|data.tracking.destination.name|String|False|No|Destination name| 
+|data.tracking.destination.selected|Boolean|Yes|No|This flag is ture if the destination object is selected on the map, other wise false. The default is false|
+|data.tracking.destination.street|String|False|No|Destination street including street number|
+|data.tracking.destination.city|String|False|No|Destination city|
+|data.tracking.destination.region|String|False|No|Destination state/province|
+|data.tracking.destination.country|String|False|No|Destination Country|
+|data.tracking.destination.postalCode|Integer|False|No|5 digits ZIP code or postalCode alphanumeric|
+|data.tracking.destination.display.latitude|Float|False|No|Displayed latitude in degrees|
+|data.tracking.destination.display.longitude|Float|False|No|Displayed longitude in degrees|
+|data.tracking.destination.display.altitude|Float|False|No|Displayed altitude in meters|
+|data.tracking.destination.routing.latitude|Float|False|No|Routing latitude in degrees|
+|data.tracking.destination.routing.longitude|Float|False|No|Routing Longitude in degrees|
+|data.tracking.destination.routing.altitude|Float|False|No|Routing altitude in meters|
+|data.tracking.destination.phone|String|False|No|Primary destination phone number|
+|data.tracking.destination.type |String|False|No|list of POI type|
+|data.tracking.destination.categories|{array}|False|No|POI categories. Example: ["grossery", "gas station"]|
+|data.tracking.destination.comments|String|False|No|Comments on distination|
+|data.tracking.destination.link|String|False|No|POI URL|
+|data.tracking.destination.symbol|String|False|No|Symbol (icon)|
+|data.tracking.destination.formattedAddress|String|False|No|Full address format based on the country|
+|data.tracking.destination.metas|{array}|False|No|Array of {attribute: value}|
+|data.tracking.track|{object}|False|No|
+|data.tracking.track.name|String|No|
+|data.tracking.track.selected|Boolean|Yes|No|This flag is ture if the track object is selected on the map, other wise false. The default is false|
+|data.tracking.track.waypoints|{array}|False|No|Waypoints array|
+|data.tracking.track.waypoints.latitude|Float|False|No|Track latitude in degrees|
+|data.tracking.track.waypoints.longitude|Float|False|No|Track Longitude in degrees|
+|data.tracking.track.waypoints.altitude|Float|False|No|Track altitude in meters|
+|data.tracking.track.waypoints.heading|Float|False|No|Azimuth values calculated in degree with reference to north|
+|data.tracking.track.waypoints.velocity|Integer|False|No|Speed in km/h|
+|data.tracking.track.waypoints.time|Date|False|No|Track Date/time|
+|data.tracking.track.waypoints.name|String|False|No|Track name|
+|data.tracking.track.waypoints.description|String|False|No|Track description|
+|data.tracking.track.waypoints.symbol|String|False|No|Track symbol: dot, crossing, etc.|
+|data.tracking.track.waypoints.type|String|False|No|Track type: crossing, intersection|
 
 ###Site automation data format
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|data.sites|{array}|False|Yes|Tracking object|
+|data.sites.siteId|String|True|Yes|Site ID.|
+|data.sites.provider|String|False|Yes|Provider name: e.g. Digital life|
+|data.sites.startTime|Date|False|Yes|Notification start time|
+|data.sites.endTime|Date|False|Yes|Notification end time|
+|data.sites.picture|String|False|Yes|Picture sent by alarm system for instance|
+|data.sites.text|String|False|Yes|Notification description (for instance incident description).|
+|data.sites.groups|{array}|False|Yes|Array resource groups related to the notification. See Site automation section for data structure.|
+|data.sites.resources|{array}|False|Yes|Array resources related to the notification. See Site automation section for data structure.|
+|data.sites.resourcetypes|{array}|False|Yes|Array resource types related to the notification. See Site automation section for data structure.|
 
 ###Get Notification Information
 **Usage:** `drive.notification.get(options).then(resolve, reject);`
@@ -1560,7 +1671,17 @@ interface CommonDataType {
 
 ####Example:
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function setMessageInfo(){
+drive.notification.messages.set({"read":true}).then(resolve,reject);
+}
 ```
 
 ###Delete Notification settings
@@ -1578,7 +1699,19 @@ interface CommonDataType {
 
 ####Example:
 ```javascript
+var filter = {"type":"sms"};
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function deleteSMSMessages(){
+  drive.notification.messages.delete(filter).then(resolve,reject);
+}
 ```
 
 ###Subscribe to notification information
@@ -1595,7 +1728,13 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: subscribe to incoming sms
 ```javascript
+function showSMS(messages){
+  console.log(messages);
+}
 
+function subscribe(){
+handle=drive.notification.messages.subscribe(showSMS,{"type":"sms"});
+}
 ```
 
 ###Unsubscribe from notification information
@@ -1610,7 +1749,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example
 ```javascript
-
+function unsubscribe(){
+     drive.notification.messages.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -1632,16 +1773,73 @@ When available method returns not_supported_policy, application can subscribe to
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.notification.available();
+}
 ```
 
 ##Media
 This Javascript SDK allows interacting with media player.
 The following interface represents a base interface to all media player properties:
+
+```javascript
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+}; 
+```
+
 CommonDataType interface represents common data type for all data types.
 
 ###Media properties
 Below properties is a subset of possible attributes that a Media service may support. More attributes shall be added in the next version of this SDK.
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|**Current media**|
+|currentMedia|{object}|False|Yes|Currently playing media|
+|currentMedia.id|String|False|Yes|Media ID|
+|currentMedia.title|String|False|Yes|Media title|
+|currentMedia.artist|String|False|Yes|Media artist|
+|currentMedia.type|String|False|Yes|Media type (video/mp4, audio/mp3, wav, etc)|
+|currentMedia.genre|String|False|Yes|
+|currentMedia.source|String|False|No|File source (URI)|
+|currentMedia.status|String|False|No|True if currently playing|
+|currentMedia.position|Integer|False|No|Last position before pausing or switching.|
+|currentMedia.duration|Integer|False|Yes|Length of media|
+|playlist|{array}|False|Yes|Array of Media objects (same attributes as currentMedia).|
+|**Player parameters*|
+|player.action|String|False|No|play, pause, resume, stop, seek, load, nextTrack, previousTrack|
+|player.controls|Boolean|False|No|Media player controls|
+|player.audio|String|No|No|Muted|
+|player.autoplay|Boolean|No|No|True for autoplay.|
+|player.controls|Boolean|No|No|Show control buttons|
+|player.height|Integer|No|No|Height of the video player|
+|player.width|Integer|No|No|Width of the video player|
+|player.loop|Boolean|No|No|Start over media evrytime it finishes|
+|player.preloaded|Boolean|No|No|Preload the media for a fast start. Ignored if autoplay is on.|
+|player.poster|String|No|No|Poster image|
+|player.status|String|No|Yes|Playing, Paused, Loading, Progress, Seeking, Canplay, Stopped, Looping|
+|player.volume|insigned short|No|No|Percentage: 0 to 100|
+|player.muted|Boolean|No|No|True means muted.|
+|player.position|Integer|False|No|Current position|
+|player.duration|Integer|False|Yes|Duration|
+|player.error|String|False|Yes|Error code/message|
 
 ###Get Media Information
 **Usage:** `drive.media.get(options).then(resolve, reject);`
@@ -1657,7 +1855,17 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 ####Example: get current media
 ```javascript
+function logMedia(currentMedia){
+   console.log(currentMedia);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getCurrentMedia(){
+   drive.media.currentMedia.get().then(logMedia,logError);
+}
 ```
 
 ###Set Media information
@@ -1675,12 +1883,60 @@ Below properties is a subset of possible attributes that a Media service may sup
 
 ####Example: Request/Release media player
 ```javascript
+var granted = false;
+var handle=drive.policy.resources.subscribe(isGranted, {"name":"media"});
 
+function requestAccess(){
+drive.policy.resources.set({"access":{"appId":"radio","exclusive":true}},{"name":"media"}).then(resolve,reject);
+}
+
+function releaseResource(){
+drive.policy.resources.set({"release":"radio"},{"name":"media"})
+.then(resolve,reject);
+}
+
+function isGranted(resource){
+if (resource.granted.indexOf("radio")>-1) { granted = true; } else { granted = fale;}
+}
+
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
 ```
 
 ####Example: set source URI and start media player
 ```javascript
+var granted = false;
+var handle=drive.policy.resources.subscribe(isGranted, {"name":"media"});
 
+function isGranted(resource){
+if (resource.granted.indexOf("radio")>-1) { granted = true; } else { granted = fale;}
+}
+
+function setMedia(){
+if (granted){     
+drive.media.currentMedia.set({"source":"http://cdn/stream1"})
+.then(resolve,reject);
+}
+}
+
+function playMedia(){
+if (granted){
+  drive.media.player.set({"action":"play"}).then(resolve,reject);
+}
+}
+
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
 ```
 
 ###Delete Media settings
@@ -1696,7 +1952,17 @@ Below properties is a subset of possible attributes that a Media service may sup
 **Returns:** Promise
 ####Example:
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function deleteMediaPlaylist(){
+  drive.media.playlist.delete().then(resolve,reject);
+}
 ```
 
 Subscribe to media information
@@ -1713,7 +1979,13 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: subscribe to destination
 ```javascript
+function whatsPlaying(currentMedia){
+  console.log(currentMedia);
+}
 
+function subscribe(){
+handle=drive.media.currentMedia.subscribe(whatsPlaying);
+}
 ```
 
 Unsubscribe from media information
@@ -1728,7 +2000,9 @@ Unsubscribe from media information
 
 ####Example:
 ```javascript
-
+function unsubscribe(){
+     drive.media.currentMedia.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -1751,16 +2025,125 @@ See policy manager section for more details.
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.media.playlist.available();
+}
 ```
 
 ##SMS
 This Javascript SDK allows interacting with SMS/MMS Messaging.
 The following interface represents a base interface to all SMS/MMS properties:
+```javascript
+interface SmsInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
 CommonDataType interface represents common data type for all data types.
 
 ###SMS/MMS properties
 Below properties is a subset of possible attributes that SMS/MMS may support. More attributes shall be added in the next version of this SDK.
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|**sms**|
+|sms|{object}|False|Yes|Application name|
+|sms.outbox|{array}|False|Yes|Outgoing messages set by other applications|
+|sms.inbox|{array}|False|Yes|Incoming messages|
+|sms.draft|{array}|False|Yes|Draft messages|
+|sms.scheduled|{array}|False|Yes|Scheduled message|
+|sms.locked|{array}|False|Yes|Locked messages|
+|sms.spam|{array}|False|Yes|Spam messages|
+|sms.inbox.messages|{array}|False|Yes|Messages in inbox folder|
+|sms.outbox.messages|{array}|False|Yes|Messages in outbox folder|
+|sms.draft.messages|{array}|False|Yes|Messages in draft folder|
+|sms.scheduled.messages|{array}|False|Yes|Messages in scheduled folder|
+|sms.locked.messages|{array}|False|Yes|Messages in locked folder|
+|sms.outbox.messages.type|String|False|Yes, sms or mms|
+|sms.outbox.messages.refId|Float|False|Yes, unique referenceID. Should be the same for all segments of a multi part message|
+|sms.outbox.messages.sender|String|False|Yes, sender phone number|
+|sms.outbox.messages.destination|String|False|Yesestination phone number|
+|sms.outbox.messages.data|String|False|Yes|Message body|
+|sms.outbox.messages.attachments|{array}|False|Yes|MMS attachments|
+|sms.outbox.messages.attachments.contentType|String|False|Yes|MMS attachments|
+|sms.outbox.messages.attachments.contentName|String|False|Yes|MMS attachments|
+|sms.outbox.messages.attachments.content|String|False|Yes, MMS attachments|
+|sms.outbox.messages.priority|String|False|Yes|Message priority (high or low)|
+|sms.outbox.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.outbox.messages.time|Date|False|Yes, date and time message sent|
+|sms.outbox.messages.segmentNumber|Integer|False|No|"Segment order of multi part message ( start at 1).|
+ 0 mean message not segmented"|
+|sms.inbox.messages.type|String|False|Yes, sms or mms|
+|sms.inbox.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.inbox.messages.sender|String|False|Yes|Sender phone number|
+|sms.inbox.messages.destination|String|False|Yes|Destination phone number|
+|sms.inbox.messages.data|String|False|Yes|Message body|
+|sms.inbox.messages.priority|String|False|Yes, message priority (high or low)|
+|sms.inbox.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.inbox.messages.time|Date|False|Yes, arrival date and time |
+|sms.inbox.messages.segmentNumber|Integer|False|No|"Segment order of multi part message ( start at 1).
+ 0 mean message not segmented"|
+|sms.draft.messages.type|String|False|Yes, sms or mms|
+|sms.draft.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.draft.messages.sender|String|False|Yes, Sender phone number|
+|sms.draft.messages.destination|String|False|Yes|Destination phone number|
+|sms.draft.messages.data|String|False|Yes, message body|
+|sms.draft.messages.priority|String|False|Yes|Message priority (high or low)|
+|sms.draft.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.draft.messages.time|Date|False|Yes|creation date and time |
+|sms.draft.messages.segmentNumber|Integer|False|No|"Segment order of multi part message ( start at 1).
+ 0 mean message not segmented"|
+|sms.scheduled.messages.type|String|False|Yes, sms or mms|
+|sms.scheduled.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.scheduled.messages.sender|String|False|Yes, sender phone number|
+|sms.scheduled.messages.destination|String|False|Yes, destination phone number|
+|sms.scheduled.messages.data|String|False|Yes|Message body|
+|sms.scheduled.messages.priority|String|False|Yes|Message priority (high or low)|
+|sms.scheduled.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.scheduled.messages.time|Date|False|Yes|scheduled date and time |
+|sms.scheduled.messages.segmentNumber|Integer|False|No|"Segment order of multi part message ( start at 1).
+ 0 mean message not segmented"|
+|sms.locked.messages.type|String|False|Yes sms or mms|
+|sms.locked.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.locked.messages.sender|String|False|Yes|Sender phone number|
+|sms.locked.messages.destination|String|False|Yes|Destination phone number|
+|sms.locked.messages.data|String|False|Yes|Message body|
+|sms.locked.messages.priority|String|False|Yes, message priority (high or low)|
+|sms.locked.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.locked.messages.time|Date|False|Yes, arrival date and time |
+|sms.locked.messages.segmentNumber|Integer|False|No|"Segment order of multi part message ( start at 1).|
+ 0 mean message not segmented"|
+|sms.spam.messages.type|String|False|Yes||sms or mms|
+|sms.spam.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.spam.messages.sender|String|False|Yes|Sender phone number|
+|sms.spam.messages.destination|String|False|Yes|Destination phone number|
+|sms.spam.messages.data|String|False|Yes|Message body|
+|sms.spam.messages.priority|String|False|Yes|Message priority (high or low)|
+|sms.spam.messages.read|Boolean|False|no|Flag that indicates if messages was read (true) or not (false)|
+|sms.spam.messages.time|Date|False|Yes|arrival date and time |
+|sms.sent.messages.type|String|False|Yes, sms or mms|
+|sms.sent.messages.refId|Float|False|Yes|Unique referenceID. Should be the same for all segments of a multi part message|
+|sms.sent.messages.sender|String|False|Yes|Sender phone number|
+|sms.sent.messages.destination|String|False|Yes, destination phone number|
+|sms.sent.messages.data|String|False|Yes|Message body|
+|sms.sent.messages.priority|String|False	|Yes. message priority (high or low)|
+|sms.sent.messages.time	|Date|False	|Yes, date and time message sent|
 
 ###Get SMS/MMS Messages
 **Usage:** `drive.sms.get(options).then(resolve, reject);`
@@ -1776,7 +2159,17 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ####Example: get inbox messages
 ```javascript
+function logMessages(messages){
+   console.log(messages);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getInbox(){
+   drive.sms.inbox.get().then(logMessages,logError);
+}
 ```
 
 ###Set SMS/MMS messages
@@ -1794,7 +2187,17 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ####Example: Send SMS
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function sendSMS(){
+drive.sms.outbox.set({"type":"sms", "destination":"5556667777", "data":"hello"}).then(resolve,reject);
+}
 ```
 
 ###Delete SMS messages
@@ -1812,7 +2215,17 @@ Below properties is a subset of possible attributes that SMS/MMS may support. Mo
 
 ####Example:
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function deleteDrafts(){
+  drive.sms.draft.messages.delete().then(resolve,reject);
+}
 ```
 
 ###Subscribe to SMS
@@ -1829,7 +2242,13 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: receive SMS
 ```javascript
+function newMessages(messages){
+  console.log(messages);
+}
 
+function subscribe(){
+handle=drive.sms.inbox.messages.subscribe(newMessages);
+}
 ```
 
 Unsubscribe from SMS
@@ -1844,7 +2263,9 @@ Unsubscribe from SMS
 
 ####Example
   ```javascript
-
+function unsubscribe(){
+     drive.sms.inbox.messages.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -1867,17 +2288,349 @@ See policy manager section for more details.
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.sms.outbox.available();
+}
 ```
 
 ##Search service
 This Javascript SDK allows interacting with search service.
-The following interface represents a base interface to all Contacts properties:
+The following interface represents a base interface to all Search properties:
+```javascript
+interface SearchInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
 
 CommonDataType interface represents common data type for all data types.
 
 ###Search properties
 Below properties is a subset of possible attributes that Search service may support. More attributes shall be added in the next version of this SDK.
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+|search|{object}|False|yes|Application name|
+|search.requests|{array}|False|yes|Search requests|
+|search.requests.requestId|String|False|No|Request Identifier. If not specified the requestId will be set to the same value as <serviceType>.<contentType>. This allows sharing results among apps.|
+|search.requests.action|String|False|No|first, next, previous|
+|search.requests.serviceType|String|True|No|Target service type: weather, poi, app|
+|search.requests.provider|String|False|No|Specify content provider. If not specified content is aggregated.|
+|search.requests.contentType|String|False|No|"Content type: Weather: current, forecast, daily-forecast, hourly-forecast, suggestions, alerts, POI: poi, suggestions, parking, address, App: suggestions, html, hybrid, native"|
+|search.requests.query|String|True|No|Request query|
+|search.requests.filter|{array}|False|No|Request filter: array of string.|
+|search.requests.maxItems|Integer|False|No|Maxium number of items in the result set.|
+|search.requests.includes|{array}|False|No|Limit the search result returned to specified attributes|
+|search.requests.sort|{array}|False|No|Sort by attributes and sorting order|
+|search.requests.sort.fieldName|String|False|No|Field name to be sorted|
+|search.requests.sort.reverse|Boolean|False|No|"Specifies the order that the items will be sorted. If the value is set to true, the items are sorted in the descending order. If the value is set to false, the items are sorted in the ascending order."|
+|search.requests.metas|{array}|False|No|Array of {attribute: value}|
+|search.requests.metas.currentPosition|Boolean|False|No|Search for content near by current position|
+|search.requests.metas.position|{object}|False|No|Search for content near by specified position|
+|search.requests.metas.position.latitude|Float|False|No|Latitude|
+|search.requests.metas.position.longitude|Float|False|No|Longitude|
+|search.requests.metas.radius|Float|False|No|Search radius|
+|search.requests.metas.details|Boolean|False|No|Return detailed result|
+|search.history.requests|{array}|True|Yes|"Array of previous requests (same format as |search.requests).
+Up to 10 requests should be saved in the history. The search history maximum size should be configurable in drive.settings namespace."|
+|search.results|{array}|True|Yes|Array of results.|
+|search.results.requestId|String|True|Yes|Request ID.|
+|search.results.pagination|Boolean|False|Yes|Set to true if pagination is supported.|
+|search.results.isFirstPage|Boolean|False|Yes|Set to true if first page.|
+|search.results.isLastPage|Boolean|False|Yes|Set to true if last page.|
+|search.results.items|{array}|False|Yes|Result set.|
+|search.results.items.provider|String|False|Yes|Content provider if available.|
+|search.results.items.id|String|False|Yes|Result item ID|
+|**POIs**|
+|search.results.items.poi|{object}|Yes|
+|search.results.items.poi.name|String|False|Yes|POI name. Example Mike’s garage|
+|search.results.items.poi.street|String|False|Yes|Full street description with number and apartment/suit if any.|
+|search.results.items.poi.city|String|False|Yes|City name.|
+|search.results.items.poi.region|String|False|Yes|state/province|
+|search.results.items.poi.postalCode|String|False|Yes|5 digits ZIP code or postalCode alphanumeric|
+|search.results.items.poi.country|String|False|Yes|Country name.|
+|search.results.items.poi.formattedAddress|String|False|Yes|Full address format based on the country|
+|search.results.items.poi.latitude|Float|False|Yes|Latitude in degree|
+|search.results.items.poi.longitude|Float|False|Yes|Longitude in degree|
+|search.results.items.poi.altitude|Float|False|Yes|Altitude in meters|
+|search.results.items.poi.heading|Float|False|Yes|Azimuth values calculated in degree with reference to north|
+|search.results.items.poi.velocity|Integer|False|Yes|Speed in km/h|
+|search.results.items.poi.phone|String|False|Yes|Default phone number|
+|search.results.items.poi.type|String|False|Yes|POI type|
+|search.results.items.poi.categories|{array}|False|Yes|"POI categories (Array of string). Example: ["grossery", "gas station"].
+For Parking: categories possible values are: off-street, block, facility"|
+|search.results.items.poi.comments|String|False|Yes|General comments|
+|search.results.items.poi.link|String|False|Yes|POI URL|
+|search.results.items.poi.symbol|String|False|Yes|POI symbol|
+|search.results.items.poi.timezone|String|False|Yes|POI local time zone|
+|search.results.items.poi.metas|{array}|False|Yes|An array of key value pairs.|
+|search.results.items.poi.metas.distance|Float|False|Yes|Distance from search position|
+|search.results.items.poi.metas.phones|{array}|False|Yes|Other phone numbers|
+|search.results.items.poi.metas.capacity|Integer|False|Yes|Place capacity (parking or hotel for instance)|
+|search.results.items.poi.metas.availability|Integer|Flase|Yes|Place availability|
+|search.results.items.poi.metas.accuracy|String|False|Yes|Estimation accuracy low, medium, high.|
+|search.results.items.poi.metas.payment|{array}|False|Yes|Array of string. Possible values: Bills, Coins, Mastercard, Visa, Amex, Discover, Debit|
+|search.results.items.poi.metas.rateLowest|Float|False|Yes|Lowest known rate|
+|search.results.items.poi.metas.rateHighest|Float|False|Yes|Highest known rate|
+|search.results.items.poi.metas.currency|String|False|Yes|Currency code|
+|search.results.items.poi.metas.hours|{array}|False|Yes|Array of strings (lines representing the business hours for instance).|
+|**POI suggestions**|
+|search.results.items.poi.suggestions|{array}|False|Yes|POI sugestions|
+|search.results.items.poi.suggestions.id|String|False|Yes|Suggestion rank or Id|
+|search.results.items.poi.suggestions.name|String|False|Yes|Suggestion text|
+|search.results.items.poi.suggestions.type|String|False|Yes|Suggestion type or category|
+|search.results.items.poi.suggestions.metas|{object}|False|Yes|Suggestion metas|
+|search.results.items.poi.suggestions.metas.distance|Float|False|Yes|POI distance from specified position|
+|search.results.items.poi.suggestions.metas.filter|String|False|Yes|Filter to be used in subsequent search filter|
+|**Weather**|
+|search.results.items.weather|{object}|Yes|
+|**Weather – Current conditions**|
+|search.results.items.weather.current|{object}|False|Yes|Current weather|
+|search.results.items.weather.current.time|Date|False|Yes|Observation date time|
+|search.results.items.weather.current.description|String|False|Yes|Weather text|
+|search.results.items.weather.current.icon|String|False|Yes|Weather icon|
+|search.results.items.weather.current.isDayTime|Boolean|False|Yes|True if day time.|
+|search.results.items.weather.current.temperature.value|Float|False|Yes|Current temperature value|
+|search.results.items.weather.current.temperature.unit|String|False|Yes|Current temperature unit|
+|search.results.items.weather.current.feelTemperature.value|Float|False|Yes|Current feel temperature value|
+|search.results.items.weather.current.feelTemperature.unit|String|False|Yes|Current felt temperature unit|
+|search.results.items.weather.current.shadeTemperature.value|Float|False|Yes|Current temperature in shade value|
+|search.results.items.weather.current.shadeTemperature.unit|String|False|Yes|Current temperature in shade unit|
+|search.results.items.weather.current.dewPoint.value|Float|False|Yes|Dew point temperature value|
+|search.results.items.weather.current.dewPoint.unit|String|False|Yes|Dew point temperature unit|
+|search.results.items.weather.current.humidity|Integer|False|Yes|Humidity percentage|
+|search.results.items.weather.current.wind.direction.value|Float|False|Yes|Wind direction in azimuth degrees|
+|search.results.items.weather.current.wind.direction.description|String|False|Yes|Wind direction description|
+|search.results.items.weather.current.wind.speed.value|Float|False|Yes|Wind speed value|
+|search.results.items.weather.current.wind.speed. unit|String|False|Yes|Wind speed unit|
+|search.results.items.weather.current.windGust.speed.value|Float|False|Yes|Wind gust speed value|
+|search.results.items.weather.current.windGust.speed.unit|String|False|Yes|Wind gust speed unit|
+|search.results.items.weather.current.uvindex.value|Integer|False|Yes|UV Index value|
+|search.results.items.weather.current.uvindex.description|String|False|Yes|UV Index description|
+|search.results.items.weather.current.visibility.value|Float|False|Yes|Visibility value|
+|search.results.items.weather.current.visibility.unit|String|False|Yes|Visibility unit|
+|search.results.items.weather.current.visibility.value|Float|False|Yes|Visibility value|
+|search.results.items.weather.current.visibility.unit|String|False|Yes|Visibility unit|
+|**Weather – Forecast**|
+|search.results.items.weather.forecast|{object}|False|Yes|Weather forecast|
+|search.results.items.weather.forecast.daily|{object}|False|Yes|Weather daily forecast|
+|search.results.items.weather.forecast.daily.time|Date|False|Yes|Date time|
+|search.results.items.weather.forecast.daily.sun.rise|Date|False|Yes|Sun rise time|
+|search.results.items.weather.forecast.daily.sun.set|Date|False|Yes|Sun set time|
+|search.results.items.weather.forecast.daily.moon.rise|Date|False|Yes|Moon rise time|
+|search.results.items.weather.forecast.daily.moon.set|Date|False|Yes|Moon set time|
+|search.results.items.weather.forecast.daily.temperature.min.value|Float|False|Yes|Minimum temperature value|
+|search.results.items.weather.forecast.daily.temperature.min.unit|String|False|Yes|Minimum temperature unit|
+|search.results.items.weather.forecast.daily.temperature.min.value|Float|False|Yes|Minimum temperature value|
+|search.results.items.weather.forecast.daily.temperature.min.unit|String|False|Yes|Minimum temperature unit|
+|search.results.items.weather.forecast.daily.feelTemperature.min.value|Float|False|Yes|Feel minimum temperature value|
+|search.results.items.weather.forecast.daily.feelTemperature.min.unit|String|False|Yes|Feel minimum temperature unit|
+|search.results.items.weather.forecast.daily.feelTemperature.max.value|Float|False|Yes|Feel maximum temperature value|
+|search.results.items.weather.forecast.daily.feelTemperature.max.unit|String|False|Yes|Feel maximum temperature unit|
+|search.results.items.weather.forecast.daily.shadeTemperature.min.value|Float|False|Yes|Shade minimum temperature value|
+|search.results.items.weather.forecast.daily.shadeTemperature.min.unit|String|False|Yes|Shade minimum temperature unit|
+|search.results.items.weather.forecast.daily.shadeTemperature.max.value|Float|False|Yes|Shade maximum temperature value|
+|search.results.items.weather.forecast.daily.shadeTemperature.max.unit|String|False|Yes|Shade maximum temperature unit|
+|search.results.items.weather.forecast.daily.hoursOfSun|Float|False|Yes|Hours of sun|
+|**Weather – Forecast day**|
+|search.results.items.weather.forecast.daily.day.icon|Integer|False|Yes|Icon number|
+|search.results.items.weather.forecast.daily.day.forecast.shortDescription|String|False|Yes|Forecast short description|
+|search.results.items.weather.forecast.daily.day.forecast.LongDescription|String|False|Yes|Forecast Long description|
+|search.results.items.weather.forecast.daily.day.precipitationProbability|Integer|False|Yes|Probability of precipitations|
+|search.results.items.weather.forecast.daily.day.thunderstormProbability|Integer|False|Yes|Probability of thunderstorms|
+|search.results.items.weather.forecast.daily.day.rainProbability|Integer|False|Yes|Probability of rain|
+|search.results.items.weather.forecast.daily.day.rain.value|Integer|False|Yes|Rain accumulation value|
+|search.results.items.weather.forecast.daily.day.rain.unit|String|False|Yes|Rain accumulation unit|
+|search.results.items.weather.forecast.daily.day.snowProbability|Integer|False|Yes|Probability of snow|
+|search.results.items.weather.forecast.daily.day.snow.value|Integer|False|Yes|Snow accumulation value|
+|search.results.items.weather.forecast.daily.day.snow.unit|String|False|Yes|Snow accumulation unit|
+|search.results.items.weather.forecast.daily.day.iceProbability|Integer|False|Yes|Probability of ice|
+|search.results.items.weather.forecast.daily.day.ice.value|Integer|False|Yes|Ice accumulation value|
+|search.results.items.weather.forecast.daily.day.ice.unit|String|False|Yes|Ice accumulation unit|
+|search.results.items.weather.forecast.daily.day.wind.direction.value|Float|False|Yes|Wind direction in azimuth degrees|
+|search.results.items.weather.forecast.daily.day.wind.direction.description|String|False|Yes|Wind direction description|
+|search.results.items.weather.forecast.daily.day.wind.speed.value|Float|False|Yes|Wind speed value|
+|search.results.items.weather.forecast.daily.day.wind.speed. unit|String|False|Yes|Wind speed unit|
+|search.results.items.weather.forecast.daily.day.windGust.speed.value|Float|False|Yes|Wind gust speed value|
+|search.results.items.weather.forecast.daily.day.windGust.speed.unit|String|False|Yes|Wind gust speed unit|
+|search.results.items.weather.forecast.daily.day.hoursOfPrecipitation|Float|False|Yes|Hours of precipitation|
+|search.results.items.weather.forecast.daily.day.hoursOfRain|Float|False|Yes|Hours of rain|
+|**Weather – Forecast night**|
+|search.results.items.weather.forecast.daily.night|{object}|False|Yes|Same attributes as day|
+|**Weather – hourly forecast**|
+|search.results.items.weather.forecast.hourly|{object}|False|Yes|Weather hourly forecast.|
+|search.results.items.weather.forecast.hourly.time|Date|False|Yes|Date time|
+|search.results.items.weather.forecast.hourly.icon|Integer|False|Yes|Icon number|
+|search.results.items.weather.forecast.hourly.forecastDescription|String|False|Yes|Forecast description|
+|search.results.items.weather.forecast.hourly.isDayLight|Boolean|False|Yes|True if day light|
+|search.results.items.weather.forecast.hourly.temperature.value|Float|False|Yes|Hourly temperature value|
+|search.results.items.weather.forecast.hourly.temperature.unit|String|False|Yes|Hourly temperature unit|
+|search.results.items.weather.forecast.hourly.feelTemperature.value|Float|False|Yes|Hourly feel temperature value|
+|search.results.items.weather.forecast.hourly.feelTemperature.unit|String|False|Yes|Hourly feel temperature unit|
+|search.results.items.weather.forecast.hourly.dewPoint.value|Float|False|Yes|Hourly dew point value|
+|search.results.items.weather.forecast.hourly.dewPoint.unit|String|False|Yes|Hourly dew point unit|
+|search.results.items.weather.forecast.hourly.wind.direction.value|Float|False|Yes|Wind direction in azimuth degrees|
+|search.results.items.weather.forecast.hourly.wind.direction.description|String|False|Yes|Wind direction description|
+|search.results.items.weather.forecast.hourly.wind.speed.value|Float|False|Yes|Wind speed value|
+|search.results.items.weather.forecast.hourly.wind.speed. unit|String|False|Yes|Wind speed unit|
+|search.results.items.weather.forecast.hourly.windGust.speed.value|Float|False|Yes|Wind gust speed value|
+|search.results.items.weather.forecast.hourly.windGust.speed.unit|String|False|Yes|Wind gust speed unit|
+|search.results.items.weather.forecast.hourly.relativeHumidity|Integer|False|Yes|Relative humidity|
+|search.results.items.weather.forecast.hourly.visibility.value|Float|False|Yes|Visibility value|
+|search.results.items.weather.forecast.hourly.visibility.unit|String|False|Yes|Visibility unit|
+|search.results.items.weather.forecast.hourly.ceiling.value|Float|False|Yes|Cloud ceiling value|
+|search.results.items.weather.forecast.hourly.ceiling.unit|String|False|Yes|Cloud ceiling unit|
+|search.results.items.weather.forecast.hourly.rainProbability|Integer|False|Yes|Probability of rain|
+|search.results.items.weather.forecast.hourly.rain.value|Integer|False|Yes|Rain accumulation value|
+|search.results.items.weather.forecast.hourly.rain.unit|String|False|Yes|Rain accumulation unit|
+|search.results.items.weather.forecast.hourly.snowProbability|Integer|False|Yes|Probability of snow|
+|search.results.items.weather.forecast.hourly.snow.value|Integer|False|Yes|Snow accumulation value|
+|search.results.items.weather.forecast.hourly.snow.unit|String|False|Yes|Snow accumulation unit|
+|search.results.items.weather.forecast.hourly.iceProbability|Integer|False|Yes|Probability of ice|
+|search.results.items.weather.forecast.hourly.ice.value|Integer|False|Yes|Ice accumulation value|
+|search.results.items.weather.forecast.hourly.ice.unit|String|False|Yes|Ice accumulation unit|
+|**Weather – Alerts**|
+|search.results.items.weather.alerts|{array}|False|Yes|Weather alerts array|
+|search.results.items.weather.alerts.alertId|String|False|Yes|Alert ID|
+|search.results.items.weather.alerts.description|String|False|Yes|Alert description|
+|search.results.items.weather.alerts.category|String|False|Yes|Alert category|
+|search.results.items.weather.alerts.priority|Integer|False|Yes|Priority number (lowest number is highest priority)|
+|search.results.items.weather.alerts.type|String|False|Yes|Alert short description|
+|search.results.items.weather.alerts.typeId|String|False|Yes|Alert type ID|
+|search.results.items.weather.alerts.alertClass|Integer|False|Yes|Classification of alert|
+|search.results.items.weather.alerts.level|Integer|False|Yes|Alert level|
+|search.results.items.weather.alerts.color.name|String|False|Yes|Alert color name: red, green, blue.|
+|search.results.items.weather.alerts.color.code|String|False|Yes|Hexa decimal value of color|
+|search.results.items.weather.alerts.source|String|False|Yes|Source of the alert|
+|search.results.items.weather.alerts.sourceId|String|False|Yes|Source ID of the alert|
+|search.results.items.weather.alerts.area|{array}|False|Yes|Array of areas|
+|search.results.items.weather.alerts.area.name|String|False|Yes|Location name|
+|search.results.items.weather.alerts.area.startTime|Date|False|Yes|Alert start time|
+|search.results.items.weather.alerts.area.endTime|Date|False|Yes|Alert end time|
+|search.results.items.weather.alerts.area.status|String|False|Yes|Status of alert|
+|search.results.items.weather.alerts.area.text|String|False|Yes|Full text description of the alert|
+|**Weather suggestions**|
+|search.results.items.weather.suggestions|{array}|False|Yes|Weather sugestions|
+|search.results.items.weather.suggestions.id|String|False|Yes|Suggestion rank or Id|
+|search.results.items.weather.suggestions.name|String|False|Yes|Suggestion city name|
+|search.results.items.weather.suggestions.type|String|False|Yes|Suggestion type or category|
+|search.results.items.weather.suggestions.metas|{object}|False|Yes|Suggestion metas|
+|search.results.items.weather.suggestions.metas.distance|Float|False|Yes|City/location distance from specified position|
+|search.results.items.weather.suggestions.metas.filter|String|False|Yes|Filter to be used in subsequent search filter|
+|**Apps**|
+|search.results.items.app|{object}|False|No|Media/app|
+|search.results.items.app.appId|String|False|Yes|app identifier|
+|search.results.items.app.ownerAppId|String|False|Yes|App identifier as specified by app provider.|
+|search.results.items.app.type|String|True|Yes|Type of the app|
+|search.results.items.app.version|String|True|Yes|Application version|
+|search.results.items.app.providerId|String|True|Yes|The ID of the provider of the app|
+|search.results.items.app.serviceId|String|True|Yes|The ID of the service|
+|search.results.items.app.created|String|True|Yes|The time when the app is created|
+|search.results.items.app.modified|String|True|Yes|The time when the app is modified|
+|search.results.items.app.startTime|String|False|Yes|The start time of the app|
+|search.results.items.app.state|String|True|Yes|The state of the app|
+|search.results.items.app.validUntil|String|False|Yes|"The end time of the validation for the App"|
+|search.results.items.app.metas|{array}|False|Yes|Array of {attribute:value}|
+|search.results.items.app.category|{array}|False|Yes|The category that the app belongs to.|
+|search.results.items.app.category.categoryId|String|True|Yes|The ID of the category|
+|search.results.items.app.category.name|String|True|Yes|The name of the category|
+|search.results.items.app.category.created|String|True|Yes|The time when the category is created|
+|search.results.items.app.category.modified|String|True|Yes|The latest time when the category is modified|
+|search.results.items.app.category.metas|{array}|False|Yes|Array of {attribute:value}|
+|search.results.items.app.group|{array}|False|Yes|Array of groups of the app|
+|search.results.items.app.group.metas|{array}|False|Yes|Array of {attribute:value}|
+|search.results.items.app.group.type|String|True|Yes|The type of the group|
+|search.results.items.app.group.deviceFiltered|String|True|Yes|If the devices are filtered in the Group|
+|search.results.items.app.group.deviceCompatible|Boolean|True|Yes|"If the devices are compatible with the group"|
+|search.results.items.app.group.preferredItem|{object}|False|Yes|The preferred item in the group|
+|search.results.items.app.group.item|{array}|False|Yes|The items belong to the group|
+|search.results.items.app.group.item.metas|{array}|False|Yes|Array of {attribute:value}|
+|search.results.items.app.group.item.type|String|False|Yes|The type of the item|
+|search.results.items.app.group.item.uri|String|True|Yes|The URI of the item|
+|search.results.items.app.group.item.contentType|String|True|Yes|The type of the content in the item|
+|search.results.items.app.group.item.filename|String|True|Yes|The file name of the content in the item|
+|search.results.items.app.group.item.size|Long|True|Yes|The file size of the content in the item|
+|search.results.items.app.group.item.downloadUri|String|True|Yes|The download URI of the item|
+|search.results.items.app.group.item.accessUri|String|True|Yes|The access URI of the item|
+|search.results.items.app.group.item.giftUri|String|True|Yes|The gift URI of the item|
+|search.results.items.app.group.item.devicePreferred|String|False|Yes|The item to be preferred by the device|
+|search.results.items.app.group.item.referencedItem|{object}|False|Yes|The item to be referenced by the current item. The reference item and the current item must be in the same group|
+|search.results.items.app.group.item.device|{object}|False|Yes|The valid devices for the item|
+|search.results.items.app.group.item.device.deviceId|String|True|Yes|The ID of the device|
+|search.results.items.app.group.item.device.brand|String|True|Yes|The brand of the device|
+|search.results.items.app.group.item.device.model|String|True|Yes|The model of the device|
+|search.results.items.app.group.item.device.userAgent|String|True|Yes|The user agent of the device|
+|search.results.items.app.purchase|{object}|False|Yes|Purchase transaction details (returned only if the app was purchased by specified user).|
+|search.results.items.app.purchase.purchaseId|String|True|Yes|The purchase ID that is given when a purchase is done.|
+|search.results.items.app.purchase.price|Long|False|Yes|The price.|
+|search.results.items.app.purchase.description|String|False|Yes|The product description.|
+|search.results.items.app.purchase.created|String|False|Yes|The product description.|
+|search.results.items.app.purchase.serviceId|String|False|Yes|The service ID.|
+|search.results.items.app.purchase.productId|String|False|Yes|The product ID.|
+|search.results.items.app.purchase.providerId|String|False|Yes|The Provider ID.|
+|search.results.items.app.purchase.vatCode|String|False|Yes|The VAT code.|
+|search.results.items.app.purchase.vatPrice|Long|False|Yes|The VAT price.|
+|search.results.items.app.purchase.type|String|False|Yes|"The purchase type. It is an enumeration type and defined as follows:
+• NORMAL
+• GIFT_PURCHASE
+• GIFT"|
+|search.results.items.app.purchase.state|String|False|Yes|"The purchase state. It is an enumeration type and defined as follows:
+• OPEN
+• OFFERED
+• CLOSED|
+|search.results.items.app.purchase.recurrentPurchaseId|String|False|Yes|The ID of the recurrent purchase. If the purchase is a recurrent purchase then it has a value, otherwise it is empty.|
+|search.results.items.app.purchase.recurrentIntervalExpirationTime|String|False|Yes|The time when the recurrent purchase is expired.|
+|search.results.items.app.purchase.recurrenceCancelTime|String|False|Yes|The time when the recurrent purchase is canceled.|
+|search.results.items.app.purchase.recurrenceExpirationTime|String|False|Yes|The time when the recurrence is expired.|
+|search.results.items.app.purchase.renewalsAllowed|Integer|False|Yes|Total allowed renewal times of the current product.|
+|search.results.items.app.purchase.renewalsDone|Integer|False|Yes|Number of renewals done.|
+|search.results.items.app.purchase.metas|{array}|False|Yes|Array of {attribute:value}.|
+|search.results.items.app.rating|{object}|False|Yes|Rating information|
+|search.results.items.app.rating.rating|Float|True|Yes|The average rating scores|
+|search.results.items.app.rating.ratingDetails|{array}|False|Yes|Array of rating details object.|
+|search.results.items.app.rating.ratingDetails.level|Integer|False|Yes|The rating level (From level 1 to 5 in 5 star rating).|
+|search.results.items.app.rating.ratingDetails.number|Integer|False|Yes|The number of raters for each level.|
+|search.results.items.app.search.score|Float|True|Yes|"Specifies the score of search results. The range of the score value is from 0 to 1.
+The app search results will be sorted as the descending order of the score.
+The larger the score is, the better the searching result is matched.|
+|search.results.items.app.permissions|{array}|False|Yes|Permission info|
+|search.results.items.app.permissions.permission.description|String|False|Yes|Resource description|
+|search.results.items.app.permissions.permission.icon|String|False|Yes|URI to the icon representing the resource|
+|search.results.items.app.permissions.permission.label|String|True|Yes|Display text of the resource|
+|search.results.items.app.permissions.permission.name|String|True|Yes|Resource unique name (permission ID)|
+|search.results.items.app.permissions.permission.permissionGroup|String|True|Yes|Permission group or category refers to permission-group|
+|search.results.items.app.permissions.permission.protectionLevel|String|False|Yes|["normal", "dangerous", "signature", "signatureOrSystem"]|
+|search.results.items.app.permissions.permissionGroup.description|String|False|Yes|Permission group description|
+|search.results.items.app.permissions.permissionGroup.icon|String|False|Yes|URI to the icon representing the permission group|
+|search.results.items.app.permissions.permissionGroup.label|String|True|Yes|Display text of the permission group|
+|search.results.items.app.permissions.permissionGroup.name|String|True|Yes|Permission group unique name (permission group ID)|
+|search.results.items.app.permissions.permissionTree.icon|String|False|Yes|Icon representing all permissions in the tree|
+|search.results.items.app.permissions.permissionTree.label|String|True|Yes|Displayed permission tree name|
+|search.results.items.app.permissions.permissionTree.name|String|True|Yes|Permission tree name (ID)|
+|search.results.items.app.permissions.usesPermission.name|String|True|Yes|Permission name application is requesting access to.|
+|search.results.items.app.permissions.usesPermission.maxSdkVersion|String|False|Yes|Applicable only for Android |search.results.items.app and Android related permissions.|
+|**App suggestions**|
+|search.results.items.app.suggestions|{array}|False|Yes|App sugestions|
+|search.results.items.app.suggestions.id|String|False|Yes|Suggestion rank or Id|
+|search.results.items.app.suggestions.name|String|False|Yes|Suggestion app name|
+|search.results.items.app.suggestions.type|String|False|Yes|Suggestion type or category|
+|search.results.items.app.suggestions.metas|{object}|False|Yes|Suggestion metas|
 
 ###Get search results
 **Usage:** `drive.search.get(options).then(resolve, reject);`
@@ -1893,7 +2646,17 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ####Example: get contacts
 ```javascript
+function logResults(items){
+   console.log(items);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getResults(){
+   drive.search.results.get().then(logResults,logError);
+}
 ```
 
 ###Set search request
@@ -1911,17 +2674,68 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ####Example: Search POIs
 ```javascript
+var handle=
+drive.search.results.subscribe(getResults,{"requestId":"poi-1"});
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function searchPOIs(){
+drive.search.request.set({"requestId":"poi-1", "serviceType":"poi", "query":"gas station", "metas":{"currentPostion":true,"radius":5000}}).then(resolve,reject);
+}
+
+function getResults(results){
+console.log(results);
+}
 ```
 
 ####Example: Search current weather
 ```javascript
+var handle=
+drive.search.results.subscribe(getResults,{"requestId":"w-1"});
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function getCurrentWeather(){
+drive.search.request.set({"requestId":"w-1", "serviceType":"weather", "query":"", "contentType":"current", "metas":{"currentPostion":true}}).then(resolve,reject);
+}
+
+function getResults(results){
+console.log(results);
+}
 ```
 
 ####Example: Search forecast weather
 ```javascript
+var handle=
+drive.search.results.subscribe(getResults,{"requestId":"w-1"});
 
+function resolve(){
+///success
+}
+
+function reject(error){
+  console.log(error);
+}
+
+function getCurrentWeather(){
+drive.search.request.set({"requestId":"w-1", "serviceType":"weather", "query":"", "contentType":"forecast", "metas":{"currentPostion":true}}).then(resolve,reject);
+}
+
+function getResults(results){
+console.log(results);
+}
 ```
 
 ###Delete search requests/results
@@ -1939,7 +2753,17 @@ Below properties is a subset of possible attributes that Search service may supp
 
 ####Example:
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function deleteContcats(){
+  drive.search.results.delete().then(resolve,reject);
+}
 ```
 
 ###Subscribe to search service
@@ -1956,7 +2780,13 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: subscribe to running apps
 ```javascript
+function getResults(results){
+  console.log(results);
+}
 
+function subscribe(){
+handle=drive.search.results.subscribe(getResults);
+}
 ```
 
 ###Unsubscribe from search service
@@ -1971,7 +2801,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example
 ```javascript
-
+function unsubscribe(){
+     drive.search.results.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -1993,16 +2825,110 @@ When available method returns not_supported_policy, application can subscribe to
 
 ####Example
 ```javascript
-
+function isAvailable(){
+    return drive.search.requests.available();
+}
 ```
 
 ##Site Automation (Digital Life)
 This Javascript SDK describes how to interact with site automation.
 The following interface represents a base interface to all site automation properties:
+```javascript
+interface SiteAutomationInterface {
+    Promise get (optional object options);
+    Promise set (object value, optional object options);
+    Promise delete (object value, optional object options);
+    Integer subscribe (InterfaceCallback callback, optional object options);
+    void unsubscribe (Integer handle);
+    Availability available ();
+};
+callback InterfaceCallback = void(object value, EventType eventType); ();
+
+enum EventType {
+"create",
+"read",
+"update",
+"delete"
+};
+
+interface CommonDataType {
+    readonly    attribute DOMTimeStamp timeStamp;
+};
+```
 CommonDataType interface represents common data type for all data types.
 
 ###Site automation properties
 Below properties is a subset of possible attributes that site automation may support. More attributes shall be added in the next version of this SDK.
+
+|Parameter|Type|Required|Read only|Description|
+|--- |--- |--- |--- |--- |
+sa|{object}|False|yes|Application name|
+|**Requests**|
+|sa.requests|{array}|False|yes|Site automation requests|
+|sa.requests.requestId|String|False|No|Request Identifier. If not specified the requestId will be set to the same value as action. This allows sharing results among apps.|
+|sa.requests.action|String|True|No|set, get, reset, delete, cancel, trigger,…|
+|sa.requests.type|String|True|No|resource, resourcetype, group, event|
+|sa.requests.id|String|True|No|ID of the resource, group, resource type or event.|
+|sa.requests.siteIds|{array}|False|No|Array of site IDs. E.g. ["home", "office"]. If not specified, all sites will be returned.||
+|sa.requests.state|String|False|No|on|off|disable|enable|
+|sa.requests.metas|{array}|False|No|Array of {attribute: value}|
+|**Results**|
+|sa.results|{array}|True|Yes|Array of results.|
+|sa.results.requestId|String|False|Yes|Site automation Request ID|
+|sa.results.status|String|True|Yes|Status code for the operation: success | failure : error code|
+|sa.results.requestTime|Date|True|Yes|Request date time|
+|sa.results.responseTime|Date|True|Yes|Response date time|
+|**Sites**|
+|sa.results.sites|{array}|False|Yes|Array of sites.|
+|sa.results.sites.id|String|True|Yes|The site ID.|
+|sa.results.sites.name|String|False|Yes|The site name.|
+|sa.results.sites.description|String|False|Yes|The site description.|
+|sa.results.site.state|String|False|Yes|"The site state. It is an enumeration type and defined as follows:
+enabled|disabled|unkown|error:code"|
+|sa.results.sites.metas|{array}|False|Yes|Meta data of the resource. Array of {attribute: value}|
+|sa.results.sites.groups|{array}|False|Yes|Array of resource groups the resource belongs to.|
+|sa.results.sites.resourcetypes|{array}|False|Yes|Array of resource types the resource belongs to.|
+|sa.results.sites.resources|{array}|False|Yes|Array of resources.|
+|**Resource**|
+|sa.results.resources|{array}|False|Yes|Current resources|
+|sa.results.resources.id|String|True|Yes|The resource ID.|
+|sa.results.resources.name|String|False|Yes|The resource name.|
+|sa.results.resources.description|String|False|Yes|The resource description.|
+|sa.results.resources.state|String|False|Yes|"The resource state. It is an enumeration type and defined as follows:
+on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.resources.metas|{array}|False|Yes|Meta data of the resource. Array of {attribute: value}|
+|sa.results.resources.groups|{array}|False|Yes|Array of resource groups the resource belongs to.|
+|sa.results.resources.resourcetypes|{array}|False|Yes|Array of resource types the resource belongs to.|
+|sa.results.resources.site|{object}|False|Yes|Site the resource belongs to (see |sa.results.sites for object structure).|
+|**Resource features**|
+|sa.results.resources.settings|{array}|False|Yes|Represents resource features or settings.|
+|sa.results.resources.settings.id|String|False|Yes|Setting/Feature ID.|
+|sa.results.resources.settings.name|String|False|Yes|Setting/Feature name.|
+|sa.results.resources.settings.description|String|False|Yes|Setting/Feature description.|
+|sa.results.resources.settings.state|String|False|Yes|"The resource feature state. It is an enumeration type and defined as follows:
+on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.resources.settings.metas|{array}|False|Yes|Meta data of the resource setting/feature. Array of {attribute: value}|
+|**Resource type**|
+|sa.results.resourcetypes|{array}|False|Yes|Resource types|
+|sa.results.resourcetypes.id|String|True|Yes|The resource type ID.|
+|sa.results.resourcetypes.name|String|True|Yes|The resource type name.|
+|sa.results.resourcetypes.description|String|False|Yes|The resource type description.|
+|sa.results.resourcetypes.state|String|False|Yes|"The resource type state. It is an enumeration type and defined as follows:
+on, off, starting, stopping. disabled, unkown, error:code"|
+|sa.results.resourcetypes.metas|{array}|False|Yes|Resource type metadata. Array of {attribute: value}|
+|sa.results.resourcetypes.resources|{array}|False|Yes|Array of resources under this resource type|
+|sa.results.resourcetypes.groups|{array}|False|Yes|Array of resources groups under this resource type|
+|**Resource groups**|
+|sa.results.groups|{array}|False|Yes|Current resource groups|
+|sa.results.groups.id|String|True|Yes|The resource group ID.|
+|sa.results.groups.name|String|True|Yes|The resource group name.|
+|sa.results.groups.description|String|False|Yes|The resource group description.|
+|sa.results.groups.state|String|False|Yes|"The resource group state. It is an enumeration type and defined as follows:
+on|off|starting|stopping|disabled|unkown|error:code"|
+|sa.results.groups.metas|{array}|False|Yes|Resource group metadata. Array of {attribute: value}|
+|sa.results.groups.resources|{array}|False|Yes|Array of resources under this resource group|
+|sa.results.groups.groups|{array}|False|Yes|Array of resources groups under this resource group|
+|sa.results.groups.resourcetypes|{array}|False|Yes|Array of resources types under this resource group|
 
 ###Get Site Automation Information
 **Usage:** `drive.sa.get(options).then(resolve, reject);`
@@ -2018,7 +2944,17 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ####Example: get site automation resource status
 ```javascript
+function logStatus(results){
+   console.log(results.status);
+}
 
+function logError(error){
+   console.log(error);
+}
+
+function getResourceStatus(){
+   drive.sa.results.get().then(logStatus,logError);
+}
 ```
 
 ###Set site automation Information
@@ -2036,7 +2972,17 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ####Example: Send request
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+   console.log(error);
+}
+
+function sendRequest(){
+   drive.sa.requests.set({"action":"get", "type":"resource", "id":"garagedoor-1", "siteIds":["home"]}).then(resolve,reject);
+}
 ```
 
 ###Delete Site automation Settings
@@ -2054,7 +3000,17 @@ Below properties is a subset of possible attributes that site automation may sup
 
 ####Example:
 ```javascript
+function resolve(){
+///success
+}
 
+function reject(error){
+  console.log(error);
+}
+
+function deleteResults(){
+  drive.sa.results.delete().then(resolve,reject);
+}
 ```
 
 ##Subscribe to site automation
@@ -2071,7 +3027,13 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example: subscribe to site automation result
 ```javascript
+function resourcesResult(results){
+  console.log(results.resources);
+}
 
+function subscribe(){
+handle=drive.sa.results.subscribe(resourcesResult, {"requestId":"set.alarm"});
+}
 ```
 
 ###Unsubscribe from site automation
@@ -2086,7 +3048,9 @@ Subscribe returns handle to subscription or 0 if error.
 
 ####Example
 ```javascript
-
+function unsubscribe(){
+     drive.sa.results.unsubscribe(handle);
+}
 ```
 
 ###Access/Availability check
@@ -2108,7 +3072,9 @@ When available method returns not_supported_policy, application can subscribe to
 
 ####Example:
 ```javascript
-
+function isAvailable(){
+    return drive.sa.requests.available();
+}
 ```
 
 **Error object format**
