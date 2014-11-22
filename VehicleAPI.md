@@ -1,5 +1,16 @@
 #AT&T Drive Vehicle API
 
+##Interfaces
+[Vehicle Information](#vehicle-information)
+[Navigation](#navigation)
+[Identity](#identity)
+[Application and System Settings](#application-and-system-settings)
+[Notifications ](#notifications )
+[Media](#media)
+[SMS](#sms)
+[Search service](#search-service)
+[Site Automation (Digital Life](#site-automation)
+
 ## Context initialization
 Application must call the init function to setup the context of a given SDK before usage.
 The callback function will be called by DEC to notify the application of any changes made to its data store space made by external applications or components.
@@ -8,7 +19,9 @@ The callback function will be called by DEC to notify the application of any cha
 For instance, if an application wants to use the vehicle information SDK, the application would have to call:
 `init(appId, callBack, ["vehicleinfo","navigation"]);`
 
-## Vehicle Information
+---
+
+## <a name="vehicle-information"></a>Vehicle Information
 This Javascript SDK allows retrieving and setting vehicle information.
 The following interface represents a base interface to all vehicle properties (from W3C):
 
@@ -375,7 +388,7 @@ function isAvailable(){
 }
 ```
 
-##Navigation
+## <a name="navigation"></a>Navigation
 This Javascript SDK allows interacting with navigation system.
 The following interface represents a base interface to all navigation properties:
 ```javascript
@@ -794,7 +807,7 @@ function isAvailable(){
 }
 ```
 
-##Identity
+##<a name="identity"></a>Identity
 This Javascript SDK allows interacting with Identity Manager.
 The following interface represents a base interface to all identity properties:
 ```javascript
@@ -1068,7 +1081,7 @@ function isAvailable(){
 }
 ```
 
-##Application and System Settings
+## <a name="application-and-system-settings"></a>Application and System Settings
 This Javascript SDK allows managing application and system settings. Applications can use this SDK to store and retrieve their own settings and benefit from built in data events handling.
 
 The following interface represents a base interface to all system/application properties:
@@ -1467,7 +1480,7 @@ function isAvailable(){
 }
 ```
 
-##Notifications
+## <a name="notifications"></a>Notifications
 This Javascript SDK allows interacting with notifications service.
 The following interface represents a base interface to all notification properties:
 ```javascript
@@ -1778,7 +1791,7 @@ function isAvailable(){
 }
 ```
 
-##Media
+## <a name="media"></a>Media
 This Javascript SDK allows interacting with media player.
 The following interface represents a base interface to all media player properties:
 
@@ -2030,7 +2043,7 @@ function isAvailable(){
 }
 ```
 
-##SMS
+## <a name="sms"></a>SMS
 This Javascript SDK allows interacting with SMS/MMS Messaging.
 The following interface represents a base interface to all SMS/MMS properties:
 ```javascript
@@ -2293,7 +2306,7 @@ function isAvailable(){
 }
 ```
 
-##Search service
+## <a name="search-service"></a>Search service
 This Javascript SDK allows interacting with search service.
 The following interface represents a base interface to all Search properties:
 ```javascript
@@ -2820,7 +2833,7 @@ function isAvailable(){
 }
 ```
 
-##Site Automation (Digital Life)
+## <a name="site-automation"></a>Site Automation (Digital Life)
 This Javascript SDK describes how to interact with site automation.
 The following interface represents a base interface to all site automation properties:
 ```javascript
@@ -3063,12 +3076,14 @@ function isAvailable(){
 ```
 
 **Error object format**
+
 |Parameter	|Type	|Required	|Description|
 |---    |---    |---    |---    |
 |error	|String	|True	|Error code|
 |message	|String	|False	|Error message|
 
 **Common error codes**
+
 |Code	|Description|
 |---    |---    |
 |invalid_parameter	|Invalid parameters|
