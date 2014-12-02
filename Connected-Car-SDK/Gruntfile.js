@@ -13,8 +13,8 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-git');
-	
+    grunt.loadNpmTasks('grunt-git');
+
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
@@ -22,7 +22,12 @@ module.exports = function (grunt) {
     var appConfig = {
         app: require('./bower.json').appPath || 'app',
         dist: 'dist',
-        seedPath: require('./bower.json').seedPath || 'myFirstApp'
+        seedPath: require('./bower.json').seedPath || 'myFirstApp',
+        decSDKHost: require('./bower.json').decSDKHost || 'localhost',
+        decSDKPort: require('./bower.json').decSDKPort || '4412',
+        decJSONPath: 'seed/dataEventSDK/json/',
+        decConcatJSON: [],
+        decNamespaces: ''
     };
 
     // Define the configuration for all the tasks
@@ -36,7 +41,7 @@ module.exports = function (grunt) {
             all: 'angular.module(\'connectedCarSDK\', [\'connectedCarSDK.tpls\', <%= modules %>]);'
         },
 
-		gitpull: {
+        gitpull: {
             pull: {
                 options: {
                     verbose: true,
@@ -45,7 +50,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-		
+
         html2js: {
             options: {
                 // custom options, see below
@@ -290,21 +295,31 @@ module.exports = function (grunt) {
         },
 
         concat: {
-            dist: {
+            att_sdk_dist: {
                 options: {
                     stripBanners: true,
                     banner: '<%= meta.modules %>',
                 },
                 src: ['app/scripts/services/*', 'app/scripts/directives/*'],
                 dest: 'dist/scripts/<%= pkg.name %>-<%= pkg.version %>.js',
-            },
-            dist_tpls: {
+            }
+            ,
+            att_sdk_dist_tpls: {
                 options: {
                     stripBanners: true,
                     banner: '<%= meta.all %>',
                 },
                 src: ['app/scripts/services/*', 'app/scripts/directives/*', 'app/templates/templates.js'],
                 dest: 'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js',
+            }
+            ,
+            dec_sdk_js: {
+                src: ['seed/dataEventSDK/js/*'],
+                dest: 'dist/scripts/data-event-sdk.js',
+            },
+            dec_sdk_json: {
+                src: '{<%= sdk.decConcatJSON %>}',
+                dest: 'dist/scripts/data-event-sdk.json',
             }
         },
 
@@ -394,18 +409,54 @@ module.exports = function (grunt) {
             seed: {
                 files: [{
                     cwd: 'seed',                        // set working folder / root to copy
-                    src: '**/*',                        // copy all files and subfolders
-                    dest: '<%= sdk.seedPath %>',            // destination folder
+                    src: ['**/*', '!**/dataEventSDK/**', '!**/scripts/**'],       // copy all files and subfolders
+                    dest: '<%= sdk.seedPath %>',        // destination folder
                     expand: true                        // required when using cwd
                 },
                 {
                     cwd: 'dist',                        // set working folder / root to copy
-                    src: '**/*',                        // copy all files and subfolders
+                    src: ['**/*', '!**/scripts/data-event-sdk.*', '!**/scripts/app.js'],       // copy all files and subfolders
                     dest: '<%= sdk.seedPath %>/att-sdk',    // destination folder
+                    expand: true                        // required when using cwd
+                },
+                {
+                    cwd: 'dist',                        // set working folder / root to copy
+                    src: ['**/scripts/data-event-sdk.*'],       // copy all files and subfolders
+                    dest: '<%= sdk.seedPath %>/dec-sdk',    // destination folder
+                    expand: true                        // required when using cwd
+                },
+                {
+                    cwd: 'dist',                        // set working folder / root to copy
+                    src: ['**/scripts/app.js'],       // copy all files and subfolders
+                    dest: '<%= sdk.seedPath %>',    // destination folder
                     expand: true                        // required when using cwd
                 }
                 ]
             }
+        },
+
+        replace: {
+            seed: {
+                src: ['dist/scripts/data-event-sdk.js', 'seed/scripts/app.js'],             // source files array (supports minimatch)
+                dest: 'dist/scripts/',                                                      // destination directory or file
+                replacements: [{
+                    from: 'var host = "10.0.2.2"', // temp solution
+                    to: 'var host = "<%= sdk.decSDKHost %>"'// + appConfig.decSDKHost + '"'
+                },
+                {
+                    from: 'var port = "4412"', // temp solution
+                    to: 'var port = "<%= sdk.decSDKPort %>"' //+ appConfig.decSDKPort + '"'
+                },
+                {
+                    from: 'decNamespacesPlaceholder',
+                    to: '<%= sdk.decNamespaces %>'
+                },
+                {
+                    from: 'appNameStr',
+                    to: '<%= sdk.seedPath %>'
+                },
+                ]
+            }            
         },
 
         // Run some tasks in parallel to speed up the build process
@@ -449,15 +500,54 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('seed', 'Compile then start a connect web server', function () {
+
+        // check application name
         if (grunt.option('name')) {
             appConfig.seedPath = grunt.option('name');
         }
 
+        // check DEC SDK host
+        if (grunt.option('dec-host')) {
+            appConfig.decSDKHost = grunt.option('dec-host');
+        }
+
+        // check DEC SDK port
+        if (grunt.option('dec-port')) {
+            appConfig.decSDKPort = grunt.option('dec-port');
+        }
+
+        // if DEC namespaces are specified in argument line, inject them in the appropriate grunt task(s)
+        var decConcatJSON = [],
+            decNamespaces = '';
+
+        if (grunt.option('dec-namespaces')) {
+            var decNamespacesParts = grunt.option('dec-namespaces').split(",");
+            for (var i = 0; i < decNamespacesParts.length; i++) {
+                decConcatJSON.push(appConfig.decJSONPath + decNamespacesParts[i] + '.json');
+                decNamespaces += '"' + decNamespacesParts[i].toLowerCase() + '",';
+            }
+        } else {
+            // used twice the same path because of a strange behaviour of array in Grunt template
+            // for more details, see http://stackoverflow.com/questions/24440863/interpolated-array-in-grunt-template-is-interpreted-as-a-string
+            decConcatJSON = [appConfig.decJSONPath + '*', appConfig.decJSONPath + '*'];
+
+            grunt.file.recurse('seed/dataEventSDK/json', function (abspath, rootdir, subdir, filename) {
+                var fileNameParts = filename.split(".");
+                decNamespaces += '"' + fileNameParts[0].toLowerCase() + '",';
+            });
+        }
+
+
+        appConfig.decConcatJSON = decConcatJSON;
+        appConfig.decNamespaces = decNamespaces.substring(0, decNamespaces.length - 1);
+        //grunt.config.set('decNamespaces', decNamespaces.substring(0, decNamespaces.length - 1));
+
         grunt.task.run([
-          'clean:seed',
-          'build',
-          'copy:seed',
-          'connect:seed:keepalive'
+         'clean:seed',
+         'build',
+         'replace:seed',
+         'copy:seed',
+         'connect:seed:keepalive'
         ]);
     });
 
@@ -519,13 +609,13 @@ module.exports = function (grunt) {
 
     });
 
-	grunt.registerTask('update-sdk', 'pull latest code from git and build newest version of sdk', function() {
-	
+    grunt.registerTask('update-sdk', 'pull latest code from git and build newest version of sdk', function () {
+
         grunt.task.run([
             'gitpull:pull',
             'build'
         ]);
 
     });
-	
+
 };

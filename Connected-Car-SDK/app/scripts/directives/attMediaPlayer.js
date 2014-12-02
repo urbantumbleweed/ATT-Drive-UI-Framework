@@ -11,7 +11,13 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
       return {
           restrict: 'E',
           replace: true,
-          templateUrl: 'templates/attMediaPlayer.html',
+          templateUrl: function (tElement, tAttrs) {
+              if (tAttrs.templateUrl === undefined) {
+                  return 'templates/attMediaPlayer.html';
+              } else {
+                  return tAttrs.templateUrl;
+              }
+          },
           scope: {
               playlist: "=",
               autoplay: "="
@@ -37,36 +43,49 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                   sliderInterval = null,
                   intervalCounter = 0;
 
-              if (scope.playlist && scope.playlist.length > 0) {
+              function init() {
+                  if (scope.playlist && scope.playlist.length > 0) {
 
-                  var audioEl = $document.find('body').find('audio');
+                      var audioEl = $document.find('body').find('audio');
 
-                  if (audioEl.length == 0) {
-                      audioEl = document.createElement("audio");
-                      scope.audio = audioEl;
-                  } else {
-                      scope.audio = audioEl[0];
-                  }
+                      if (audioEl.length == 0) {
+                          audioEl = document.createElement("audio");
+                          scope.audio = audioEl;
+                      } else {
+                          scope.audio = audioEl[0];
+                      }
 
-                  $document.find('body').eq(0).append(audioEl);
+                      $document.find('body').eq(0).append(audioEl);
 
-                  scope.audio.addEventListener("error", function() {
-                      console.log("error loading file");
-                      // invalidate current file in the playlist
-                      scope.playlist[scope.currentIndex].isValid = false;
-                      if (sliderInterval)
-                          $interval.cancel(sliderInterval);
-                      scope.changeFile(1);
-                  });
+                      scope.audio.addEventListener("error", function () {
+                          console.log("error loading file");
+                          // invalidate current file in the playlist
+                          scope.playlist[scope.currentIndex].isValid = false;
+                          if (sliderInterval)
+                              $interval.cancel(sliderInterval);
+                          scope.changeFile(1);
+                      });
 
-                  if (scope.audio != null && scope.audio.canPlayType && scope.audio.canPlayType("audio/mpeg")) {
-                      scope.audio.src = scope.playlist[scope.currentIndex].src;
+                      if (scope.audio != null && scope.audio.canPlayType && scope.audio.canPlayType("audio/mpeg")) {
+                          scope.audio.src = scope.playlist[scope.currentIndex].src;
 
-                      if (scope.autoplay) {
-                          startPlayer(true);
+                          if (scope.autoplay) {
+                              startPlayer(true);
+                          }
                       }
                   }
               }
+
+              init();
+
+              //Init playlist only when playlist is populated and was empty before
+              scope.$watchCollection('playlist', function (newPlaylist, oldPlaylist) {
+                  if (!scope.playlist || (oldPlaylist && oldPlaylist.length > 0)) {
+                      return;
+                  }
+                  init();
+                  scope.changeFile(0);
+              });
 
               function startPlayer(reset) {
                   if (reset && sliderInterval)
@@ -83,7 +102,7 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
                           if (isDurationAvailable) {
                               scope.audio.play();
                               setupSlider(reset);
-                          } 
+                          }
                       }
                       counter++;
                   }, 50);
@@ -253,13 +272,18 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               };
 
               scope.nextSong = function () {
+                  if (!scope.playlist)
+                      return false;
+
                   var index = scope.currentIndex;
                   if (scope.playlist.length == (scope.currentIndex + 1))
                       index = -1;
-                  return scope.playlist[index + 1];
+                  return scope.playlist && scope.playlist[index + 1];
               };
 
-              scope.currentSong = function() {
+              scope.currentSong = function () {
+                  if (!scope.playlist)
+                      return false;
                   return scope.playlist[scope.currentIndex];
               };
           }

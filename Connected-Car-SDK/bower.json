@@ -19,5 +19,7 @@
     "font-awesome": "~4.2.0"
   },
   "appPath": "app",
-  "seedPath": "myFirstApp"
+  "seedPath": "myFirstApp",
+  "decSDKHost": "localhost",
+  "decSDKPort": "4412"
 }

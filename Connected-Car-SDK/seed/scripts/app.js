@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 var app = angular.module('app', [
     'ngRoute',
@@ -26,7 +26,14 @@ app.config(function ($routeProvider) {
         });
 });
 
+// AT&T DRIVE DEC INIT
+function decCallback() {
+};
+
 app.run(function ($rootScope) {
+
+    // DO NOT REMOVE THE BELLOW COMMENT - used for grunt build process
+    init(new decCallback(), [decNamespacesPlaceholder], 'appNameStr');
 
     $rootScope.appName = 'myFirstApp';
     $rootScope.showDrawer = true;
@@ -46,6 +53,12 @@ app.run(function ($rootScope) {
         { text: 'First Page', desc: 'First page description', href: '#/firstPage', selected: true },
         { text: 'Second Page', desc: 'Second page description', href: '#/secondPage', selected: false }
     ];
-
 });
 
+//SUBSCRIBE SET & GET IDENTIFICATION
+var idSubscribeHandle = drive.vehicleinfo.identification.subscribe(callbacktestId);
+console.log("Handle Returned: " + idSubscribeHandle);
+
+var idSettings = {"vin":"B5244S6 S60","wmi":"K&N drop-in filter","vehicleType":"Car","brand":"Volvo","model":"S60","year":2014};
+drive.vehicleinfo.identification.set(idSettings).then(logResult, logError);
+drive.vehicleinfo.identification.get().then(logResult, logError);
