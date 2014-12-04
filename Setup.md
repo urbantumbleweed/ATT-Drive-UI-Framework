@@ -19,7 +19,7 @@ Need instructions here once the SIM is ready. Hacker will need to tie their IDE 
 ## Building apps for Head Unit
 AT&T Drive automotive app development framework and UI Kit are AngularJS based complete with readily available UI directives built to enable you -the developer, to effortlessly create apps to be deployed on AT&T Drive automotive Services Delivery Platform.
 
-App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](Link to Runnung UI Kit preview Site) to visualize the UX, and get the example code. 
+App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [AT&T Drive UI Kit API Docs](Link to Runnung UI Kit preview Site) to visualize the UX, and get the example code. 
 
 Now you are ready to build your first app, and the API is readily available. 
 
@@ -40,8 +40,8 @@ Once the build is completed the app will load in your browser and if you see the
 
 Now you are ready to build your first app, and the API is readily available. 
 
-- [In-car Apps API Docs](Link to Vehicle API compiled from VehicleAPI.md)
-- [UI Kit API Docs](Link to Runnung UI Kit preview Site)
+- [In-car Apps API Docs](url)
+- [UI Kit API Docs](url)
 
 # Optional stuff
 ### Running the docs website locally 
@@ -67,7 +67,7 @@ Once you [download](url) them locally, in terminal CD to that directory and insi
 ## Building apps on Hand-held device
 You can build the external apps to interface with in-vehicle Head Unit and exchange information over [REST API](url). You can also simulate (override) the TCU data via [Luigi](url) interface and see the result in the vehicle app and hand-held app alike.
 
-- [Out-of-car Apps API]()
-- [Luigi Sandbox]() 
+- [Out-of-car Apps API](url)
+- [Luigi Sandbox](url) 
 
 > Example: You can build a wearable app to send navigation instructions to the vehicle Head Unit navigation app, or to remotely control the vehicle.
