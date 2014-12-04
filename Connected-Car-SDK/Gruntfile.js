@@ -323,17 +323,6 @@ module.exports = function (grunt) {
             }
         },
 
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= sdk.app %>/images',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= sdk.dist %>/images'
-                }]
-            }
-        },
-
         svgmin: {
             dist: {
                 files: [{
