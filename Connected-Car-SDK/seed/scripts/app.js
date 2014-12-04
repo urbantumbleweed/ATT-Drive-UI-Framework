@@ -54,11 +54,3 @@ app.run(function ($rootScope) {
         { text: 'Second Page', desc: 'Second page description', href: '#/secondPage', selected: false }
     ];
 });
-
-//SUBSCRIBE SET & GET IDENTIFICATION
-var idSubscribeHandle = drive.vehicleinfo.identification.subscribe(callbacktestId);
-console.log("Handle Returned: " + idSubscribeHandle);
-
-var idSettings = {"vin":"B5244S6 S60","wmi":"K&N drop-in filter","vehicleType":"Car","brand":"Volvo","model":"S60","year":2014};
-drive.vehicleinfo.identification.set(idSettings).then(logResult, logError);
-drive.vehicleinfo.identification.get().then(logResult, logError);

@@ -7,7 +7,7 @@
  * # attSlider
  */
 angular.module('connectedCarSDK.attSlider', [])
-    .directive('attSlider', function() {
+    .directive('attSlider', ['$interval', function($interval) {
         return {
             restrict: 'EA',
             templateUrl: 'templates/attSlider.html',
@@ -44,8 +44,16 @@ angular.module('connectedCarSDK.attSlider', [])
                     
                 }
 
+                scope.sliderMovingInterval;
+                scope.sliderMovingTime = 200;
+                scope.sliderMoved = false;
+
                 scope.sliderMoved = function () {
                     scope.$emit("sliderMoved", scope.parentControl);
+                };               
+
+                scope.sliderMoving = function () {
+                    scope.$emit("sliderMoving", scope.parentControl);
                 };
 
                 // watch for model changes and repaint the slider
@@ -70,4 +78,4 @@ angular.module('connectedCarSDK.attSlider', [])
                 });
             }
         };
-    });
+    }]);

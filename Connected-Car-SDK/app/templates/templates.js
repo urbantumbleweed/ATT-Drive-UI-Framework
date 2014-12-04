@@ -236,7 +236,7 @@ angular.module("templates/attSlider.html", []).run(["$templateCache", function($
     "<div class=\"range-slider\">\n" +
     "    <span class=\"value-left\">{{textLeft}}</span>\n" +
     "    <span class=\"value-right\">{{textRight}}</span>\n" +
-    "    <input class=\"input-range input-range-{{type}}\" type=\"range\" ng-model=\"ngModel\" min=\"{{min}}\" max=\"{{max}}\" ng-mouseup=\"sliderMoved()\">\n" +
+    "    <input class=\"input-range input-range-{{type}}\" type=\"range\" ng-model=\"ngModel\" min=\"{{min}}\" max=\"{{max}}\" ng-mouseup=\"sliderMoved()\" ng-mousedown=\"sliderMoving()\">\n" +
     "</div> ");
 }]);
 

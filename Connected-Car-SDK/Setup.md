@@ -29,10 +29,19 @@ Once you [download](url) them locally, in terminal CD to that directory and insi
 ## Building apps for Head Unit
 AT&T Drive automotive app development framework and UI Kit are AngularJS based complete with readily available UI directives built to enable you -the developer, to effortlessly create apps to be deployed on AT&T Drive automotive Services Delivery Platform.
 
-App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps shown in Step 3 is the fastest way to get started. Then take advantage of the [UI Kit preview site]() to visualize the UX, copy & paste code to extend UI directive's functionality. 
+App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps shown in Step 3 is the fastest way to get started. Then take advantage of the [UI Kit preview site]() to visualize the UX, and get the example code. 
 
-- [In-car Apps API]()
-- [Sample apps]() 
+## Seed your first app
+Once you download the SDK, using terminal in "Connected-Car-SDK" folder install the `grunt seed --dec-host=127.0.0.1 --dec-port=4402 -name=/pat/to/your/app`
+
+Change the host IP and port to that of your environment.
+You can always change this later (see optional commands).
+Once the build is completed the app will load in your borwser and if you see the fisrt page, the app is connecected to span and ready for development. 
+
+Now you are ready to build your first app, and the API is readly available. 
+
+- [In-car Apps API Docs]()
+- [UI Kit API Docs]()
 
 ## Building apps on Handheld device
 You can build the external apps to interface with in-vehicle Head Unit and exchange information over [REST API](url). You can also simulate (override) the TCU data via [Luigi](url) interface and see the result in the vehicle app and handheld app alike.
@@ -51,7 +60,26 @@ You can preview the AT&T Drive UI Kit [here](url) then copy & paste example code
 - Change directory to Connected-Car-SDK folder 
 - Run: `$npm install`
 - Then: `$bower install`
-- and finally: `$grunt serve` or `$grunt serve --force` if you see any errors
+- and finally: `$grunt serve`
 
 ### Running the docs website
 Default browser should auto-start and open your localhost URL: [http://localhost:9000](http://localhost:9000) after you execute grunt serve command.
+
+
+## Seed your first app
+Once you download the SDK, using terminal in "Connected-Car-SDK" folder install the `grunt seed --dec-host=127.0.0.1 --dec-port=4402 -name=/pat/to/your/app`
+
+Change the host IP and port to that of your environment.
+You can always change this later (see optional commands).
+
+Once the build is completed the app will load in your borwser and if you see the fisrt page, the app is connecected to span and ready for development. 
+
+Now you are ready to build your first app, and the API is readly available. 
+
+- [In-car Apps API Docs]()
+
+## Optional commands
+- Change SPAN IP
+- Change SPAN Port
+- Rebuild SDK
+- 

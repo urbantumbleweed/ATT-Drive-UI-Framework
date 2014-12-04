@@ -35,6 +35,12 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               scope.maxVolume = 100;
               scope.changeVolumeQuantity = 10;
 
+              // volume slider parameters
+              scope.volumeSliderMovingInterval = null;
+              scope.volumeInactive = true;
+              scope.volumeInactivityInterval = null;
+              scope.volumeInativityTime = 2000;
+
               var changePositionInterval = 5, // seconds
                   changePositionTimeInterval = 500, // miliseconds                 
                   intervalpromise = null,
@@ -149,14 +155,30 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
 
               function setVolume() {
                   scope.audio.volume = (scope.currentVolume / 100);
-              };
+              };              
 
               scope.$on("sliderMoved", function (event, message) {
                   if (message == "time")
                       setTime();
-                  else if (message == "volume")
+                  else if (message == "volume") {
+                      scope.volumeInactive = false;
                       setVolume();
+                      //$interval.cancel(scope.volumeSliderMovingInterval);
+                  }
               });
+
+              //scope.$on("sliderMoving", function (event, message) {
+              //    if (message == "volume") {
+              //        scope.volumeInactive = false;
+
+              //        // setup an interval every 200 ms that will set scope.volumeInactive = false;
+              //        // that interval will be canceled at **
+              //        scope.volumeSliderMovingInterval = $interval(function () {
+              //            scope.volumeInactive = false;
+              //        }, 200);
+
+              //    }
+              //});
 
               scope.countdown = function (isElapsed) {
                   //console.log('countdown, isElapsed: ' + isElapsed);
@@ -269,7 +291,26 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
 
               scope.volume = function () {
                   scope.showVolume = !scope.showVolume;
+
+                  //if (scope.showVolume) {
+                                            
+                  //    if (scope.volumeInactivityInterval)
+                  //        $interval.cancel(scope.volumeInactivityInterval);
+
+                  //    // start timer to calculate inactivity time
+                  //    // if > 2 sec of inactivity, close the volume control
+                  //    scope.volumeInactivityInterval = $interval(function () {
+
+                  //        if (scope.volumeInactive) {
+                  //            scope.showVolume = false;
+                  //            $interval.cancel(scope.volumeInactivityInterval);
+                  //        } else scope.volumeInactive = true;
+
+                  //    }, scope.volumeInativityTime);
+                  //} else $interval.cancel(scope.volumeInactivityInterval);
               };
+
+
 
               scope.nextSong = function () {
                   if (!scope.playlist)
