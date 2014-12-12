@@ -120,51 +120,60 @@ angular.module("templates/attLoader.html", []).run(["$templateCache", function($
 
 angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attMediaPlayer.html",
-    "<div class=\"padding\" style=\"padding-top: 20px\" ng-show=\"audio\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-xs-12\">\n" +
-    "            <h2 class=\"view-title\">{{currentSong().author}} - {{currentSong().title}}</h2>\n" +
-    "            <!--<h4 class=\"view-subtitle\">Queen</h2>-->\n" +
-    "            <h4 class=\"text-uppercase text-muted\">Next: <span class=\"font-medium\">{{nextSong().author}} - {{nextSong().title}}</span></h4>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"btn-group-media sep-t-40\">\n" +
-    "        <a ng-mousedown=\"changePosition(true, false)\" ng-mouseup=\"changePosition(true, true)\" class=\"btn btn-circ small\"><span class=\"icon-skip-left\"></span></a>\n" +
-    "        <a ng-click=\"changeStatus()\" class=\"btn btn-circ large sep-lr-40\"><span ng-class=\"{'icon-pause' : (!audio.paused), 'icon-play' : audio.paused}\"></span></a>\n" +
-    "        <a ng-mousedown=\"changePosition(false, false)\" ng-mouseup=\"changePosition(false, true)\" class=\"btn btn-circ small\"><span class=\"icon-skip-right\"></span></a>\n" +
-    "    </div>\n" +
-    "    \n" +
-    "    <div style=\"position: absolute; bottom: 0; left: 0; width: 100%; padding: 0 24px 36px;\">\n" +
-    "        <a class=\"btn btn-icon sep-r-40\"><span class=\"icon-shuffle\" ng-click=\"shuffle()\"></span></a>\n" +
-    "        <a class=\"btn btn-icon\"><span class=\"icon-repeat\" ng-click=\"repeat()\"></span></a>\n" +
-    "        <a class=\"btn btn-icon volume-icon pull-right\" ng-class=\"{'active': showVolume}\" ng-click=\"volume()\"><span class=\"icon-volume-down\"></span></a>\n" +
-    "        <div class=\"sep-top-10\">\n" +
-    "            <att-slider type=\"default\"\n" +
-    "                min=\"{{sliderConfig.min}}\"\n" +
-    "                max=\"{{sliderConfig.max}}\"\n" +
-    "                ng-model=\"sliderConfig.val\"\n" +
-    "                text-left=\"{{sliderConfig.elapsedTime | filter: countdown(true)}}\"\n" +
-    "                text-right=\"{{sliderConfig.remainingTime | filter: countdown(false)}}\"\n" +
-    "                parent-control=\"time\">\n" +
-    "            </att-slider>\n" +
-    "        </div>\n" +
+    "<div class=\"att-media-player\" ng-show=\"audio\">\n" +
+    "  <div class=\"header\">\n" +
+    "    <div class=\"album-art\">\n" +
+    "      <img src=\"images/music-icon.png\" alt=\"\">\n" +
     "    </div>\n" +
     "\n" +
-    "    <div style=\"display: none\" ng-repeat=\"song in playlist\" ng-class=\"{'active-song' : currentIndex == $index}\" ng-click=\"setFile($index)\">\n" +
-    "        <span ng-bind=\"song.title\"></span>\n" +
+    "    <div class=\"media-title\">\n" +
+    "      <span class=\"current\">{{currentSong().title}}</span>\n" +
+    "      <span class=\"author\">{{currentSong().author}}</span>\n" +
     "    </div>\n" +
+    "    <span class=\"next\" ng-show=\"!shuffleActive\">\n" +
+    "        Next: <span class=\"font-medium\">{{nextSong().author}} - {{nextSong().title}}</span>\n" +
+    "    </span>\n" +
+    "  </div>\n" +
     "\n" +
-    "    <div class=\"volume-panel\" ng-class=\"{'show': showVolume}\">\n" +
-    "        VOLUME AT {{currentVolume}}%\n" +
-    "        <att-slider type=\"default\"\n" +
-    "                    min=\"{{minVolume}}\"\n" +
-    "                    max=\"{{maxVolume}}\"\n" +
-    "                    ng-model=\"currentVolume\"\n" +
-    "                    text-left=\"{{minVolume}}\"\n" +
-    "                    text-right=\"{{maxVolume}}\"\n" +
-    "                    parent-control=\"volume\">\n" +
-    "        </att-slider>\n" +
+    "  <div class=\"main-controls\">\n" +
+    "    <div class=\"btn-group-media\">\n" +
+    "      <a ng-mousedown=\"changePosition(true, false)\" ng-mouseup=\"changePosition(true, true)\" class=\"btn btn-circ small\"><span class=\"icon-skip-left\"></span></a>\n" +
+    "      <a ng-click=\"changeStatus()\" class=\"btn btn-circ large sep-lr-40\"><span ng-class=\"{'icon-pause' : (!audio.paused), 'icon-play' : audio.paused}\"></span></a>\n" +
+    "      <a ng-mousedown=\"changePosition(false, false)\" ng-mouseup=\"changePosition(false, true)\" class=\"btn btn-circ small\"><span class=\"icon-skip-right\"></span></a>\n" +
     "    </div>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"sub-controls\">\n" +
+    "    <a class=\"btn btn-icon sep-r-40\"><span class=\"icon-shuffle\" ng-class=\"{'white-icon': shuffleActive}\" ng-click=\"shuffleActive = !shuffleActive\"></span></a>\n" +
+    "    <a class=\"btn btn-icon\"><span class=\"icon-repeat\" ng-class=\"{'white-icon': repeatActive}\" ng-click=\"repeatActive = !repeatActive\"></span></a>\n" +
+    "    <a class=\"btn btn-icon volume-icon pull-right\" ng-class=\"{'active': showVolume}\" ng-click=\"volume()\"><span class=\"icon-volume-down\"></span></a>\n" +
+    "    <div class=\"sep-top-10\">\n" +
+    "      <att-slider type=\"default\"\n" +
+    "                  min=\"{{sliderConfig.min}}\"\n" +
+    "                  max=\"{{sliderConfig.max}}\"\n" +
+    "                  ng-model=\"sliderConfig.val\"\n" +
+    "                  text-left=\"{{sliderConfig.elapsedTime | filter: countdown(true)}}\"\n" +
+    "                  text-right=\"{{sliderConfig.remainingTime | filter: countdown(false)}}\"\n" +
+    "                  parent-control=\"time\">\n" +
+    "      </att-slider>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"playlist\" ng-repeat=\"song in playlist\" ng-class=\"{'active-song' : currentIndex == $index}\" ng-click=\"setFile($index)\">\n" +
+    "    <span ng-bind=\"song.title\"></span>\n" +
+    "  </div>\n" +
+    "\n" +
+    "  <div class=\"volume-panel\" ng-class=\"{'show': showVolume}\">\n" +
+    "    VOLUME AT {{currentVolume}}%\n" +
+    "    <att-slider type=\"default\"\n" +
+    "                min=\"{{minVolume}}\"\n" +
+    "                max=\"{{maxVolume}}\"\n" +
+    "                ng-model=\"currentVolume\"\n" +
+    "                text-left=\"{{minVolume}}\"\n" +
+    "                text-right=\"{{maxVolume}}\"\n" +
+    "                parent-control=\"volume\">\n" +
+    "    </att-slider>\n" +
+    "  </div>\n" +
     "</div>\n" +
     "");
 }]);

@@ -185,7 +185,7 @@ li.L9 { background: #eee }
 .tab-pane ul li {font-size: 14px;}
 
 #sidebar ul {
-    padding-left: 0px; 
+    padding-left: 0px;
     margin-left: 0;
 }
 .tab-pane {
@@ -195,7 +195,7 @@ padding: 10px;
 .logo img {
     height: 32px;
     width: 180px;
- }   
+ }
 .nav ul li {
     display: inline;
 }
@@ -211,4 +211,15 @@ padding: 10px;
 
     font-size: 14px;
     text-align: center;
+}
+
+
+.att-media-player{
+  top: 60px;
+}
+
+.att-media-player .main-controls{
+  position: absolute;
+  top: 44%;
+
 }

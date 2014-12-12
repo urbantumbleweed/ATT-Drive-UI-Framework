@@ -148,11 +148,13 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               };
 
               function setTime() {
-                  scope.audio.currentTime = scope.sliderConfig.val;
-                  secondsElapsed = scope.audio.currentTime;
-                  scope.sliderConfig.elapsedTime = secondsElapsed;
-                  secondsleft = scope.audio.duration - scope.sliderConfig.val;
-                  scope.sliderConfig.remainingTime = secondsleft;
+                  $timeout(function () {
+                      scope.audio.currentTime = scope.sliderConfig.val;
+                      secondsElapsed = scope.audio.currentTime;
+                      scope.sliderConfig.elapsedTime = secondsElapsed;
+                      secondsleft = scope.audio.duration - scope.sliderConfig.val;
+                      scope.sliderConfig.remainingTime = secondsleft;
+                  }, 50);
               };
 
               function setVolume() {
