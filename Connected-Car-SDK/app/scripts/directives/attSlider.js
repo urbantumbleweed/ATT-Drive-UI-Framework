@@ -56,6 +56,19 @@ angular.module('connectedCarSDK.attSlider', [])
                     scope.$emit("sliderMoving", scope.parentControl);
                 };
 
+                // Add touch events to control slider on mobile devices
+                var slider = element.find('input');
+
+                slider.bind('touchstart', function (evt) {
+                    scope.$emit("sliderMoving", scope.parentControl);
+                    this.focus();
+                });
+
+                slider.bind('touchend', function (evt) {
+                    scope.$emit("sliderMoved", scope.parentControl);
+                    this.focus();
+                });
+
                 // watch for model changes and repaint the slider
                 // using new calculated gradient stops
                 scope.$watch(function () {

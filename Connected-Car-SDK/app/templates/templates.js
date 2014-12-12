@@ -1,21 +1,22 @@
-angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMediaPlayer.html', 'templates/attMenu.html', 'templates/attPinPad.html', 'templates/attProgressBar.html', 'templates/attSlider.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
+angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attContent.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attFooter.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMediaPlayer.html', 'templates/attMenu.html', 'templates/attPinPad.html', 'templates/attProgressBar.html', 'templates/attSlider.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
 angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attAlert.html",
-    "<div ng-show=\"alert.isActive\" class=\"att-alert\" ng-class=\"alert.type && 'alert-' + alert.type\" ng-click=\"close()\">\n" +
+    "<div ng-show=\"alert.isActive\" class=\"att-alert alert-animation\" ng-class=\"alert.type && 'alert-' + alert.type\" ng-click=\"close()\">\n" +
     "    <div class=\"content\">\n" +
     "        <h1 class=\"alert-heading\" ng-bind=\"alert.title\"></h1>\n" +
     "        <!--<p class=\"alert-text\" ng-bind=\"alert.text\"></p>-->\n" +
     "        <p class=\"alert-text\" ng-transclude></p>\n" +
     "    </div>\n" +
     "    <span class=\"alert-icon {{type}}\" ng-show=\"alert.showIcon && !alert.showConfirmationBtn\">\n" +
-    "            <i class=\"fa fa-info-circle\"></i>\n" +
+    "        <i class=\"fa\" ng-class=\"type=='success' ? 'fa-check-circle' : type=='danger' ? 'fa-warning' : 'fa-info-circle'\"></i>\n" +
     "    </span>\n" +
     "    <div class=\"alert-button\">\n" +
     "        <button class=\"btn btn-default\" ng-show=\"alert.showConfirmationBtn\" ng-click=\"btnClick()\">{{alert.buttonText}}</button>\n" +
     "    </div>\n" +
     "\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/attBadge.html", []).run(["$templateCache", function($templateCache) {
@@ -23,6 +24,14 @@ angular.module("templates/attBadge.html", []).run(["$templateCache", function($t
     "<span class=\"att-badge badge-{{badgeType}}\">\n" +
     "    {{value}}\n" +
     "</span>");
+}]);
+
+angular.module("templates/attContent.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attContent.html",
+    "<div class=\"att-content-container\">\n" +
+    "  <div class=\"att-content att-grid\" ng-transclude></div>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/attDrawer.html", []).run(["$templateCache", function($templateCache) {
@@ -39,15 +48,25 @@ angular.module("templates/attDrawer.html", []).run(["$templateCache", function($
 angular.module("templates/attDropdown.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attDropdown.html",
     "<div class=\"att-dropdown\">\n" +
-    "    <a class=\"selected\" ng-bind=\"defaultOption\" ng-click=\"show=!show\"></a>\n" +
-    "    <span class=\"icon\"><i class=\"fa fa-caret-down\"></i></span>\n" +
+    "    <div ng-click=\"show=!show\">\n" +
+    "        <a class=\"selected\" ng-bind=\"defaultOption\"></a>\n" +
+    "        <span class=\"icon\"><i class=\"fa fa-caret-down\"></i></span>\n" +
+    "    </div>\n" +
     "    <div class=\"screen\" ng-show=\"show\">\n" +
-    "        <button ng-show=\"closeButton\" type=\"button\" class=\"btn btn-circ medium btn-close-list\" ng-click=\"show=false\"><span class=\"icon-close\"></span></button>\n" +
+    "        <button ng-show=\"closeButton\" type=\"button\" class=\"btn btn-circ small btn-close-list\" ng-click=\"show=false\"><span class=\"icon-close\"></span></button>\n" +
     "        <ul class=\"list\">\n" +
     "            <li ng-repeat=\"item in items\" ng-click=\"selectItem(item)\">{{item.text}}</li>\n" +
     "\n" +
     "        </ul>\n" +
     "    </div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/attFooter.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attFooter.html",
+    "<div class=\"att-footer att-grid\">\n" +
+    "  <div class=\"row footer-content\" ng-class=\"alignment && 'row-' + alignment\" ng-transclude></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -288,13 +307,12 @@ angular.module("templates/modal/backdrop.html", []).run(["$templateCache", funct
 
 angular.module("templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/modal/window.html",
-    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
-    "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\">\n" +
-    "        <div class=\"att-modal\">\n" +
-    "            <div class=\"modal-content\" modal-transclude></div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade att-modal animated-short\" ng-class=\"{'modal-animation': animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
+    "  <div class=\"modal-dialog\">\n" +
+    "    <div modal-transclude></div>\n" +
+    "  </div>\n" +
     "</div>\n" +
+    "\n" +
     "");
 }]);
 

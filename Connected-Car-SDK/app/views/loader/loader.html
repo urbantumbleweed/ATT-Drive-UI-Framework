@@ -1,18 +1,10 @@
 ﻿<div class="container" id="main-container">
-    <!-- <att-loader></att-loader>  IMPORTANT: this is the actual directive -->
-    <!-- this is just a static representation -->
-    <div class="att-loader">
-        <div class="circles">
-            <div id="circle1" class="animated-circle"></div>
-            <div id="circle2" class="animated-circle"></div>
-            <div id="circle3" class="animated-circle"></div>
-        </div>
-    </div>
-
+    <att-loader></att-loader>
 </div>
 
 <div id="options-panel">
-    This component has no additional options.
+    <button ng-click="showLoader()">Show Loader</button>
+    <button ng-click="hideLoader()">Hide Loader</button>
 </div>
 
 <div class="container" id="details-container">

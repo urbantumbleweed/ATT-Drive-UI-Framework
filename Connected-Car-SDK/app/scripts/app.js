@@ -33,7 +33,9 @@ var app = angular
     'connectedCarSDK.attSlider',
     'connectedCarSDK.attMediaPlayer',
     'connectedCarSDK.attDynamicContent',
-    'connectedCarSDK.attPinPad'
+    'connectedCarSDK.attPinPad',
+    'connectedCarSDK.attContent',
+    'connectedCarSDK.attFooter'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -68,6 +70,10 @@ var app = angular
         .when('/dropdown', {
             templateUrl: 'views/dropdown/dropdown.html',
             controller: 'DropdownCtrl'
+        })
+        .when('/dropdowniFrame', {
+          templateUrl: 'views/dropdown/dropdowniFrame.html',
+          controller: 'DropdownCtrl'
         })
         .when('/loader', {
             templateUrl: 'views/loader/loader.html',
@@ -121,6 +127,10 @@ var app = angular
             templateUrl: 'views/pinPad/pinPadProvider.html',
             controller: 'PinPadProviderCtrl'
         })
+        .when('/pinPadProvideriFrame', {
+            templateUrl: 'views/pinPad/pinPadProvideriFrame.html',
+            controller: 'PinPadProviderCtrl'
+        })
         .when('/simError', {
             templateUrl: 'views/simError/simError.html'
 
@@ -132,12 +142,20 @@ var app = angular
 
 
 app.run(function ($rootScope, $timeout) {
-    
+
     $rootScope.$on('$routeChangeSuccess',
         function (event, next, current) {
             $timeout(function() {
                 prettyPrint();
             }, 500);
-            
+
         });
+
+    $rootScope.isContentInIFrame = function() {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    };
 });

@@ -12,7 +12,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    
+
     <script src="lib/prettify.js"></script>
     <link href="lib/prettify.css" rel="stylesheet" />
     <script src="lib/showdown.js"></script>
@@ -24,7 +24,7 @@
     <!-- docs site specific stuff -->
 
     <!-- end docs specific stuff -->
-    
+
     <style>
         li.L0, li.L1, li.L2, li.L3,
         li.L5, li.L6, li.L7, li.L8 {
@@ -33,58 +33,57 @@
     </style>
 
 </head>
-<body ng-app="connectedCarSDK">
+<body ng-app="connectedCarSDK" data-ng-style="{ 'padding-top' : isContentInIFrame() && 0 }">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <!-- Add your site or application content here -->
 
 
 
-    <div id="page-wrapper" class="container-fluid">
-        <div class="col-md-2" id="sidebar">
+    <div id="page-wrapper" class="container-fluid" data-ng-style="{ 'padding-left' : isContentInIFrame() && 0 }">
+        <div class="col-md-2" id="sidebar" ng-hide="isContentInIFrame()">
             <div class="logo">
-                <img src="images/ATT-logo.jpg" alt="AT&T Drive SDK" width="80%"/>
+                <img src="images/ATT-logo.jpg" alt="AT&T Drive SDK" width="80%" />
                 <p class="small">Automotive UI Kit</p>
             </div>
-            
+
             <div class="nav">
-            <hr/>
-            <h5>Basic UI components</h5>
-            <ul>
-                <li><a href="#/alert">Alert</a></li>
-                <li><a href="#/badge">Badge</a></li>
-                <li><a href="#/buttons">Buttons</a></li>
-                <li><a href="#/carousel">Carousel</a></li>
-                <li><a href="#/checkbox">Checkboxes</a></li>
-                <li><a href="#/drawer">Drawer</a></li>
-                <li><a href="#/dropdown">Dropdown</a></li>
-                <li><a href="#/header">Header</a></li>
-                <li><a href="#/listview">List View</a></li>
-                <li><a href="#/loader">Loader</a></li>
-                <li><a href="#/menu">Menu</a></li>
-                <li><a href="#/modal">Modal</a></li>
-                <li><a href="#/progress-bar">Progress bars</a></li>
-                <li><a href="#/radio">Radio Buttons</a></li>
-                <li><a href="#/slider">Slider</a></li>
-                <li><a href="#/toggle-switch">Toggle Switch</a></li>
-                <li><a href="#/tabs">Tabs</a></li>
-                
-            </ul>
-            <h5>Specialized components</h5>
+                <hr />
+                <h5>Basic UI components</h5>
+                <ul>
+                    <li><a href="#/alert">Alert</a></li>
+                    <li><a href="#/badge">Badge</a></li>
+                    <li><a href="#/buttons">Buttons</a></li>
+                    <li><a href="#/carousel">Carousel</a></li>
+                    <li><a href="#/checkbox">Checkboxes</a></li>
+                    <li><a href="#/drawer">Drawer</a></li>
+                    <li><a href="#/dropdown">Dropdown</a></li>
+                    <li><a href="#/header">Header</a></li>
+                    <li><a href="#/listview">List View</a></li>
+                    <li><a href="#/loader">Loader</a></li>
+                    <li><a href="#/menu">Menu</a></li>
+                    <li><a href="#/modal">Modal</a></li>
+                    <li><a href="#/progress-bar">Progress bars</a></li>
+                    <li><a href="#/radio">Radio Buttons</a></li>
+                    <li><a href="#/slider">Slider</a></li>
+                    <li><a href="#/toggle-switch">Toggle Switch</a></li>
+                    <li><a href="#/tabs">Tabs</a></li>
+
+                </ul>
+                <h5>Specialized components</h5>
                 <ul>
                     <li><a href="#/pinPad">Pin input pad</a></li>
                     <li><a href="#/pinPadProvider">Pin pad code usage</a></li>
                     <li><a href="#/simError">SIM card error</a></li>
                     <li><a href="#/mediaPlayer">Media Player</a></li>
                 </ul>
-                </div>
+            </div>
         </div>
-<div class="col-md-10">
-    <div ng-view></div>
-</div>
-        <footer>
+        <div class="col-md-10" data-ng-style="{ 'padding-left' : isContentInIFrame() && 0 }">
+            <div ng-view></div>
+        </div>
+        <footer ng-hide="isContentInIFrame()">
             <div class="footer">
                 <p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
                 <p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
@@ -99,7 +98,6 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
     <!-- endbuild -->
-
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -112,10 +110,9 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:js({.tmp,app}) scripts/ui.connected-car.js -->
     <!--<script src="directives/ui.connected-car.js"></script>-->
-    
+
     <script src="scripts/services/transition.js"></script>
 
     <script src="scripts/directives/attToggleSwitch.js"></script>
@@ -133,9 +130,11 @@
     <script src="scripts/directives/attDrawer.js"></script>
     <script src="scripts/directives/attMenu.js"></script>
     <script src="scripts/directives/attHeader.js"></script>
-    <script src="scripts/directives/attSlider.js"></script>    
+    <script src="scripts/directives/attSlider.js"></script>
     <script src="scripts/directives/attMediaPlayer.js"></script>
     <script src="scripts/directives/attPinPad.js"></script>
+    <script src="scripts/directives/attContent.js"></script>
+    <script src="scripts/directives/attFooter.js"></script>
     <!-- endbuild -->
 
     <script src="scripts/app.js"></script>
@@ -157,9 +156,9 @@
     <script src="scripts/controllers/menu.js"></script>
     <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/slider.js"></script>
-    <script src="scripts/controllers/mediaPlayer.js"></script>   
-    <script src="scripts/controllers/pinpad.js"></script>   
-    <script src="scripts/controllers/pinPadProvider.js"></script>   
+    <script src="scripts/controllers/mediaPlayer.js"></script>
+    <script src="scripts/controllers/pinpad.js"></script>
+    <script src="scripts/controllers/pinPadProvider.js"></script>
 
     <script src="scripts/appDirectives/attDynamicContent.js"></script>
 </body>

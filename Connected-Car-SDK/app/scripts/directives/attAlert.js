@@ -125,7 +125,6 @@ angular.module('connectedCarSDK.attAlert', [])
                      text: '@'
                  },
                  link: function (scope, element, attrs) {
-
                      alertProvider.addAlert(scope);
 
                      if (scope.alert.isActive)

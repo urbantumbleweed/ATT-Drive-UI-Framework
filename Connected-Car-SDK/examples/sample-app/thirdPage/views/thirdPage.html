@@ -1,0 +1,11 @@
+<br/>
+<div>
+  <ng-form name="customForm" novalidate class="css-form">
+  <div ng-repeat="(type, navInfo) in formData.nav">
+    <label class="customform">{{type}}</label>
+    <input class="customform" type="text" ng-model="navInfo"/>
+    <span ng-show="false">{{customForm[type] = navInfo}}</span>
+  </div>
+  <button class="btn btn-default" ng-click="saveFormData(customForm)"> Save Form Data </button>
+</ng-form>
+</div>

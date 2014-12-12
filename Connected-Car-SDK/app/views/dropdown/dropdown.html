@@ -1,6 +1,5 @@
 ﻿<div class="container" id="main-container">
-    <att-dropdown default-option="Please select an option:" items="items" close-button="true" ng-model="selectedItem">
-    </att-dropdown>
+  <iframe src='#/dropdowniFrame' style="width: 768px; height: 470px;" name="internal" scrolling="no" frameBorder="0"></iframe>
 </div>
 
 <div id="options-panel">
@@ -14,7 +13,8 @@
         </att-tab>
 
         <att-tab heading="Markup">
-            <att-dynamic-content data-url="/views/dropdown/dropdown.html" linenums="true" markup="true"></att-dynamic-content>
+            <att-dynamic-content data-url="/views/dropdown/markup.md" markdown="false" linenums="true"></att-dynamic-content>
+
         </att-tab>
 
         <att-tab heading="JavaScript">

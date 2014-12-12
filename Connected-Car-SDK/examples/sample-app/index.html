@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myFirstApp</title>
+    <link rel="stylesheet" href="att-sdk/styles/att-sdk.css">
+    <link rel="stylesheet" href="att-sdk/styles/font-asesome.css">
+    <link rel="stylesheet" href="styles/main.css"/>
+
+    <script type="text/javascript" src="DecJSSDK/json/Appmanager.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Commerce.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Connectivity.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Identity.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Media.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Navigation.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Notification.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Policy.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Sa.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Search.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Settings.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Sms.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Va.json"></script>
+    <script type="text/javascript" src="DecJSSDK/json/Vehicleinfo.json"></script>
+
+    <script type="text/javascript" src="DecJSSDK/js/minified/DECSdk.js"></script>
+    <script type="text/javascript" src="DecJSSDK/js/minified/Promise.js"></script>
+    <script type="text/javascript" src="DecJSSDK/js/minified/Properties.js"></script>
+    <script type="text/javascript" src="DecJSSDK/js/minified/SpanMessageBroker.js"></script>
+
+</head>
+<body ng-app="app">
+
+    <div id="main-container">
+            <att-header app-name="appName" current-item="viewName"></att-header>
+            <div id="view-container" ng-view></div>
+            <att-drawer>
+                <att-menu title="title" items="appLinks"></att-menu>
+            </att-drawer>
+    </div>
+    <att-loader></att-loader>
+</body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+<script src="att-sdk/scripts/connectedCarSDK-tpls-0.0.4.js"></script>
+<script src="scripts/app.js"></script>
+
+<!--Controllers-->
+<script src="firstPage/controllers/FirstPageCtrl.js"></script>
+<script src="secondPage/controllers/SecondPageCtrl.js"></script>
+<script src="thirdPage/controllers/ThirdPageCtrl.js"></script>
+
+<!-- jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+</html>

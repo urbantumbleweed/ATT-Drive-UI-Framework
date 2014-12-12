@@ -1,0 +1,40 @@
+.att-content-container{
+  background-color: #333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+
+  &:before{
+    content: '';
+    display: block;
+    background-color: rgba(15,15,15,.8);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -11;
+  }
+
+  .att-content{
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 0;
+    bottom: 0px;
+    right: 0;
+    overflow: auto;
+  }
+
+  &.has-header  .att-content{
+    top: 60px;
+  }
+
+  &.has-footer .att-content{
+    bottom: 100px;
+  }
+
+}
+
+

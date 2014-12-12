@@ -9,12 +9,18 @@
  */
 
 angular.module('connectedCarSDK')
-  .controller('LoaderCtrl', ['$scope', '$http', function ($scope, $http) {
-      $scope.testLoader = function () {
-          $http.get('http://www.google.com')
-            .success(function (response, status) {
-            });
-      };
-  }]);
+    .controller('LoaderCtrl', [
+        '$scope', '$http', '$loader', function($scope, $http, $loader) {
+
+            $scope.showLoader = function() {
+                $loader.show();
+            };
+
+            $scope.hideLoader = function() {
+                $loader.hide();
+            };
+
+        }
+    ]);
 
 

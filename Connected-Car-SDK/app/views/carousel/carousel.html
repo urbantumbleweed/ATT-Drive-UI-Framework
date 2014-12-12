@@ -1,28 +1,27 @@
 ﻿<div class="container" id="main-container">
     <att-carousel interval="myInterval">
         <att-slide ng-repeat="slide in slides" active="slide.active">
-            <img src="../images/placeholder.png" alt=""/>
+            <img src="../images/placeholder.png" alt="" />
             <div class="carousel-content">
                 <ul>
                     <li>List item</li>
                     <li>List item</li>
                     <li>List item</li>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam architecto at beatae commodi explicabo illo impedit, iste, nam quaerat quod reprehenderit repudiandae unde, vero voluptatem? Molestias odio recusandae ut.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam architecto at beatae commodi explicabo illo impedit, iste, nam quaerat quod reprehenderit repudiandae unde, vero voluptatem? Molestias odio recusandae ut.</p>
             </div>
         </att-slide>
     </att-carousel>
 </div>
 
 <div id="options-panel">
-    <div class="row">
-
-            <button ng-click="addSlide()">Add Slide</button>
-        <br/><br/>
-            Interval, in milliseconds:
-            <input type="number" ng-model="myInterval">
-            <br />
-            Enter a negative number to stop the interval.
+    <div>
+        <button ng-click="addSlide()">Add Slide</button>
+        <br /><br />
+        Interval, in milliseconds:
+        <input type="number" ng-model="myInterval">
+        <br />
+        Enter a negative number to stop the interval.
     </div>
 </div>
 
@@ -38,7 +37,7 @@
 
         <att-tab heading="JavaScript">
             <pre class="prettyprint linenums">
-                <div ng-include=" '/scripts/controllers/carousel.js' "></div>
+            <div ng-include=" '/scripts/controllers/carousel.js' "></div>
             </pre>
         </att-tab>
     </att-tabset>

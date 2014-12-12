@@ -1,9 +1,15 @@
 ﻿<div class="padding" style="padding-top: 20px" ng-show="audio">
+    <style>
+        .white-icon
+        {
+            color: white;
+        }
+    </style>
     <div class="row">
         <div class="col-xs-12">
-            <h2 class="view-title">{{currentSong().author}} - {{currentSong().title}}</h2>
-            <!--<h4 class="view-subtitle">Queen</h2>-->
-            <h4 class="text-uppercase text-muted">Next: <span class="font-medium">{{nextSong().author}} - {{nextSong().title}}</span></h4>
+            <h2 class="view-title">{{currentSong().title}}</h2>
+            <h4 class="view-subtitle">{{currentSong().author}}</h2>
+            <h4 class="text-uppercase text-muted" ng-show="!shuffleActive">Next: <span class="font-medium">{{nextSong().author}} - {{nextSong().title}}</span></h4>
         </div>
     </div>
     <div class="btn-group-media sep-t-40">
@@ -13,8 +19,8 @@
     </div>
     
     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 0 24px 36px;">
-        <a class="btn btn-icon sep-r-40"><span class="icon-shuffle" ng-click="shuffle()"></span></a>
-        <a class="btn btn-icon"><span class="icon-repeat" ng-click="repeat()"></span></a>
+        <a class="btn btn-icon sep-r-40"><span class="icon-shuffle" ng-class="{'white-icon': shuffleActive}" ng-click="shuffleActive = !shuffleActive"></span></a>
+        <a class="btn btn-icon"><span class="icon-repeat" ng-class="{'white-icon': repeatActive}" ng-click="repeatActive = !repeatActive"></span></a>
         <a class="btn btn-icon volume-icon pull-right" ng-class="{'active': showVolume}" ng-click="volume()"><span class="icon-volume-down"></span></a>
         <div class="sep-top-10">
             <att-slider type="default"

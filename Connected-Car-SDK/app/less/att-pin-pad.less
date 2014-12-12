@@ -60,6 +60,12 @@
     background-color: rgba(15, 15, 15, .8);
     &.confirm{
       background-color: @brand-primary;
+      &[disabled="disabled"]{
+        background-color: rgba(15, 15, 15, .8);
+        i{
+          opacity: .5;
+        }
+      }
     }
     &.backspace{
       color: #999999;
@@ -89,3 +95,4 @@
 
 
 }
+
