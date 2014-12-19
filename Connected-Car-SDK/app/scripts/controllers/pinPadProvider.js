@@ -1,20 +1,17 @@
 ﻿'use strict';
 
-/**
- * @ngdoc function
- * @name connectedCarSDK.controller:PinPadProviderCtrl
- * @description
- * # PinPadProviderCtrl
- * Controller of the connectedCarSDK
- */
 
-angular.module('connectedCarSDK')
+
+angular.module('pinpadContainerApp', [
+  'connectedCarSDK.attPinPad'
+])
     .controller('PinPadProviderCtrl', function($scope, $pinPad) {
 
         $scope.purchase = function() {
             $pinPad.show({
                 numDigits: 6,
-                onConfirm: $scope.validatePin
+                onConfirm: $scope.validatePin,
+                templateUrl: '/templates/attPinPad.html'
             });
         };
 

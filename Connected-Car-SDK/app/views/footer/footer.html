@@ -1,0 +1,31 @@
+<div class="container" id="main-container">
+  <att-footer vertical-alignment="{{alignment}}">
+    <div class="col" ng-repeat="item in items"><div class="footer-item full-width">{{item.value}}</div></div>
+  </att-footer>
+</div>
+
+<div id="options-panel">
+  <button ng-click="addItem()">Add an item</button>
+  <br/><br/>
+  <input style="display: initial" type="radio" ng-model="alignment" value="top"/>&nbsp;&nbsp;alignment: "top" <br/>
+  <input style="display: initial" type="radio" ng-model="alignment" value="center"/>&nbsp;&nbsp;alignment: "center" <br/>
+  <input style="display: initial" type="radio" ng-model="alignment" value="bottom"/>&nbsp;&nbsp;alignment: "bottom" <br/><br/>
+  <button ng-click="reset()">Reset</button>
+</div>
+
+<div class="container" id="details-container">
+  <att-tabset top-position="true">
+    <att-tab heading="Description">
+      <att-dynamic-content data-url="/views/content/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+    </att-tab>
+
+    <att-tab heading="Markup">
+      <att-dynamic-content data-url="/views/footer/footer.html" linenums="true" markup="true"></att-dynamic-content>
+    </att-tab>
+
+    <att-tab heading="JavaScript">
+      <pre class="prettyprint linenums"><div ng-include=" '/scripts/controllers/content.js' "></div></pre>
+    </att-tab>
+  </att-tabset>
+</div>
+

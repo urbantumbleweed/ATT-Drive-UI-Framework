@@ -20,15 +20,18 @@ angular.module('connectedCarSDK.attPinPad', [])
 
                 var angularDomEl = angular.element('<att-pin-pad ng-model="ngModel" on-confirm="onConfirm(ngModel)"></att-pin-pad>');
                 angularDomEl.attr({
-                    'num-digits': options.numDigits
+                  'num-digits': options.numDigits
+                });
+                angularDomEl.attr({
+                  'template-url': options.templateUrl
                 });
 
                 var pinPadScope = $rootScope.$new(false);
                 pinPadScope.ngModel = options.ngModel || '';
                 pinPadScope.onConfirm = options.onConfirm ? options.onConfirm : null;
-                
+
                 pinPadDomEl = $compile(angularDomEl)(pinPadScope);
-                
+
                 $document.find('body').eq(0).append(pinPadDomEl);
             },
 
@@ -42,7 +45,9 @@ angular.module('connectedCarSDK.attPinPad', [])
     }])
     .directive('attPinPad', function() {
         return {
-            templateUrl: 'templates/attPinPad.html',
+            templateUrl: function(tElement, tAttrs) {
+              return tAttrs.templateUrl || 'templates/attPinPad.html';
+            },
             restrict: 'EA',
             scope: {
                 numDigits: '@',

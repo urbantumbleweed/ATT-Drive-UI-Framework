@@ -1,0 +1,31 @@
+<div class="container" id="main-container" style="background-image: none">
+  <att-content has-header="{{hasHeader}}" has-footer="{{hasFooter}}" background-img="{{bgImg}}">
+    <div class="row">
+      <div class="col">
+        Your content goes here
+      </div>
+    </div>
+  </att-content>
+</div>
+
+<div id="options-panel">
+  <button ng-click="toggleHeader()">Toggle header</button>
+  <button ng-click="toggleFooter()">Toggle footer</button>
+  <button ng-click="toggleBackground()">Toggle background</button>
+</div>
+
+<div class="container" id="details-container">
+  <att-tabset top-position="true">
+    <att-tab heading="Description">
+      <att-dynamic-content data-url="/views/content/readme.md" markdown="true" linenums="false"></att-dynamic-content>
+    </att-tab>
+
+    <att-tab heading="Markup">
+      <att-dynamic-content data-url="/views/content/content.html" linenums="true" markup="true"></att-dynamic-content>
+    </att-tab>
+
+    <att-tab heading="JavaScript">
+            <pre class="prettyprint linenums"><div ng-include=" '/scripts/controllers/content.js' "></div></pre>
+    </att-tab>
+  </att-tabset>
+</div>

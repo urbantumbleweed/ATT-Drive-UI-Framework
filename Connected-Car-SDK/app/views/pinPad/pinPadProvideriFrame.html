@@ -1,17 +1,30 @@
-﻿<style>
+﻿<html>
+<head>
+  <link rel="stylesheet" href="/sdkstyles/att-sdk.css"/>
+
+  <style>
     h1 {
-        color: white;
+      color: white;
     }
     button.btn.btn-default {
-        position: relative;
-        float: right;
-        margin-top: 70px;
-        margin-right: 20px;
+      position: relative;
+      float: right;
+      margin-top: 70px;
+      margin-right: 20px;
     }
-</style>
+  </style>
 
-<div class="container" id="main-container">
-    <div>
-        <button class="btn btn-default" ng-click="purchase()">Purchase</button>
-    </div>
-</div>
+</head>
+
+<body ng-app="pinpadContainerApp">
+
+  <div ng-controller="PinPadProviderCtrl">
+    <button class="btn btn-default" ng-click="purchase()">Purchase</button>
+  </div>
+  </body>
+
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/scripts/controllers/pinPadProvider.js"></script>
+  <script src="/scripts/directives/attPinPad.js"></script>
+
+</html>

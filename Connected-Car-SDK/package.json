@@ -1,6 +1,6 @@
 {
   "name": "connectedCarSDK",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "grunt-contrib-less": "^0.11.4"
   },

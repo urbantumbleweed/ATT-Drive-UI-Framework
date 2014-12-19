@@ -441,9 +441,18 @@ module.exports = function (grunt) {
                 {
                     from: 'appNameStr',
                     to: '<%= sdk.seedPath %>'
-                },
+                }
                 ]
-            }            
+            }  ,
+            seedPath:  {
+                src: ['<%= sdk.seedPath %>/index.html'],
+                dest: '<%= sdk.seedPath %>/',
+                replacements: [{
+                        from: /att-sdk\/scripts\/connectedCarSDK-tpls-((\d(.)?){3,4}).js/, 
+                        to: 'att-sdk/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js'
+                    }
+                ]
+            }           
         },
 
         // Run some tasks in parallel to speed up the build process
@@ -534,6 +543,7 @@ module.exports = function (grunt) {
          'build',
          'replace:seed',
          'copy:seed',
+         'replace:seedPath',
          'connect:seed:keepalive'
         ]);
     });
@@ -604,5 +614,4 @@ module.exports = function (grunt) {
         ]);
 
     });
-
 };

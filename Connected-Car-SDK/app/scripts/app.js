@@ -70,11 +70,10 @@ var app = angular
         })
         .when('/dropdown', {
             templateUrl: 'views/dropdown/dropdown.html',
-            controller: 'DropdownCtrl'
+            /*controller: 'DropdownCtrl'*/
         })
         .when('/dropdowniFrame', {
-          templateUrl: 'views/dropdown/dropdowniFrame.html',
-          controller: 'DropdownCtrl'
+          templateUrl: 'views/dropdown/dropdowniFrame.html'
         })
         .when('/loader', {
             templateUrl: 'views/loader/loader.html',
@@ -126,7 +125,7 @@ var app = angular
         })
         .when('/pinPadProvider', {
             templateUrl: 'views/pinPad/pinPadProvider.html',
-            controller: 'PinPadProviderCtrl'
+/*            controller: 'PinPadProviderCtrl'*/
         })
         .when('/pinPadProvideriFrame', {
             templateUrl: 'views/pinPad/pinPadProvideriFrame.html',
@@ -140,11 +139,18 @@ var app = angular
           templateUrl: 'views/grid/grid.html'
 
         })
+        .when('/simErroriFrame', {
+          templateUrl: 'views/simError/simErroriFrame.html'
 
-      .when('/simErroriFrame', {
-        templateUrl: 'views/simError/simErroriFrame.html'
-
-      })
+        })
+        .when('/content', {
+          templateUrl: 'views/content/content.html',
+          controller: 'ContentCtrl'
+        })
+        .when('/footer', {
+          templateUrl: 'views/footer/footer.html',
+          controller: 'FooterCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

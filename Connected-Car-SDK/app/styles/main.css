@@ -103,6 +103,7 @@ body {
 
 #options-panel input[type="text"],
 #options-panel input[type="number"],
+#options-panel button,
 #options-panel select
 {
   width: 100%;
@@ -186,19 +187,7 @@ li.L9 { background: #eee }
 .tab-pane {
 padding: 10px;
 }
-@media (max-width: 1000px) {
-.logo img {
-    height: 32px;
-    width: 180px;
- }
-.nav ul li {
-    display: inline;
-}
-.nav ul li:after {
-    content: " - ";
-}
 
-}
 
 
 
@@ -214,6 +203,14 @@ padding: 10px;
 
 .full-height{
   height: 100%;
+}
+
+code{
+  font-size: 16px;
+}
+
+nav ul{
+  list-style: none;
 }
 
 /* SITE LAYOUT
@@ -281,4 +278,23 @@ footer.row .col{
 
 .col-content{
   max-width: 1000px !important;
+}
+
+
+/* CONTENT CONTAINER
+----------------------------------------*/
+
+.att-content-container{
+  background-color: red;
+}
+
+.att-content-container .att-content{
+  background-color: rgba(150,100,100,.3);
+}
+
+
+/* FOOTER
+-----------------------------------------*/
+.att-footer{
+  background-color: rgba(150,100,100,.7);
 }
