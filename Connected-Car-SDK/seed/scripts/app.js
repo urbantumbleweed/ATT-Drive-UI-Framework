@@ -27,13 +27,57 @@ app.config(function ($routeProvider) {
 });
 
 // AT&T DRIVE DEC INIT
-function decCallback() {
-};
+function initDec() {
+    $rootScope.decInstance = {};
+    window.DecInstanceConstructor = function (inputParam) {
+        var input = inputParam;
+        var isOnline = input && input.successCode == '0';
+
+        function getSuccessObject() {
+            return isOnline ? input : null;
+        }
+
+        function getErrorObject() {
+            return !isOnline ? input : null;
+        }
+
+        function status() {
+            var returnObj = {};
+
+            returnObj.status = isOnline ? 'success' : 'error';
+            returnObj.message = isOnline ? input.successMessage : input.errorMessage;
+            returnObj.code = isOnline ? input.successCode : input.errorCode;
+
+            return returnObj;
+        }
+
+        return {
+            isOnline: isOnline,
+            status: status,
+            getSuccessObject: getSuccessObject,
+            getErrorObject: getErrorObject
+        };
+    };
+
+    function decCallback(decResponse) {
+        $rootScope.decInstance = new DecInstanceConstructor(decResponse);
+    };
+
+    try {
+        // DO NOT REMOVE THE BELLOW COMMENT - used for grunt build process
+        init(decCallback, ["appmanager", "commerce", "connectivity", "identity", "media", "navigation", "notification", "policy", "sa", "search", "settings", "sms", "va", "vehicleinfo"], 'myFirstApp');
+    } catch (e) {
+        $rootScope.decInstance = new DecInstanceConstructor({
+            "errorCode": e.code,
+            "errorMessage": e.message,
+            "thrownError": e
+        });
+    }
+}
 
 app.run(function ($rootScope) {
-
-    // DO NOT REMOVE THE BELLOW COMMENT - used for grunt build process
-    init(new decCallback(), [decNamespacesPlaceholder], 'appNameStr');
+    window.$rootScope = $rootScope;
+    initDec();
 
     $rootScope.appName = 'myFirstApp';
     $rootScope.showDrawer = true;

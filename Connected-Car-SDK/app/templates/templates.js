@@ -1,4 +1,4 @@
-angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attContent.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attFooter.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMediaPlayer.html', 'templates/attMenu.html', 'templates/attPinPad.html', 'templates/attProgressBar.html', 'templates/attSlider.html', 'templates/attToggleSwitch.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
+angular.module('connectedCarSDK.tpls', ['templates/attAlert.html', 'templates/attBadge.html', 'templates/attContent.html', 'templates/attDrawer.html', 'templates/attDropdown.html', 'templates/attFooter.html', 'templates/attHeader.html', 'templates/attListView.html', 'templates/attLoader.html', 'templates/attMediaPlayer.html', 'templates/attMenu.html', 'templates/attPinPad.html', 'templates/attProgressBar.html', 'templates/attSimError.html', 'templates/attSlider.html', 'templates/attToggleSwitch.html', 'templates/attVehicleInMotion.html', 'templates/carousel/carousel.html', 'templates/carousel/slide.html', 'templates/modal/backdrop.html', 'templates/modal/window.html', 'templates/tabs/attTab.html', 'templates/tabs/attTabset.html']);
 
 angular.module("templates/attAlert.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attAlert.html",
@@ -123,7 +123,7 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
     "<div class=\"att-media-player\" ng-show=\"audio\">\n" +
     "  <div class=\"header\">\n" +
     "    <div class=\"album-art\">\n" +
-    "      <img src=\"images/music-icon.png\" alt=\"\">\n" +
+    "      <img ng-src=\"{{currentSong().art && currentSong().art || 'images/music-icon.png'}}\" alt=\"\">\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"media-title\">\n" +
@@ -157,10 +157,6 @@ angular.module("templates/attMediaPlayer.html", []).run(["$templateCache", funct
     "                  parent-control=\"time\">\n" +
     "      </att-slider>\n" +
     "    </div>\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"playlist\" ng-repeat=\"song in playlist\" ng-class=\"{'active-song' : currentIndex == $index}\" ng-click=\"setFile($index)\">\n" +
-    "    <span ng-bind=\"song.title\"></span>\n" +
     "  </div>\n" +
     "\n" +
     "  <div class=\"volume-panel\" ng-class=\"{'show': showVolume}\">\n" +
@@ -259,11 +255,25 @@ angular.module("templates/attProgressBar.html", []).run(["$templateCache", funct
     "</div>");
 }]);
 
+angular.module("templates/attSimError.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attSimError.html",
+    "<div class=\"att-sim-error\">\n" +
+    "	<div class=\"v-align\">\n" +
+    "		<div class=\"symbol animated vehicle-in-motion-animation\">\n" +
+    "			<div class=\"sim-icon\"></div>\n" +
+    "		</div>\n" +
+    "		<p class=\"warning-message\">SIM card is missing or inactive.<br>Please contact customer support.</p>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "");
+}]);
+
 angular.module("templates/attSlider.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/attSlider.html",
     "<div class=\"range-slider\">\n" +
     "    <span class=\"value-left\">{{textLeft}}</span>\n" +
-    "    <span class=\"value-right\">{{textRight}}</span>\n" +
+    "    <span class=\"value-right\" ng-show=\"textRight != '-NaN:NaN'\">{{textRight}}</span>\n" +
     "    <input class=\"input-range input-range-{{type}}\" type=\"range\" ng-model=\"ngModel\" min=\"{{min}}\" max=\"{{max}}\" ng-mouseup=\"sliderMoved()\" ng-mousedown=\"sliderMoving()\">\n" +
     "</div> ");
 }]);
@@ -277,6 +287,18 @@ angular.module("templates/attToggleSwitch.html", []).run(["$templateCache", func
     "            <span class=\"btn btn-primary\" ng-model=\"ngModel\" ng-click=\"click(true)\" btn-radio=\"ON\">ON</span>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("templates/attVehicleInMotion.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/attVehicleInMotion.html",
+    "<div class=\"att-vehicle-in-motion\">\n" +
+    "	<div class=\"v-align\">\n" +
+    "		<div class=\"symbol animated vehicle-in-motion-animation\">\n" +
+    "			<strong>!</strong>\n" +
+    "		</div>		\n" +
+    "		<p class=\"warning-message\">Please do not interact with the screen<br>while the vehicle is in motion</p>\n" +
+    "	</div>\n" +
     "</div>");
 }]);
 
@@ -316,12 +338,11 @@ angular.module("templates/modal/backdrop.html", []).run(["$templateCache", funct
 
 angular.module("templates/modal/window.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/modal/window.html",
-    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade att-modal animated-short\" ng-class=\"{'modal-animation': animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
+    "<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade att-modal animated-short modal-animation\" ng-class=\"{'modal-animation': animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
     "  <div class=\"modal-dialog\">\n" +
     "    <div modal-transclude></div>\n" +
     "  </div>\n" +
     "</div>\n" +
-    "\n" +
     "");
 }]);
 

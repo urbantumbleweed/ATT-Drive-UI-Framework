@@ -16,14 +16,14 @@ angular.module('connectedCarSDK.attMenu', [])
               items: '=',         // list of objects to bind {text, desc, selected}
               title: '='          // string
           },
-          link: function (scope, element, attrs) {
+          link: function (scope) {
 
               scope.activeTemp = false; // used to fix menu scrolling issue in Chrome
 
               scope.onItemClick = function (item) {
                   if (scope.items) {
                       scope.items.forEach(function (i) {
-                          if (i == item)
+                          if (i === item)
                               i.selected = true;
                           else i.selected = false;
                       });
@@ -34,7 +34,7 @@ angular.module('connectedCarSDK.attMenu', [])
                   scope.onItemClick(args[0]);
               });
 
-              $rootScope.$on('changeDrawer', function (event, args) {
+              $rootScope.$on('changeDrawer', function () {
                   $timeout(function () {
                       scope.activeTemp = true;
                   }, 500);

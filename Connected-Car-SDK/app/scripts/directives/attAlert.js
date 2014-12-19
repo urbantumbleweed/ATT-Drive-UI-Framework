@@ -17,7 +17,7 @@ angular.module('connectedCarSDK.attAlert', [])
             alerts: [],
             timeoutPromise: null,
 
-            addAlert: function(scope) {
+            addAlert: function (scope) {
 
                 scope.alert = {
                     type: angular.isDefined(scope.type) ? scope.type : alertConfig.type,
@@ -27,16 +27,17 @@ angular.module('connectedCarSDK.attAlert', [])
                     showConfirmationBtn: angular.isDefined(scope.showConfirmationBtn) ? scope.showConfirmationBtn : false,
                     buttonText: angular.isDefined(scope.buttonText) ? scope.buttonText : '',
                     autoCloseInterval: angular.isDefined(scope.autoCloseInterval) ? scope.autoCloseInterval : null,
-                    title: angular.isDefined(scope.title) ? scope.title : '',
+                    title: angular.isDefined(scope.title) ? scope.title : ''
                 };
 
-                if (this.alerts.length == 0)
+                if (this.alerts.length === 0)
                     scope.alert.isActive = true;
 
                 this.alerts.push(scope.alert);
             },
 
-            removeActiveAlert: function() {
+            removeActiveAlert: function () {
+
                 this.alerts[0].isActive = false;
                 this.alerts.splice(0, 1);
 
@@ -78,7 +79,7 @@ angular.module('connectedCarSDK.attAlert', [])
                     'show-icon': options.showIcon,
                     'show-confirmation-btn': options.showConfirmationBtn,
                     'button-text': options.buttonText,
-                    'auto-close-interval': options.autoCloseInterval ? options.autoCloseInterval : null,
+                    'auto-close-interval': options.autoCloseInterval ? options.autoCloseInterval : null
                 });
 
                 var alertScope = $rootScope.$new(false);
@@ -124,7 +125,7 @@ angular.module('connectedCarSDK.attAlert', [])
                      title: '@',
                      text: '@'
                  },
-                 link: function (scope, element, attrs) {
+                 link: function (scope) {
                      alertProvider.addAlert(scope);
 
                      if (scope.alert.isActive)
@@ -144,6 +145,11 @@ angular.module('connectedCarSDK.attAlert', [])
                          scope.onClick();
                          alertProvider.closeAlert();
                      };
+
+                     scope.$on('$destroy', function () {
+                         if (scope.alert.isActive)
+                             alertProvider.closeAlert();
+                     });
 
                  }
              };

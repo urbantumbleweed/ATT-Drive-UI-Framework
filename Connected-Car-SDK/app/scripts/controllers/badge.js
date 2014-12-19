@@ -9,6 +9,6 @@
  */
 
 angular.module('connectedCarSDK')
-  .controller('BadgeCtrl', function ($scope) {
+  .controller('BadgeCtrl', function () {
 
   });

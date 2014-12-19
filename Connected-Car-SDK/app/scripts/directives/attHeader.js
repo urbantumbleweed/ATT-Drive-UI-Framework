@@ -10,8 +10,7 @@ angular.module('connectedCarSDK.attHeader', [])
     .factory('$header', ['$rootScope', '$interval', function ($rootScope, $interval) {
         return {
             showBackButton: function (show, callback) {
-                var that = this,
-                    backButtonInterval;
+                var that = this;
                 this.backButtonInterval = $interval(function () {
                     $rootScope.$broadcast('showBackButton', [show, callback, function () {
                         $interval.cancel(that.backButtonInterval);
@@ -33,7 +32,7 @@ angular.module('connectedCarSDK.attHeader', [])
                     showBackButton: '=',
                     backButtonCallback: '&'
                 },
-                link: function (scope, element, attrs) {
+                link: function (scope) {
 
                     scope.backButton = scope.showBackButton ? scope.showBackButton : false;
                     scope.backCallback = scope.backButtonCallback ? scope.backButtonCallback : null;

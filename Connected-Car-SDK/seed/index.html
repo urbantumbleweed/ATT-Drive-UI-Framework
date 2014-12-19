@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body ng-app="app">
-    <div id="main-container">
-            <att-header app-name="appName" current-item="viewName"></att-header>
-            <div id="view-container" ng-view></div>
-            <att-drawer>
-                <att-menu title="title" items="appLinks"></att-menu>
-            </att-drawer>
-    </div>
+    <att-header app-name="appName" current-item="viewName" app-image="images/att-icon.png"></att-header>
+    <att-content has-header="true" background-img="images/att-stencil.png">
+        <ng-view></ng-view>
+    </att-content>
+    <att-drawer>
+        <att-menu title="title" items="appLinks"></att-menu>
+    </att-drawer>
     <att-loader></att-loader>
 </body>
 
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="dec-sdk\scripts\data-event-sdk.js"></script>
 
 <!-- APP FRAMEWORK -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
 <script src="att-sdk/scripts/connectedCarSDK-tpls-0.0.4.js"></script>
 <script src="scripts/app.js"></script>
@@ -32,5 +32,4 @@
 <!--Controllers-->
 <script src="firstPage/controllers/FirstPageCtrl.js"></script>
 <script src="secondPage/controllers/SecondPageCtrl.js"></script>
-
 </html>

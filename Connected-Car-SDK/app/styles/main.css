@@ -2,7 +2,6 @@
 body {
   margin: 0;
     padding: 0;
-    padding-top: 1em;
     background-color: white;
     color: #222222;
     overflow: auto;
@@ -42,7 +41,7 @@ body {
     clear: both;
 
     padding: 0;
-    height: 100%;
+    min-height: 400px;
     width: 768px;
 
 
@@ -70,8 +69,7 @@ body {
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
-  .footer {
+  .marketing{
     padding-left: 0;
     padding-right: 0;
   }
@@ -85,14 +83,7 @@ body {
   }
 }
 
-@media screen and (max-width: 1366px){
-    #sidebar,
-    #options-panel
-    {
-        font-size: 16px;
-    }
 
-}
 
 
 
@@ -103,28 +94,32 @@ body {
     margin-left: 1em;
 
     width: 240px;
-    background-color: #f9f9f9;
+
     padding: 1em;
-/*    -webkit-box-shadow: inset 0px 0px 4px 2px rgba(50, 50, 50, 0.52);
-    -moz-box-shadow:    inset 0px 0px 4px 2px rgba(50, 50, 50, 0.52);
-    box-shadow:         inset 0px 0px 4px 2px rgba(50, 50, 50, 0.52);
-    height: 470px;
-    */
+
     overflow: auto;
 
-
 }
 
-pre{
-    margin-left: 0;
-    padding-left: 0;
+#options-panel input[type="text"],
+#options-panel input[type="number"],
+#options-panel select
+{
+  width: 100%;
 }
+
 
 
 .padding {
   padding: 24px;
 }
 
+
+
+pre{
+  margin-left: 0;
+  padding-left: 0;
+}
 /* Pretty printing styles. Used with prettify.js. */
 
 /* SPAN elements with the classes below are added by prettyprint. */
@@ -202,16 +197,9 @@ padding: 10px;
 .nav ul li:after {
     content: " - ";
 }
-#options-panel {
-    display: none;
-}
+
 }
 
-.footer {
-
-    font-size: 14px;
-    text-align: center;
-}
 
 
 .att-media-player{
@@ -222,4 +210,75 @@ padding: 10px;
   position: absolute;
   top: 44%;
 
+}
+
+.full-height{
+  height: 100%;
+}
+
+/* SITE LAYOUT
+------------------------------------------*/
+
+header.row{
+  height: 3em;
+  background: #0574ac;
+  color: #ffffff;
+}
+
+header.row .col img{
+  max-height: 3em;
+  width: auto;
+}
+
+nav.col{
+  background: #fafafa;
+  margin-left: -10px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  width: 320px !important;
+}
+
+
+footer.row{
+  background: #333333;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: -20px !important;
+}
+
+footer.row .col{
+  padding: 20px;
+}
+
+
+
+
+/* Component demos */
+
+/* GRID SYSTEM
+-------------------------------------------*/
+
+.att-grid.grid-demo{
+  padding: 0px 10px;
+}
+
+.att-grid.grid-demo .col{
+  padding: 10px;
+  background: #f5f5f5;
+  border: 1px solid #cccccc;
+}
+
+.grid-demo-table{
+  width: 100%;
+}
+
+.note{
+  background: #E6F9FF;
+  border: 1px solid #0e90d2;
+  border-radius: 5px;
+}
+
+.col-content{
+  max-width: 1000px !important;
 }

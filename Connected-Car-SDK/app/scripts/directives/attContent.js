@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('connectedCarSDK.attContent', [])
-  .directive('attContent', ['$rootScope', function($rootScope){
+  .directive('attContent', [function(){
   return {
     restrict: 'E',
     transclude: true,

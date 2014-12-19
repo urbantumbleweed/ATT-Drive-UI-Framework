@@ -1,7 +1,7 @@
 ﻿<div class="att-media-player" ng-show="audio">
   <div class="header">
     <div class="album-art">
-      <img src="images/music-icon.png" alt="">
+      <img ng-src="{{currentSong().art && currentSong().art || 'images/music-icon.png'}}" alt="">
     </div>
 
     <div class="media-title">
@@ -35,10 +35,6 @@
                   parent-control="time">
       </att-slider>
     </div>
-  </div>
-
-  <div class="playlist" ng-repeat="song in playlist" ng-class="{'active-song' : currentIndex == $index}" ng-click="setFile($index)">
-    <span ng-bind="song.title"></span>
   </div>
 
   <div class="volume-panel" ng-class="{'show': showVolume}">

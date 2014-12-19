@@ -38,58 +38,67 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Add your site or application content here -->
-
-
-
-    <div id="page-wrapper" class="container-fluid" data-ng-style="{ 'padding-left' : isContentInIFrame() && 0 }">
-        <div class="col-md-2" id="sidebar" ng-hide="isContentInIFrame()">
-            <div class="logo">
-                <img src="images/ATT-logo.jpg" alt="AT&T Drive SDK" width="80%" />
-                <p class="small">Automotive UI Kit</p>
-            </div>
-
-            <div class="nav">
-                <hr />
-                <h5>Basic UI components</h5>
-                <ul>
-                    <li><a href="#/alert">Alert</a></li>
-                    <li><a href="#/badge">Badge</a></li>
-                    <li><a href="#/buttons">Buttons</a></li>
-                    <li><a href="#/carousel">Carousel</a></li>
-                    <li><a href="#/checkbox">Checkboxes</a></li>
-                    <li><a href="#/drawer">Drawer</a></li>
-                    <li><a href="#/dropdown">Dropdown</a></li>
-                    <li><a href="#/header">Header</a></li>
-                    <li><a href="#/listview">List View</a></li>
-                    <li><a href="#/loader">Loader</a></li>
-                    <li><a href="#/menu">Menu</a></li>
-                    <li><a href="#/modal">Modal</a></li>
-                    <li><a href="#/progress-bar">Progress bars</a></li>
-                    <li><a href="#/radio">Radio Buttons</a></li>
-                    <li><a href="#/slider">Slider</a></li>
-                    <li><a href="#/toggle-switch">Toggle Switch</a></li>
-                    <li><a href="#/tabs">Tabs</a></li>
-
-                </ul>
-                <h5>Specialized components</h5>
-                <ul>
-                    <li><a href="#/pinPad">Pin input pad</a></li>
-                    <li><a href="#/pinPadProvider">Pin pad code usage</a></li>
-                    <li><a href="#/simError">SIM card error</a></li>
-                    <li><a href="#/mediaPlayer">Media Player</a></li>
-                </ul>
-            </div>
+    <div class="att-grid">
+      <header class="row full-height" ng-hide="isContentInIFrame()">
+        <div class="col col-center">
+          <img src="images/logo-white.png" alt="AT&T Drive SDK"/>
+          <span>&nbsp;&nbsp;Automorive UI kit</span>
         </div>
-        <div class="col-md-10" data-ng-style="{ 'padding-left' : isContentInIFrame() && 0 }">
-            <div ng-view></div>
+      </header>
+      <div class="row">
+
+        <nav class="col" ng-if="!isContentInIFrame()">
+          <h5>CSS Utilities</h5>
+          <ul>
+              <li><a href="#/grid">Grid system</a></li>
+          </ul>
+          <h5>Basic UI components</h5>
+          <ul>
+            <li><a href="#/alert">Alert</a></li>
+            <li><a href="#/badge">Badge</a></li>
+            <li><a href="#/buttons">Buttons</a></li>
+            <li><a href="#/carousel">Carousel</a></li>
+            <li><a href="#/checkbox">Checkboxes</a></li>
+            <li><a href="#/drawer">Drawer</a></li>
+            <li><a href="#/dropdown">Dropdown</a></li>
+            <li><a href="#/header">Header</a></li>
+            <li><a href="#/listview">List View</a></li>
+            <li><a href="#/loader">Loader</a></li>
+            <li><a href="#/menu">Menu</a></li>
+            <li><a href="#/modal">Modal</a></li>
+            <li><a href="#/progress-bar">Progress bars</a></li>
+            <li><a href="#/radio">Radio Buttons</a></li>
+            <li><a href="#/slider">Slider</a></li>
+            <li><a href="#/toggle-switch">Toggle Switch</a></li>
+            <li><a href="#/tabs">Tabs</a></li>
+
+          </ul>
+          <h5>Specialized components</h5>
+          <ul>
+            <li><a href="#/pinPad">Pin input pad</a></li>
+            <li><a href="#/pinPadProvider">Pin pad code usage</a></li>
+            <li><a href="#/simError">SIM card error</a></li>
+            <li><a href="#/mediaPlayer">Media Player</a></li>
+          </ul>
+        </nav>
+
+        <section class="col" ng-if="!isContentInIFrame()">
+          <ng-view></ng-view>
+        </section>
+      </div>
+      <footer class="row" ng-if="!isContentInIFrame()">
+        <div class="col">
+          <p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
+          <p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
         </div>
-        <footer ng-hide="isContentInIFrame()">
-            <div class="footer">
-                <p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
-                <p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
-            </div>
-        </footer>
+      </footer>
     </div>
+
+
+    <ng-view ng-if="isContentInIFrame()"></ng-view>
+
+
+
 
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -118,7 +127,7 @@
     <script src="scripts/directives/attToggleSwitch.js"></script>
     <script src="scripts/directives/attTab.js"></script>
     <script src="scripts/directives/attTabset.js"></script>
-    <script src="scripts/directives/attProgressbar.js"></script>
+    <script src="scripts/directives/attProgressBar.js"></script>
     <script src="scripts/directives/attCarousel.js"></script>
     <script src="scripts/directives/attAlert.js"></script>
     <script src="scripts/directives/attButtons.js"></script>
@@ -135,6 +144,7 @@
     <script src="scripts/directives/attPinPad.js"></script>
     <script src="scripts/directives/attContent.js"></script>
     <script src="scripts/directives/attFooter.js"></script>
+    <script src="scripts/directives/attSimError.js"></script>
     <!-- endbuild -->
 
     <script src="scripts/app.js"></script>

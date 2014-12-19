@@ -25,7 +25,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
                   },
                   get: function (key) {
                       for (var i = 0; i < stack.length; i++) {
-                          if (key == stack[i].key) {
+                          if (key === stack[i].key) {
                               return stack[i];
                           }
                       }
@@ -43,7 +43,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
                   remove: function (key) {
                       var idx = -1;
                       for (var i = 0; i < stack.length; i++) {
-                          if (key == stack[i].key) {
+                          if (key === stack[i].key) {
                               idx = i;
                               break;
                           }
@@ -117,7 +117,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
 
               scope.close = function (evt) {
                   var modal = $modalStack.getTop();
-                  if (modal && modal.value.backdrop && modal.value.backdrop != 'static' && (evt.target === evt.currentTarget)) {
+                  if (modal && modal.value.backdrop && modal.value.backdrop !== 'static' && (evt.target === evt.currentTarget)) {
                       evt.preventDefault();
                       evt.stopPropagation();
                       $modalStack.dismiss(modal.key, 'backdrop click');
@@ -182,7 +182,7 @@ angular.module('connectedCarSDK.attModal', ['connectedCarSDK.transition'])
 
         function checkRemoveBackdrop() {
             //remove backdrop if no longer needed
-            if (backdropDomEl && backdropIndex() == -1) {
+            if (backdropDomEl && backdropIndex() === -1) {
                 var backdropScopeRef = backdropScope;
                 removeAfterAnimate(backdropDomEl, backdropScope, 150, function () {
                     backdropScopeRef.$destroy();

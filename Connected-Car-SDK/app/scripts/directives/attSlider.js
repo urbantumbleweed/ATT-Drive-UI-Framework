@@ -7,7 +7,7 @@
  * # attSlider
  */
 angular.module('connectedCarSDK.attSlider', [])
-    .directive('attSlider', ['$interval', function($interval) {
+    .directive('attSlider', [function() {
         return {
             restrict: 'EA',
             templateUrl: 'templates/attSlider.html',
@@ -20,7 +20,7 @@ angular.module('connectedCarSDK.attSlider', [])
                 textRight: '@',
                 parentControl: '@'
             },
-            link: function (scope, element, attrs) {
+            link: function (scope, element) {
 
                 // set default values
                 scope.min = scope.min || 0;
@@ -44,28 +44,28 @@ angular.module('connectedCarSDK.attSlider', [])
                     
                 }
 
-                scope.sliderMovingInterval;
+                //scope.sliderMovingInterval;
                 scope.sliderMovingTime = 200;
                 scope.sliderMoved = false;
 
                 scope.sliderMoved = function () {
-                    scope.$emit("sliderMoved", scope.parentControl);
+                    scope.$emit('sliderMoved', scope.parentControl);
                 };               
 
                 scope.sliderMoving = function () {
-                    scope.$emit("sliderMoving", scope.parentControl);
+                    scope.$emit('sliderMoving', scope.parentControl);
                 };
 
                 // Add touch events to control slider on mobile devices
                 var slider = element.find('input');
 
-                slider.bind('touchstart', function (evt) {
-                    scope.$emit("sliderMoving", scope.parentControl);
+                slider.bind('touchstart', function () {
+                    scope.$emit('sliderMoving', scope.parentControl);
                     this.focus();
                 });
 
-                slider.bind('touchend', function (evt) {
-                    scope.$emit("sliderMoved", scope.parentControl);
+                slider.bind('touchend', function () {
+                    scope.$emit('sliderMoved', scope.parentControl);
                     this.focus();
                 });
 

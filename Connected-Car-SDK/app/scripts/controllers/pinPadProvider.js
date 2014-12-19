@@ -19,10 +19,10 @@ angular.module('connectedCarSDK')
         };
 
         $scope.validatePin = function (pin) {
-            if (pin == "751645") {
-                alert("Correct PIN");
+            if (pin === '751645') {
+                window.alert('Correct PIN');
             } else {
-                alert("Incorrect PIN");
+                window.alert('Incorrect PIN');
             }
 
             // close the pin pad

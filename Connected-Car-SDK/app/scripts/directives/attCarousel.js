@@ -39,7 +39,7 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSDK.transition'])
               if (self.currentSlide && angular.isString(direction) && !$scope.noTransition && nextSlide.$element) {
                   //We shouldn't do class manip in here, but it's the same weird thing bootstrap does. need to fix sometime
                   nextSlide.$element.addClass(direction);
-                  var reflow = nextSlide.$element[0].offsetWidth; //force reflow
+                  nextSlide.$element[0].offsetWidth = nextSlide.$element[0].offsetWidth; //force reflow hack
 
                   //Set all other slides to stop doing their stuff for the new transition
                   angular.forEach(slides, function (slide) {
@@ -147,7 +147,7 @@ angular.module('connectedCarSDK.attCarousel', ['connectedCarSDK.transition'])
           //if this is the first slide or the slide is set to active, select it
           if (slides.length === 1 || slide.active) {
               self.select(slides[slides.length - 1]);
-              if (slides.length == 1) {
+              if (slides.length === 1) {
                   $scope.play();
               }
           } else {

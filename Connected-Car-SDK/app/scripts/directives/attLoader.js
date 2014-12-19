@@ -7,7 +7,7 @@
  * # attLoader
  */
 angular.module('connectedCarSDK.attLoader', [])
-    .factory('$loader', ['$rootScope', '$compile', '$document', function ($rootScope, $compile, $document) {
+    .factory('$loader', ['$rootScope', '$compile', '$document', '$timeout', function ($rootScope, $compile, $document, $timeout) {
 
         var getLoaderReference = function () {
 
@@ -53,8 +53,10 @@ angular.module('connectedCarSDK.attLoader', [])
 
                 // show the loader
                 if (loader) {
-                    var scope = angular.element(loader).scope();
-                    scope.forceshow = true;
+                    $timeout(function () {
+                        var scope = angular.element(loader).scope();
+                        scope.forceshow = true;
+                    }, 0);
                 }
             },
 
@@ -64,8 +66,10 @@ angular.module('connectedCarSDK.attLoader', [])
 
                 // show the loader
                 if (loader) {
-                    var scope = angular.element(loader).scope();
-                    scope.forceshow = false;
+                    $timeout(function () {
+                        var scope = angular.element(loader).scope();
+                        scope.forceshow = false;
+                    }, 0);
                 }
             }
 
@@ -76,7 +80,7 @@ angular.module('connectedCarSDK.attLoader', [])
           restrict: 'E',
           replace: true,
           templateUrl: 'templates/attLoader.html',
-          link: function (scope, element, attrs) {
+          link: function (scope, element) {
 
               scope.isLoading = function () {
                   return ($http.pendingRequests.length > 0) || scope.forceshow;
@@ -84,9 +88,9 @@ angular.module('connectedCarSDK.attLoader', [])
 
               scope.$watch(scope.isLoading, function (v) {
                   if (v) {
-                      element.css("display", "flex");
+                      element.css('display', 'flex');
                   } else {
-                      element.css("display", "none");
+                      element.css('display', 'none');
                   }
               });
 

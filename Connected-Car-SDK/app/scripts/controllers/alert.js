@@ -16,7 +16,7 @@ angular.module('connectedCarSDK')
     };
 
     $scope.onClick = function() {
-        alert('Alert button click');
+        window.alert('Alert button click');
     };
 
     $scope.showAlert = function() {

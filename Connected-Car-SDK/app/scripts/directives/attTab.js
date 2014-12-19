@@ -55,7 +55,7 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
     return {
         restrict: 'A',
         require: '^attTab',
-        link: function (scope, elm, attrs, tabCtrl) {
+        link: function (scope, elm) {
             scope.$watch('headingElement', function updateHeadingElement(heading) {
                 if (heading) {
                     elm.html('');
@@ -66,6 +66,15 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
     };
 }])
 .directive('tabContentTransclude', function () {
+    function isTabHeading(node) {
+        return node.tagName && (
+          node.hasAttribute('tab-heading') ||
+          node.hasAttribute('data-tab-heading') ||
+          node.tagName.toLowerCase() === 'tab-heading' ||
+          node.tagName.toLowerCase() === 'data-tab-heading'
+        );
+    }
+
     return {
         restrict: 'A',
         require: '^attTabset',
@@ -86,12 +95,4 @@ angular.module('connectedCarSDK.attTab', ['connectedCarSDK.attTabset'])
             });
         }
     };
-    function isTabHeading(node) {
-        return node.tagName && (
-          node.hasAttribute('tab-heading') ||
-          node.hasAttribute('data-tab-heading') ||
-          node.tagName.toLowerCase() === 'tab-heading' ||
-          node.tagName.toLowerCase() === 'data-tab-heading'
-        );
-    }
 });

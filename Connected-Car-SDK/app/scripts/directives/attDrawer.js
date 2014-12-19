@@ -8,13 +8,13 @@
  */
 angular.module('connectedCarSDK.attDrawer', [])
     .directive('attDrawer', [
-        '$rootScope', '$timeout', function ($rootScope, $timeout) {
+        '$rootScope', function ($rootScope) {
             return {
                 restrict: 'E',
                 templateUrl: 'templates/attDrawer.html',
                 transclude: true,
                 scope: {},
-                link: function(scope, element, attrs) {
+                link: function(scope) {
 
                     scope.showDrawer = false;
 

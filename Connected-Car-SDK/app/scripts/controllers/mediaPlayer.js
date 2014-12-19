@@ -15,7 +15,8 @@ angular.module('connectedCarSDK')
           {
               title: 'I Want To Break Free',
               author: 'Queen',
-              src: 'audio/I Want To Break Free.mp3'
+              src: 'audio/I Want To Break Free.mp3',
+              art: 'http://netstorage.metrolyrics.com/blog/wp-content/uploads/2013/04/DemiAlbumArt.jpg'
           },
           {
               title: 'We Will Rock You',

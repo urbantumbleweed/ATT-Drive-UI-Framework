@@ -295,29 +295,27 @@ module.exports = function (grunt) {
         },
 
         concat: {
-            att_sdk_dist: {
+            attSdkDist: {
                 options: {
                     stripBanners: true,
                     banner: '<%= meta.modules %>',
                 },
                 src: ['app/scripts/services/*', 'app/scripts/directives/*'],
                 dest: 'dist/scripts/<%= pkg.name %>-<%= pkg.version %>.js',
-            }
-            ,
-            att_sdk_dist_tpls: {
+            },
+            attSdkDistTpls: {
                 options: {
                     stripBanners: true,
                     banner: '<%= meta.all %>',
                 },
                 src: ['app/scripts/services/*', 'app/scripts/directives/*', 'app/templates/templates.js'],
                 dest: 'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js',
-            }
-            ,
-            dec_sdk_js: {
+            },
+            decSdkJs: {
                 src: ['seed/dataEventSDK/js/*'],
                 dest: 'dist/scripts/data-event-sdk.js',
             },
-            dec_sdk_json: {
+            decSdkJson: {
                 src: '{<%= sdk.decConcatJSON %>}',
                 dest: 'dist/scripts/data-event-sdk.json',
             }
@@ -510,7 +508,7 @@ module.exports = function (grunt) {
             decNamespaces = '';
 
         if (grunt.option('dec-namespaces')) {
-            var decNamespacesParts = grunt.option('dec-namespaces').split(",");
+            var decNamespacesParts = grunt.option('dec-namespaces').split(',');
             for (var i = 0; i < decNamespacesParts.length; i++) {
                 decConcatJSON.push(appConfig.decJSONPath + decNamespacesParts[i] + '.json');
                 decNamespaces += '"' + decNamespacesParts[i].toLowerCase() + '",';
@@ -521,7 +519,7 @@ module.exports = function (grunt) {
             decConcatJSON = [appConfig.decJSONPath + '*', appConfig.decJSONPath + '*'];
 
             grunt.file.recurse('seed/dataEventSDK/json', function (abspath, rootdir, subdir, filename) {
-                var fileNameParts = filename.split(".");
+                var fileNameParts = filename.split('.');
                 decNamespaces += '"' + fileNameParts[0].toLowerCase() + '",';
             });
         }
@@ -589,8 +587,8 @@ module.exports = function (grunt) {
             grunt.log.ok(path);
 
             grunt.config('modules', grunt.config('modules')
-                .concat("'connectedCarSDK." + path.substring(path.lastIndexOf('/') + 1,
-                        path.lastIndexOf('.')) + "'"));
+                .concat('\'connectedCarSDK.' + path.substring(path.lastIndexOf('/') + 1,
+                        path.lastIndexOf('.')) + '\''));
 
         });
 

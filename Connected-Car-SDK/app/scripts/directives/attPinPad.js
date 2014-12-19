@@ -49,7 +49,7 @@ angular.module('connectedCarSDK.attPinPad', [])
                 ngModel: '=',
                 onConfirm: '&'
             },
-            link: function(scope, element, attrs) {
+            link: function(scope) {
 
                 // if model is undefined, set to empty string
                 if (!scope.ngModel) {

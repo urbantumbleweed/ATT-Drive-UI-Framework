@@ -35,7 +35,8 @@ var app = angular
     'connectedCarSDK.attDynamicContent',
     'connectedCarSDK.attPinPad',
     'connectedCarSDK.attContent',
-    'connectedCarSDK.attFooter'
+    'connectedCarSDK.attFooter',
+    'connectedCarSDK.attSimError'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -135,6 +136,15 @@ var app = angular
             templateUrl: 'views/simError/simError.html'
 
         })
+        .when('/grid', {
+          templateUrl: 'views/grid/grid.html'
+
+        })
+
+      .when('/simErroriFrame', {
+        templateUrl: 'views/simError/simErroriFrame.html'
+
+      })
         .otherwise({
             redirectTo: '/'
         });
@@ -144,9 +154,9 @@ var app = angular
 app.run(function ($rootScope, $timeout) {
 
     $rootScope.$on('$routeChangeSuccess',
-        function (event, next, current) {
+        function () {
             $timeout(function() {
-                prettyPrint();
+                window.prettyPrint();
             }, 500);
 
         });

@@ -13,13 +13,11 @@ angular.module('connectedCarSDK.attBadge', [])
           restrict: 'E',
           replace: true,
           scope: {
-              value: "@",
-              badgeType: "@"
+              value: '@',
+              badgeType: '@'
           },
-          link: function (scope, element, attrs) {
-              var a = 5;
-              // sejo
-              // ramiz
+          link: function () {
+              // Implement logic here..
           }
       };
   });

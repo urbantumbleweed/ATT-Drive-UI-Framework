@@ -20,11 +20,11 @@ angular.module('connectedCarSDK.attDropdown', [])
                     items: '=',
                     closeButton: '@'
                 },
-                link: function(scope, element, attrs) {
+                link: function(scope) {
 
                     scope.show = false;
 
-                    if (scope.ngModel != null && scope.ngModel != undefined) {
+                    if (scope.ngModel !== null && scope.ngModel !== undefined) {
                         $timeout(function() {
                             scope.defaultOption = scope.ngModel.text;
                         });
