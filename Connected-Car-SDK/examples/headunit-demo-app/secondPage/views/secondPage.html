@@ -1,0 +1,19 @@
+
+<div ng-show="notification.text!=''">
+  <div class="notification"><h3>{{notification.text}}</h3></div>
+  <button ng-click="clearNotification()" class="btn btn-danger">Close</button>
+</div>
+
+<table class="table table-condensed">
+  <tbody>
+  <tr ng-repeat="(key,value) in vehicleInfo.climateControl">
+    <td class="leftcolumn">
+      {{key}}
+    </td>
+    <td>
+      <span animate-on-change='value'> {{value}}</span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--<button ng-click="simulate()" class="btn btn-danger">Simulate</button>-->

@@ -1,0 +1,22 @@
+<div ng-show="notification.text!=''">
+  <div class="notification"><h3>{{notification.text}}</h3></div>
+  <button ng-click="clearNotification()" class="btn btn-danger">Close</button>
+</div>
+
+<table>
+  <tr>
+    <td><h3><span class="ng-binding">VEHICLE</span></h3></td><td><att-toggle-switch ng-model="subscribedVehicleInfo" on-change="onChangeVI()"></att-toggle-switch><!--<td>Status: {{subscribedVehicleInfo}}</td>-->
+  </tr>
+  <tr>
+    <td><h3><span class="ng-binding">NAVIGATION</span></h3></td><td><att-toggle-switch ng-model="subscribedNavigation" on-change="onChangeNav()"></att-toggle-switch></td><!-- <td>Status: {{subscribedNavigation}}</td> -->
+  </tr>
+  <tr>
+    <td><h3><span class="ng-binding">NOTIFICATIONS</span></h3></td><td><att-toggle-switch ng-model="subscribedNotification" on-change="onChangeNotif()"></att-toggle-switch></td><!-- <td>Status: {{subscribedUserInfo}}</td> -->
+  </tr>
+  <!--  <tr><td></td><td> <button ng-click="resetSubscriptions()" class="btn btn-danger">Reset</button></td></tr> -->
+  <!--<tr><td></td><td> <button ng-click="simulate()" class="btn btn-danger">Simulate</button></td></tr>-->
+  <!--<tr><td></td><td> <button ng-click="getulate()" class="btn btn-danger">Pull Storage</button></td></tr>-->
+  <tr><td></td><td> <button ng-click="showStorageData()" class="btn btn-default">Storage</button></td></tr>
+  <tr><td></td><td> <button ng-click="showStorageSubscriptions()" class="btn btn-default">Listeners</button></td></tr>
+  <tr><td></td><td> <button ng-click="clearStorage()" class="btn btn-success">Clear Storage</button></td></tr>
+</table>
