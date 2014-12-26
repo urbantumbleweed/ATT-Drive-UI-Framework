@@ -312,7 +312,7 @@ module.exports = function (grunt) {
                 dest: 'dist/scripts/<%= pkg.name %>-tpls-<%= pkg.version %>.js',
             },
             decSdkJs: {
-                src: ['seed/dataEventSDK/js/*'],
+                src: ['seed/dataEventSDK/js/**/*.js'],
                 dest: 'dist/scripts/data-event-sdk.js',
             },
             decSdkJson: {

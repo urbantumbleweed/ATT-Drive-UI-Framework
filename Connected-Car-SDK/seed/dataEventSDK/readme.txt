@@ -1,1 +1,1 @@
-﻿//DEC SDK version: R1D011.5.2
+﻿//DEC JS SDK version: R1D011.6.1
