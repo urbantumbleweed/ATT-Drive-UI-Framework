@@ -1,7 +1,7 @@
 # Head Unit development environment setup
-AT&T Head Unit apps are built with HTML5 for AngularJS framework. Sample apps contain directives for UI and essential functionality like app menu, app routes, init and hooks into the middle-ware data and event controller, for which the API is documented [here](link). 
+AT&T Head Unit apps are built with HTML5 for AngularJS framework. Sample apps contain directives for UI and essential functionality like app menu, app routes, init and hooks into the middle-ware data and event controller.
 
-App framework contains automation and helper tools for which we need to install NodeJS, and some of its libraries. 
+App framework contains automation and helper tools for which we need to install NodeJS, and some of its libraries. You can get started in two ways; Using Virtual Machine or by installing developer environment manually into your local environment.
 
 ## Installing developer environment using virtual machine 
 This is the fastes way to get coding as application framework and its dependencies are preconfigured. Using Vagrant is simple and upon installation all you need to do is SSH into the VM and start coding.
@@ -13,7 +13,7 @@ This virtual machine will get you up and running with development very fast. If 
 
 - Download and install [Vagrant](http://vagrantup.com)
 - Download and install [VirtualBox](https://www.virtualbox.org)
-- Download or clone this repository [url](https://github.com/ericsson-innovate/ATT-Drive-SDK-VM.git)
+- Download or clone this repository [AT&T Drive VM](https://github.com/ericsson-innovate/ATT-Drive-SDK-VM.git)
 
 - Using terminal (Command Line), go to root of this project **ATT-Drive-VM** and type `vagrant up`
 - Once Vagrant starts the VM, use SSH to access the server `vagrant ssh` command
@@ -33,7 +33,8 @@ Once Node is installed and running, using terminal as sudo (Node shell running a
 
 ## Step 2: 
 ### Install Head Unit simulator and DEC service
-Need instructions here once the SIM is ready. Hacker will need to tie their IDE to the HU running on a tablet. 
+> Hackaton participants: Request hardware from the organizes. See AT&T or Ericsson booth for help. You will skip this step.
+
 - Download and run [nSpan](url)
 - Download and run [nServices](url)
 - Download and install head unit Simulator (for Android 4.4.x tablets)
@@ -69,14 +70,14 @@ Now you are ready to build your first app, and the API is readily available.
 Default browser should auto-start and open your localhost URL: [http://localhost:9000](http://localhost:9000) after you execute grunt serve command. `grunt serve`
 
 ### Sample apps
-Sample apps are the best place to start and you can download them from [github](url). Sample apps contain directives for UI and essential functionality like app menu, app routes, init and hooks into the middle-ware data and event controller.
+Sample apps are the best place to start and you can download them from [github](https://github.com/ericsson-innovate/sample-app). Sample apps contain directives for UI and essential functionality like app menu, app routes, init and hooks into the middle-ware data and event controller.
 
 #### Following sample apps are available:
 - Hello World - Blank app with hooks to DEC API
 - Navigation app - With an example function to pass an events to navigation app via DEC
 - Vehicle Info app - Passes the vehicle information from TCU via the DEC
 
-Once you [download](url) them locally, in terminal CD to that directory and inside the app folder of the app you wish to load, run `http-server`. Browser should pop-up showing you the app running, If your browser is able to communicate with the DEC service you should be able start building your apps.
+Once you download the sample app locally, in terminal CD to that directory and inside the app folder of the app you wish to load, run `http-server`. Browser should pop-up showing you the app running, If your browser is able to communicate with the DEC service you should be able start building your apps.
 
 ### Helper commands (run in terminal inside the Connected-Car-SDK folder)
 - Change SPAN Host IP: `grunt seed --dec-host=myHost`
