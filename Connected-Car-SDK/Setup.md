@@ -6,10 +6,10 @@ App framework contains automation and helper tools for which we need to install 
 ## Installing developer environment using virtual machine 
 This is the fastes way to get coding as application framework and its dependencies are preconfigured. Using Vagrant is simple and upon installation all you need to do is SSH into the VM and start coding.
 
-## AT&T Drive App Development VM 
+### AT&T Drive App Development VM 
 This virtual machine will get you up and running with development very fast. If you are planing on continuing building you app for AT&T Drive its best if you setup your local development environment locally following the steps in [Setup.MD](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework/blob/developer/Setup.md).
 
-### VM Setup
+#### VM Setup
 
 - Download and install [Vagrant](http://vagrantup.com)
 - Download and install [VirtualBox](https://www.virtualbox.org)
