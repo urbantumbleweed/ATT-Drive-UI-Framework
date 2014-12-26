@@ -33,7 +33,7 @@ Once Node is installed and running, using terminal as sudo (Node shell running a
 
 ## Step 2: 
 ### Install Head Unit simulator and DEC service
-> Hackaton participants: Request hardware from the organizes. See AT&T or Ericsson booth for help. You will skip this step.
+> Hackaton participants: Request hardware from the organizers. See AT&T or Ericsson booth for help. You will skip this step.
 
 - Download and run [nSpan](url)
 - Download and run [nServices](url)
