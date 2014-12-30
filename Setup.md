@@ -23,39 +23,39 @@ This virtual machine will get you up and running with development very fast. If 
 ## Installing developer environment manually into local environment
 Suggested method if you intent to get serius about developing apps for AT&T Drive.
 
-## Step 1: 
-### Before you start
+### Step 1: 
+#### Before you start
 Before you start development make sure you have the following installed:
 - NodeJS [http://nodejs.org](http://nodejs.org) (.exe or .dmg installers are available)
 
 Once Node is installed and running, using terminal as sudo (Node shell running as Administrator on Windows): 
 - Install globally Grunt, Karma, Bower and Grunt-Cli: `npm install -g grunt bower karma grunt-cli http-server`
 
-## Step 2: 
-### Install Head Unit simulator and DEC service
+### Step 2: 
+#### Install Head Unit simulator and DEC service
 > Hackaton participants: Request hardware from the organizers. See AT&T or Ericsson booth for help. You will skip this step.
 
 - Download and run [nSpan](url)
 - Download and run [nServices](url)
 - Download and install head unit Simulator (for Android 4.4.x tablets)
 
-## Configure Head Unit Simulator
+#### Configure Head Unit Simulator
 > Hackaton participants: Request hardware from the organizers. See AT&T or Ericsson booth for help.
 
-## Step 3: 
-### Installing App Framework
+### Step 3: 
+#### Installing App Framework
 - Verify you have performed **Step 1**
 - Download UI Kit Framework [github](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework)
 - Change directory to Connected-Car-SDK folder 
 - Run: `npm install`
 - Then: `bower install`
 
-## Building apps for Head Unit
+#### Building apps for Head Unit
 App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit) to visualize the UX, and get the example code. You may also install the UI Kit reference site locally by following the instructions below. 
 
 Now you are ready to build your first app, and the API is readily available. 
 
-## Seed your first app
+#### Seed your first app
 Once you download the SDK, using terminal in "Connected-Car-SDK" folder run this command: `grunt seed --dec-host=127.0.0.1 --dec-port=4402 -name=/full/path/to/your/app` (you can change the default IP and port if needed). You can always change this later (see optional commands).
 
 Once the build is completed the app will load in your browser and if you see the first page, the app is connected to span and ready for development. 
