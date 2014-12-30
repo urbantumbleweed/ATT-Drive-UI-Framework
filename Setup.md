@@ -53,7 +53,7 @@ Once Node is installed and running, using terminal as sudo (Node shell running a
 - Then: `bower install`
 
 #### Building apps for Head Unit
-App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit) to visualize the UX, and get the example code. You may also install the UI Kit reference site locally by following the instructions below. 
+App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit/) to visualize the UX, and get the example code. You may also install the UI Kit reference site locally by following the instructions below. 
 
 Now you are ready to build your first app, and the API is readily available. 
 
@@ -65,7 +65,7 @@ Once the build is completed the app will load in your browser and if you see the
 Now you are ready to build your first app, and the API is readily available. 
 
 - [In-car Apps API Docs](http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api)
-- [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit)
+- [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit/)
 
 # Optional stuff
 ### Running the docs website locally 
