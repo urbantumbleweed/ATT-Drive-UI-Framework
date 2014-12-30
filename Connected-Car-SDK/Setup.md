@@ -51,7 +51,7 @@ Need instructions here once the SIM is ready. Hacker will need to tie their IDE 
 - Then: `bower install`
 
 ## Building apps for Head Unit
-App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](Link to Runnung UI Kit preview Site) to visualize the UX, and get the example code. You may also install the UI Kit reference site locally by following the instructions below. 
+App framework contains all the essentials to build standardized head unit apps, and starting your app from the sample apps is the fastest way to get started. Then take advantage of the [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit) to visualize the UX, and get the example code. You may also install the UI Kit reference site locally by following the instructions below. 
 
 Now you are ready to build your first app, and the API is readily available. 
 
