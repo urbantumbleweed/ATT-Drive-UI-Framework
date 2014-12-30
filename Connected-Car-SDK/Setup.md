@@ -7,7 +7,7 @@ App framework contains automation and helper tools for which we need to install 
 This is the fastes way to get coding as application framework and its dependencies are preconfigured. Using Vagrant is simple and upon installation all you need to do is SSH into the VM and start coding.
 
 ### AT&T Drive App Development VM 
-This virtual machine will get you up and running with development very fast. If you are planing on continuing building you app for AT&T Drive its best if you setup your local development environment locally following the steps in [Setup.MD](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework/blob/developer/Setup.md).
+This virtual machine will get you up and running with development very fast. If you are planing on continuing building you app for AT&T Drive its best if you setup your local development environment locally following the steps in [Setup.MD](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework/Setup.md).
 
 #### VM Setup
 
@@ -45,7 +45,7 @@ Need instructions here once the SIM is ready. Hacker will need to tie their IDE 
 ## Step 3: 
 ### Installing App Framework
 - Verify you have performed **Step 1**
-- Download UI Kit Framework [github](url)
+- Download UI Kit Framework [github](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework)
 - Change directory to Connected-Car-SDK folder 
 - Run: `npm install`
 - Then: `bower install`
@@ -62,8 +62,8 @@ Once the build is completed the app will load in your browser and if you see the
 
 Now you are ready to build your first app, and the API is readily available. 
 
-- [In-car Apps API Docs](Link to Vehicle API compiled from VehicleAPI.md)
-- [UI Kit API Docs](Link to Runnung UI Kit preview Site)
+- [In-car Apps API Docs](http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api)
+- [UI Kit API Docs](http://attgarage.msg.betelab.ericy.com:443/ui-toolkit)
 
 # Optional stuff
 ### Running the docs website locally 
@@ -87,10 +87,10 @@ Once you download the sample app locally, in terminal CD to that directory and i
 - Rebuild SDK (if updated) `grunt build` then copy & paste the dist/ATT-SDK folder to your app
 
 ## Building apps on Hand-held device
-You can build the external apps to interface with in-vehicle Head Unit and exchange information over [REST API](url). You can also simulate (override) the TCU data via [Luigi](url) interface and see the result in the vehicle app and hand-held app alike.
+You can build the external apps to interface with in-vehicle Head Unit and exchange information over [REST API](http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/getting-started). You can also simulate (override) the TCU data via [Luigi](http://mafalda.hack.att.io) interface and see the result in the vehicle app and hand-held app alike.
 
-- [Out-of-car Apps API]()
-- [Luigi Sandbox]() 
+- [Out-of-car Apps API](http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/getting-started)
+- [Luigi Sandbox](http://mafalda.hack.att.io) 
 
 > Example: You can build a wearable app to send navigation instructions to the vehicle Head Unit navigation app, or to remotely control the vehicle.
 
