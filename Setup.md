@@ -44,7 +44,8 @@ Once Node is installed and running, using terminal as sudo (Node shell running a
 #### Configure Head Unit Simulator
 > Hackaton participants: Request hardware from the organizers. See AT&T or Ericsson booth for help.
 
-### Step 3: #### Installing App Framework
+### Step 3: 
+#### Installing App Framework
 - Verify you have performed **Step 1**
 - Download UI Kit Framework [github](https://github.com/ericsson-innovate/ATT-Drive-UI-Framework)
 - Change directory to Connected-Car-SDK folder 
