@@ -414,7 +414,7 @@ module.exports = function (grunt) {
                 },
                 {
                     cwd: 'dist',                        // set working folder / root to copy
-                    src: ['**/scripts/app.js'],       // copy all files and subfolders
+                    src: ['**/scripts/dec.js', '**/scripts/app.js'],       // copy all files and subfolders
                     dest: '<%= sdk.seedPath %>',    // destination folder
                     expand: true                        // required when using cwd
                 }
@@ -424,7 +424,7 @@ module.exports = function (grunt) {
 
         replace: {
             seed: {
-                src: ['dist/scripts/data-event-sdk.js', 'seed/scripts/app.js'],             // source files array (supports minimatch)
+                src: ['dist/scripts/data-event-sdk.js', 'seed/scripts/app.js', 'seed/scripts/dec.js'],             // source files array (supports minimatch)
                 dest: 'dist/scripts/',                                                      // destination directory or file
                 replacements: [{
                     from: 'var host = "10.0.2.2"', // temp solution
