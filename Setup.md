@@ -40,7 +40,7 @@ Once Node is installed and running, using terminal as sudo (Node shell running a
 - Download and install head unit Simulator (for Android 4.4.x tablets)
 
 ## Configure Head Unit Simulator
-Need instructions here once the SIM is ready. Hacker will need to tie their IDE to the HU running on a tablet. 
+> Hackaton participants: Request hardware from the organizers. See AT&T or Ericsson booth for help.
 
 ## Step 3: 
 ### Installing App Framework
