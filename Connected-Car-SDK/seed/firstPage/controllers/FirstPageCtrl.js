@@ -2,7 +2,9 @@
 
 angular.module('app')
   .controller('FirstPageCtrl', ["$scope", function ($scope) {
-      $scope.isDecOnline = $rootScope.decInstance.isOnline;
+      	$rootScope.$watch('decInstance.isOnline', function(value){
+			$scope.isDecOnline = value;
+		});
 
       //SUBSCRIBE SET & GET IDENTIFICATION
       //var idSubscribeHandle = drive.vehicleinfo.identification.subscribe(function (res) {
