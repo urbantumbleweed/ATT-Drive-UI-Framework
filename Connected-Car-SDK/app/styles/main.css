@@ -28,6 +28,11 @@ body {
     overflow: hidden;
 }
 
+.fixed-container{
+  width: 1000px;
+  margin: 0 auto;
+}
+
 #main-container > .ng-scope{
     height: 470px;
 }
@@ -88,10 +93,8 @@ body {
 
 
 #options-panel{
-    position: relative;
-    float: left;
-    clear: none;
-    margin-left: 1em;
+    position: absolute;
+    margin-left: 780px;
 
     width: 240px;
 
@@ -217,28 +220,64 @@ nav ul{
 ------------------------------------------*/
 
 header.row{
-  height: 3em;
+  height: 70px;
   background: #0574ac;
   color: #ffffff;
+  font-size: 14px;
+}
+
+header span{
+  margin-left: 15px;
 }
 
 header.row .col img{
-  max-height: 3em;
+  height: 26px;
   width: auto;
+  margin-top: -5px;
 }
 
 nav.col{
-  background: #fafafa;
-  margin-left: -10px;
-  margin-top: -10px;
+  padding: 0;
+  margin-left: -20px;
+  margin-top: 2.5px;
   margin-bottom: -10px;
-  width: 320px !important;
+
+}
+
+nav ul li ul{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+nav a{
+  color: #0574ac;
+}
+
+nav h5{
+  font-size: 22px;
+}
+
+nav a.selected{
+  font-weight: bold;
+  font-family: omnes_attbold;
+}
+
+nav ul{
+  padding-left: 0;
+}
+
+nav ul li{
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+nav a:hover, a:focus{
+  color: #0574ac;
+  text-decoration: none;
 }
 
 
 footer.row{
-  background: #333333;
-  color: #ffffff;
+
   font-size: 14px;
   text-align: center;
   margin-bottom: -20px !important;
@@ -298,3 +337,5 @@ footer.row .col{
 .att-footer{
   background-color: rgba(150,100,100,.7);
 }
+
+

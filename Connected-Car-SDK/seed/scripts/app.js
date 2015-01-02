@@ -61,8 +61,6 @@ function initDec() {
 
     function decCallback(decResponse) {
         $rootScope.decInstance = new DecInstanceConstructor(decResponse);
-
-        decSetSubscriptions();
     };
 
     try {

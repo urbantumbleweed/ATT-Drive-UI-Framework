@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/font-asesome.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -37,67 +38,88 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Add your site or application content here -->
-    <div class="att-grid">
-      <header class="row full-height" ng-hide="isContentInIFrame()">
+
+    <div ng-if="!isContentInIFrame()" class="att-grid">
+      <header class="row full-height">
         <div class="col col-center">
-          <a href="#/"><img src="images/logo-white.png" alt="AT&T Drive SDK"/></a>
-          <span>&nbsp;&nbsp;Automotive UI kit</span>
+          <div class="fixed-container">
+            <a href="http://attgarage.msg.betelab.ericy.com:443/driveSdk/"><img src="images/logo-white.png" alt="AT&T Drive SDK"/></a>
+            <span>&nbsp;&nbsp;DEVELOPER PREVIEW</span>
+          </div>
         </div>
       </header>
-      <div class="row">
-
-        <nav class="col" ng-if="!isContentInIFrame()">
-          <h5>CSS Utilities</h5>
-          <ul>
-              <li><a href="#/grid">Grid system</a></li>
-          </ul>
-          <h5>Basic UI components</h5>
-          <ul>
-            <li><a href="#/alert">Alert</a></li>
-            <li><a href="#/badge">Badge</a></li>
-            <li><a href="#/buttons">Buttons</a></li>
-            <li><a href="#/carousel">Carousel</a></li>
-            <li><a href="#/checkbox">Checkboxes</a></li>
-            <li><a href="#/content">Content container</a></li>
-            <li><a href="#/drawer">Drawer</a></li>
-            <li><a href="#/dropdown">Dropdown</a></li>
-            <li><a href="#/footer">Footer</a></li>
-            <li><a href="#/header">Header</a></li>
-            <li><a href="#/listview">List View</a></li>
-            <li><a href="#/loader">Loader</a></li>
-            <li><a href="#/menu">Menu</a></li>
-            <li><a href="#/modal">Modal</a></li>
-            <li><a href="#/progress-bar">Progress bars</a></li>
-            <li><a href="#/radio">Radio Buttons</a></li>
-            <li><a href="#/slider">Slider</a></li>
-            <li><a href="#/toggle-switch">Toggle Switch</a></li>
-            <li><a href="#/tabs">Tabs</a></li>
-
-          </ul>
-          <h5>Specialized components</h5>
-          <ul>
-            <li><a href="#/pinPad">Pin input pad</a></li>
-            <li><a href="#/pinPadProvider">Pin pad code usage</a></li>
-            <li><a href="#/simError">SIM card error</a></li>
-            <li><a href="#/mediaPlayer">Media Player</a></li>
-          </ul>
-        </nav>
-
-        <section class="col" ng-if="!isContentInIFrame()">
-          <ng-view></ng-view>
-        </section>
-      </div>
-      <footer class="row" ng-if="!isContentInIFrame()">
-        <div class="col">
-          <p>&copy;2014 AT&amp;T, Inc. All rights reserved. For use only for purposes of Drive Platform app developmemt.</p>
-          <p><a href="#">License</a> | <a href="mailto:danny.mustafic@att.com">Contact</a></p>
-        </div>
-      </footer>
     </div>
 
+    <div ng-if="!isContentInIFrame()" class="fixed-container">
+      <div class="att-grid">
+
+        <div class="row">
+
+          <nav class="col" style="width: 220px; min-width: 220px;">
+            <h5>Vehicle Apps API</h5>
+            <ul>
+              <li ng-repeat="item in sideMenuItems.vehicleAppsApi">
+                <a href="{{item.href}}">{{item.text}}</a>
+              </li>
+            </ul>
+            <h5>Vehicle UI API</h5>
+            <ul>
+              <li><a href="#/" ng-click="markAsSelected(sideMenuItems.topLevelRoutes[0])"
+                     ng-class="{'selected': sideMenuItems.topLevelRoutes[0].isSelected === true}">
+                Car App framework
+              </a></li>
+              <li><a href="#/alert" ng-click="markAsSelected(sideMenuItems.vehicleUiApi[0])">UI Components</a>
+                <ul>
+                  <li ng-repeat="item in sideMenuItems.vehicleUiApi | orderBy:'text'">
+                    <a ng-class="{'selected': item.isSelected === true}"
+                       ng-click="markAsSelected(item)"
+                       href="{{item.href}}">
+                      {{item.text}}
+                    </a>
+                  </li>
+                </ul>
+
+              </li>
+              <li>
+                <a>Design Tools</a>
+                <ul>
+                  <li><a href="https://www.dropbox.com/sh/3vegatwa68pjlvw/AADc7xKdJbHu283QQNcLaooXa/UX%20Guidelines?dl=0">
+                    UX Design Guidelines</a>
+                  </li>
+                  <li><a href="https://www.dropbox.com/sh/3vegatwa68pjlvw/AAD_-_1-IdjPN_-0WHGVQnmxa/Omni%20Graffle%20Stencil?dl=0">
+                    UX Stencil</a>
+                  </li>
+                  <li><a href="https://www.dropbox.com/sh/3vegatwa68pjlvw/AADOgq6PlJhhlcIj15XOJjbIa/Photoshop%20Spine?dl=0">
+                    UI Photoshop Spine</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <h5>Web Apps API</h5>
+            <ul>
+              <li ng-repeat="item in sideMenuItems.webAppsApi">
+                <a href="{{item.href}}">{{item.text}}</a>
+              </li>
+            </ul>
+          </nav>
+
+
+          <section class="col">
+            <div id="wrapper">
+              <ng-view></ng-view>
+            </div>
+          </section>
+        </div>
+        <footer class="row">
+          <div class="col">
+            <p>&copy;2015 AT&amp;T, Inc. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
+    </div>
 
     <ng-view ng-if="isContentInIFrame()"></ng-view>
-
 
 
 

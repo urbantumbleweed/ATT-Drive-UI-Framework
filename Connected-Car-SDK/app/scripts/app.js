@@ -174,4 +174,232 @@ app.run(function ($rootScope, $timeout) {
             return true;
         }
     };
+
+
+
+  $rootScope.sideMenuItems = {
+    vehicleAppsApi : [
+      {
+        text: 'Context initialization',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#context-initialization'
+      },
+      {
+        text: 'Vehicle information',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#vehicle-information'
+      },
+
+      {
+        text: 'Get Vehicle information',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#get-vehicle-information'
+      },
+      {
+        text: 'Set Vehicle information',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#set-vehicle-information'
+      },
+      {
+        text: 'Navigation',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#navigation'
+      },
+      {
+        text: 'Identity',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#identity'
+      },
+      {
+        text: 'Application and System Settings',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#application-and-system-settings'
+      },
+      {
+        text: 'Notifications',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#notifications'
+      },
+      {
+        text: 'Media',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#media'
+      },
+      {
+        text: 'SMS',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#sms'
+      },
+      {
+        text: 'Search service',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#search-service'
+      },
+      {
+        text: 'Site Automation (Digital Life)',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#site-automation-digital-life'
+      },
+      {
+        text: 'Subscribe to site automation',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/vehicle-apps-api#subscribe-to-site-automation'
+      }
+    ],
+    vehicleUiApi : [
+      {
+        text: 'Alert',
+        href: '#/alert',
+        isSelected: false
+      },
+      {
+        text: 'Badges',
+        href: '#/badge',
+        isSelected: false
+      },
+      {
+        text: 'Buttons',
+        href: '#/buttons',
+        isSelected: false
+      },
+      {
+        text: 'Carousel',
+        href: '#/carousel',
+        isSelected: false
+      },
+      {
+        text: 'Checkbox',
+        href: '#/checkbox',
+        isSelected: false
+      },
+      {
+        text: 'Content container',
+        href: '#/content',
+        isSelected: false
+      },
+      {
+        text: 'Drawer',
+        href: '#/drawer',
+        isSelected: false
+      },
+      {
+        text: 'Dropdown',
+        href: '#/dropdown',
+        isSelected: false
+      },
+      {
+        text: 'Footer',
+        href: '#/footer',
+        isSelected: false
+      },
+      {
+        text: 'Header',
+        href: '#/header',
+        isSelected: false
+      },
+      {
+        text: 'List View',
+        href: '#/listview',
+        isSelected: false
+      },
+      {
+        text: 'Loader',
+        href: '#/loader',
+        isSelected: false
+      },
+      {
+        text: 'Menu',
+        href: '#/menu',
+        isSelected: false
+      },
+      {
+        text: 'Modal',
+        href: '#/modal',
+        isSelected: false
+      },
+      {
+        text: 'Progress bars',
+        href: '#/progress-bar',
+        isSelected: false
+      },
+      {
+        text: 'Radio Buttons',
+        href: '#/radio',
+        isSelected: false
+      },
+      {
+        text: 'Slider',
+        href: '#/slider',
+        isSelected: false
+      },
+      {
+        text: 'Toggle Switch',
+        href: '#/toggle-switch',
+        isSelected: false
+      },
+      {
+        text: 'Tabs',
+        href: '#/tabs',
+        isSelected: false
+      },
+      {
+        text: 'Pin input pad',
+        href: '#/pinPad',
+        isSelected: false
+      },
+      {
+        text: 'Pin pad code usage',
+        href: '#/pinPadProvider',
+        isSelected: false
+      },
+      {
+        text: 'SIM card error',
+        href: '#/simError',
+        isSelected: false
+      },
+      {
+        text: 'Media Player',
+        href: '#/mediaPlayer',
+        isSelected: false
+      },
+      {
+        text: 'Grid system',
+        href: '#/grid',
+        isSelected: false
+      }
+    ],
+    webAppsApi: [
+      {
+        text: 'Getting started',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/getting-started'
+      },
+      {
+        text: 'Sample Apps',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/sample-apps'
+      },
+      {
+        text: 'Know the Driver',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/know-driver'
+      },
+      {
+        text: 'Know the Car',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/know-car'
+      },
+      {
+        text: 'Control the Car',
+        href: 'http://attgarage.msg.betelab.ericy.com:443/driveSdk/#/api-docs/web-apps-api/control-car'
+      },
+    ],
+    topLevelRoutes: [
+      {
+        text: 'Car App Framework',
+        href: '#/',
+        isSelected: false
+      },
+      {
+        text: 'UI Components',
+        href: '#/alert',
+        isSelected: false
+      }
+    ]
+  };
+
+  $rootScope.markAsSelected = function(item){
+    angular.forEach($rootScope.sideMenuItems.vehicleUiApi, function(i){
+      i.isSelected = false;
+    });
+    angular.forEach($rootScope.sideMenuItems.topLevelRoutes, function(i){
+      i.isSelected = false;
+    });
+    item.isSelected = true;
+  };
+
+
 });
