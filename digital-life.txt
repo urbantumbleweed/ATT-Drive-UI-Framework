@@ -1,0 +1,58 @@
+Get your authToken & requestTokens here to use the REST API
+This is needed to get the Gateway ID (GUID) for other endpoints
+/api/authtokens
+https://systest.digitallife.att.com:443/penguin/api/authtokens?userId=553474456&password=NO-PASSWD&domain=DL&appKey=DE_23CEF339470E7699_1
+  ["content"]["authToken"] -> string of authToken
+  ["content"]["gateways"]["id"] ->get GUID
+  ["content"]["gateways"]["contact"] -> get user object
+  ["content"]["gateways"]["contact"]["contactInfos"] -> array of contact methods
+
+List All Devices for the Gateway
+/api/{gatewayGUID}/devices
+https://systest.digitallife.att.com:443/penguin/api/485317BF0E4A4E9CA3A5704AD417DAE3/devices
+["content"][0]["deviceGuid"] -> used to address a specific component on the system
+["content"][0]["deviceType"] -> Get the type of device on the system
+["content"][0]["events"] -> array of events
+["content"][0]["attributes"][0] -> array of attribute objects containing (label, protection, dataType, value, defaultValue, lastTimeUdpated)
+["content"][0]["attributes"][{index}]["value"] -> value of a device attribute
+
+
+List a device with a given device GUID
+/api/{gatewayGUID}/devices/{deviceGUID}
+https://systest.digitallife.att.com:443/penguin/api/485317BF0E4A4E9CA3A5704AD417DAE3/devices/DT00000004
+  ["content"]["deviceType"] -> string of device Type
+  ["content"]["events"]-> Array of events
+  ["content"]["attributes"]-> array of attribute objects with (label, protection, dataType, value, defaultValue, lastUpdateTime)
+
+
+
+Update device
+/api/{gatewayGUID}/devices/{deviceGUID}/{action}
+https://systest.digitallife.att.com:443/penguin/api/485317BF0E4A4E9CA3A5704AD417DAE3/devices/DT00000004/thermostat-mode
+  ["content"] == -1 means the value is already what is being posted
+
+
+Fetch Device Attribute
+/api/{gatewayGUID}/devices/{deviceGUID}/{action}
+https://systest.digitallife.att.com:443/penguin/api/485317BF0E4A4E9CA3A5704AD417DAE3/devices/DT00000004/thermostat-mode
+  ["content"]["label"] -> the attribute that is being read.  The {action} parameter
+  ["content"]["value"] -> the current value of the device
+  ["content"]["dataType"] -> acceptable device value types
+
+Update device
+/api/{gatewayGUID}/devices/{deviceGUID}/{action}/{value}
+
+Get a list of locations
+/api/{gatewayGUID}/locations
+https://systest.digitallife.att.com:443/penguin/api/485317BF0E4A4E9CA3A5704AD417DAE3/locations
+  ["content"]["floors"]["idString"] -> object with id and label of location object
+
+
+31321
+
+
+nodeTypes.json
++file in assets/json/channels ->if authmechani
+
+
+get alerts
