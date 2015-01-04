@@ -12,6 +12,8 @@ angular.module('connectedCarSDK.transition', [])
  */
 .factory('$transition', ['$q', '$timeout', '$rootScope', function ($q, $timeout, $rootScope) {
 
+  console.log('connectedCarSDK then what?');
+
     var $transition = function (element, trigger, options) {
         options = options || {};
         var deferred = $q.defer();
@@ -129,13 +131,13 @@ angular.module('connectedCarSDK.attAlert', [])
             },
 
             closeAlert: function() {
-                
+
                     if (this.timeoutPromise)
                         $timeout.cancel(this.timeoutPromise);
 
                     this.alerts[0].onClose();
                     this.removeActiveAlert();
-                
+
 
                 this.handleAutoClose();
             },
@@ -153,7 +155,7 @@ angular.module('connectedCarSDK.attAlert', [])
     .factory('$alert', ['$rootScope', '$compile', '$document', function ($rootScope, $compile, $document) {
 
         return {
-            
+
             show: function(options) {
                 var angularDomEl = angular.element('<att-alert on-close="onClose()" on-click="onClick()">' + options.text + '</att-alert>');
                 angularDomEl.attr({
@@ -168,7 +170,7 @@ angular.module('connectedCarSDK.attAlert', [])
                 var alertScope = $rootScope.$new(false);
                 alertScope.onClose = options.onClose ? options.onClose : null;
                 alertScope.onClick = options.onClick ? options.onClick : null;
-                
+
                 var alertDomEl = $compile(angularDomEl)(alertScope);
                 $document.find('body').eq(0).append(alertDomEl);
             },
@@ -779,7 +781,7 @@ angular.module('connectedCarSDK.attListView', [])
             restrict: 'E',
             templateUrl: 'templates/attListView.html',
             replace: true,
-            
+
             scope: {
                 items: '=',         // list of objects to bind {text, desc, selected}
                 title: '=',         // string
@@ -839,7 +841,7 @@ angular.module('connectedCarSDK.attLoader', [])
                 });
 
             }
-            
+
             // if there are no existing loaders, create one and add to document body
             if (!loaderDomEl) {
 
@@ -959,7 +961,7 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
               scope.volumeInativityTime = 2000;
 
               var changePositionInterval = 5, // seconds
-                  changePositionTimeInterval = 500, // miliseconds                 
+                  changePositionTimeInterval = 500, // miliseconds
                   intervalpromise = null,
                   secondsleft = 0,
                   secondsElapsed = 0,
@@ -1139,7 +1141,7 @@ angular.module('connectedCarSDK.attMediaPlayer', [])
 
               scope.changePosition = function (rewind, stop) {
 
-                  if (stop) { // key released, stop changing position   
+                  if (stop) { // key released, stop changing position
                       $interval.cancel(intervalpromise);
 
                       // if user kept button pressed less than intervalCounter * 2
@@ -1939,7 +1941,7 @@ angular.module('connectedCarSDK.attSlider', [])
                 scope.min = scope.min || 0;
                 scope.max = scope.max || 100;
                 scope.ngModel = scope.ngModel || 0;
-                
+
                 var input = element.find('input');
                 if (input && input.length > 0) {
 
@@ -1954,7 +1956,7 @@ angular.module('connectedCarSDK.attSlider', [])
                         'color-stop(' + value + ', #ffffff)',
                         ')'
                     ].join('');
-                    
+
                 }
 
                 //scope.sliderMovingInterval;
@@ -1963,7 +1965,7 @@ angular.module('connectedCarSDK.attSlider', [])
 
                 scope.sliderMoved = function () {
                     scope.$emit('sliderMoved', scope.parentControl);
-                };               
+                };
 
                 scope.sliderMoving = function () {
                     scope.$emit('sliderMoving', scope.parentControl);

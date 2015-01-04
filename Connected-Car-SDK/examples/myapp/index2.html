@@ -11,13 +11,15 @@
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">-->
 
 </head>
-<body>
-    <h2 class="fleetTitle">ATT Fleet</h2>
-    <div class="propList">
-        <div id="prop1" class="unselectedProp">600 West Peachtree St NE, Atlanta, Georgia 30308</div>
-        <div id="prop2" class="unselectedProp">835 Glendale Terrace NE, Atlanta, GA 30308</div>
-        <div id="prop3" class="unselectedProp">1011 Curran St NW, Atlanta, GA 30318</div>
-    </div>
+<body ng-app="app">
+    <att-header app-name="appName" current-item="viewName" app-image="images/att-icon.png"></att-header>
+    <att-content has-header="true" background-img="images/att-stencil.png">
+        <ng-view></ng-view>
+    </att-content>
+    <att-drawer>
+        <att-menu title="title" items="appLinks"></att-menu>
+    </att-drawer>
+    <att-loader></att-loader>
 </body>
 
 <!-- DEC API -->
@@ -25,22 +27,20 @@
 <script type="text/javascript" src="dec-sdk/scripts/data-event-sdk.js"></script>
 
 <!-- APP FRAMEWORK -->
-<!--
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
 <script src="att-sdk/scripts/connectedCarSDK-tpls-0.0.5.js"></script>
 
 <script src="scripts/dec.js"></script>
 <script src="scripts/app.js"></script>
-<script src="scripts/directives.js"></script> -->
+<script src="scripts/directives.js"></script>
 
 <!--Controllers-->
 
-<!-- <script src="firstPage/controllers/FirstPageCtrl.js"></script>
+<script src="firstPage/controllers/FirstPageCtrl.js"></script>
 <script src="secondPage/controllers/SecondPageCtrl.js"></script>
- -->
- <script src="scripts/rest.js"></script>
- <script src="scripts/jquery-2.1.3.min.js"></script>
- <script src="scripts/fleet.js"></script>
+
+
+ <!--<script src="scripts/test.js"></script>-->
 
 </html>

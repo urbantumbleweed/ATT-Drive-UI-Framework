@@ -1,2 +1,3 @@
-Connected-Car-SDK/dist/
-Connected-Car-SDK/myFirstApp/
+node_modules
+.DS_Store
+

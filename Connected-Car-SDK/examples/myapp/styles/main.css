@@ -1,3 +1,22 @@
+.propList{
+	margin-left: 10px;
+}
+
+.fleetTitle{
+	margin-left: 10px;
+}
+
+
+.unselectedProp{
+
+	margin: 10px;
+}
+
+.selectedProp{
+  color: rgb(240,200,30);
+  margin: 10px;
+}
+
 .status-box{
 	padding: 10px;
 	margin-right: 10px;

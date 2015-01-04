@@ -124,4 +124,24 @@ app.run(function ($rootScope) {
         { text: 'Vehicle Diagnostics', desc: 'Simple test to show that the API is in fact working and tied to the vehicle simulator. ', href: '#/firstPage', selected: true },
         { text: 'Navigation Status', desc: 'DEC API is working properly if this HTML app responds to changes in position and fuel level.', href: '#/secondPage', selected: false }
     ];
+
+    function navError(err){
+        console.log('nav error', err);
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(gps){
+
+        console.log('GPS !!! ', gps);
+        setTimeout(function(){
+          navigator.geolocation.getCurrentPosition(function(gps){
+            console.log('GPS 2!!! ', gps);
+          }, navError);
+
+        }, 3000);
+
+      }, navError);
+    } else {
+      error('not supported');
+    }
 });
